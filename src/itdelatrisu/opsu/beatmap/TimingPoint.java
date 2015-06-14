@@ -16,14 +16,16 @@
  * along with opsu!.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package itdelatrisu.opsu;
+package itdelatrisu.opsu.beatmap;
+
+import itdelatrisu.opsu.Utils;
 
 import org.newdawn.slick.util.Log;
 
 /**
  * Data type representing a timing point.
  */
-public class OsuTimingPoint {
+public class TimingPoint {
 	/** Timing point start time/offset (in ms). */
 	private int time = 0;
 
@@ -55,7 +57,7 @@ public class OsuTimingPoint {
 	 * Constructor.
 	 * @param line the line to be parsed
 	 */
-	public OsuTimingPoint(String line) {
+	public TimingPoint(String line) {
 		// TODO: better support for old formats
 		String[] tokens = line.split(",");
 		try {
@@ -64,9 +66,9 @@ public class OsuTimingPoint {
 			this.sampleType = Byte.parseByte(tokens[3]);
 			this.sampleTypeCustom = Byte.parseByte(tokens[4]);
 			this.sampleVolume = Integer.parseInt(tokens[5]);
-//			this.inherited = (Integer.parseInt(tokens[6]) == 1);
+//			this.inherited = Utils.parseBoolean(tokens[6]);
 			if (tokens.length > 7)
-				this.kiai = (Integer.parseInt(tokens[7]) == 1);
+				this.kiai = Utils.parseBoolean(tokens[7]);
 		} catch (ArrayIndexOutOfBoundsException e) {
 			Log.debug(String.format("Error parsing timing point: '%s'", line));
 		}

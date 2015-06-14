@@ -16,25 +16,32 @@
  * along with opsu!.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package itdelatrisu.opsu.downloads;
+package itdelatrisu.opsu.downloads.servers;
 
 import itdelatrisu.opsu.ErrorHandler;
 import itdelatrisu.opsu.Utils;
+import itdelatrisu.opsu.downloads.DownloadNode;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
  * Download server: http://bloodcat.com/osu/
  */
 public class BloodcatServer extends DownloadServer {
+	/** Server name. */
+	private static final String SERVER_NAME = "Bloodcat";
+
 	/** Formatted download URL: {@code beatmapSetID} */
 	private static final String DOWNLOAD_URL = "http://bloodcat.com/osu/s/%d";
 
@@ -48,7 +55,10 @@ public class BloodcatServer extends DownloadServer {
 	public BloodcatServer() {}
 
 	@Override
-	public String getURL(int beatmapSetID) {
+	public String getName() { return SERVER_NAME; }
+
+	@Override
+	public String getDownloadURL(int beatmapSetID) {
 		return String.format(DOWNLOAD_URL, beatmapSetID);
 	}
 
@@ -58,7 +68,7 @@ public class BloodcatServer extends DownloadServer {
 		try {
 			// read JSON
 			String search = String.format(SEARCH_URL, URLEncoder.encode(query, "UTF-8"), rankedOnly ? "0" : "", page);
-			JSONObject json = readJsonFromUrl(new URL(search));
+			JSONObject json = Utils.readJsonObjectFromUrl(new URL(search));
 			if (json == null) {
 				this.totalResults = -1;
 				return null;
@@ -70,7 +80,7 @@ public class BloodcatServer extends DownloadServer {
 			for (int i = 0; i < nodes.length; i++) {
 				JSONObject item = arr.getJSONObject(i);
 				nodes[i] = new DownloadNode(
-					item.getInt("id"), item.getString("date"),
+					item.getInt("id"), formatDate(item.getString("date")),
 					item.getString("title"), item.isNull("titleUnicode") ? null : item.getString("titleUnicode"),
 					item.getString("artist"), item.isNull("artistUnicode") ? null : item.getString("artistUnicode"),
 					item.getString("creator")
@@ -86,24 +96,30 @@ public class BloodcatServer extends DownloadServer {
 	}
 
 	@Override
+	public int minQueryLength() { return 0; }
+
+	@Override
 	public int totalResults() { return totalResults; }
 
 	/**
-	 * Returns a JSON object from a URL.
-	 * @param url the remote URL
-	 * @return the JSON object
-	 * @author Roland Illig (http://stackoverflow.com/a/4308662)
+	 * Returns a formatted date string from a raw date.
+	 * @param s the raw date string (e.g. "2015-05-14T23:38:47+09:00")
+	 * @return the formatted date, or the raw string if it could not be parsed
 	 */
-	private static JSONObject readJsonFromUrl(URL url) throws IOException {
-		String s = Utils.readDataFromUrl(url);
-		JSONObject json = null;
-		if (s != null) {
-			try {
-				json = new JSONObject(s);
-			} catch (JSONException e) {
-				ErrorHandler.error("Failed to create JSON object.", e, true);
-			}
+	private String formatDate(String s) {
+		try {
+			// make string parseable by SimpleDateFormat
+			int index = s.lastIndexOf(':');
+			if (index == -1)
+				return s;
+			String str = new StringBuilder(s).deleteCharAt(index).toString();
+
+			DateFormat f = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+			Date d = f.parse(str);
+			DateFormat fmt = new SimpleDateFormat("d MMM yyyy HH:mm:ss");
+			return fmt.format(d);
+		} catch (StringIndexOutOfBoundsException | ParseException e) {
+			return s;
 		}
-		return json;
 	}
 }

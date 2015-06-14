@@ -16,7 +16,9 @@
  * along with opsu!.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package itdelatrisu.opsu;
+package itdelatrisu.opsu.ui;
+
+import itdelatrisu.opsu.Utils;
 
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;
@@ -146,7 +148,7 @@ public class MenuButton {
 	 * Sets text to draw in the middle of the button.
 	 * @param text the text to draw
 	 * @param font the font to use when drawing
-	 * @color the color to draw the text
+	 * @param color the color to draw the text
 	 */
 	public void setText(String text, Font font, Color color) {
 		this.text = text;
