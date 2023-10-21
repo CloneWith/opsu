@@ -78,6 +78,9 @@ public class SkinLoader {
 					line = in.readLine();
 					continue;
 				}
+				// <TODO> This implied minimal skin settings. Read osu!wiki for details and additions.
+				// <TODO> can add the use of commands "Author" and "Name" to show accurate skin name and author instead of folder name
+				// <TODO> Consider show a warning when "skin.ini" not found.
 				switch (line) {
 				case "[General]":
 					while ((line = in.readLine()) != null) {
@@ -173,6 +176,7 @@ public class SkinLoader {
 							break;
 						if ((tokens = tokenize(line)) == null)
 							continue;
+							// <TODO> Is there valid support for RGBA format? don't know
 						try {
 							String[] rgb = tokens[1].split(",");
 							Color color = new Color(
