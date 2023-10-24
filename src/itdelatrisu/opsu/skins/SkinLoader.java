@@ -280,6 +280,13 @@ public class SkinLoader {
 		return skin;
 	}
 
+	/**
+	 * Gets information from the skin.ini file of a skin.
+	 * If 'skin.ini' is not found, or if any fields are not specified, the
+	 * default values will be used.
+	 * @param dir the skin directory
+	 * @return relevant information of the skin
+	 */
 	public static String[] getSkinInfo(File dir) {
 		// 0-Name, 1-Author, 2-Version
 		File skinFile = new File(dir, CONFIG_FILENAME);
@@ -297,7 +304,6 @@ public class SkinLoader {
 					continue;
 				}
 				// <TODO> This implied minimal skin settings. Read osu!wiki for details and additions.
-				// <TODO> can add the use of commands "Author" and "Name" to show accurate skin name and author instead of folder name
 				switch (line) {
 				case "[General]":
 					while ((line = in.readLine()) != null) {
