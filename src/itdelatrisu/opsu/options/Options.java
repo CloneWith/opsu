@@ -368,10 +368,12 @@ public class Options {
 
 			@Override
 			public boolean isRestartRequired() { return true; }
+			// <TODO> Can we directly load skins without restart here?
 
 			/** Creates the list of available skins. */
 			private void createSkinList() {
 				File[] dirs = SkinLoader.getSkinDirectories(getSkinRootDir());
+				// <TODO> Here we use skin directory names as display names, need to change it.
 				itemList = new String[dirs.length + 1];
 				itemList[0] = Skin.DEFAULT_SKIN_NAME;
 				for (int i = 0; i < dirs.length; i++)
@@ -1519,6 +1521,9 @@ public class Options {
 		else {
 			// load the skin
 			skin = SkinLoader.loadSkin(skinDir);
+			String info = skin.name + " (" + skin.author + ")";
+			ErrorHandler.error(String.format("You are using the skin '%s'.", info), null, false);
+			// Show the real name and author in skin.ini
 			ResourceLoader.addResourceLocation(new FileSystemLocation(skinDir));
 		}
 		ResourceLoader.addResourceLocation(new ClasspathLocation());

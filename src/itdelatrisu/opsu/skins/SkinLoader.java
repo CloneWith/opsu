@@ -68,6 +68,7 @@ public class SkinLoader {
 		Skin skin = new Skin(dir);
 		if (!skinFile.isFile())  // missing skin.ini
 			return skin;
+			// <TODO> Consider show a warning when "skin.ini" not found.
 
 		try (BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(skinFile), "UTF-8"))) {
 			String line = in.readLine();
@@ -80,7 +81,6 @@ public class SkinLoader {
 				}
 				// <TODO> This implied minimal skin settings. Read osu!wiki for details and additions.
 				// <TODO> can add the use of commands "Author" and "Name" to show accurate skin name and author instead of folder name
-				// <TODO> Consider show a warning when "skin.ini" not found.
 				switch (line) {
 				case "[General]":
 					while ((line = in.readLine()) != null) {
@@ -278,6 +278,69 @@ public class SkinLoader {
 		}
 
 		return skin;
+	}
+
+	public static String[] getSkinInfo(File dir) {
+		// 0-Name, 1-Author, 2-Version
+		File skinFile = new File(dir, CONFIG_FILENAME);
+		String info[] = ["Unknown", "Unknown", "Unknown"];
+		if (!skinFile.isFile())  // missing skin.ini
+			return info;
+
+		try (BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(skinFile), "UTF-8"))) {
+			String line = in.readLine();
+			String tokens[] = null;
+			while (line != null) {
+				line = line.trim();
+				if (!isValidLine(line)) {
+					line = in.readLine();
+					continue;
+				}
+				// <TODO> This implied minimal skin settings. Read osu!wiki for details and additions.
+				// <TODO> can add the use of commands "Author" and "Name" to show accurate skin name and author instead of folder name
+				switch (line) {
+				case "[General]":
+					while ((line = in.readLine()) != null) {
+						line = line.trim();
+						if (!isValidLine(line))
+							continue;
+						if (line.charAt(0) == '[')
+							break;
+						if ((tokens = tokenize(line)) == null)
+							continue;
+						try {
+							switch (tokens[0]) {
+							case "Name":
+								info[0] = tokens[1];
+								break;
+							case "Author":
+								info[1] = tokens[1];
+								break;
+							case "Version":
+								if (tokens[1].equalsIgnoreCase("latest"))
+									info[2] = Skin.LATEST_VERSION;
+								else
+									info[2] = Float.parseFloat(tokens[1]);
+								break;
+							default:
+								break;
+							}
+						} catch (Exception e) {
+							Log.warn(String.format("Failed to read line '%s' for file '%s'.",
+									line, skinFile.getAbsolutePath()), e);
+						}
+					}
+					break;
+				default:
+					line = in.readLine();
+					break;
+				}
+			}
+		} catch (IOException e) {
+			ErrorHandler.error(String.format("Failed to read file '%s'.", skinFile.getAbsolutePath()), e, false);
+		}
+
+		return info;
 	}
 
 	/**
