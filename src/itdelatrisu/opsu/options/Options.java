@@ -1521,7 +1521,7 @@ public class Options {
 		else {
 			// load the skin
 			skin = SkinLoader.loadSkin(skinDir);
-			String info = skin.name + " (" + skin.author + ")";
+			String info = skin.getName() + " (" + skin.getAuthor() + ")";
 			ErrorHandler.error(String.format("You are using the skin '%s'.", info), null, false);
 			// Show the real name and author in skin.ini
 			ResourceLoader.addResourceLocation(new FileSystemLocation(skinDir));
