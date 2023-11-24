@@ -31,6 +31,9 @@ public class Skin {
 	/** The default skin name. */
 	public static final String DEFAULT_SKIN_NAME = "Default";
 
+	/** The status of skin.ini. If it exists it is true. */
+	public Boolean INI_STATUS = false;
+
 	/** Slider styles. */
 	public static final byte
 		STYLE_PEPPYSLIDER = 1,   // fallback
@@ -205,6 +208,11 @@ public class Skin {
 	 * Returns the skin directory.
 	 */
 	public File getDirectory() { return dir; }
+
+	/**
+	 * Returns the skin directory.
+	 */
+	public Boolean getINIStatus() { return INI_STATUS; }
 
 	/**
 	 * Returns the name of the skin.
