@@ -34,6 +34,9 @@ import org.newdawn.slick.util.ResourceLoader;
  * Game images.
  */
 public enum GameImage {
+	// Launch
+	WELCOME_TEXT ("welcome-text", "png"),
+
 	// Cursor
 	CURSOR ("cursor", "png"),
 	CURSOR_MIDDLE ("cursormiddle", "png"),
@@ -81,6 +84,7 @@ public enum GameImage {
 	FOLLOWPOINT ("followpoint", "png"),
 
 	// Game Pause/Fail
+	PAUSE_ARROW ("arrow-pause", "png"),
 	PAUSE_CONTINUE ("pause-continue", "png"),
 	PAUSE_RETRY ("pause-retry", "png"),
 	PAUSE_BACK ("pause-back", "png"),
@@ -113,7 +117,7 @@ public enum GameImage {
 	REVERSEARROW ("reversearrow", "png"),
 	SLIDER_TICK ("sliderscorepoint", "png"),
 
-	// Spinner
+	// Old Spinner
 	SPINNER_CIRCLE ("spinner-circle", "png"),
 	SPINNER_APPROACHCIRCLE ("spinner-approachcircle", "png") {
 		@Override
@@ -136,6 +140,12 @@ public enum GameImage {
 			return img.getScaledCopy(0.8f);
 		}
 	},
+
+	// New Spinner
+	SPINNER_TOP ("spinner-top", "png"),
+	SPINNER_MIDDLE ("spinner-middle", "png"),
+	SPINNER_BOTTOM ("spinner-bottom", "png"),
+	SPINNER_GROW ("spinner-grow", "png"),
 
 	// Game Data
 	COMBO_BURST ("comboburst", "comboburst-%d", "png"),
@@ -207,14 +217,18 @@ public enum GameImage {
 	MOD_NO_FAIL ("selection-mod-nofail", "png", false, false),
 	MOD_HARD_ROCK ("selection-mod-hardrock", "png", false, false),
 	MOD_SUDDEN_DEATH ("selection-mod-suddendeath", "png", false, false),
+	MOD_PERFECT ("selection-mod-perfect", "png", false, false),
 	MOD_SPUN_OUT ("selection-mod-spunout", "png", false, false),
 	MOD_AUTO ("selection-mod-autoplay", "png", false, false),
 	MOD_HALF_TIME ("selection-mod-halftime", "png", false, false),
 	MOD_DOUBLE_TIME ("selection-mod-doubletime", "png", false, false),
+	MOD_NIGHTCORE ("selection-mod-nightcore", "png", false, false),
 	MOD_HIDDEN ("selection-mod-hidden", "png", false, false),
 	MOD_FLASHLIGHT ("selection-mod-flashlight", "png", false, false),
 	MOD_RELAX ("selection-mod-relax", "png", false, false),
 	MOD_AUTOPILOT ("selection-mod-relax2", "png", false, false),
+	MOD_CINEMA ("selection-mod-cinema", "png", false, false),
+	MOD_TARGET ("selection-mod-target", "png", false, false),
 
 	// Selection Buttons
 	SELECTION_MODS ("selection-mods", "png", false, false),
