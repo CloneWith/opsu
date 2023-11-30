@@ -90,7 +90,7 @@ public class Skin {
 	protected String name = OpsuConstants.PROJECT_NAME + " Default Skin";
 
 	/** The skin author. */
-	protected String author = "[various authors]";
+	protected String author = "various authors";
 
 	/** The skin version. */
 	protected float version = LATEST_VERSION;
