@@ -22,7 +22,6 @@ import itdelatrisu.opsu.ui.Fonts;
 import itdelatrisu.opsu.ui.MenuButton;
 import itdelatrisu.opsu.ui.animations.AnimationEquation;
 
-import java.lang.annotation.Target;
 import java.util.Arrays;
 import java.util.Collections;
 

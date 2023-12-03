@@ -5,6 +5,7 @@
 /SongPacks/
 /Songs/
 /Temp/
+*.log
 /.opsu.log
 /.opsu.cfg
 /.opsu.db*
