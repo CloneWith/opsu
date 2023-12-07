@@ -976,6 +976,25 @@ public class Game extends BasicGameState {
 		}
 	}
 
+	private void retry() {
+		// TODO: need another step of process
+		int trackPosition = MusicController.getPosition(true);
+		if (gameFinished)
+			return;
+		try {
+			if (trackPosition < beatmap.objects[0].getTime())
+				retries--;  // don't count this retry (cancel out later increment)
+			playState = PlayState.RETRY;
+			game.enterState(Opsu.STATE_GAME,
+				new DelayedFadeOutTransition(Color.black, LOSE_FADEOUT_TIME, 0),
+				new FadeInTransition());
+			enter(container, game);
+			if(!GameMod.PERFECT.isActive()) skipIntro();
+		} catch (SlickException e) {
+			ErrorHandler.error("Failed to restart game.", e, false);
+		}
+	}
+
 	/**
 	 * Updates the game.
 	 * @param mouseX the mouse x coordinate
@@ -1102,8 +1121,22 @@ public class Game extends BasicGameState {
 			}
 
 			// game over, force a restart
+			// TODO: If using PF mod, needs a quick restart
 			if (!isReplay) {
+				// record to stats
+				User user = UserList.get().getCurrentUser();
+				user.add(data.getScore());
+				ScoreDB.updateUser(user);
+
 				if (playState != PlayState.LOSE) {
+					if (GameMod.PERFECT.isActive()) {
+						// game.enterState(Opsu.STATE_GAME,
+						// 	new DelayedFadeOutTransition(Color.black, MUSIC_FADEOUT_TIME, MUSIC_FADEOUT_TIME - LOSE_FADEOUT_TIME),
+						// 	new FadeInTransition());
+						// new DelayedFadeOutTransition(Color.black, MUSIC_FADEOUT_TIME, MUSIC_FADEOUT_TIME - LOSE_FADEOUT_TIME);
+						retry();
+						return;
+					}
 					playState = PlayState.LOSE;
 					failTime = System.currentTimeMillis();
 					failTrackTime = MusicController.getPosition(true);
@@ -1111,11 +1144,6 @@ public class Game extends BasicGameState {
 					MusicController.pitchFadeOut(MUSIC_FADEOUT_TIME);
 					rotations = new IdentityHashMap<GameObject, Float>();
 					SoundController.playSound(SoundEffect.FAIL);
-
-					// record to stats
-					User user = UserList.get().getCurrentUser();
-					user.add(data.getScore());
-					ScoreDB.updateUser(user);
 
 					// fade to pause menu
 					game.enterState(Opsu.STATE_GAMEPAUSEMENU,
@@ -1219,17 +1247,7 @@ public class Game extends BasicGameState {
 			// fall through
 		case Input.KEY_GRAVE:
 			// restart
-			if (gameFinished)
-				break;
-			try {
-				if (trackPosition < beatmap.objects[0].getTime())
-					retries--;  // don't count this retry (cancel out later increment)
-				playState = PlayState.RETRY;
-				enter(container, game);
-				skipIntro();
-			} catch (SlickException e) {
-				ErrorHandler.error("Failed to restart game.", e, false);
-			}
+			retry();
 			break;
 		case Input.KEY_S:
 			// save checkpoint

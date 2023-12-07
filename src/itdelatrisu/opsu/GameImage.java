@@ -35,7 +35,7 @@ import org.newdawn.slick.util.ResourceLoader;
  */
 public enum GameImage {
 	// Launch
-	WELCOME_TEXT ("welcome-text", "png"),
+	// WELCOME_TEXT ("welcome-text", "png"),
 
 	// Cursor
 	CURSOR ("cursor", "png"),
@@ -84,7 +84,7 @@ public enum GameImage {
 	FOLLOWPOINT ("followpoint", "png"),
 
 	// Game Pause/Fail
-	PAUSE_ARROW ("arrow-pause", "png"),
+	// PAUSE_ARROW ("arrow-pause", "png"),
 	PAUSE_CONTINUE ("pause-continue", "png"),
 	PAUSE_RETRY ("pause-retry", "png"),
 	PAUSE_BACK ("pause-back", "png"),
@@ -142,10 +142,10 @@ public enum GameImage {
 	},
 
 	// New Spinner
-	SPINNER_TOP ("spinner-top", "png"),
-	SPINNER_MIDDLE ("spinner-middle", "png"),
-	SPINNER_BOTTOM ("spinner-bottom", "png"),
-	SPINNER_GROW ("spinner-grow", "png"),
+	// SPINNER_TOP ("spinner-top", "png"),
+	// SPINNER_MIDDLE ("spinner-middle", "png"),
+	// SPINNER_BOTTOM ("spinner-bottom", "png"),
+	// SPINNER_GROW ("spinner-grow", "png"),
 
 	// Game Data
 	COMBO_BURST ("comboburst", "comboburst-%d", "png"),

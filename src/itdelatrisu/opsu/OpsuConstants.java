@@ -30,7 +30,7 @@ public class OpsuConstants {
 	public static final String PROJECT_NAME = "opsu!";
 
 	/** Project author. */
-	public static final String PROJECT_AUTHOR = "@itdelatrisu";
+	public static final String PROJECT_AUTHOR = "@itdelatrisu + @CloneWith";
 
 	/** Website address. */
 	public static final URI WEBSITE_URI = URI.create("https://itdelatrisu.github.io/opsu/");
