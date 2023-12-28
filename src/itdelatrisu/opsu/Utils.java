@@ -504,11 +504,11 @@ public class Utils {
 			String osName = System.getProperty("os.name");
 			if (osName.startsWith("Win")) {
 				// windows: select in Explorer
-				Runtime.getRuntime().exec("explorer.exe /select," + f.getAbsolutePath());
+				Runtime.getRuntime().exec(new String[] {"explorer.exe /select," , f.getAbsolutePath()});
 				return;
 			} else if (osName.startsWith("Mac")) {
 				// mac: reveal in Finder
-				Runtime.getRuntime().exec("open -R " + f.getAbsolutePath());
+				Runtime.getRuntime().exec(new String[] {"open -R " , f.getAbsolutePath()});
 				return;
 			}
 			f = f.getParentFile();

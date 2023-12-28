@@ -402,7 +402,7 @@ public class UserSelectOverlay extends AbstractComponent {
 		scrollOffset -= height - cy;
 		scrollOffset = Math.max(scrollOffset, 0);
 		scrolling.setMinMax(0, scrollOffset);
-		cy += -scrolling.getPosition();
+		cy += -Math.round(scrolling.getPosition());
 		for (int i = 0; i < userIcons.length; i += maxPerLine) {
 			// draw line-by-line
 			int n = Math.min(maxPerLine, userIcons.length - i);

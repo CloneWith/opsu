@@ -65,7 +65,8 @@ public class NativeLoader {
 				break;
 
 			File f = new File(nativeDir, e.getName());
-			if (isNativeFile(e.getName()) && !e.isDirectory() && e.getName().indexOf('/') == -1 && !f.exists()) {
+			// Fix zip slip
+			if (isNativeFile(e.getName()) && !e.isDirectory() && e.getName().indexOf('/') == -1 && !f.exists() && !f.toPath().normalize().startsWith(nativeDir.toPath())) {
 				InputStream in = jarFile.getInputStream(jarFile.getEntry(e.getName()));
 				OutputStream out = new FileOutputStream(f);
 
