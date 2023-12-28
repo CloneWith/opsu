@@ -166,8 +166,8 @@ public class BeatmapHPDropRateCalculator {
 					if (health.getRawHealth() < lowestHpComboEnd) {
 						if (++comboTooLowCount > 2) {
 							fail = true;
-							hpMultiplierNormal *= 1.03;
-							hpMultiplierComboEnd *= 1.07;
+							hpMultiplierNormal *= 1.03f;
+							hpMultiplierComboEnd *= 1.07f;
 							break;
 						}
 					}
@@ -177,16 +177,16 @@ public class BeatmapHPDropRateCalculator {
 			if (!fail && health.getRawHealth() < lowestHpEnd) {
 				fail = true;
 				testDrop *= 0.94f;
-				hpMultiplierNormal *= 1.01;
-				hpMultiplierComboEnd *= 1.01;
+				hpMultiplierNormal *= 1.01f;
+				hpMultiplierComboEnd *= 1.01f;
 			}
 
 			double recovery = (health.getUncappedRawHealth() - Health.HP_MAX) / beatmap.objects.length;
 			if (!fail && recovery < hpRecoveryAvailable) {
 				fail = true;
-				testDrop *= 0.96;
-				hpMultiplierNormal *= 1.01;
-				hpMultiplierComboEnd *= 1.02;
+				testDrop *= 0.96f;
+				hpMultiplierNormal *= 1.01f;
+				hpMultiplierComboEnd *= 1.02f;
 			}
 
 			if (fail)
