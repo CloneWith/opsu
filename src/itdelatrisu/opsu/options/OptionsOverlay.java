@@ -901,7 +901,7 @@ public class OptionsOverlay extends AbstractComponent {
 				indicatorPos = indicatorRenderPos;
 			} else {
 				float progress = (float) indicatorMoveAnimationTime / INDICATOR_MOVE_ANIMATION_TIME;
-				indicatorRenderPos += AnimationEquation.OUT_BACK.calc(progress) * indicatorOffsetToNextPos;
+				indicatorRenderPos += Math.round(AnimationEquation.OUT_BACK.calc(progress) * indicatorOffsetToNextPos);
 			}
 		}
 
