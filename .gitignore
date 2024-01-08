@@ -24,9 +24,13 @@
 *.iws
 *.ipr
 
+# VS Code
+.vscode/
+
 # Gradle
 .gradle
 build/
 
 Thumbs.db
 /target
+*.log
