@@ -753,7 +753,7 @@ public class Game extends BasicGameState {
 				GameImage.INPUTOVERLAY_KEY.getImage().getScaledCopy((int) BTNSIZE, (int) BTNSIZE);
 			for (int i = 0; i < 4; i++) {
 				inputOverlayKeys[i].render(g, x, y, keyimg);
-				y += BTNSIZE;
+				y += (int) BTNSIZE;
 			}
 		}
 
@@ -2321,7 +2321,7 @@ public class Game extends BasicGameState {
 						progress = (float) (trackPosition - breakTime) / approachTime;
 					else if (endTime - trackPosition < approachTime)
 						progress = (float) (endTime - trackPosition) / approachTime;
-					flashlightRadius += (width - flashlightRadius) * progress;
+					flashlightRadius += (width - flashlightRadius) * ((int) progress);
 				}
 			} else if (flashlightRadius != targetRadius) {
 				// radius size change
@@ -2331,7 +2331,7 @@ public class Game extends BasicGameState {
 					if (flashlightRadius < targetRadius)
 						flashlightRadius = targetRadius;
 				} else {
-					flashlightRadius += radiusDiff;
+					flashlightRadius += (int) radiusDiff;
 					if (flashlightRadius > targetRadius)
 						flashlightRadius = targetRadius;
 				}
