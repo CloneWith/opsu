@@ -382,7 +382,9 @@ public class UserSelectOverlay extends AbstractComponent {
 		editUserButton.draw(g, alpha);
 
 		// delete button
-		deleteUserButton.draw(g, alpha);
+		if (UserList.get().size() != 1) {
+			deleteUserButton.draw(g, alpha);
+		}
 
 		// user icons
 		int cy = (int) (y + usersStartY + (UserButton.getHeight() + usersPaddingY) * 2);
@@ -511,14 +513,10 @@ public class UserSelectOverlay extends AbstractComponent {
 					String name = user.getName();
 					if (button == Input.MOUSE_RIGHT_BUTTON) {
 						// right click: edit user
-						if (name.equals(UserList.DEFAULT_USER_NAME)) {
-							UI.getNotificationManager().sendBarNotification("This user can't be edited.");
-						} else {
-							state = State.EDIT_USER;
-							prevState = State.USER_SELECT;
-							stateChangeProgress.setTime(0);
-							prepareUserEdit(selectedButton.getUser());
-						}
+						state = State.EDIT_USER;
+						prevState = State.USER_SELECT;
+						stateChangeProgress.setTime(0);
+						prepareUserEdit(selectedButton.getUser());
 					} else {
 						// left click: select user
 						if (!name.equals(UserList.get().getCurrentUser().getName())) {

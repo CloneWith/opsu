@@ -365,6 +365,7 @@ public class Options {
 		},
 		SKIN ("Skin", "Skin", "") {
 			private String[] itemList = null;
+			private String[] DirList = null;
 
 			@Override
 			public boolean isRestartRequired() { return true; }
@@ -375,9 +376,15 @@ public class Options {
 				File[] dirs = SkinLoader.getSkinDirectories(getSkinRootDir());
 				// <TODO> Here we use skin directory names as display names, need to change it.
 				itemList = new String[dirs.length + 1];
+				DirList = new String[dirs.length + 1];
 				itemList[0] = Skin.DEFAULT_SKIN_NAME;
-				for (int i = 0; i < dirs.length; i++)
-					itemList[i + 1] = dirs[i].getName();
+				DirList[0] = null;
+				for (int i = 0; i < dirs.length; i++){
+					Skin r = SkinLoader.loadSkin(dirs[i]);
+					// itemList[i + 1] = r.getName() + "(" + r.getAuthor() + ")";
+					itemList[i + 1] = r.getName();
+					DirList[i + 1] = dirs[i].getName();
+				}
 			}
 
 			@Override
@@ -970,6 +977,9 @@ public class Options {
 	/** The current skin. */
 	private static Skin skin;
 
+	/** The directory of the skin. */
+	// private static File skinDir = skin.getDirectory();
+
 	/** Frame limiters. */
 	private static final int[] targetFPS = { 60, 120, 240, -1 /* Unlimited */ };
 
@@ -1521,6 +1531,9 @@ public class Options {
 		else {
 			// load the skin
 			skin = SkinLoader.loadSkin(skinDir);
+			// String info = skin.getName() + " (" + skin.getAuthor() + ")";
+			// ErrorHandler.error(String.format("You are using the skin '%s'.", info), null, false);
+			// Show the real name and author in skin.ini
 			ResourceLoader.addResourceLocation(new FileSystemLocation(skinDir));
 		}
 		ResourceLoader.addResourceLocation(new ClasspathLocation());
@@ -1546,6 +1559,9 @@ public class Options {
 	public static File getSkinDir() {
 		File root = getSkinRootDir();
 		File dir = new File(root, skinName);
+		// File dir = skinDir;
+		// File dir = new File(root, skinDir);
+		// TODO: Need to adjust
 		return (dir.isDirectory()) ? dir : null;
 	}
 
