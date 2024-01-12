@@ -322,6 +322,17 @@ public class MusicController {
 	}
 
 	/**
+	 * Always play the current track from the start.
+	 */
+	public static void replay() {
+		if (trackExists()) {
+			pauseTime = 0f;
+			player.resume();
+			player.setVolume(1.0f);
+		}
+	}
+
+	/**
 	 * Stops the current track.
 	 */
 	public static void stop() {

@@ -27,6 +27,10 @@ import java.util.Map;
  * Abstract class for beatmap download servers.
  */
 public abstract class DownloadServer {
+	/** 
+	 * <TODO> For mirror download servers, there may be a better solution.
+	 * For example, use visible .conf (maybe) files instead coding servers insider, just for convenience and need for maintenance.
+	 */
 	/** Track preview URL. */
 	private static final String PREVIEW_URL = "http://b.ppy.sh/preview/%d.mp3";
 

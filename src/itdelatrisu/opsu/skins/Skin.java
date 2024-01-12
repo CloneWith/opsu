@@ -28,8 +28,19 @@ import org.newdawn.slick.Color;
  * Skin configuration (skin.ini).
  */
 public class Skin {
+	// TODO: Add playwarning arrow tinting support (on/off)
+	// TODO: Pulsing effect for arrows and pass/fail indicator
+	// TODO: Animation improvement for combo bursts
+	// TODO: Clarify usage of star2 (partof / zoom)
+	// TODO: Difference between hit results and results
+	// TODO: Spinner versions
+	// TODO: Adjust locations and anchors of elements
+	// TODO: Improve support for transparent images
 	/** The default skin name. */
 	public static final String DEFAULT_SKIN_NAME = "Default";
+
+	/** The status of skin.ini. If it exists it is true. */
+	public Boolean INI_STATUS = false;
 
 	/** Slider styles. */
 	public static final byte
@@ -87,7 +98,7 @@ public class Skin {
 	protected String name = OpsuConstants.PROJECT_NAME + " Default Skin";
 
 	/** The skin author. */
-	protected String author = "[various authors]";
+	protected String author = "various authors";
 
 	/** The skin version. */
 	protected float version = LATEST_VERSION;
@@ -205,6 +216,11 @@ public class Skin {
 	 * Returns the skin directory.
 	 */
 	public File getDirectory() { return dir; }
+
+	/**
+	 * Returns the skin directory.
+	 */
+	public Boolean getINIStatus() { return INI_STATUS; }
 
 	/**
 	 * Returns the name of the skin.
