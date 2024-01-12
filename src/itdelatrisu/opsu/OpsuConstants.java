@@ -33,22 +33,22 @@ public class OpsuConstants {
 	public static final String PROJECT_AUTHOR = "@itdelatrisu + @CloneWith";
 
 	/** Website address. */
-	public static final URI WEBSITE_URI = URI.create("https://itdelatrisu.github.io/opsu/");
+	public static final URI WEBSITE_URI = URI.create("https://clonewith.github.io/opsu/");
 
 	/** Repository address. */
-	public static final URI REPOSITORY_URI = URI.create("https://github.com/itdelatrisu/opsu");
+	public static final URI REPOSITORY_URI = URI.create("https://github.com/clonewith/opsu");
 
 	/** Credits address. */
-	public static final URI CREDITS_URI = URI.create("https://github.com/itdelatrisu/opsu/blob/master/CREDITS.md");
+	public static final URI CREDITS_URI = URI.create("https://github.com/clonewith/opsu/blob/master/CREDITS.md");
 
 	/** Issue reporting address. */
-	public static final String ISSUES_URL = "https://github.com/itdelatrisu/opsu/issues/new?title=%s&body=%s";
+	public static final String ISSUES_URL = "https://github.com/clonewith/opsu/issues/new?title=%s&body=%s";
 
 	/** Address containing the latest version file. */
 	public static final String VERSION_REMOTE = "https://raw.githubusercontent.com/itdelatrisu/opsu/gh-pages/version";
 
 	/** Changelog address. */
-	private static final String CHANGELOG_URL = "https://github.com/itdelatrisu/opsu/releases/tag/%s";
+	private static final String CHANGELOG_URL = "https://github.com/clonewith/opsu/releases/tag/%s";
 
 	/** Returns the changelog URI for the given version. */
 	public static URI getChangelogURI(String version) {
