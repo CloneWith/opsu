@@ -374,6 +374,7 @@ public class Options {
 			/** Creates the list of available skins. */
 			private void createSkinList() {
 				File[] dirs = SkinLoader.getSkinDirectories(getSkinRootDir());
+				// <TODO> Here we use skin directory names as display names, need to change it.
 				itemList = new String[dirs.length + 1];
 				DirList = new String[dirs.length + 1];
 				itemList[0] = Skin.DEFAULT_SKIN_NAME;
