@@ -51,8 +51,7 @@ The following files and folders will be created by opsu! as needed:
 
 ## Building
 
-opsu! is distributed as both a [Maven](https://maven.apache.org/) and
-[Gradle](https://gradle.org/) project.
+opsu! is distributed as both a [Maven](https://maven.apache.org/) and [Gradle](https://gradle.org/) project.
 
 ### Maven
 

@@ -20,6 +20,9 @@ package itdelatrisu.opsu.skins;
 
 import itdelatrisu.opsu.ErrorHandler;
 import itdelatrisu.opsu.Utils;
+import itdelatrisu.opsu.ui.Colors;
+import itdelatrisu.opsu.ui.NotificationManager;
+import itdelatrisu.opsu.ui.UI;
 
 import java.io.BufferedReader;
 import java.io.File;
