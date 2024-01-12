@@ -33,6 +33,7 @@ import org.newdawn.slick.Input;
  * Game mods.
  */
 public enum GameMod {
+	// TODO: Process PF, NC and TP approxmiately
 	EASY          (Category.EASY, 0, GameImage.MOD_EASY, "EZ", 2, Input.KEY_Q, 0.5f,
 	              "Easy", "Reduces overall difficulty - larger circles, more forgiving HP drain, less accuracy required."),
 	NO_FAIL       (Category.EASY, 1, GameImage.MOD_NO_FAIL, "NF", 1, Input.KEY_W, 0.5f,
@@ -43,24 +44,26 @@ public enum GameMod {
 	              "HardRock", "Everything just got a bit harder..."),
 	SUDDEN_DEATH  (Category.HARD, 1, GameImage.MOD_SUDDEN_DEATH, "SD", 32, Input.KEY_S, 1f,
 	              "SuddenDeath", "Miss a note and fail."),
-//	PERFECT       (Category.HARD, 1, GameImage.MOD_PERFECT, "PF", 64, Input.KEY_S, 1f,
-//	              "Perfect", "SS or quit."),
-	DOUBLE_TIME   (Category.HARD, 2, GameImage.MOD_DOUBLE_TIME, "DT", 64, Input.KEY_D, 1.12f,
+	PERFECT       (Category.HARD, 2, GameImage.MOD_PERFECT, "PF", 64, Input.KEY_P, 1f, "Perfect", "SS or quit."),
+	DOUBLE_TIME   (Category.HARD, 3, GameImage.MOD_DOUBLE_TIME, "DT", 64, Input.KEY_D, 1.12f,
 	              "DoubleTime", "Zoooooooooom."),
-//	NIGHTCORE     (Category.HARD, 2, GameImage.MOD_NIGHTCORE, "NT", 64, Input.KEY_D, 1.12f,
-//	              "Nightcore", "uguuuuuuuu"),
-	HIDDEN        (Category.HARD, 3, GameImage.MOD_HIDDEN, "HD", 8, Input.KEY_F, 1.06f,
+	NIGHTCORE     (Category.HARD, 4, GameImage.MOD_NIGHTCORE, "NT", 64, Input.KEY_N, 1.12f, "Nightcore", "uguuuuuuuu"),
+	HIDDEN        (Category.HARD, 5, GameImage.MOD_HIDDEN, "HD", 8, Input.KEY_F, 1.06f,
 	              "Hidden", "Play with no approach circles and fading notes for a slight score advantage."),
-	FLASHLIGHT    (Category.HARD, 4, GameImage.MOD_FLASHLIGHT, "FL", 1024, Input.KEY_G, 1.12f,
+	FLASHLIGHT    (Category.HARD, 6, GameImage.MOD_FLASHLIGHT, "FL", 1024, Input.KEY_G, 1.12f,
 	              "Flashlight", "Restricted view area."),
 	RELAX         (Category.SPECIAL, 0, GameImage.MOD_RELAX, "RL", 128, Input.KEY_Z, 0f,
 	              "Relax", "You don't need to click.\nGive your clicking/tapping finger a break from the heat of things.\n**UNRANKED**"),
 	AUTOPILOT     (Category.SPECIAL, 1, GameImage.MOD_AUTOPILOT, "AP", 8192, Input.KEY_X, 0f,
 	              "Relax2", "Automatic cursor movement - just follow the rhythm.\n**UNRANKED**"),
-	SPUN_OUT      (Category.SPECIAL, 2, GameImage.MOD_SPUN_OUT, "SO", 4096, Input.KEY_C, 0.9f,
+	Target	      (Category.SPECIAL, 2, GameImage.MOD_TARGET, "AP", 8388608, Input.KEY_T, 1f,
+	              "Target", "Timing practice!"),
+	SPUN_OUT      (Category.SPECIAL, 3, GameImage.MOD_SPUN_OUT, "SO", 4096, Input.KEY_C, 0.9f,
 	              "SpunOut", "Spinners will be automatically completed."),
-	AUTO          (Category.SPECIAL, 3, GameImage.MOD_AUTO, "", 2048, Input.KEY_V, 1f,
-	              "Autoplay", "Watch a perfect automated play through the song.");
+	AUTO          (Category.SPECIAL, 4, GameImage.MOD_AUTO, "", 2048, Input.KEY_V, 1f,
+	              "Autoplay", "Watch a perfect automated play through the song."),
+	CINEMA          (Category.SPECIAL, 5, GameImage.MOD_CINEMA, "", 4194304, Input.KEY_M, 1f, "Autoplay", "Watch the video without being distubed by objects.");
+
 
 	/** Mod categories. */
 	public enum Category {
@@ -192,7 +195,7 @@ public enum GameMod {
 
 		// create buttons
 		float baseX = Category.EASY.getX() + Fonts.LARGE.getWidth(Category.EASY.getName()) * 1.25f;
-		float offsetX = GameImage.MOD_EASY.getImage().getWidth() * 2.1f;
+		float offsetX = GameImage.MOD_EASY.getImage().getWidth() * 1.1f;
 		for (GameMod mod : GameMod.values()) {
 			Image img = mod.image.getImage();
 			mod.button = new MenuButton(img,
@@ -371,16 +374,20 @@ public enum GameMod {
 				if (this == AUTO) {
 					SPUN_OUT.active = false;
 					SUDDEN_DEATH.active = false;
+					PERFECT.active = false;
 					RELAX.active = false;
 					AUTOPILOT.active = false;
-				} else if (this == SPUN_OUT || this == SUDDEN_DEATH || this == RELAX || this == AUTOPILOT)
+					CINEMA.active = false;
+				} else if (this == SPUN_OUT || this == SUDDEN_DEATH || this == PERFECT || this == RELAX || this == AUTOPILOT || this == CINEMA)
 					this.active = false;
 			}
-			if (active && (this == SUDDEN_DEATH || this == NO_FAIL || this == RELAX || this == AUTOPILOT)) {
+			if (active && (this == SUDDEN_DEATH || this == PERFECT || this == NO_FAIL || this == RELAX || this == AUTOPILOT)) {
 				SUDDEN_DEATH.active = false;
+				PERFECT.active = false;
 				NO_FAIL.active = false;
 				RELAX.active = false;
 				AUTOPILOT.active = false;
+				CINEMA.active = false;
 				active = true;
 			}
 			if (AUTOPILOT.isActive() && SPUN_OUT.isActive()) {
@@ -395,11 +402,19 @@ public enum GameMod {
 				else
 					EASY.active = false;
 			}
-			if (HALF_TIME.isActive() && DOUBLE_TIME.isActive()) {
-				if (this == HALF_TIME)
+			if (HALF_TIME.isActive() && (DOUBLE_TIME.isActive() || NIGHTCORE.isActive())) {
+				if (this == HALF_TIME){
 					DOUBLE_TIME.active = false;
+					NIGHTCORE.active = false;
+				}
 				else
 					HALF_TIME.active = false;
+			}
+			if (DOUBLE_TIME.isActive() && NIGHTCORE.isActive()){
+				if (this == DOUBLE_TIME)
+					NIGHTCORE.active = false;
+				else
+					DOUBLE_TIME.active = false;
 			}
 		}
 	}
