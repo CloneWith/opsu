@@ -2,7 +2,7 @@
 
 **opsu!** is an unofficial open-source client for the rhythm game [osu!](https://osu.ppy.sh/), written in Java using [Slick2D](http://slick.ninjacave.com/) and [LWJGL](http://lwjgl.org/) (wrappers around OpenGL and OpenAL).
 
-opsu! runs on Windows, Linux and Android (libGDX port). For Android releases, there is also a [separate repo](https://github.com/clonewith/opsu-droid) and one to [build apks](https://github.com/clonewith/opsu-ABuild).
+opsu! runs on Windows and Linux.
 
 Take a look at the original project if you would like to do so:
 
@@ -13,8 +13,7 @@ Specially, you may hope to read [relevant wiki articles](https://osu.ppy.sh/wiki
 
 ## Getting Started
 
-- Get a copy of opsu! from the [releases](https://github.com/clonewith/opsu/releases) page.
-- APK releases can be found [here](https://github.com/clonewith/opsu-droid/releases).
+Get a copy of opsu! from the [releases](https://github.com/clonewith/opsu/releases) page.
 
 ### Java Setup
 
