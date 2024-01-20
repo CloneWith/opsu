@@ -55,7 +55,7 @@ dependencies {
 		exclude group: 'com.googlecode.soundlibs', module: 'tritonus-share'
 	}
 	compile 'com.googlecode.soundlibs:tritonus-all:0.3.7.2'
-	compile 'org.xerial:sqlite-jdbc:3.44.1.0'
+	compile 'org.xerial:sqlite-jdbc:3.45.0.0'
 	compile 'org.json:json:20231013'
 	compile 'net.java.dev.jna:jna:5.14.0'
 	compile 'net.java.dev.jna:jna-platform:5.14.0'
