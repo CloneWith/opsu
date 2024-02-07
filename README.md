@@ -13,8 +13,7 @@ Specially, you may hope to read [relevant wiki articles](https://osu.ppy.sh/wiki
 
 ## Getting Started
 
-- Get a copy of opsu! from the [releases](https://github.com/clonewith/opsu/releases) page.
-- APK releases can be found [here](https://github.com/clonewith/opsu-droid/releases).
+Get a copy of opsu! from the [releases](https://github.com/clonewith/opsu/releases) page.
 
 ### Java Setup
 
