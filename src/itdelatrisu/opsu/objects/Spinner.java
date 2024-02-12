@@ -176,6 +176,9 @@ public class Spinner implements GameObject {
 
 	@Override
 	public void draw(Graphics g, int trackPosition) {
+		/* Hide objects when Cinema is enabled. */
+		if (GameMod.CINEMA.isActive())
+			return;
 		// only draw spinners shortly before start time
 		int timeDiff = hitObject.getTime() - trackPosition;
 		final int fadeInTime = game.getFadeInTime();
@@ -282,7 +285,7 @@ public class Spinner implements GameObject {
 		deltaOverflow += delta;
 
 		float angleDiff = 0;
-		if (GameMod.AUTO.isActive()) {
+		if (GameMod.AUTO.isActive() || GameMod.CINEMA.isActive()) {
 			angleDiff = delta * AUTO_MULTIPLIER;
 			isSpinning = true;
 		} else if (GameMod.SPUN_OUT.isActive() || GameMod.AUTOPILOT.isActive()) {
@@ -359,7 +362,7 @@ public class Spinner implements GameObject {
 			timeDiff = trackPosition - hitObject.getTime();
 
 		// calculate point
-		float multiplier = (GameMod.AUTO.isActive()) ? AUTO_MULTIPLIER : SPUN_OUT_MULTIPLIER;
+		float multiplier = (GameMod.AUTO.isActive() || GameMod.CINEMA.isActive()) ? AUTO_MULTIPLIER : SPUN_OUT_MULTIPLIER;
 		float angle = (timeDiff * multiplier) - HALF_PI;
 		final float r = height / 10f;
 		return new Vec2f((float) (x + r * Math.cos(angle)), (float) (y + r * Math.sin(angle)));

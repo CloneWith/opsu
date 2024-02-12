@@ -191,6 +191,8 @@ public class Slider implements GameObject {
 
 	@Override
 	public void draw(Graphics g, int trackPosition) {
+		/* Hide objects when Cinema is enabled. */
+		if (GameMod.CINEMA.isActive()) return;
 		int timeDiff = hitObject.getTime() - trackPosition;
 		final int repeatCount = hitObject.getRepeatCount();
 		final int approachTime = game.getApproachTime();
@@ -614,7 +616,7 @@ public class Slider implements GameObject {
 	public boolean update(int delta, int mouseX, int mouseY, boolean keyPressed, int trackPosition) {
 		int repeatCount = hitObject.getRepeatCount();
 		int[] hitResultOffset = game.getHitResultOffsets();
-		boolean isAutoMod = GameMod.AUTO.isActive();
+		boolean isAutoMod = GameMod.AUTO.isActive() || GameMod.CINEMA.isActive();
 
 		if (!sliderClickedInitial) {
 			int time = hitObject.getTime();
