@@ -112,7 +112,7 @@ public class SayobotServer extends DownloadServer {
 			for (int i = 0; i < nodes.length; i++) {
 				JSONObject item = arr.getJSONObject(i);
 				nodes[i] = new DownloadNode(
-						item.getInt("sid"), formatDate(item.getString("lastupdate")), // "date"
+						item.getInt("sid"), formatDate(item.getLong("lastupdate")), // "date"
 						item.getString("title"), item.isNull("titleU") ? null : item.getString("titleU"), // "titleUnicode"
 						item.getString("artist"), item.isNull("artistU") ? null : item.getString("artistU"), // "artistUnicode"
 						item.getString("creator"));
@@ -146,21 +146,13 @@ public class SayobotServer extends DownloadServer {
 	 * @param s the raw date string (e.g. "2015-09-30 09:39:04.536")
 	 * @return the formatted date, or the raw string if it could not be parsed
 	 */
-	private String formatDate(String s) {
+	private String formatDate(Long s) {
 		try {
-			// old format: "2015-05-14T23:38:47+09:00"
-			// make string parseable by SimpleDateFormat
-			// int index = s.lastIndexOf(':');
-			// if (index == -1)
-			// return s;
-			// s = new StringBuilder(s).deleteCharAt(index).toString();
-
-			DateFormat f = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS"); // "yyyy-MM-dd'T'HH:mm:ssZ"
-			Date d = f.parse(s);
 			DateFormat fmt = new SimpleDateFormat("d MMM yyyy HH:mm:ss");
-			return fmt.format(d);
-		} catch (StringIndexOutOfBoundsException | ParseException e) {
-			return s;
+			Date date = new Date(s * 1000); // Unix timestamp
+			return fmt.format(date);
+		} catch (StringIndexOutOfBoundsException e) {
+			return "";
 		}
 	}
 }

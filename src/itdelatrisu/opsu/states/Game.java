@@ -405,6 +405,7 @@ public class Game extends BasicGameState {
 
 		// background
 		float dimLevel = Options.getBackgroundDim();
+		if (GameMod.CINEMA.isActive()) dimLevel = 1.0f;
 		if (video != null && video.isStarted() && !video.isFinished()) {
 			// video
 			video.render(0, 0, width, height, dimLevel);
@@ -427,11 +428,11 @@ public class Game extends BasicGameState {
 		if (GameMod.FLASHLIGHT.isActive())
 			Graphics.setCurrent(g);
 
-		// "auto" and "autopilot" mods: move cursor automatically
+		// Auto relevant mods: move cursor automatically
 		// TODO: this should really be in update(), not render()
 		autoMousePosition.set(width / 2, height / 2);
 		autoMousePressed = false;
-		if (GameMod.AUTO.isActive() || GameMod.AUTOPILOT.isActive()) {
+		if (GameMod.AUTO.isActive() || GameMod.AUTOPILOT.isActive() || GameMod.CINEMA.isActive()) {
 			Vec2f autoPoint = null;
 			if (gameFinished) {
 				// game finished, do nothing
@@ -512,7 +513,7 @@ public class Game extends BasicGameState {
 			if (pauseTime > -1 && pausedMousePosition != null) {
 				mouseX = (int) pausedMousePosition.x;
 				mouseY = (int) pausedMousePosition.y;
-			} else if (GameMod.AUTO.isActive() || GameMod.AUTOPILOT.isActive()) {
+			} else if (GameMod.AUTO.isActive() || GameMod.AUTOPILOT.isActive() || GameMod.CINEMA.isActive()) {
 				mouseX = (int) autoMousePosition.x;
 				mouseY = (int) autoMousePosition.y;
 			} else if (isReplay) {
@@ -677,7 +678,7 @@ public class Game extends BasicGameState {
 		}
 
 		// in-game scoreboard
-		if (previousScores != null && trackPosition >= firstObjectTime && !GameMod.RELAX.isActive() && !GameMod.AUTOPILOT.isActive()) {
+		if (previousScores != null && trackPosition >= firstObjectTime && !GameMod.RELAX.isActive() && !GameMod.AUTOPILOT.isActive() && !GameMod.CINEMA.isActive()) {
 			// NOTE: osu! uses the actual score, but we use sliding score instead
 			ScoreData currentScore = data.getCurrentScoreData(beatmap, true);
 			while (currentRank > 0 && previousScores[currentRank - 1].score < currentScore.score) {
@@ -725,7 +726,7 @@ public class Game extends BasicGameState {
 			GameImage.UNRANKED.getImage().drawCentered(width / 2, height * 0.077f);
 
 		// draw replay speed button
-		if (isReplay || GameMod.AUTO.isActive())
+		if (isReplay || GameMod.AUTO.isActive() || GameMod.CINEMA.isActive())
 			playbackSpeed.getButton().draw();
 
 		// draw music position bar (for replay seeking)
@@ -788,7 +789,7 @@ public class Game extends BasicGameState {
 
 		if (isReplay)
 			UI.draw(g, replayX, replayY, replayKeyPressed);
-		else if (GameMod.AUTO.isActive())
+		else if (GameMod.AUTO.isActive() || GameMod.CINEMA.isActive())
 			UI.draw(g, (int) autoMousePosition.x, (int) autoMousePosition.y, autoMousePressed);
 		else if (GameMod.AUTOPILOT.isActive())
 			UI.draw(g, (int) autoMousePosition.x, (int) autoMousePosition.y, Utils.isGameKeyPressed());
@@ -802,7 +803,7 @@ public class Game extends BasicGameState {
 		UI.update(delta);
 		int mouseX = input.getMouseX(), mouseY = input.getMouseY();
 		skipButton.hoverUpdate(delta, mouseX, mouseY);
-		if (isReplay || GameMod.AUTO.isActive())
+		if (isReplay || GameMod.AUTO.isActive() || GameMod.CINEMA.isActive())
 			playbackSpeed.getButton().hoverUpdate(delta, mouseX, mouseY);
 		int trackPosition = MusicController.getPosition(true);
 		int firstObjectTime = beatmap.objects[0].getTime();
@@ -811,7 +812,7 @@ public class Game extends BasicGameState {
 		// returning from pause screen: must click previous mouse position
 		if (pauseTime > -1) {
 			// paused during lead-in or break, or "relax" or "autopilot": continue immediately
-			if (pausedMousePosition == null || (GameMod.RELAX.isActive() || GameMod.AUTOPILOT.isActive())) {
+			if (pausedMousePosition == null || (GameMod.RELAX.isActive() || GameMod.AUTOPILOT.isActive() || GameMod.CINEMA.isActive())) {
 				pauseTime = -1;
 				if (!isLeadIn())
 					MusicController.resume();
@@ -967,7 +968,7 @@ public class Game extends BasicGameState {
 
 		// game finished: change state after timer expires
 		if (gameFinished && !gameFinishedTimer.update(delta)) {
-			if (checkpointLoaded)  // if checkpoint used, skip ranking screen
+			if (checkpointLoaded || GameMod.CINEMA.isActive())  // if checkpoint or Cinema used, skip ranking screen
 				game.closeRequested();
 			else {  // go to ranking screen
 				MusicController.setPitch(1f);
@@ -1018,7 +1019,7 @@ public class Game extends BasicGameState {
 
 			// save score and replay
 			if (!checkpointLoaded) {
-				boolean unranked = (GameMod.AUTO.isActive() || GameMod.RELAX.isActive() || GameMod.AUTOPILOT.isActive());
+				boolean unranked = (GameMod.AUTO.isActive() || GameMod.RELAX.isActive() || GameMod.AUTOPILOT.isActive() || GameMod.CINEMA.isActive());
 				((GameRanking) game.getState(Opsu.STATE_GAMERANKING)).setGameData(data);
 				if (isReplay)
 					data.setReplay(replay);
@@ -1090,7 +1091,7 @@ public class Game extends BasicGameState {
 		}
 
 		// pause game if focus lost
-		if (!container.hasFocus() && !GameMod.AUTO.isActive() && !isReplay) {
+		if (!container.hasFocus() && (!GameMod.AUTO.isActive() && !GameMod.CINEMA.isActive()) && !isReplay) {
 			if (pauseTime < 0) {
 				pausedMousePosition = new Vec2f(mouseX, mouseY);
 				pausePulse = 0f;
@@ -1219,7 +1220,7 @@ public class Game extends BasicGameState {
 			}
 
 			// "auto" mod or watching replay: go back to song menu
-			if (GameMod.AUTO.isActive() || isReplay) {
+			if (GameMod.AUTO.isActive() || isReplay || GameMod.CINEMA.isActive()) {
 				game.closeRequested();
 				break;
 			}
@@ -1303,7 +1304,7 @@ public class Game extends BasicGameState {
 			// change playback speed
 			if (gameFinished)
 				break;
-			if (isReplay || GameMod.AUTO.isActive()) {
+			if (isReplay || GameMod.AUTO.isActive() || GameMod.CINEMA.isActive()) {
 				playbackSpeed = playbackSpeed.next();
 				MusicController.setPitch(getCurrentPitch());
 			}
@@ -1337,7 +1338,7 @@ public class Game extends BasicGameState {
 			return;
 
 		// watching replay
-		if (isReplay || GameMod.AUTO.isActive()) {
+		if (isReplay || GameMod.AUTO.isActive() || GameMod.CINEMA.isActive()) {
 			if (button == Input.MOUSE_MIDDLE_BUTTON)
 				return;
 
@@ -1421,7 +1422,7 @@ public class Game extends BasicGameState {
 		}
 
 		// "auto" and "relax" mods: ignore user actions
-		if (GameMod.AUTO.isActive() || GameMod.RELAX.isActive())
+		if (GameMod.AUTO.isActive() || GameMod.RELAX.isActive() || GameMod.CINEMA.isActive())
 			return;
 
 		// send a game key press
@@ -1527,9 +1528,9 @@ public class Game extends BasicGameState {
 				loadImages();
 				setMapModifiers();
 				retries = 0;
-			} else if (playState == PlayState.RETRY && !GameMod.AUTO.isActive()) {
+			} else if (playState == PlayState.RETRY && !GameMod.AUTO.isActive() && !GameMod.CINEMA.isActive()) {
 				retries++;
-			} else if (playState == PlayState.REPLAY || GameMod.AUTO.isActive()) {
+			} else if (playState == PlayState.REPLAY || GameMod.AUTO.isActive() || GameMod.CINEMA.isActive()) {
 				retries = 0;
 			}
 
@@ -1619,7 +1620,7 @@ public class Game extends BasicGameState {
 				createMergedSlider();
 
 			// unhide cursor for "auto" mod and replays
-			if (GameMod.AUTO.isActive() || isReplay)
+			if (GameMod.AUTO.isActive() || GameMod.CINEMA.isActive() || isReplay)
 				UI.getCursor().show();
 
 			// load replay frames
@@ -1686,7 +1687,7 @@ public class Game extends BasicGameState {
 		}
 
 		skipButton.resetHover();
-		if (isReplay || GameMod.AUTO.isActive())
+		if (isReplay || GameMod.AUTO.isActive() || GameMod.CINEMA.isActive())
 			playbackSpeed.getButton().resetHover();
 		MusicController.setPitch(getCurrentPitch());
 	}
@@ -1697,7 +1698,7 @@ public class Game extends BasicGameState {
 //		container.setMouseGrabbed(false);
 
 		// re-hide cursor
-		if (GameMod.AUTO.isActive() || isReplay)
+		if (GameMod.AUTO.isActive() || isReplay || GameMod.CINEMA.isActive())
 			UI.getCursor().hide();
 
 		// replays
@@ -1712,7 +1713,8 @@ public class Game extends BasicGameState {
 	 */
 	private void drawHitObjects(Graphics g, int trackPosition) {
 		// draw result objects (under)
-		data.drawHitResults(trackPosition, false);
+		if (!GameMod.CINEMA.isActive())
+			data.drawHitResults(trackPosition, false);
 
 		// include previous object in follow points
 		int lastObjectIndex = -1;
@@ -1725,7 +1727,7 @@ public class Game extends BasicGameState {
 			trackPosition = failTrackTime + (int) (System.currentTimeMillis() - failTime);
 
 		// draw merged slider
-		if (!loseState && mergedSlider != null && Options.isExperimentalSliderMerging()) {
+		if (!loseState && !GameMod.CINEMA.isActive() && mergedSlider != null && Options.isExperimentalSliderMerging()) {
 			mergedSlider.draw(Color.white);
 			mergedSlider.clearPoints();
 		}
@@ -1748,7 +1750,7 @@ public class Game extends BasicGameState {
 				stack.add(index);
 
 			// draw follow points
-			if (Options.isFollowPointEnabled() && !loseState)
+			if (Options.isFollowPointEnabled() && !loseState && !GameMod.CINEMA.isActive())
 				lastObjectIndex = drawFollowPointsBetween(objectIndex, lastObjectIndex, trackPosition);
 		}
 		if (spinnerIndex != -1)
@@ -2166,7 +2168,7 @@ public class Game extends BasicGameState {
 	 */
 	private synchronized void addReplayFrameAndRun(int x, int y, int keys, int time){
 		// "auto" and "autopilot" mods: use automatic cursor coordinates
-		if (GameMod.AUTO.isActive() || GameMod.AUTOPILOT.isActive()) {
+		if (GameMod.AUTO.isActive() || GameMod.AUTOPILOT.isActive() || GameMod.CINEMA.isActive()) {
 			x = (int) autoMousePosition.x;
 			y = (int) autoMousePosition.y;
 		}

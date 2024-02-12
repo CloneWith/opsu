@@ -370,15 +370,16 @@ public enum GameMod {
 		scoreMultiplier = speedMultiplier = difficultyMultiplier = -1f;
 
 		if (checkInverse) {
-			if (AUTO.isActive()) {
-				if (this == AUTO) {
+			if (AUTO.isActive() || CINEMA.isActive()) {
+				if (this == AUTO || this == CINEMA) {
 					SPUN_OUT.active = false;
 					SUDDEN_DEATH.active = false;
 					PERFECT.active = false;
 					RELAX.active = false;
 					AUTOPILOT.active = false;
-					CINEMA.active = false;
-				} else if (this == SPUN_OUT || this == SUDDEN_DEATH || this == PERFECT || this == RELAX || this == AUTOPILOT || this == CINEMA)
+					if (this == CINEMA) AUTO.active = false;
+					else CINEMA.active = false;
+				} else if (this == SPUN_OUT || this == SUDDEN_DEATH || this == PERFECT || this == RELAX || this == AUTOPILOT)
 					this.active = false;
 			}
 			if (active && (this == SUDDEN_DEATH || this == PERFECT || this == NO_FAIL || this == RELAX || this == AUTOPILOT)) {

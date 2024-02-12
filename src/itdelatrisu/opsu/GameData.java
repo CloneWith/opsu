@@ -650,7 +650,7 @@ public class GameData {
 		}
 
 		// mod icons
-		if ((firstObject && trackPosition < firstObjectTime) || GameMod.AUTO.isActive()) {
+		if ((firstObject && trackPosition < firstObjectTime) || GameMod.AUTO.isActive() || GameMod.CINEMA.isActive()) {
 			int modWidth = GameMod.AUTO.getImage().getWidth();
 			float modX = (width * 0.98f) - modWidth;
 			int modCount = 0;
@@ -1176,11 +1176,17 @@ public class GameData {
 
 	/**
 	 * Returns false if health is zero.
-	 * If "No Fail" or "Auto" mods are active, this will always return true.
+	 * If No Fail, Auto or Cinema mods are active, this will always return true.
 	 */
 	public boolean isAlive() {
-		return (health.getHealth() > 0f || GameMod.NO_FAIL.isActive() || GameMod.AUTO.isActive() ||
-		        GameMod.RELAX.isActive() || GameMod.AUTOPILOT.isActive());
+		return (
+			health.getHealth() > 0f
+			|| GameMod.NO_FAIL.isActive()
+			|| GameMod.AUTO.isActive()
+			|| GameMod.CINEMA.isActive()
+			|| GameMod.RELAX.isActive()
+			|| GameMod.AUTOPILOT.isActive()
+		);
 	}
 
 	/**
@@ -1661,7 +1667,7 @@ public class GameData {
 		if (hitResult == HIT_MISS && (GameMod.RELAX.isActive() || GameMod.AUTOPILOT.isActive()))
 			return;  // "relax" and "autopilot" mods: hide misses
 
-		boolean hideResult = (hitResult == HIT_300 || hitResult == HIT_300G || hitResult == HIT_300K) && !Options.isPerfectHitBurstEnabled();
+		boolean hideResult = ((hitResult == HIT_300 || hitResult == HIT_300G || hitResult == HIT_300K) && !Options.isPerfectHitBurstEnabled())|| GameMod.CINEMA.isActive();
 		hitResultList.add(new HitObjectResult(time, hitResult, x, y, color, hitResultType, curve, expand, hideResult));
 	}
 
@@ -1706,7 +1712,7 @@ public class GameData {
 		sd.perfect = (comboMax == fullObjectCount);
 		sd.mods = GameMod.getModState();
 		sd.replayString = (replay == null) ? null : replay.getReplayFilename();
-		sd.playerName = GameMod.AUTO.isActive() ?
+		sd.playerName = (GameMod.AUTO.isActive() || GameMod.CINEMA.isActive()) ?
 			UserList.AUTO_USER_NAME : UserList.get().getCurrentUser().getName();
 		return sd;
 	}
