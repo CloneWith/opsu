@@ -2,7 +2,7 @@
 
 **opsu!** is an unofficial open-source client for the rhythm game [osu!](https://osu.ppy.sh/), written in Java using [Slick2D](http://slick.ninjacave.com/) and [LWJGL](http://lwjgl.org/) (wrappers around OpenGL and OpenAL).
 
-opsu! runs on Windows, Linux and Android (libGDX port). For Android releases, there is also a [separate repo](https://github.com/clonewith/opsu-droid) and one to [build apks](https://github.com/clonewith/opsu-ABuild).
+opsu! runs on Windows and Linux.
 
 Take a look at the original project if you would like to do so:
 
@@ -13,8 +13,7 @@ Specially, you may hope to read [relevant wiki articles](https://osu.ppy.sh/wiki
 
 ## Getting Started
 
-- Get a copy of opsu! from the [releases](https://github.com/clonewith/opsu/releases) page.
-- APK releases can be found [here](https://github.com/clonewith/opsu-droid/releases).
+Get a copy of opsu! from the [releases](https://github.com/clonewith/opsu/releases) page.
 
 ### Java Setup
 
@@ -51,8 +50,9 @@ The following files and folders will be created by opsu! as needed:
 
 ## Building
 
-opsu! is distributed as both a [Maven](https://maven.apache.org/) and
-[Gradle](https://gradle.org/) project.
+opsu! is distributed a [Maven](https://maven.apache.org/) project.
+
+*Note:* Due to technical reasons, the support for [Gradle](https://gradle.org/) has been temporarily dropped. Chances are that we would add it back in the future.
 
 ### Maven
 
@@ -63,22 +63,13 @@ Maven builds are built to the `target` directory.
   - Setting the "XDG" property (`-DXDG=true`) will make the application use XDG folders under Unix-like operating systems.
   - Setting the "exclude" property to "ffmpeg" (`-Dexclude=ffmpeg`) will exclude FFmpeg shared libraries from the jar.
 
-### Gradle
-
-Gradle builds are built to the `build` directory.
-
-- To run the project, execute the Gradle task `run`.
-- To create a single executable jar, execute the Gradle task `jar`. This will compile a jar to `build/libs/opsu-${version}.jar` with the libraries, resources and natives packed inside the jar.
-  - Setting the "XDG" property (`-PXDG=true`) will make the application use XDG folders under Unix-like operating systems.
-  - Setting the "excludeFFmpeg" property (`-PexcludeFFmpeg`) will exclude FFmpeg shared libraries from the jar.
-
 ## Contributing
 
 See the [contributing guidelines](CONTRIBUTING.md) for details.
 
 ## Credits
 
-This software was created by Jeffrey Han ([@itdelatrisu](https://github.com/itdelatrisu/)). All game concepts and designs are based on work by [osu!](https://osu.ppy.sh/) developer Dean Herbert ([@ppy](https://github.com/ppy)). Other credits can be found [here](CREDITS.md).
+This software was originally created by Jeffrey Han ([@itdelatrisu](https://github.com/itdelatrisu/)). All game concepts and designs are based on work by [osu!](https://osu.ppy.sh/) developer Dean Herbert ([@ppy](https://github.com/ppy)). Other credits can be found [here](CREDITS.md).
 
 ## License
 
