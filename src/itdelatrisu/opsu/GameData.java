@@ -609,7 +609,7 @@ public class GameData {
 
 		// score percentage
 		int symbolHeight = getScoreSymbolImage('0').getHeight();
-		if (!relaxAutoPilot)
+		if (!relaxAutoPilot && !GameMod.CINEMA.isActive())
 			drawSymbolString(
 					String.format((scorePercentDisplay < 10f) ? "0%.2f%%" : "%.2f%%", scorePercentDisplay),
 					width - margin, symbolHeight, 0.60f, alpha, true);
@@ -650,7 +650,7 @@ public class GameData {
 		}
 
 		// mod icons
-		if ((firstObject && trackPosition < firstObjectTime) || GameMod.AUTO.isActive() || GameMod.CINEMA.isActive()) {
+		if ((firstObject && trackPosition < firstObjectTime) || GameMod.AUTO.isActive()) {
 			int modWidth = GameMod.AUTO.getImage().getWidth();
 			float modX = (width * 0.98f) - modWidth;
 			int modCount = 0;
@@ -668,7 +668,7 @@ public class GameData {
 		}
 
 		// hit error bar
-		if (Options.isHitErrorBarEnabled() && !hitErrorList.isEmpty()) {
+		if (Options.isHitErrorBarEnabled() && !hitErrorList.isEmpty() && !GameMod.CINEMA.isActive()) {
 			// fade out with last tick
 			float hitErrorAlpha = 1f;
 			Color white = new Color(Color.white);
@@ -716,7 +716,7 @@ public class GameData {
 			}
 		}
 
-		if (!breakPeriod && !relaxAutoPilot) {
+		if (!breakPeriod && !relaxAutoPilot && !GameMod.CINEMA.isActive()) {
 			// scorebar
 			float healthRatio = health.getHealthDisplay() / 100f;
 			if (firstObject) {  // gradually move ki before map begins
@@ -770,7 +770,7 @@ public class GameData {
 					drawSymbolString(comboString, margin, height - margin - (symbolHeight * comboPopBack), comboPopBack, 0.5f * alpha, false);
 				drawSymbolString(comboString, margin, height - margin - (symbolHeight * comboPopFront), comboPopFront, alpha, false);
 			}
-		} else if (!relaxAutoPilot) {
+		} else if (!relaxAutoPilot && !GameMod.CINEMA.isActive()) {
 			// grade
 			Grade grade = getGrade();
 			if (grade != Grade.NULL) {
@@ -791,6 +791,7 @@ public class GameData {
 	 */
 	public void drawRankingElements(Graphics g, Beatmap beatmap, int time) {
 		// TODO Version 2 skins
+		if (GameMod.CINEMA.isActive()) return;
 		float symbolTextScale = 1.15f;
 		float uiScale = GameImage.getUIscale();
 		Image zeroImg = getScoreSymbolImage('0');
