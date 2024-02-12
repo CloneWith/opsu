@@ -52,7 +52,7 @@ The following files and folders will be created by opsu! as needed:
 
 opsu! is distributed a [Maven](https://maven.apache.org/) project.
 
-*Note:* Due to technical issues, we have temporarily dropped support for Gradle. Chances are that we would add it back in the future.
+*Note:* Due to technical reasons, the support for [Gradle](https://gradle.org/) has been temporarily dropped. Chances are that we would add it back in the future.
 
 ### Maven
 
