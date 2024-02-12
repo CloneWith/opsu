@@ -90,6 +90,7 @@ public class Circle implements GameObject {
 
 	@Override
 	public void draw(Graphics g, int trackPosition) {
+		if (GameMod.CINEMA.isActive()) return;
 		int timeDiff = hitObject.getTime() - trackPosition;
 		final int approachTime = game.getApproachTime();
 		final int fadeInTime = game.getFadeInTime();
@@ -168,7 +169,7 @@ public class Circle implements GameObject {
 		int time = hitObject.getTime();
 
 		int[] hitResultOffset = game.getHitResultOffsets();
-		boolean isAutoMod = GameMod.AUTO.isActive();
+		boolean isAutoMod = GameMod.AUTO.isActive() || GameMod.CINEMA.isActive();
 
 		if (trackPosition > time + hitResultOffset[GameData.HIT_50]) {
 			if (isAutoMod)  // "auto" mod: catch any missed notes due to lag

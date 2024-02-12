@@ -460,11 +460,13 @@ public class SongMenu extends BasicGameState {
 		search.setMaxLength(60);
 
 		// selection buttons
-		Image selectionMods = GameImage.SELECTION_MODS.getImage();
-		float selectX = width * 0.183f + selectionMods.getWidth() / 2f;
-		float selectY = height - selectionMods.getHeight() / 2f;
-		float selectOffset = selectionMods.getWidth() * 1.05f;
-		selectModsButton = new MenuButton(GameImage.SELECTION_MODS_OVERLAY.getImage(),
+		// TODO: For special cases (e.g. 5 digit skin), need to process each image separately
+		// Image selectionMods = GameImage.SELECTION_MODS.getImage();
+		Image selectionModsOverlay = GameImage.SELECTION_MODS_OVERLAY.getImage();
+		float selectX = width * 0.183f + selectionModsOverlay.getWidth() / 2f;
+		float selectY = height - selectionModsOverlay.getHeight() / 2f;
+		float selectOffset = selectionModsOverlay.getWidth() * 1.05f;
+		selectModsButton = new MenuButton(selectionModsOverlay,
 				selectX, selectY);
 		selectRandomButton = new MenuButton(GameImage.SELECTION_RANDOM_OVERLAY.getImage(),
 				selectX + selectOffset, selectY);
