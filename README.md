@@ -50,7 +50,9 @@ The following files and folders will be created by opsu! as needed:
 
 ## Building
 
-opsu! is distributed as both a [Maven](https://maven.apache.org/) and [Gradle](https://gradle.org/) project.
+opsu! is distributed as a [Maven](https://maven.apache.org/) project.
+
+Due to technical reasons, the support for [Gradle](https://gradle.org/) has been temporarily dropped.
 
 ### Maven
 
@@ -60,15 +62,6 @@ Maven builds are built to the `target` directory.
 - To create a single executable jar, execute the Maven goal `package -Djar`. This will compile a jar to `target/opsu-${version}.jar` with the libraries, resources and natives packed inside the jar.
   - Setting the "XDG" property (`-DXDG=true`) will make the application use XDG folders under Unix-like operating systems.
   - Setting the "exclude" property to "ffmpeg" (`-Dexclude=ffmpeg`) will exclude FFmpeg shared libraries from the jar.
-
-### Gradle
-
-Gradle builds are built to the `build` directory.
-
-- To run the project, execute the Gradle task `run`.
-- To create a single executable jar, execute the Gradle task `jar`. This will compile a jar to `build/libs/opsu-${version}.jar` with the libraries, resources and natives packed inside the jar.
-  - Setting the "XDG" property (`-PXDG=true`) will make the application use XDG folders under Unix-like operating systems.
-  - Setting the "excludeFFmpeg" property (`-PexcludeFFmpeg`) will exclude FFmpeg shared libraries from the jar.
 
 ## Contributing
 

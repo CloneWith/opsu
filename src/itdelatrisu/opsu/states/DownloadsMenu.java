@@ -38,6 +38,7 @@ import itdelatrisu.opsu.downloads.servers.DownloadServer;
 import itdelatrisu.opsu.downloads.servers.HexideServer;
 import itdelatrisu.opsu.downloads.servers.MnetworkServer;
 import itdelatrisu.opsu.downloads.servers.RippleServer;
+import itdelatrisu.opsu.downloads.servers.SayobotServer;
 import itdelatrisu.opsu.options.Options;
 import itdelatrisu.opsu.ui.Colors;
 import itdelatrisu.opsu.ui.DropdownMenu;
@@ -100,7 +101,8 @@ public class DownloadsMenu extends BasicGameState {
 		new RippleServer(),
 		new MnetworkServer(),
 		new HexideServer(),
-		new BloodcatServer()
+		new BloodcatServer(),
+		new SayobotServer()
 	};
 
 	/** The current list of search results. */

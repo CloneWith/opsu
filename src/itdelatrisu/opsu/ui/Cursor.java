@@ -20,6 +20,7 @@ package itdelatrisu.opsu.ui;
 
 import itdelatrisu.opsu.ErrorHandler;
 import itdelatrisu.opsu.GameImage;
+import itdelatrisu.opsu.GameMod;
 import itdelatrisu.opsu.Opsu;
 import itdelatrisu.opsu.Utils;
 import itdelatrisu.opsu.options.Options;
@@ -115,7 +116,8 @@ public class Cursor {
 	 * @param mousePressed whether or not the mouse button is pressed
 	 */
 	public void draw(int mouseX, int mouseY, boolean mousePressed) {
-		if (Options.isCursorDisabled())
+		int state = game.getCurrentStateID();
+		if (Options.isCursorDisabled() || (state == Opsu.STATE_GAME && GameMod.CINEMA.isActive()))
 			return;
 
 		Skin skin = Options.getSkin();

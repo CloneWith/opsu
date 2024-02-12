@@ -5,12 +5,8 @@
 
 version: 2
 updates:
-  - package-ecosystem: "gradle" # See documentation for possible values
-    directory: "/" # Location of package manifests
-    schedule:
-      interval: "daily"
   - package-ecosystem: "maven"
-    directory: "/repo"
+    directory: "/"
     schedule:
       interval: "daily"
   - package-ecosystem: "github-actions"
