@@ -48,17 +48,21 @@ public class SayobotServer extends DownloadServer {
 	/** Formatted download URL: {@code beatmapSetID} */
 	private static final String DOWNLOAD_URL = "https://txy1.sayobot.cn/beatmaps/download/full/%d";
 
-	/** Formatted search URL: {@code query,rankedOnly,page} */
-	private static final String SEARCH_URL = "https://api.sayobot.cn/beatmaplist?0=%d&1=%d&2=%d&3=%s&5=%d&6=%d";
-	/*
-	 * Format:
-	 * 0=%d: Page size
-	 * 1=%d: Page index
-	 * 2=%d: Beatmap list type
-	 * 3=%s: Query
-	 * 5=%d: Modes
-	 * 6=%d: Ranked state
-	 */
+	/**
+	* Format:
+	* {@params}:
+	* 0=%d: Page size
+	* 1=%d: Page index from 0
+	* 2=%d: Beatmap list type:
+	* *
+	* *
+	* * 4: search
+	*
+	* 3=%s: Query
+	* 5=%d: Modes -> 1
+	* 6=%d: Ranked state
+	*/
+	private static final String SEARCH_URL = "https://api.sayobot.cn/beatmaplist?0=%d&1=%d&2=%d&3=%s&5=%d&6=";
 
 	/** TODO: Preview audio URL, for future use */
 	private static final String PREVIEW_URL = "https://cdnx.sayobot.cn:25225/preview/%d";
@@ -87,15 +91,14 @@ public class SayobotServer extends DownloadServer {
 		DownloadNode[] nodes = null;
 		try {
 			// read JSON
-			String search = String.format(
-				SEARCH_URL,
+			String search = String.format(SEARCH_URL,
 				PAGE_LIMIT,
-				page,
+				page - 1,
 				4,
-				URLEncoder.encode(query, "UTF-8"),
-				1,
-				rankedOnly ? 1 : null
+				(URLEncoder.encode(query, "UTF-8")).replace("+", "%20"),
+				1
 			);
+			if (rankedOnly) search += "1";
 			String s = Utils.readDataFromUrl(new URL(search));
 			JSONObject body = new JSONObject(s);
 			int stat = body.getInt("status");
