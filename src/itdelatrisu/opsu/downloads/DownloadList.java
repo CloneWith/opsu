@@ -21,6 +21,8 @@ package itdelatrisu.opsu.downloads;
 import itdelatrisu.opsu.OpsuConstants;
 import itdelatrisu.opsu.downloads.Download.Status;
 
+import static itdelatrisu.opsu.I18n.t;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -36,7 +38,7 @@ public class DownloadList {
 
 	/** The exit confirmation message. */
 	public static final String EXIT_CONFIRMATION = String.format(
-		"Beatmap downloads are in progress.\nAre you sure you want to quit %s?",
+		t("Beatmap downloads are in progress.\nAre you sure you want to quit %s?"),
 		OpsuConstants.PROJECT_NAME
 	);
 

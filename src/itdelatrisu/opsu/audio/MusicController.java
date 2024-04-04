@@ -26,6 +26,8 @@ import itdelatrisu.opsu.beatmap.TimingPoint;
 import itdelatrisu.opsu.options.Options;
 import itdelatrisu.opsu.ui.UI;
 
+import static itdelatrisu.opsu.I18n.t;
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -100,7 +102,7 @@ public class MusicController {
 		if (lastBeatmap == null || !beatmap.audioFilename.equals(lastBeatmap.audioFilename)) {
 			final File audioFile = beatmap.audioFilename;
 			if (!audioFile.isFile() && !ResourceLoader.resourceExists(audioFile.getPath())) {
-				UI.getNotificationManager().sendBarNotification(String.format("Could not find track '%s'.", audioFile.getName()));
+				UI.getNotificationManager().sendBarNotification(String.format(t("Could not find track '%s'."), audioFile.getName()));
 				return;
 			}
 
@@ -146,8 +148,8 @@ public class MusicController {
 				player = null;
 				trackEnded = false;
 				UI.getNotificationManager().sendNotification(
-					"Looks like sound isn't working right now. Sorry!\n\n" +
-					"Restarting the game will probably fix this.",
+					t("Looks like sound isn't working right now. Sorry!\n\n") +
+					t("Restarting the game will probably fix this."),
 					Color.red
 				);
 				return;
@@ -166,7 +168,7 @@ public class MusicController {
 			});
 			playAt(position, loop);
 		} catch (Exception e) {
-			ErrorHandler.error(String.format("Could not play track '%s'.", file.getName()), e, false);
+			ErrorHandler.error(String.format(t("Could not play track '%s'."), file.getName()), e, false);
 		}
 	}
 
@@ -589,7 +591,7 @@ public class MusicController {
 			int exc = AL10.alGetError();
 			if (exc != AL10.AL_NO_ERROR) {
 				throw new SlickException(
-						"Could not clear SoundStore sources, err: " + exc);
+						t("Could not clear SoundStore sources, err: ") + exc);
 			}
 
 			// delete any buffer data stored in memory, too...
@@ -599,9 +601,9 @@ public class MusicController {
 				AL10.alDeleteBuffers(buf);
 				exc = AL10.alGetError();
 				if (exc != AL10.AL_NO_ERROR) {
-					throw new SlickException("Could not clear buffer "
+					throw new SlickException(t("Could not clear buffer ")
 							+ audio.getBufferID()
-							+ ", err: "+exc);
+							+ t(", err: ")+exc);
 				}
 			}
 
@@ -613,7 +615,7 @@ public class MusicController {
 
 			player = null;
 		} catch (Exception e) {
-			ErrorHandler.error("Failed to destroy the OpenAL context.", e, true);
+			ErrorHandler.error(t("Failed to destroy the OpenAL context."), e, true);
 		}
 	}
 }

@@ -18,6 +18,8 @@
 
 package itdelatrisu.opsu.objects.curves;
 
+import static itdelatrisu.opsu.I18n.t;
+
 import itdelatrisu.opsu.Utils;
 import itdelatrisu.opsu.beatmap.HitObject;
 
@@ -97,7 +99,7 @@ public class CircumscribedCircle extends Curve {
 			else if (Math.abs(startAng - (endAng - TWO_PI)) < TWO_PI && isIn(startAng, midAng, endAng - (TWO_PI)))
 				endAng -= TWO_PI;
 			else
-				throw new RuntimeException(String.format("Cannot find angles between midAng (%.3f %.3f %.3f).", startAng, midAng, endAng));
+				throw new RuntimeException(String.format(t("Cannot find angles between midAng (%.3f %.3f %.3f)."), startAng, midAng, endAng));
 		}
 
 		// find an angle with an arc length of pixelLength along this circle
@@ -149,7 +151,7 @@ public class CircumscribedCircle extends Curve {
 
 		float des = tb.x * ta.y - tb.y * ta.x;
 		if (Math.abs(des) < 0.00001f)
-			throw new RuntimeException("Vectors are parallel.");
+			throw new RuntimeException(t("Vectors are parallel."));
 		float u = ((b.y - a.y) * ta.x + (a.x - b.x) * ta.y) / des;
 		return b.cpy().add(tb.x * u, tb.y * u);
 	}

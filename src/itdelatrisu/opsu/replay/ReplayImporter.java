@@ -25,6 +25,8 @@ import itdelatrisu.opsu.db.ScoreDB;
 import itdelatrisu.opsu.options.Options;
 import itdelatrisu.opsu.ui.UI;
 
+import static itdelatrisu.opsu.I18n.t;
+
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
@@ -71,7 +73,7 @@ public class ReplayImporter {
 		File replayDir = Options.getReplayDir();
 		if (!replayDir.isDirectory()) {
 			if (!replayDir.mkdir()) {
-				ErrorHandler.error(String.format("Failed to create replay directory '%s'.", replayDir.getAbsolutePath()), null, false);
+				ErrorHandler.error(String.format(t("Failed to create replay directory '%s'."), replayDir.getAbsolutePath()), null, false);
 				return;
 			}
 		}
@@ -103,7 +105,7 @@ public class ReplayImporter {
 				}
 			} else {
 				moveToFailedDirectory(file);
-				ErrorHandler.error(String.format("Failed to import replay '%s'. The associated beatmap could not be found.", file.getName()), null, false);
+				ErrorHandler.error(String.format(t("Failed to import replay '%s'. The associated beatmap could not be found."), file.getName()), null, false);
 				continue;
 			}
 		}
@@ -112,7 +114,8 @@ public class ReplayImporter {
 		files = null;
 
 		if (importCount > 0) {
-			String text = String.format("Imported %d replay%s.", importCount, importCount == 1 ? "" : "s");
+			// TODO: Plural
+			String text = String.format(t("Imported %d replay%s."), importCount, importCount == 1 ? "" : "s");
 			UI.getNotificationManager().sendNotification(text);
 		}
 	}

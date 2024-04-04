@@ -22,6 +22,8 @@ import itdelatrisu.opsu.Utils;
 import itdelatrisu.opsu.options.Options;
 import itdelatrisu.opsu.ui.UI;
 
+import static itdelatrisu.opsu.I18n.t;
+
 import java.io.File;
 import java.io.FilenameFilter;
 import java.util.ArrayList;
@@ -83,7 +85,8 @@ public class OszUnpacker {
 		files = null;
 
 		if (!dirs.isEmpty()) {
-			String text = String.format("Imported %d new beatmap pack%s.", dirs.size(), dirs.size() == 1 ? "" : "s");
+			// TODO: Plural
+			String text = String.format(t("Imported %d new beatmap pack%s."), dirs.size(), dirs.size() == 1 ? "" : "s");
 			UI.getNotificationManager().sendNotification(text);
 		}
 

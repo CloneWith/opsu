@@ -24,6 +24,8 @@ import itdelatrisu.opsu.audio.MusicController;
 import itdelatrisu.opsu.db.BeatmapDB;
 import itdelatrisu.opsu.options.Options;
 
+import static itdelatrisu.opsu.I18n.t;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -215,7 +217,7 @@ public class BeatmapSetList {
 		try {
 			Utils.deleteToTrash(dir);
 		} catch (IOException e) {
-			ErrorHandler.error("Could not delete song group.", e, true);
+			ErrorHandler.error(t("Could not delete song group."), e, true);
 		}
 		if (ws != null)
 			ws.resume();
@@ -270,7 +272,7 @@ public class BeatmapSetList {
 		try {
 			Utils.deleteToTrash(file);
 		} catch (IOException e) {
-			ErrorHandler.error("Could not delete song.", e, true);
+			ErrorHandler.error(t("Could not delete song."), e, true);
 		}
 		if (ws != null)
 			ws.resume();

@@ -33,6 +33,8 @@ import itdelatrisu.opsu.ui.UI;
 import itdelatrisu.opsu.ui.animations.AnimatedValue;
 import itdelatrisu.opsu.ui.animations.AnimationEquation;
 
+import static itdelatrisu.opsu.I18n.t;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -199,7 +201,7 @@ public class GameRanking extends BasicGameState {
 				gameState.setPlayState((data.isGameplay()) ? Game.PlayState.REPLAY : Game.PlayState.FIRST_LOAD);
 				returnToGame = true;
 			} else
-				UI.getNotificationManager().sendBarNotification("Replay file not found.");
+				UI.getNotificationManager().sendBarNotification(t("Replay file not found."));
 		}
 
 		// retry
@@ -284,7 +286,7 @@ public class GameRanking extends BasicGameState {
 				// file not found
 			} catch (IOException e) {
 				Log.error("Failed to load replay data.", e);
-				UI.getNotificationManager().sendNotification("Failed to load replay data.\nSee log for details.", Color.red);
+				UI.getNotificationManager().sendNotification(t("Failed to load replay data.\nSee log for details."), Color.red);
 			}
 		}
 		// else file not found

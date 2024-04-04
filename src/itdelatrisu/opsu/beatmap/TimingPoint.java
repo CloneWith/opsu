@@ -20,6 +20,8 @@ package itdelatrisu.opsu.beatmap;
 
 import itdelatrisu.opsu.Utils;
 
+import static itdelatrisu.opsu.I18n.t;
+
 import org.newdawn.slick.util.Log;
 
 /**
@@ -78,7 +80,7 @@ public class TimingPoint {
 			if (tokens.length > 7)
 				this.kiai = Utils.parseBoolean(tokens[7]);
 		} catch (ArrayIndexOutOfBoundsException e) {
-			Log.debug(String.format("Error parsing timing point: '%s'", line));
+			Log.debug(String.format(t("Error parsing timing point: '%s'"), line));
 		}
 
 		// tokens[1] is either beatLength (positive) or velocity (negative)

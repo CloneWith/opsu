@@ -23,6 +23,8 @@ import itdelatrisu.opsu.ErrorHandler;
 import itdelatrisu.opsu.Utils;
 import itdelatrisu.opsu.downloads.DownloadNode;
 
+import static itdelatrisu.opsu.I18n.t;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
@@ -121,7 +123,7 @@ public class SayobotServer extends DownloadServer {
 						item.getString("creator"));
 			}
 		} catch (MalformedURLException | UnsupportedEncodingException e) {
-			ErrorHandler.error(String.format("Problem loading result list for query '%s'.", query), e, true);
+			ErrorHandler.error(String.format(t("Problem loading result list for query '%s'."), query), e, true);
 		} catch (JSONException e) {
 			Log.error(e);
 		}
@@ -151,7 +153,7 @@ public class SayobotServer extends DownloadServer {
 	 */
 	private String formatDate(Long s) {
 		try {
-			DateFormat fmt = new SimpleDateFormat("d MMM yyyy HH:mm:ss");
+			DateFormat fmt = new SimpleDateFormat(t("d MMM yyyy HH:mm:ss"));
 			Date date = new Date(s * 1000); // Unix timestamp
 			return fmt.format(date);
 		} catch (StringIndexOutOfBoundsException e) {

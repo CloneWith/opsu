@@ -20,6 +20,8 @@ package itdelatrisu.opsu;
 
 import itdelatrisu.opsu.options.Options;
 
+import static itdelatrisu.opsu.I18n.t;
+
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.io.IOException;
@@ -44,18 +46,18 @@ import org.newdawn.slick.util.ResourceLoader;
  */
 public class ErrorHandler {
 	/** Error popup title. */
-	private static final String title = "Error";
+	private static final String title = t("Error");
 
 	/** Error popup description text. */
 	private static final String
-		desc = "An error occurred. :(",
-		descReport = "Something bad happened. Please report this!";
+		desc = t("An error occurred. :("),
+		descReport = t("Something bad happened. Please report this!");
 
 	/** Error popup button options. */
 	private static final String[]
-		optionsLog  = {"View Error Log", "Close"},
-		optionsReport = {"Send Report", "Close"},
-		optionsLogReport = {"Send Report", "View Error Log", "Close"};
+		optionsLog  = {t("View Error Log"), t("Close")},
+		optionsReport = {t("Send Report"), t("Close")},
+		optionsLogReport = {t("Send Report"), t("View Error Log"), t("Close")};
 
 	/** Text area for Exception. */
 	private static final JTextArea textArea = new JTextArea(7, 30);
@@ -164,7 +166,7 @@ public class ErrorHandler {
 						title, JOptionPane.ERROR_MESSAGE);
 			}
 		} catch (Exception e1) {
-			Log.error("An error occurred in the crash popup.", e1);
+			Log.error(t("An error occurred in the crash popup."), e1);
 		}
 	}
 
@@ -181,7 +183,7 @@ public class ErrorHandler {
 				URLEncoder.encode(body, "UTF-8"))
 			);
 		} catch (UnsupportedEncodingException e) {
-			Log.warn("URLEncoder failed to encode the auto-filled issue report URL.");
+			Log.warn(t("URLEncoder failed to encode the auto-filled issue report URL."));
 			return URI.create(String.format(OpsuConstants.ISSUES_URL, "", ""));
 		}
 	}
@@ -215,7 +217,7 @@ public class ErrorHandler {
 				sb.append('\n');
 			}
 		} catch (IOException e1) {
-			Log.warn("Could not read version file.", e1);
+			Log.warn(t("Could not read version file."), e1);
 		}
 		sb.append("**OS:** ");
 		sb.append(System.getProperty("os.name"));

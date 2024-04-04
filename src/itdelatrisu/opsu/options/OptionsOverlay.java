@@ -34,6 +34,8 @@ import itdelatrisu.opsu.ui.UI;
 import itdelatrisu.opsu.ui.animations.AnimatedValue;
 import itdelatrisu.opsu.ui.animations.AnimationEquation;
 
+import static itdelatrisu.opsu.I18n.t;
+
 import java.util.IdentityHashMap;
 import java.util.Map;
 import java.util.Random;
@@ -479,8 +481,8 @@ public class OptionsOverlay extends AbstractComponent {
 		g.fillRect((int) x + navButtonSize, y, width, height);
 
 		// title
-		String title = "Options";
-		String subtitle = String.format("Change the way %s behaves", OpsuConstants.PROJECT_NAME);
+		String title = t("Options");
+		String subtitle = String.format(t("Change the way %s behaves"), OpsuConstants.PROJECT_NAME);
 		Fonts.LARGE.drawString(
 			x + navButtonSize + (width - navButtonSize - Fonts.LARGE.getWidth(title)) / 2,
 			(int) (y + textOptionsY - scrolling.getPosition()),
@@ -521,7 +523,7 @@ public class OptionsOverlay extends AbstractComponent {
 			searchColor.b = COLOR_PINK.b + (1f - COLOR_PINK.b) * invalidProgress;
 			invalidProgress = 1f - invalidProgress;
 		}
-		String searchText = "Type to search!";
+		String searchText = t("Type to search!");
 		if (lastSearchText.length() > 0)
 			searchText = lastSearchText;
 		int textWidth = width - navButtonSize;
@@ -569,8 +571,8 @@ public class OptionsOverlay extends AbstractComponent {
 			g.fillRect(0, 0, containerWidth, containerHeight);
 			g.setColor(COLOR_WHITE);
 			String prompt = keyEntryLeft ?
-				"Press the new left-click key." : "Press the new right-click key.";
-			String subtext = "Click anywhere or hit ESC to cancel.";
+				t("Press the new left-click key.") : t("Press the new right-click key.");
+			String subtext = t("Click anywhere or hit ESC to cancel.");
 			float promptY = (containerHeight - Fonts.XLARGE.getLineHeight() - Fonts.DEFAULT.getLineHeight()) / 2 - 2;
 			float subtextY = promptY + Fonts.XLARGE.getLineHeight() + 2;
 			Fonts.XLARGE.drawString((containerWidth - Fonts.XLARGE.getWidth(prompt)) / 2, promptY, prompt);
@@ -867,7 +869,7 @@ public class OptionsOverlay extends AbstractComponent {
 		if (hoverOption != null && getOptionAtPosition(mouseX, mouseY) == hoverOption && !keyEntryLeft && !keyEntryRight)
 			UI.updateTooltip(delta, hoverOption.getDescription(), true);
 		else if (showRestartButton && restartButton.contains(mouseX, mouseY) && !keyEntryLeft && !keyEntryRight)
-			UI.updateTooltip(delta, "Click to restart the game.", false);
+			UI.updateTooltip(delta, t("Click to restart the game."), false);
 		backButton.hoverUpdate(delta, backButton.contains(mouseX, mouseY) && !keyEntryLeft && !keyEntryRight);
 		if (showRestartButton)
 			restartButton.autoHoverUpdate(delta, false);
@@ -1209,7 +1211,7 @@ public class OptionsOverlay extends AbstractComponent {
 				// show restart button?
 				if (oldValue != hoverOption.getBooleanValue() && hoverOption.isRestartRequired()) {
 					showRestartButton = true;
-					UI.getNotificationManager().sendBarNotification("Restart to apply changes.");
+					UI.getNotificationManager().sendBarNotification(t("Restart to apply changes."));
 				}
 			} else if (hoverOption.getItemList() != null) {
 				SoundController.playSound(SoundEffect.MENUCLICK);
@@ -1415,7 +1417,7 @@ public class OptionsOverlay extends AbstractComponent {
 						// show restart button?
 						if (option.isRestartRequired()) {
 							showRestartButton = true;
-							UI.getNotificationManager().sendBarNotification("Restart to apply changes.");
+							UI.getNotificationManager().sendBarNotification(t("Restart to apply changes."));
 						}
 					}
 

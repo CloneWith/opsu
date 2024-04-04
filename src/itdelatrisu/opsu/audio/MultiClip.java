@@ -25,6 +25,8 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+import static itdelatrisu.opsu.I18n.t;
+
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -241,7 +243,7 @@ public class MultiClip {
 			try {
 				audioIn.close();
 			} catch (IOException e) {
-				ErrorHandler.error(String.format("Could not close AudioInputStream for MultiClip %s.", name), e, true);
+				ErrorHandler.error(String.format(t("Could not close AudioInputStream for MultiClip %s."), name), e, true);
 			}
 		}
 	}

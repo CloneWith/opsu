@@ -24,6 +24,8 @@ import itdelatrisu.opsu.ui.Fonts;
 import itdelatrisu.opsu.ui.animations.AnimatedValue;
 import itdelatrisu.opsu.ui.animations.AnimationEquation;
 
+import static itdelatrisu.opsu.I18n.t;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -196,9 +198,9 @@ public class UserButton {
 		int textY = cy + padding / 2;
 		Fonts.MEDIUM.drawString(textX, textY, user.getName(), Colors.WHITE_FADE);
 		textY += Fonts.MEDIUM.getLineHeight() - 3;
-		Fonts.SMALL.drawString(textX, textY, String.format("Score: %,d", user.getScore()), Colors.WHITE_FADE);
+		Fonts.SMALL.drawString(textX, textY, String.format(t("Score: %,d"), user.getScore()), Colors.WHITE_FADE);
 		textY += Fonts.SMALL.getLineHeight() - 2;
-		Fonts.SMALL.drawString(textX, textY, String.format("Accuracy: %.2f%%", user.getAccuracy()), Colors.WHITE_FADE);
+		Fonts.SMALL.drawString(textX, textY, String.format(t("Accuracy: %.2f%%"), user.getAccuracy()), Colors.WHITE_FADE);
 		textY += Fonts.SMALL.getLineHeight() - 2;
 		Fonts.SMALL.drawString(textX, textY, String.format("Lv%d", user.getLevel()), Colors.WHITE_FADE);
 

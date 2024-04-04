@@ -27,6 +27,8 @@ import itdelatrisu.opsu.options.Options;
 import itdelatrisu.opsu.skins.Skin;
 import itdelatrisu.opsu.ui.animations.AnimationEquation;
 
+import static itdelatrisu.opsu.I18n.t;
+
 import java.awt.Point;
 import java.nio.IntBuffer;
 import java.util.LinkedList;
@@ -88,7 +90,7 @@ public class Cursor {
 			IntBuffer tmp = BufferUtils.createIntBuffer(min * min);
 			emptyCursor = new org.lwjgl.input.Cursor(min, min, min/2, min/2, 1, tmp, null);
 		} catch (LWJGLException e) {
-			ErrorHandler.error("Failed to create hidden cursor.", e, true);
+			ErrorHandler.error(t("Failed to create hidden cursor."), e, true);
 		}
 	}
 
@@ -322,7 +324,7 @@ public class Cursor {
 			try {
 				container.setMouseCursor(emptyCursor, 0, 0);
 			} catch (SlickException e) {
-				ErrorHandler.error("Failed to hide the cursor.", e, true);
+				ErrorHandler.error(t("Failed to hide the cursor."), e, true);
 			}
 		}
 	}

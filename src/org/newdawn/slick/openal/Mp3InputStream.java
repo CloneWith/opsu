@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2013, Slick2D
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  * - Redistributions of source code must retain the above copyright notice,
@@ -12,7 +12,7 @@
  * - Neither the name of the Slick2D nor the names of its contributors may be
  *   used to endorse or promote products derived from this software without
  *   specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -30,6 +30,8 @@ package org.newdawn.slick.openal;
 
 import java.io.IOException;
 import java.io.InputStream;
+
+import static itdelatrisu.opsu.I18n.t;
 
 import javazoom.jl.decoder.Bitstream;
 import javazoom.jl.decoder.BitstreamException;
@@ -88,7 +90,7 @@ public class Mp3InputStream extends InputStream implements AudioInputStream {
 		}
 		if (header == null) {
 			close();
-			throw new IOException("Failed to read header from MP3 input stream.");
+			throw new IOException(t("Failed to read header from MP3 input stream."));
 		}
 
 		channels = (header.mode() == Header.SINGLE_CHANNEL) ? 1 : 2;
@@ -171,7 +173,7 @@ public class Mp3InputStream extends InputStream implements AudioInputStream {
 	@Override
 	public long skip(long length) {
 		if (bufLen <= 0)
-			Log.warn("Mp3InputStream: skip: bufLen not yet determined.");
+			Log.warn(t("Mp3InputStream: skip: bufLen not yet determined."));
 
 		int skipped = 0;
 		while (skipped + bufLen * 2 < length) {

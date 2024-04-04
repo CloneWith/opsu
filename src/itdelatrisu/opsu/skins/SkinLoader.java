@@ -24,6 +24,8 @@ import itdelatrisu.opsu.ui.Colors;
 import itdelatrisu.opsu.ui.NotificationManager;
 import itdelatrisu.opsu.ui.UI;
 
+import static itdelatrisu.opsu.I18n.t;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -278,7 +280,7 @@ public class SkinLoader {
 				}
 			}
 		} catch (IOException e) {
-			ErrorHandler.error(String.format("Failed to read file '%s'.", skinFile.getAbsolutePath()), e, false);
+			ErrorHandler.error(String.format(t("Failed to read file '%s'."), skinFile.getAbsolutePath()), e, false);
 		}
 
 		return skin;

@@ -31,6 +31,8 @@ import itdelatrisu.opsu.skins.SkinLoader;
 import itdelatrisu.opsu.ui.Fonts;
 import itdelatrisu.opsu.ui.UI;
 
+import static itdelatrisu.opsu.I18n.t;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -193,7 +195,7 @@ public class Options {
 			}
 			File dir = new File(rootPath, "opsu");
 			if (!dir.isDirectory() && !dir.mkdir())
-				ErrorHandler.error(String.format("Failed to create configuration folder at '%s/opsu'.", rootPath), null, false);
+				ErrorHandler.error(String.format(t("Failed to create configuration folder at '%s/opsu'."), rootPath), null, false);
 			return dir;
 		} else
 			return workingDir;
@@ -283,7 +285,7 @@ public class Options {
 				Beatmap beatmap = getThemeBeatmap();
 				if (beatmap == null) {
 					themeString = oldThemeString;
-					Log.warn(String.format("The theme song string [%s] is malformed.", s));
+					Log.warn(String.format(t("The theme song string [%s] is malformed."), s));
 				} else if (!beatmap.audioFilename.isFile() && !ResourceLoader.resourceExists(beatmap.audioFilename.getName())) {
 					themeString = oldThemeString;
 					Log.warn(String.format("Cannot find theme song [%s].", beatmap.audioFilename.getAbsolutePath()));
@@ -306,7 +308,7 @@ public class Options {
 		},
 
 		// in-game options
-		SCREEN_RESOLUTION ("Resolution", "ScreenResolution", "") {
+		SCREEN_RESOLUTION (t("Resolution"), "ScreenResolution", "") {
 			private Resolution[] itemList = null;
 
 			@Override
@@ -348,7 +350,7 @@ public class Options {
 				} catch (IllegalArgumentException e) {}
 			}
 		},
-		FULLSCREEN ("Fullscreen mode", "Fullscreen", "Switches to dedicated fullscreen mode.", false) {
+		FULLSCREEN (t("Fullscreen mode"), "Fullscreen", t("Switches to dedicated fullscreen mode."), false) {
 			@Override
 			public boolean isRestartRequired() { return true; }
 
@@ -363,7 +365,7 @@ public class Options {
 				super.toggle(container);
 			}
 		},
-		SKIN ("Skin", "Skin", "") {
+		SKIN (t("Skin"), "Skin", "") {
 			private String[] itemList = null;
 			private String[] DirList = null;
 
@@ -407,7 +409,7 @@ public class Options {
 			@Override
 			public void read(String s) { skinName = s; }
 		},
-		TARGET_FPS ("Frame limiter", "FrameSync", "Higher values may cause high CPU usage.") {
+		TARGET_FPS (t("Frame limiter"), "FrameSync", t("Higher values may cause high CPU usage.")) {
 			private String[] itemList = null;
 
 			@Override
@@ -456,14 +458,14 @@ public class Options {
 				}
 			}
 		},
-		SHOW_FPS ("Show FPS counter", "FpsCounter", "Show a subtle FPS counter in the bottom right corner of the screen.", true) {
+		SHOW_FPS (t("Show FPS counter"), "FpsCounter", t("Show a subtle FPS counter in the bottom right corner of the screen."), true) {
 			@Override
 			public void toggle(GameContainer container) {
 				super.toggle(container);
 				UI.resetFPSDisplay();
 			}
 		},
-		SHOW_UNICODE ("Prefer metadata in original language", "ShowUnicode", "Where available, song titles will be shown in their native language (and character-set).", false) {
+		SHOW_UNICODE (t("Prefer metadata in original language"), "ShowUnicode", t("Where available, song titles will be shown in their native language (and character-set)."), false) {
 			@Override
 			public void toggle(GameContainer container) {
 				super.toggle(container);
@@ -478,7 +480,7 @@ public class Options {
 				}
 			}
 		},
-		SCREENSHOT_FORMAT ("Screenshot format", "ScreenshotFormat", "Press F12 to take a screenshot.") {
+		SCREENSHOT_FORMAT (t("Screenshot format"), "ScreenshotFormat", t("Press F12 to take a screenshot.")) {
 			private String[] itemList = null;
 
 			@Override
@@ -507,7 +509,7 @@ public class Options {
 					screenshotFormatIndex = i;
 			}
 		},
-		CURSOR_SIZE ("Cursor size", "CursorSize", "Change the cursor scale.", 100, 50, 200) {
+		CURSOR_SIZE (t("Cursor size"), "CursorSize", t("Change the cursor scale."), 100, 50, 200) {
 			@Override
 			public String getValueString() { return String.format("%.2fx", val / 100f); }
 
@@ -521,34 +523,34 @@ public class Options {
 					val = i;
 			}
 		},
-		DYNAMIC_BACKGROUND ("Dynamic backgrounds", "DynamicBackground", "The current beatmap background will be used as the main menu background.", true),
-		LOAD_VERBOSE ("Detailed loading progress", "LoadVerbose", "Display more verbose loading progress in the splash screen.", false),
-		MASTER_VOLUME ("Master", "VolumeUniversal", "Global volume level.", 35, 0, 100) {
+		DYNAMIC_BACKGROUND (t("Dynamic backgrounds"), "DynamicBackground", t("The current beatmap background will be used as the main menu background."), true),
+		LOAD_VERBOSE (t("Detailed loading progress"), "LoadVerbose", t("Display more verbose loading progress in the splash screen."), false),
+		MASTER_VOLUME (t("Master"), "VolumeUniversal", t("Global volume level."), 35, 0, 100) {
 			@Override
 			public void setValue(int value) {
 				super.setValue(value);
 				SoundStore.get().setMusicVolume(getMasterVolume() * getMusicVolume());
 			}
 		},
-		MUSIC_VOLUME ("Music", "VolumeMusic", "Music volume.", 80, 0, 100) {
+		MUSIC_VOLUME (t("Music"), "VolumeMusic", t("Music volume."), 80, 0, 100) {
 			@Override
 			public void setValue(int value) {
 				super.setValue(value);
 				SoundStore.get().setMusicVolume(getMasterVolume() * getMusicVolume());
 			}
 		},
-		EFFECT_VOLUME ("Effects", "VolumeEffect", "Menu and game sound effects volume.", 70, 0, 100),
-		HITSOUND_VOLUME ("Hit sounds", "VolumeHitSound", "Hit sounds volume.", 30, 0, 100),
-		MUSIC_OFFSET ("Universal offset", "Offset", "Adjust this value if hit objects are out of sync.", -75, -500, 500) {
+		EFFECT_VOLUME (t("Effects"), "VolumeEffect", t("Menu and game sound effects volume."), 70, 0, 100),
+		HITSOUND_VOLUME (t("Hit sounds"), "VolumeHitSound", t("Hit sounds volume."), 30, 0, 100),
+		MUSIC_OFFSET (t("Universal offset"), "Offset", t("Adjust this value if hit objects are out of sync."), -75, -500, 500) {
 			@Override
 			public String getValueString() { return String.format("%dms", val); }
 		},
-		DISABLE_GAMEPLAY_SOUNDS ("Disable sound effects in gameplay", "DisableGameplaySound", "Mute all sound effects during gameplay only.", false),
-		DISABLE_SOUNDS ("Disable all sound effects", "DisableSound", "May resolve Linux sound driver issues.\nRequires a restart.", false) {
+		DISABLE_GAMEPLAY_SOUNDS (t("Disable sound effects in gameplay"), "DisableGameplaySound", t("Mute all sound effects during gameplay only."), false),
+		DISABLE_SOUNDS (t("Disable all sound effects"), "DisableSound", t("May resolve Linux sound driver issues.\nRequires a restart."), false) {
 			@Override
 			public boolean isRestartRequired() { return true; }
 		},
-		KEY_LEFT ("Left game key", "keyOsuLeft", "Select this option to input a key.") {
+		KEY_LEFT (t("Left game key"), "keyOsuLeft", t("Select this option to input a key.")) {
 			@Override
 			public String getValueString() { return Keyboard.getKeyName(getGameKeyLeft()); }
 
@@ -558,7 +560,7 @@ public class Options {
 			@Override
 			public void read(String s) { setGameKeyLeft(Keyboard.getKeyIndex(s)); }
 		},
-		KEY_RIGHT ("Right game key", "keyOsuRight", "Select this option to input a key.") {
+		KEY_RIGHT (t("Right game key"), "keyOsuRight", t("Select this option to input a key.")) {
 			@Override
 			public String getValueString() { return Keyboard.getKeyName(getGameKeyRight()); }
 
@@ -568,29 +570,29 @@ public class Options {
 			@Override
 			public void read(String s) { setGameKeyRight(Keyboard.getKeyIndex(s)); }
 		},
-		DISABLE_MOUSE_WHEEL ("Disable mouse wheel in play mode", "MouseDisableWheel", "During play, you can use the mouse wheel to adjust the volume and pause the game.\nThis will disable that functionality.", false),
-		DISABLE_MOUSE_BUTTONS ("Disable mouse buttons in play mode", "MouseDisableButtons", "This option will disable all mouse buttons.\nSpecifically for people who use their keyboard to click.", false),
-		DISABLE_CURSOR ("Disable cursor", "DisableCursor", "Hides the cursor sprite.", false),
-		BACKGROUND_DIM ("Background dim", "DimLevel", "Percentage to dim the background image during gameplay.", 50, 0, 100),
-		FORCE_DEFAULT_PLAYFIELD ("Force default playfield", "ForceDefaultPlayfield", "Overrides the song background with the default playfield background.", false),
-		ENABLE_VIDEOS ("Background video", "Video", "Enables background video playback.\nIf you get a large amount of lag on beatmaps with video, try disabling this feature.", true),
-		IGNORE_BEATMAP_SKINS ("Ignore all beatmap skins", "IgnoreBeatmapSkins", "Defaults game settings to never use skin element overrides provided by beatmaps.", false),
-		FORCE_SKIN_CURSOR ("Always use skin cursor", "UseSkinCursor", "The selected skin's cursor will override any beatmap-specific cursor modifications.", false),
-		SNAKING_SLIDERS ("Snaking sliders", "SnakingSliders", "Sliders gradually snake out from their starting point.", true),
-		EXPERIMENTAL_SLIDERS ("Use experimental sliders", "ExperimentalSliders", "Render sliders using the experimental slider style.", false),
-		EXPERIMENTAL_SLIDERS_CAPS ("Draw slider caps", "ExperimentalSliderCaps", "Draw caps (end circles) on sliders.\nOnly applies to experimental sliders.", false),
-		EXPERIMENTAL_SLIDERS_SHRINK ("Shrinking sliders", "ExperimentalSliderShrink", "Sliders shrink toward their ending point when the ball passes.\nOnly applies to experimental sliders.", true),
-		EXPERIMENTAL_SLIDERS_MERGE ("Merging sliders", "ExperimentalSliderMerge", "For overlapping sliders, don't draw the edges and combine the slider tracks where they cross.\nOnly applies to experimental sliders.", true),
-		SHOW_HIT_LIGHTING ("Hit lighting", "HitLighting", "Adds a subtle glow behind hit explosions which lights the playfield.", true),
-		SHOW_COMBO_BURSTS ("Combo bursts", "ComboBurst", "A character image bursts from the side of the screen at combo milestones.", true),
-		SHOW_PERFECT_HIT ("Perfect hits", "PerfectHit", "Shows perfect hit result bursts (300s, slider ticks).", true),
-		SHOW_FOLLOW_POINTS ("Follow points", "FollowPoints", "Shows follow points between hit objects.", true),
-		SHOW_HIT_ERROR_BAR ("Hit error bar", "ScoreMeter", "Shows precisely how accurate you were with each hit.", false),
-		ALWAYS_SHOW_KEY_OVERLAY ("Always show key overlay", "KeyOverlay", "Show the key overlay when playing instead of only on replays.", false),
-		LOAD_HD_IMAGES ("Load HD images", "LoadHDImages", String.format("Loads HD (%s) images when available.\nIncreases memory usage and loading times.", GameImage.HD_SUFFIX), true),
-		FIXED_CS ("Fixed CS", "FixedCS", "Determines the size of circles and sliders.", 0, 0, 100) {
+		DISABLE_MOUSE_WHEEL (t("Disable mouse wheel in play mode"), "MouseDisableWheel", t("During play, you can use the mouse wheel to adjust the volume and pause the game.\nThis will disable that functionality."), false),
+		DISABLE_MOUSE_BUTTONS (t("Disable mouse buttons in play mode"), "MouseDisableButtons", t("This option will disable all mouse buttons.\nSpecifically for people who use their keyboard to click."), false),
+		DISABLE_CURSOR (t("Disable cursor"), "DisableCursor", t("Hides the cursor sprite."), false),
+		BACKGROUND_DIM (t("Background dim"), "DimLevel", t("Percentage to dim the background image during gameplay."), 50, 0, 100),
+		FORCE_DEFAULT_PLAYFIELD (t("Force default playfield"), "ForceDefaultPlayfield", t("Overrides the song background with the default playfield background."), false),
+		ENABLE_VIDEOS (t("Background video"), "Video", t("Enables background video playback.\nIf you get a large amount of lag on beatmaps with video, try disabling this feature."), true),
+		IGNORE_BEATMAP_SKINS (t("Ignore all beatmap skins"), "IgnoreBeatmapSkins", t("Defaults game settings to never use skin element overrides provided by beatmaps."), false),
+		FORCE_SKIN_CURSOR (t("Always use skin cursor"), "UseSkinCursor", t("The selected skin's cursor will override any beatmap-specific cursor modifications."), false),
+		SNAKING_SLIDERS (t("Snaking sliders"), "SnakingSliders", t("Sliders gradually snake out from their starting point."), true),
+		EXPERIMENTAL_SLIDERS (t("Use experimental sliders"), "ExperimentalSliders", t("Render sliders using the experimental slider style."), false),
+		EXPERIMENTAL_SLIDERS_CAPS (t("Draw slider caps"), "ExperimentalSliderCaps", t("Draw caps (end circles) on sliders.\nOnly applies to experimental sliders."), false),
+		EXPERIMENTAL_SLIDERS_SHRINK (t("Shrinking sliders"), "ExperimentalSliderShrink", t("Sliders shrink toward their ending point when the ball passes.\nOnly applies to experimental sliders."), true),
+		EXPERIMENTAL_SLIDERS_MERGE (t("Merging sliders"), "ExperimentalSliderMerge", t("For overlapping sliders, don't draw the edges and combine the slider tracks where they cross.\nOnly applies to experimental sliders."), true),
+		SHOW_HIT_LIGHTING (t("Hit lighting"), "HitLighting", "Adds a subtle glow behind hit explosions which lights the playfield.", true),
+		SHOW_COMBO_BURSTS (t("Combo bursts"), "ComboBurst", t("A character image bursts from the side of the screen at combo milestones."), true),
+		SHOW_PERFECT_HIT (t("Perfect hits"), "PerfectHit", t("Shows perfect hit result bursts (300s, slider ticks)."), true),
+		SHOW_FOLLOW_POINTS (t("Follow points"), "FollowPoints", t("Shows follow points between hit objects."), true),
+		SHOW_HIT_ERROR_BAR (t("Hit error bar"), "ScoreMeter", t("Shows precisely how accurate you were with each hit."), false),
+		ALWAYS_SHOW_KEY_OVERLAY (t("Always show key overlay"), "KeyOverlay", t("Show the key overlay when playing instead of only on replays."), false),
+		LOAD_HD_IMAGES (t("Load HD images"), "LoadHDImages", String.format(t("Loads HD (%s) images when available.\nIncreases memory usage and loading times."), GameImage.HD_SUFFIX), true),
+		FIXED_CS (t("Fixed CS"), "FixedCS", t("Determines the size of circles and sliders."), 0, 0, 100) {
 			@Override
-			public String getValueString() { return (val == 0) ? "Disabled" : String.format("%.1f", val / 10f); }
+			public String getValueString() { return (val == 0) ? t("Disabled") : String.format("%.1f", val / 10f); }
 
 			@Override
 			public String write() { return String.format(Locale.US, "%.1f", val / 10f); }
@@ -602,9 +604,9 @@ public class Options {
 					val = i;
 			}
 		},
-		FIXED_HP ("Fixed HP", "FixedHP", "Determines the rate at which health decreases.", 0, 0, 100) {
+		FIXED_HP (t("Fixed HP"), "FixedHP", t("Determines the rate at which health decreases."), 0, 0, 100) {
 			@Override
-			public String getValueString() { return (val == 0) ? "Disabled" : String.format("%.1f", val / 10f); }
+			public String getValueString() { return (val == 0) ? t("Disabled") : String.format("%.1f", val / 10f); }
 
 			@Override
 			public String write() { return String.format(Locale.US, "%.1f", val / 10f); }
@@ -616,9 +618,9 @@ public class Options {
 					val = i;
 			}
 		},
-		FIXED_AR ("Fixed AR", "FixedAR", "Determines how long hit circles stay on the screen.", 0, 0, 100) {
+		FIXED_AR (t("Fixed AR"), "FixedAR", t("Determines how long hit circles stay on the screen."), 0, 0, 100) {
 			@Override
-			public String getValueString() { return (val == 0) ? "Disabled" : String.format("%.1f", val / 10f); }
+			public String getValueString() { return (val == 0) ? t("Disabled") : String.format("%.1f", val / 10f); }
 
 			@Override
 			public String write() { return String.format(Locale.US, "%.1f", val / 10f); }
@@ -630,9 +632,9 @@ public class Options {
 					val = i;
 			}
 		},
-		FIXED_OD ("Fixed OD", "FixedOD", "Determines the time window for hit results.", 0, 0, 100) {
+		FIXED_OD (t("Fixed OD"), "FixedOD", t("Determines the time window for hit results."), 0, 0, 100) {
 			@Override
-			public String getValueString() { return (val == 0) ? "Disabled" : String.format("%.1f", val / 10f); }
+			public String getValueString() { return (val == 0) ? t("Disabled") : String.format("%.1f", val / 10f); }
 
 			@Override
 			public String write() { return String.format(Locale.US, "%.1f", val / 10f); }
@@ -644,9 +646,9 @@ public class Options {
 					val = i;
 			}
 		},
-		FIXED_SPEED ("Fixed speed", "FixedSpeed", "Determines the speed of the music.", 0, 0, 300) {
+		FIXED_SPEED (t("Fixed speed"), "FixedSpeed", t("Determines the speed of the music."), 0, 0, 300) {
 			@Override
-			public String getValueString() { return (val == 0) ? "Disabled" : String.format("%.2fx", val / 100f); }
+			public String getValueString() { return (val == 0) ? t("Disabled") : String.format("%.2fx", val / 100f); }
 
 			@Override
 			public String write() { return String.format(Locale.US, "%.2f", val / 100f); }
@@ -658,19 +660,19 @@ public class Options {
 					val = i;
 			}
 		},
-		CHECKPOINT ("Track checkpoint", "Checkpoint", "Press Ctrl+L while playing to load a checkpoint, and Ctrl+S to set one.", 0, 0, 1800) {
+		CHECKPOINT (t("Track checkpoint"), "Checkpoint", t("Press Ctrl+L while playing to load a checkpoint, and Ctrl+S to set one."), 0, 0, 1800) {
 			@Override
 			public String getValueString() {
-				return (val == 0) ? "Disabled" : String.format("%02d:%02d",
+				return (val == 0) ? t("Disabled") : String.format("%02d:%02d",
 						TimeUnit.SECONDS.toMinutes(val),
 						val - TimeUnit.MINUTES.toSeconds(TimeUnit.SECONDS.toMinutes(val)));
 			}
 		},
-		PARALLAX ("Parallax", "MenuParallax", "Add a parallax effect based on the current cursor position.", true),
-		ENABLE_THEME_SONG ("Theme song", "MenuMusic", OpsuConstants.PROJECT_NAME + " will play themed music throughout the game, instead of using random beatmaps.", true),
-		REPLAY_SEEKING ("Replay seeking", "ReplaySeeking", "Enable a seeking bar on the left side of the screen during replays.", false),
-		DISABLE_UPDATER ("Disable automatic updates", "DisableUpdater", "Disable checking for updates when the game starts.", false),
-		ENABLE_WATCH_SERVICE ("Watch service", "WatchService", "Watch the beatmap directory for changes. Requires a restart.", false) {
+		PARALLAX (t("Parallax"), "MenuParallax", t("Add a parallax effect based on the current cursor position."), true),
+		ENABLE_THEME_SONG (t("Theme song"), "MenuMusic", OpsuConstants.PROJECT_NAME + t(" will play themed music throughout the game, instead of using random beatmaps."), true),
+		REPLAY_SEEKING (t("Replay seeking"), "ReplaySeeking", t("Enable a seeking bar on the left side of the screen during replays."), false),
+		DISABLE_UPDATER (t("Disable automatic updates"), "DisableUpdater", t("Disable checking for updates when the game starts."), false),
+		ENABLE_WATCH_SERVICE (t("Watch service"), "WatchService", t("Watch the beatmap directory for changes. Requires a restart."), false) {
 			@Override
 			public boolean isRestartRequired() { return true; }
 		};
@@ -847,7 +849,7 @@ public class Options {
 			if (type == OptionType.NUMERIC)
 				return String.format("%d%%", val);
 			else if (type == OptionType.BOOLEAN)
-				return (bool) ? "Yes" : "No";
+				return (bool) ? t("Yes") : t("No");
 			else
 				return "";
 		}
@@ -959,7 +961,7 @@ public class Options {
 						return true;
 				}
 			} catch (LWJGLException e) {
-				ErrorHandler.error("Failed to get available display modes.", e, true);
+				ErrorHandler.error(t("Failed to get available display modes."), e, true);
 			}
 			return false;
 		}
@@ -1016,7 +1018,7 @@ public class Options {
 		if (index == targetFPS.length - 1)
 			index = 0;  // Skip "Unlimited" option
 		GameOption.TARGET_FPS.selectItem(index, container);
-		UI.getNotificationManager().sendBarNotification(String.format("Frame limiter: %s", GameOption.TARGET_FPS.getValueString()));
+		UI.getNotificationManager().sendBarNotification(String.format(t("Frame limiter: %s"), GameOption.TARGET_FPS.getValueString()));
 	}
 
 	/**
@@ -1091,7 +1093,7 @@ public class Options {
 		try {
 			app.setDisplayMode(resolution.getWidth(), resolution.getHeight(), fullscreen);
 		} catch (SlickException e) {
-			ErrorHandler.error("Failed to set display mode.", e, true);
+			ErrorHandler.error(t("Failed to set display mode."), e, true);
 		}
 
 		// set borderless window if dimensions match screen size
@@ -1357,7 +1359,7 @@ public class Options {
 	public static void toggleMouseDisabled() {
 		GameOption.DISABLE_MOUSE_BUTTONS.toggle(null);
 		UI.getNotificationManager().sendBarNotification((GameOption.DISABLE_MOUSE_BUTTONS.getBooleanValue()) ?
-			"Mouse buttons are disabled." : "Mouse buttons are enabled.");
+			t("Mouse buttons are disabled.") : t("Mouse buttons are enabled."));
 	}
 
 	/**
@@ -1446,7 +1448,7 @@ public class Options {
 		// use default directory
 		beatmapDir = BEATMAP_DIR;
 		if (!beatmapDir.isDirectory() && !beatmapDir.mkdir())
-			ErrorHandler.error(String.format("Failed to create beatmap directory at '%s'.", beatmapDir.getAbsolutePath()), null, false);
+			ErrorHandler.error(String.format(t("Failed to create beatmap directory at '%s'."), beatmapDir.getAbsolutePath()), null, false);
 		return beatmapDir;
 	}
 
@@ -1461,7 +1463,7 @@ public class Options {
 
 		importDir = new File(DATA_DIR, "Import/");
 		if (!importDir.isDirectory() && !importDir.mkdir())
-			ErrorHandler.error(String.format("Failed to create import directory at '%s'.", importDir.getAbsolutePath()), null, false);
+			ErrorHandler.error(String.format(t("Failed to create import directory at '%s'."), importDir.getAbsolutePath()), null, false);
 		return importDir;
 	}
 
@@ -1511,7 +1513,7 @@ public class Options {
 		// use default directory
 		skinRootDir = SKIN_ROOT_DIR;
 		if (!skinRootDir.isDirectory() && !skinRootDir.mkdir())
-			ErrorHandler.error(String.format("Failed to create skins directory at '%s'.", skinRootDir.getAbsolutePath()), null, false);
+			ErrorHandler.error(String.format(t("Failed to create skins directory at '%s'."), skinRootDir.getAbsolutePath()), null, false);
 		return skinRootDir;
 	}
 
@@ -1635,12 +1637,12 @@ public class Options {
 						String value = line.substring(index + 1).trim();
 						option.read(value);
 					} catch (NumberFormatException e) {
-						Log.warn(String.format("Format error in options file for line: '%s'.", line), e);
+						Log.warn(String.format(t("Format error in options file for line: '%s'."), line), e);
 					}
 				}
 			}
 		} catch (IOException e) {
-			ErrorHandler.error(String.format("Failed to read file '%s'.", OPTIONS_FILE.getAbsolutePath()), e, false);
+			ErrorHandler.error(String.format(t("Failed to read file '%s'."), OPTIONS_FILE.getAbsolutePath()), e, false);
 		}
 	}
 
@@ -1653,9 +1655,9 @@ public class Options {
 			// header
 			SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE, MMMM dd, yyyy");
 			String date = dateFormat.format(new Date());
-			writer.write(String.format("# %s configuration", OpsuConstants.PROJECT_NAME));
+			writer.write(String.format(t("# %s configuration"), OpsuConstants.PROJECT_NAME));
 			writer.newLine();
-			writer.write("# last updated on ");
+			writer.write(t("# last updated on "));
 			writer.write(date);
 			writer.newLine();
 			writer.newLine();
@@ -1669,7 +1671,7 @@ public class Options {
 			}
 			writer.close();
 		} catch (IOException e) {
-			ErrorHandler.error(String.format("Failed to write to file '%s'.", OPTIONS_FILE.getAbsolutePath()), e, false);
+			ErrorHandler.error(String.format(t("Failed to write to file '%s'."), OPTIONS_FILE.getAbsolutePath()), e, false);
 		}
 	}
 }

@@ -236,5 +236,10 @@
 			<artifactId>media</artifactId>
 			<version>0.8.9</version>
 		</dependency>
+		<dependency>
+			<groupId>org.gnu.gettext</groupId>
+			<artifactId>libintl</artifactId>
+			<version>0.18.2</version>
+		</dependency>
 	</dependencies>
 </project>

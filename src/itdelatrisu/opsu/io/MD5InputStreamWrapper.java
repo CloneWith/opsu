@@ -18,6 +18,8 @@
 
 package itdelatrisu.opsu.io;
 
+import static itdelatrisu.opsu.I18n.t;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.MessageDigest;
@@ -86,12 +88,12 @@ public class MD5InputStreamWrapper extends InputStream {
 
 	@Override
 	public synchronized void reset() throws IOException {
-		throw new RuntimeException("The reset() method is not implemented.");
+		throw new RuntimeException(t("The reset() method is not implemented."));
 	}
 
 	@Override
 	public long skip(long n) throws IOException {
-		throw new RuntimeException("The skip() method is not implemented.");
+		throw new RuntimeException(t("The skip() method is not implemented."));
 	}
 
 	/**

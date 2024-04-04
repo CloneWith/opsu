@@ -25,6 +25,8 @@ import itdelatrisu.opsu.objects.curves.Curve;
 import itdelatrisu.opsu.objects.curves.LinearBezier;
 import itdelatrisu.opsu.objects.curves.Vec2f;
 
+import static itdelatrisu.opsu.I18n.t;
+
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
@@ -313,13 +315,13 @@ public class HitObject {
 	 */
 	public String getTypeName() {
 		if (isCircle())
-			return "circle";
+			return t("circle");
 		else if (isSlider())
-			return "slider";
+			return t("slider");
 		else if (isSpinner())
-			return "spinner";
+			return t("spinner");
 		else
-			return "unknown object type";
+			return t("unknown object type");
 	}
 
 	/**

@@ -26,6 +26,8 @@ import itdelatrisu.opsu.options.Options;
 import itdelatrisu.opsu.ui.Colors;
 import itdelatrisu.opsu.ui.UI;
 
+import static itdelatrisu.opsu.I18n.t;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
@@ -51,7 +53,7 @@ public class Updater {
 
 	/** The exit confirmation message. */
 	public static final String EXIT_CONFIRMATION = String.format(
-		"A new update is being downloaded.\nAre you sure you want to quit %s?",
+		t("A new update is being downloaded.\nAre you sure you want to quit %s?"),
 		OpsuConstants.PROJECT_NAME
 	);
 
@@ -63,24 +65,24 @@ public class Updater {
 	/** Updater status. */
 	public enum Status {
 		INITIAL (""),
-		CHECKING ("Checking for updates..."),
-		CONNECTION_ERROR ("Connection error."),
-		INTERNAL_ERROR ("Internal error."),
-		UP_TO_DATE ("Up to date!"),
-		UPDATE_AVAILABLE ("Update available!\nClick to download."),
-		UPDATE_DOWNLOADING ("Downloading update...") {
+		CHECKING (t("Checking for updates...")),
+		CONNECTION_ERROR (t("Connection error.")),
+		INTERNAL_ERROR (t("Internal error.")),
+		UP_TO_DATE (t("Up to date!")),
+		UPDATE_AVAILABLE (t("Update available!\nClick to download.")),
+		UPDATE_DOWNLOADING (t("Downloading update...")) {
 			@Override
 			public String getDescription() {
 				Download d = updater.download;
 				if (d != null && d.getStatus() == Download.Status.DOWNLOADING) {
-					return String.format("Downloading update...\n%.1f%% complete (%s/%s)",
+					return String.format(t("Downloading update...\n%.1f%% complete (%s/%s)"),
 							d.getProgress(), Utils.bytesToString(d.readSoFar()), Utils.bytesToString(d.contentLength()));
 				} else
 					return super.getDescription();
 			}
 		},
-		UPDATE_DOWNLOADED ("Download complete.\nClick to restart."),
-		UPDATE_FINAL ("Update queued.");
+		UPDATE_DOWNLOADED (t("Download complete.\nClick to restart.")),
+		UPDATE_FINAL (t("Update queued."));
 
 		/** The status description. */
 		private final String description;
@@ -241,7 +243,7 @@ public class Updater {
 			s = Utils.readDataFromUrl(new URL(OpsuConstants.VERSION_REMOTE));
 		} catch (UnknownHostException e) {
 			Log.warn(String.format(
-				"Check for updates failed. Please check your internet connection, or your connection to %s.",
+				t("Check for updates failed. Please check your internet connection, or your connection to %s."),
 				OpsuConstants.VERSION_REMOTE)
 			);
 		}
@@ -274,13 +276,13 @@ public class Updater {
 				@Override
 				public void completed() {
 					status = Status.UPDATE_DOWNLOADED;
-					UI.getNotificationManager().sendNotification("Update has finished downloading.", Colors.GREEN);
+					UI.getNotificationManager().sendNotification(t("Update has finished downloading."), Colors.GREEN);
 				}
 
 				@Override
 				public void error() {
 					status = Status.CONNECTION_ERROR;
-					UI.getNotificationManager().sendNotification("Update failed due to a connection error.", Color.red);
+					UI.getNotificationManager().sendNotification(t("Update failed due to a connection error."), Color.red);
 				}
 			});
 		}
@@ -323,7 +325,7 @@ public class Updater {
 			pb.start();
 		} catch (IOException e) {
 			status = Status.INTERNAL_ERROR;
-			ErrorHandler.error("Failed to start new process.", e, true);
+			ErrorHandler.error(t("Failed to start new process."), e, true);
 		}
 	}
 }

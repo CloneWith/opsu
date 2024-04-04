@@ -24,6 +24,8 @@ import itdelatrisu.opsu.db.BeatmapDB;
 import itdelatrisu.opsu.io.MD5InputStreamWrapper;
 import itdelatrisu.opsu.options.Options;
 
+import static itdelatrisu.opsu.I18n.t;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
@@ -186,7 +188,7 @@ public class BeatmapParser {
 					// Change boolean to 'true' to parse them immediately.
 					beatmap = parseFile(file, dir, beatmaps, false);
 				} catch (Exception e) {
-					ErrorHandler.error(String.format("Failed to parse beatmap file '%s'.",
+					ErrorHandler.error(String.format(t("Failed to parse beatmap file '%s'."),
 							file.getAbsolutePath()), e, true);
 				}
 
@@ -310,7 +312,7 @@ public class BeatmapParser {
 										}
 									}
 									if (!match) {
-										Log.error(String.format("Audio file '%s' not found in directory '%s'.", tokens[1], dir.getName()));
+										Log.error(String.format(t("Audio file '%s' not found in directory '%s'."), tokens[1], dir.getName()));
 										return null;
 									}
 								}
@@ -353,7 +355,7 @@ public class BeatmapParser {
 								break;
 							}
 						} catch (Exception e) {
-							Log.warn(String.format("Failed to read line '%s' for file '%s'.",
+							Log.warn(String.format(t("Failed to read line '%s' for file '%s'."),
 									line, file.getAbsolutePath()), e);
 						}
 					}
@@ -440,7 +442,7 @@ public class BeatmapParser {
 								break;
 							}
 						} catch (Exception e) {
-							Log.warn(String.format("Failed to read metadata '%s' for file '%s'.",
+							Log.warn(String.format(t("Failed to read metadata '%s' for file '%s'."),
 									line, file.getAbsolutePath()), e);
 						}
 						if (beatmap.beatmapSetID <= 0) {  // try to determine MSID from directory name
@@ -483,7 +485,7 @@ public class BeatmapParser {
 								break;
 							}
 						} catch (Exception e) {
-							Log.warn(String.format("Failed to read difficulty '%s' for file '%s'.",
+							Log.warn(String.format(t("Failed to read difficulty '%s' for file '%s'."),
 									line, file.getAbsolutePath()), e);
 						}
 					}
@@ -518,7 +520,7 @@ public class BeatmapParser {
 								beatmap.breaks.add(Integer.parseInt(tokens[1]));
 								beatmap.breaks.add(Integer.parseInt(tokens[2]));
 							} catch (Exception e) {
-								Log.warn(String.format("Failed to read break period '%s' for file '%s'.",
+								Log.warn(String.format(t("Failed to read break period '%s' for file '%s'."),
 										line, file.getAbsolutePath()), e);
 							}
 							break;
@@ -555,7 +557,7 @@ public class BeatmapParser {
 								}
 							}
 						} catch (Exception e) {
-							Log.warn(String.format("Failed to read timing point '%s' for file '%s'.",
+							Log.warn(String.format(t("Failed to read timing point '%s' for file '%s'."),
 									line, file.getAbsolutePath()), e);
 						}
 					}
@@ -596,7 +598,7 @@ public class BeatmapParser {
 								break;
 							}
 						} catch (Exception e) {
-							Log.warn(String.format("Failed to read color '%s' for file '%s'.",
+							Log.warn(String.format(t("Failed to read color '%s' for file '%s'."),
 									line, file.getAbsolutePath()), e);
 						}
 					}
@@ -622,7 +624,7 @@ public class BeatmapParser {
 							else //if ((type & HitObject.TYPE_SPINNER) > 0)
 								beatmap.hitObjectSpinner++;
 						} catch (Exception e) {
-							Log.warn(String.format("Failed to read hit object '%s' for file '%s'.",
+							Log.warn(String.format(t("Failed to read hit object '%s' for file '%s'."),
 									line, file.getAbsolutePath()), e);
 						}
 					}
@@ -650,9 +652,9 @@ public class BeatmapParser {
 			if (md5stream != null)
 				beatmap.md5Hash = md5stream.getMD5();
 		} catch (IOException e) {
-			ErrorHandler.error(String.format("Failed to read file '%s'.", file.getAbsolutePath()), e, false);
+			ErrorHandler.error(String.format(t("Failed to read file '%s'."), file.getAbsolutePath()), e, false);
 		} catch (NoSuchAlgorithmException e) {
-			ErrorHandler.error("Failed to get MD5 hash stream.", e, true);
+			ErrorHandler.error(t("Failed to get MD5 hash stream."), e, true);
 
 			// retry without MD5
 			hasNoMD5Algorithm = true;
@@ -741,10 +743,10 @@ public class BeatmapParser {
 
 			// check that all objects were parsed
 			if (objectIndex != beatmap.objects.length)
-				ErrorHandler.error(String.format("Parsed %d objects for beatmap '%s', %d objects expected.",
+				ErrorHandler.error(String.format(t("Parsed %d objects for beatmap '%s', %d objects expected."),
 						objectIndex, beatmap.toString(), beatmap.objects.length), null, true);
 		} catch (IOException e) {
-			ErrorHandler.error(String.format("Failed to read file '%s'.", beatmap.getFile().getAbsolutePath()), e, false);
+			ErrorHandler.error(String.format(t("Failed to read file '%s'."), beatmap.getFile().getAbsolutePath()), e, false);
 		}
 	}
 

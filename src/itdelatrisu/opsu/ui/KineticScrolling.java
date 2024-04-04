@@ -18,6 +18,8 @@
 
 package itdelatrisu.opsu.ui;
 
+import static itdelatrisu.opsu.I18n.t;
+
 /**
  * Drag to scroll based on:
  * http://ariya.ofilabs.com/2013/11/javascript-kinetic-scrolling-part-2.html
@@ -224,7 +226,7 @@ public class KineticScrolling {
 	 */
 	public void setSpeedMultiplier(float multiplier) {
 		if (multiplier <= 0f)
-			throw new IllegalArgumentException("Speed multiplier must be above zero.");
+			throw new IllegalArgumentException(t("Speed multiplier must be above zero."));
 		this.speedMultiplier = multiplier;
 	}
 
