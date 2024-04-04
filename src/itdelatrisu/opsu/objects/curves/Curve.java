@@ -27,6 +27,8 @@ import itdelatrisu.opsu.render.LegacyCurveRenderState;
 import itdelatrisu.opsu.skins.Skin;
 import itdelatrisu.opsu.ui.Colors;
 
+import static itdelatrisu.opsu.I18n.t;
+
 import org.lwjgl.opengl.ContextCapabilities;
 import org.lwjgl.opengl.GLContext;
 import org.newdawn.slick.Color;
@@ -105,7 +107,7 @@ public abstract class Curve {
 			LegacyCurveRenderState.init(width, height, circleDiameter);
 		} else {
 			if (Options.getSkin().getSliderStyle() != Skin.STYLE_PEPPYSLIDER)
-				Log.warn("New slider style requires OpenGL 3.0.");
+				Log.warn(t("New slider style requires OpenGL 3.0."));
 		}
 	}
 

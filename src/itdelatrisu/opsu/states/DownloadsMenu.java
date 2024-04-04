@@ -56,6 +56,8 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import static itdelatrisu.opsu.I18n.t;
+
 import javax.sound.sampled.LineEvent;
 import javax.sound.sampled.LineListener;
 
@@ -249,20 +251,21 @@ public class DownloadsMenu extends BasicGameState {
 					focusResult = -1;
 					startResultPos.setPosition(0);
 					if (nodes == null)
-						searchResultString = "No results found or an internal error occurred. See log for details.";
+						searchResultString = t("No results found or an internal error occurred. See log for details.");
 					else {
 						if (query.isEmpty())
-							searchResultString = "Type to search!";
+							searchResultString = t("Type to search!");
 						else if (totalResults == 0 || resultList.length == 0)
-							searchResultString = "No results found.";
+							searchResultString = t("No results found.");
 						else
-							searchResultString = String.format("%d result%s found!",
+						// TODO: Plural handling
+							searchResultString = String.format(t("%d result%s found!"),
 									totalResults, (totalResults == 1) ? "" : "s");
 					}
 				}
 			} catch (IOException e) {
 				if (!interrupted)
-					searchResultString = "Could not establish connection to server.";
+					searchResultString = t("Could not establish connection to server.");
 			} finally {
 				complete = true;
 			}
@@ -299,7 +302,7 @@ public class DownloadsMenu extends BasicGameState {
 			if (dirs != null && dirs.length > 0) {
 				this.importedNode = BeatmapParser.parseDirectories(dirs);
 				if (importedNode == null)
-					UI.getNotificationManager().sendNotification("No Standard beatmaps could be loaded.", Color.red);
+					UI.getNotificationManager().sendNotification(t("No Standard beatmaps could be loaded."), Color.red);
 			}
 
 			DownloadList.get().clearDownloads(Download.Status.COMPLETE);
@@ -329,7 +332,7 @@ public class DownloadsMenu extends BasicGameState {
 
 		// search
 		searchTimer = SEARCH_DELAY;
-		searchResultString = "Loading data from server...";
+		searchResultString = t("Loading data from server...");
 		searchFont = Fonts.DEFAULT;
 		search = new TextField(
 				container, searchFont, (int) baseX, (int) searchY,
@@ -381,9 +384,9 @@ public class DownloadsMenu extends BasicGameState {
 				baseX + searchWidth + buttonMarginX + resetButtonWidth / 2f, topButtonY);
 		rankedButton = new MenuButton(rankedButtonImage, buttonL, buttonR,
 				baseX + searchWidth + buttonMarginX * 2f + resetButtonWidth + rankedButtonWidth / 2f, topButtonY);
-		clearButton.setText("Clear", Fonts.MEDIUM, Color.white);
-		importButton.setText("Import All", Fonts.MEDIUM, Color.white);
-		resetButton.setText("Reset", Fonts.MEDIUM, Color.white);
+		clearButton.setText(t("Clear"), Fonts.MEDIUM, Color.white);
+		importButton.setText(t("Import All"), Fonts.MEDIUM, Color.white);
+		resetButton.setText(t("Reset"), Fonts.MEDIUM, Color.white);
 		clearButton.setHoverFade();
 		importButton.setHoverFade();
 		resetButton.setHoverFade();
@@ -402,7 +405,7 @@ public class DownloadsMenu extends BasicGameState {
 				page = 0;
 				pageResultTotal = 1;
 				pageDir = Page.RESET;
-				searchResultString = "Loading data from server...";
+				searchResultString = t("Loading data from server...");
 				lastQuery = null;
 				pageDir = Page.RESET;
 				if (searchQuery != null)
@@ -458,7 +461,7 @@ public class DownloadsMenu extends BasicGameState {
 		}
 
 		// title
-		Fonts.LARGE.drawString(width * 0.024f, height * 0.03f, "Download Beatmaps!", Color.white);
+		Fonts.LARGE.drawString(width * 0.024f, height * 0.03f, t("Download Beatmaps!"), Color.white);
 
 		// search
 		g.setColor(Color.white);
@@ -499,9 +502,9 @@ public class DownloadsMenu extends BasicGameState {
 				float buttonY = height * 0.2f;
 				float buttonWidth = width * 0.7f;
 				Fonts.BOLD.drawString(
-						baseX + (buttonWidth - Fonts.BOLD.getWidth("Page 1")) / 2f,
+						baseX + (buttonWidth - Fonts.BOLD.getWidth(t("Page 1"))) / 2f,
 						buttonY - Fonts.BOLD.getLineHeight() * 1.3f,
-						String.format("Page %d", page), Color.white
+						String.format(t("Page %d"), page), Color.white
 				);
 				if (page > 1)
 					prevPage.draw();
@@ -544,7 +547,7 @@ public class DownloadsMenu extends BasicGameState {
 		clearButton.draw(Color.gray);
 		importButton.draw(Color.orange);
 		resetButton.draw(Color.red);
-		rankedButton.setText((rankedOnly) ? "Show Unranked" : "Hide Unranked", Fonts.MEDIUM, Color.white);
+		rankedButton.setText((rankedOnly) ? t("Show Unranked") : t("Hide Unranked"), Fonts.MEDIUM, Color.white);
 		rankedButton.draw(Color.magenta);
 
 		// dropdown menu
@@ -638,11 +641,11 @@ public class DownloadsMenu extends BasicGameState {
 
 		// tooltips
 		if (resetButton.contains(mouseX, mouseY))
-			UI.updateTooltip(delta, "Reset the current search.", false);
+			UI.updateTooltip(delta, t("Reset the current search."), false);
 		else if (rankedButton.contains(mouseX, mouseY))
-			UI.updateTooltip(delta, "Toggle the display of unranked maps.\nSome download servers may not support this option.", true);
+			UI.updateTooltip(delta, t("Toggle the display of unranked maps.\nSome download servers may not support this option."), true);
 		else if (serverMenu.baseContains(mouseX, mouseY))
-			UI.updateTooltip(delta, "Select a download server.", false);
+			UI.updateTooltip(delta, t("Select a download server."), false);
 
 		// fade in background
 		Beatmap beatmap = MusicController.getBeatmap();
@@ -728,7 +731,7 @@ public class DownloadsMenu extends BasicGameState {
 											if (playing)
 												previewID = node.getID();
 										} catch (SlickException e) {
-											UI.getNotificationManager().sendBarNotification("Failed to load track preview. See log for details.");
+											UI.getNotificationManager().sendBarNotification(t("Failed to load track preview. See log for details."));
 											Log.error(e);
 										}
 									}
@@ -1036,7 +1039,7 @@ public class DownloadsMenu extends BasicGameState {
 		// download in browser
 		if (server.isDownloadInBrowser()) {
 			final String importText = String.format(
-				"Save the beatmap in the Import folder and then click \"Import All\":\n%s",
+				t("Save the beatmap in the Import folder and then click \"Import All\":\n%s"),
 				Options.getImportDir().getAbsolutePath()
 			);
 			if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
@@ -1044,15 +1047,15 @@ public class DownloadsMenu extends BasicGameState {
 				try {
 					Desktop.getDesktop().browse(new URI(downloadURL));
 					UI.getNotificationManager().sendNotification(String.format(
-						"Opened a web browser to download \"%s\".\n\n%s",
+						t("Opened a web browser to download \"%s\".\n\n%s"),
 						node.getTitle(), importText
 					));
 				} catch (IOException | URISyntaxException e) {
-					ErrorHandler.error("Failed to launch browser.", e, true);
+					ErrorHandler.error(t("Failed to launch browser."), e, true);
 				}
 			} else {
 				// browse not supported: copy URL instead
-				String text = String.format("Click here to copy the download URL for \"%s\".", node.getTitle());
+				String text = String.format(t("Click here to copy the download URL for \"%s\"."), node.getTitle());
 				UI.getNotificationManager().sendNotification(text, Color.white, new NotificationListener() {
 					@Override
 					public void click() {
@@ -1069,7 +1072,7 @@ public class DownloadsMenu extends BasicGameState {
 		else if (!DownloadList.get().contains(node.getID())) {
 			node.createDownload(server);
 			if (node.getDownload() == null)
-				UI.getNotificationManager().sendBarNotification("The download could not be started.");
+				UI.getNotificationManager().sendBarNotification(t("The download could not be started."));
 			else {
 				DownloadList.get().addNode(node);
 				node.getDownload().start();

@@ -18,6 +18,8 @@
 
 package itdelatrisu.opsu.db;
 
+import static itdelatrisu.opsu.I18n.t;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -58,7 +60,7 @@ public class DBController {
 		try {
 			return DriverManager.getConnection(String.format("jdbc:sqlite:%s", path));
 		} catch (SQLException e) {
-			throw new SQLException(String.format("Could not connect to database: '%s'.", path), e);
+			throw new SQLException(String.format(t("Could not connect to database: '%s'."), path), e);
 		}
 	}
 }

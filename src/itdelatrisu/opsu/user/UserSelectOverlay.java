@@ -29,6 +29,8 @@ import itdelatrisu.opsu.ui.UI;
 import itdelatrisu.opsu.ui.animations.AnimatedValue;
 import itdelatrisu.opsu.ui.animations.AnimationEquation;
 
+import static itdelatrisu.opsu.I18n.t;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -296,7 +298,7 @@ public class UserSelectOverlay extends AbstractComponent {
 		COLOR_WHITE.a = alpha;
 
 		// title
-		String title = "User Select";
+		String title = t("User Select");
 		Fonts.XLARGE.drawString(
 			x + (width - Fonts.XLARGE.getWidth(title)) / 2,
 			(int) (y + titleY - scrolling.getPosition()),
@@ -327,7 +329,7 @@ public class UserSelectOverlay extends AbstractComponent {
 		COLOR_GRAY.a = alpha * 0.8f;
 
 		// title
-		String title = "Add User";
+		String title = t("Add User");
 		Fonts.XLARGE.drawString(
 			x + (width - Fonts.XLARGE.getWidth(title)) / 2,
 			(int) (y + titleY),
@@ -336,20 +338,20 @@ public class UserSelectOverlay extends AbstractComponent {
 
 		// user button
 		int cy = (int) (y + usersStartY);
-		String caption = "Click the profile below to create it.";
+		String caption = t("Click the profile below to create it.");
 		Fonts.MEDIUM.drawString(x + (width - Fonts.MEDIUM.getWidth(caption)) / 2, cy, caption, COLOR_WHITE);
 		cy += Fonts.MEDIUM.getLineHeight();
 		newUserButton.draw(g, alpha);
 		cy += UserButton.getHeight() + Fonts.MEDIUMBOLD.getLineHeight();
 
 		// user name
-		String nameHeader = "Name";
+		String nameHeader = t("Name");
 		Fonts.MEDIUMBOLD.drawString(x + (width - Fonts.MEDIUMBOLD.getWidth(nameHeader)) / 2, cy, nameHeader, COLOR_WHITE);
 		cy += Fonts.MEDIUMBOLD.getLineHeight();
 		Color textColor = COLOR_WHITE;
 		String name = newUser.getName();
 		if (name.isEmpty()) {
-			name = "Type a name...";
+			name = t("Type a name...");
 			textColor = COLOR_GRAY;
 		} else if (!UserList.get().isValidUserName(name))
 			textColor = COLOR_RED;
@@ -363,7 +365,7 @@ public class UserSelectOverlay extends AbstractComponent {
 		cy += Fonts.MEDIUMBOLD.getLineHeight();
 
 		// user icons
-		renderUserIcons(g, newUser.getIconId(), "Icon", cy, alpha);
+		renderUserIcons(g, newUser.getIconId(), t("Icon"), cy, alpha);
 	}
 
 	/** Renders the user edit menu. */
@@ -371,7 +373,7 @@ public class UserSelectOverlay extends AbstractComponent {
 		COLOR_WHITE.a = alpha;
 
 		// title
-		String title = "Edit User";
+		String title = t("Edit User");
 		Fonts.XLARGE.drawString(
 			x + (width - Fonts.XLARGE.getWidth(title)) / 2,
 			(int) (y + titleY),
@@ -388,7 +390,7 @@ public class UserSelectOverlay extends AbstractComponent {
 
 		// user icons
 		int cy = (int) (y + usersStartY + (UserButton.getHeight() + usersPaddingY) * 2);
-		renderUserIcons(g, editUserButton.getUser().getIconId(), "Change Icon", cy, alpha);
+		renderUserIcons(g, editUserButton.getUser().getIconId(), t("Change Icon"), cy, alpha);
 	}
 
 	/** Renders the user icons. */
@@ -548,18 +550,18 @@ public class UserSelectOverlay extends AbstractComponent {
 				SoundController.playSound(SoundEffect.MENUCLICK);
 				String name = editUserButton.getUser().getName();
 				if (name.equals(UserList.get().getCurrentUser().getName()))
-					UI.getNotificationManager().sendBarNotification("You can't delete the current user!");
+					UI.getNotificationManager().sendBarNotification(t("You can't delete the current user!"));
 				else {
-					String confirmationText = "Confirm User Deletion";
+					String confirmationText = t("Confirm User Deletion");
 					if (!deleteUserButton.getPlaceholderText().equals(confirmationText)) {
 						// ask for confirmation first
 						deleteUserButton.setPlaceholderText(confirmationText);
 					} else {
 						// actually delete the user
 						if (UserList.get().deleteUser(name)) {
-							UI.getNotificationManager().sendNotification(String.format("User '%s' was deleted.", name), Colors.GREEN);
+							UI.getNotificationManager().sendNotification(String.format(t("User '%s' was deleted."), name), Colors.GREEN);
 						} else {
-							UI.getNotificationManager().sendNotification("The user could not be deleted.", Color.red);
+							UI.getNotificationManager().sendNotification(t("The user could not be deleted."), Color.red);
 						}
 						listener.close(false);
 					}
@@ -681,16 +683,16 @@ public class UserSelectOverlay extends AbstractComponent {
 		String name = newUser.getName();
 		int icon = newUser.getIconId();
 		if (!UserList.get().isValidUserName(name)) {
-			String error = name.isEmpty() ? "Enter a name for the user." : "You can't use that name.";
+			String error = name.isEmpty() ? t("Enter a name for the user.") : t("You can't use that name.");
 			UI.getNotificationManager().sendBarNotification(error);
 			newUserButton.flash();
 		} else {
 			if (UserList.get().createNewUser(name, icon) == null)
-				UI.getNotificationManager().sendBarNotification("Something wrong happened.");
+				UI.getNotificationManager().sendBarNotification(t("Something wrong happened."));
 			else {
 				// change user
 				UserList.get().changeUser(name);
-				UI.getNotificationManager().sendNotification("New user created.\nEnjoy the game! :)", Colors.GREEN);
+				UI.getNotificationManager().sendNotification(t("New user created.\nEnjoy the game! :)"), Colors.GREEN);
 				listener.close(true);
 			}
 		}
@@ -718,7 +720,7 @@ public class UserSelectOverlay extends AbstractComponent {
 
 		// add button to create new user
 		UserButton addUserButton = new UserButton(0, 0, Color.white);
-		addUserButton.setPlaceholderText("Add User");
+		addUserButton.setPlaceholderText(t("Add User"));
 		userButtons.add(addUserButton);
 
 		maxScrollOffset = Math.max(0,
@@ -744,7 +746,7 @@ public class UserSelectOverlay extends AbstractComponent {
 	private void prepareUserEdit(User user) {
 		editUserButton.setUser(user);
 		editUserButton.resetHover();
-		deleteUserButton.setPlaceholderText("Delete User");
+		deleteUserButton.setPlaceholderText(t("Delete User"));
 		deleteUserButton.resetHover();
 
 		prepareUserIcons();

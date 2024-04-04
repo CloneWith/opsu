@@ -25,6 +25,8 @@ import itdelatrisu.opsu.options.Options;
 import itdelatrisu.opsu.user.User;
 import itdelatrisu.opsu.user.UserList;
 
+import static itdelatrisu.opsu.I18n.t;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -436,7 +438,7 @@ public class ScoreDB {
 			rs.close();
 			return name;
 		} catch (SQLException e) {
-			ErrorHandler.error("Failed to read current user from database.", e, true);
+			ErrorHandler.error(t("Failed to read current user from database."), e, true);
 			return null;
 		}
 	}
@@ -453,7 +455,7 @@ public class ScoreDB {
 			setCurrentUserStmt.setString(1, user);
 			setCurrentUserStmt.executeUpdate();
 		} catch (SQLException e) {
-			ErrorHandler.error("Failed to set current user in database.", e, true);
+			ErrorHandler.error(t("Failed to set current user in database."), e, true);
 		}
 	}
 
@@ -474,7 +476,7 @@ public class ScoreDB {
 			insertUserStmt.setInt(6, user.getIconId());
 			insertUserStmt.executeUpdate();
 		} catch (SQLException e) {
-			ErrorHandler.error("Failed to update user in database.", e, true);
+			ErrorHandler.error(t("Failed to update user in database."), e, true);
 			return;
 		}
 	}
@@ -491,7 +493,7 @@ public class ScoreDB {
 			deleteUserStmt.setString(1, user);
 			deleteUserStmt.executeUpdate();
 		} catch (SQLException e) {
-			ErrorHandler.error("Failed to delete user from database.", e, true);
+			ErrorHandler.error(t("Failed to delete user from database."), e, true);
 		}
 	}
 
@@ -514,7 +516,7 @@ public class ScoreDB {
 			connection.close();
 			connection = null;
 		} catch (SQLException e) {
-			ErrorHandler.error("Failed to close score database.", e, true);
+			ErrorHandler.error(t("Failed to close score database."), e, true);
 		}
 	}
 }

@@ -22,6 +22,8 @@ import itdelatrisu.opsu.ErrorHandler;
 import itdelatrisu.opsu.Utils;
 import itdelatrisu.opsu.options.Options;
 
+import static itdelatrisu.opsu.I18n.t;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -56,11 +58,11 @@ public class Download {
 
 	/** Download statuses. */
 	public enum Status {
-		WAITING ("Waiting"),
-		DOWNLOADING ("Downloading"),
-		COMPLETE ("Complete"),
-		CANCELLED ("Cancelled"),
-		ERROR ("Error");
+		WAITING (t("Waiting")),
+		DOWNLOADING (t("Downloading")),
+		COMPLETE (t("Complete")),
+		CANCELLED (t("Cancelled")),
+		ERROR (t("Error"));
 
 		/** The status name. */
 		private final String name;
@@ -156,7 +158,7 @@ public class Download {
 			this.url = new URL(remoteURL);
 		} catch (MalformedURLException e) {
 			this.status = Status.ERROR;
-			ErrorHandler.error(String.format("Bad download URL: '%s'", remoteURL), e, true);
+			ErrorHandler.error(String.format(t("Bad download URL: '%s'"), remoteURL), e, true);
 			return;
 		}
 		this.localPath = localPath;
@@ -242,11 +244,11 @@ public class Download {
 							// check for problems
 							String error = null;
 							if (location == null)
-								error = String.format("Download for URL '%s' is attempting to redirect without a 'location' header.", base.toString());
+								error = String.format(t("Download for URL '%s' is attempting to redirect without a 'location' header."), base.toString());
 							else if (!target.getProtocol().equals("http") && !target.getProtocol().equals("https"))
-								error = String.format("Download for URL '%s' is attempting to redirect to a non-HTTP/HTTPS protocol '%s'.", base.toString(), target.getProtocol());
+								error = String.format(t("Download for URL '%s' is attempting to redirect to a non-HTTP/HTTPS protocol '%s'."), base.toString(), target.getProtocol());
 							else if (redirectCount > MAX_REDIRECTS)
-								error = String.format("Download for URL '%s' is attempting too many redirects (over %d).", base.toString(), MAX_REDIRECTS);
+								error = String.format(t("Download for URL '%s' is attempting too many redirects (over %d)."), base.toString(), MAX_REDIRECTS);
 							if (error != null) {
 								ErrorHandler.error(error, null, false);
 								throw new IOException();
@@ -263,7 +265,7 @@ public class Download {
 					contentLength = conn.getContentLength();
 				} catch (IOException e) {
 					status = Status.ERROR;
-					Log.warn("Failed to open connection.", e);
+					Log.warn(t("Failed to open connection."), e);
 					if (listener != null)
 						listener.error();
 					return;
@@ -306,7 +308,7 @@ public class Download {
 					}
 				} catch (Exception e) {
 					status = Status.ERROR;
-					Log.warn("Failed to start download.", e);
+					Log.warn(t("Failed to start download."), e);
 					if (listener != null)
 						listener.error();
 				}
@@ -457,7 +459,7 @@ public class Download {
 			}
 		} catch (IOException e) {
 			this.status = Status.ERROR;
-			ErrorHandler.error("Failed to cancel download.", e, true);
+			ErrorHandler.error(t("Failed to cancel download."), e, true);
 		}
 	}
 }

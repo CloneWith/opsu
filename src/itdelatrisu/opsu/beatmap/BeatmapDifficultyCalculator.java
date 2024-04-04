@@ -22,6 +22,8 @@ import itdelatrisu.opsu.db.BeatmapDB;
 import itdelatrisu.opsu.objects.curves.Curve;
 import itdelatrisu.opsu.objects.curves.Vec2f;
 
+import static itdelatrisu.opsu.I18n.t;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -108,8 +110,8 @@ public class BeatmapDifficultyCalculator {
 	 */
 	public void calculate() {
 		if (beatmap.objects == null || beatmap.timingPoints == null) {
-			Log.error(String.format("Trying to calculate difficulty values for beatmap '%s' with %s not yet loaded.",
-					beatmap.toString(), (beatmap.objects == null) ? "hit objects" : "timing points"));
+			Log.error(String.format(t("Trying to calculate difficulty values for beatmap '%s' with %s not yet loaded."),
+					beatmap.toString(), (beatmap.objects == null) ? t("hit objects") : t("timing points")));
 			return;
 		}
 
@@ -147,7 +149,7 @@ public class BeatmapDifficultyCalculator {
 		}
 
 		if (!calculateStrainValues()) {
-			Log.error("Could not compute strain values. Aborting difficulty calculation.");
+			Log.error(t("Could not compute strain values. Aborting difficulty calculation."));
 			return;
 		}
 
@@ -199,7 +201,7 @@ public class BeatmapDifficultyCalculator {
 		// Traverse hitObjects in pairs to calculate the strain value of NextHitObject from
 		// the strain value of CurrentHitObject and environment.
 		if (tpHitObjects.length == 0) {
-			Log.warn("Can not compute difficulty of empty beatmap.");
+			Log.warn(t("Can not compute difficulty of empty beatmap."));
 			return false;
 		}
 

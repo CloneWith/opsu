@@ -18,6 +18,8 @@
 
 package itdelatrisu.opsu.objects.curves;
 
+import static itdelatrisu.opsu.I18n.t;
+
 /**
  * Representation of a Centripetal Catmull–Rom spline.
  * (Currently not technically Centripetal Catmull–Rom.)
@@ -38,7 +40,7 @@ public class CentripetalCatmullRom extends CurveType {
 	 */
 	protected CentripetalCatmullRom(Vec2f[] points) {
 		if (points.length != 4)
-			throw new RuntimeException(String.format("Need exactly 4 points to initialize CentripetalCatmullRom, %d provided.", points.length));
+			throw new RuntimeException(String.format(t("Need exactly 4 points to initialize CentripetalCatmullRom, %d provided."), points.length));
 
 		this.points = points;
 		time = new float[4];

@@ -33,6 +33,8 @@ import itdelatrisu.opsu.states.SongMenu;
 import itdelatrisu.opsu.states.Splash;
 import itdelatrisu.opsu.ui.UI;
 import itdelatrisu.opsu.video.FFmpeg;
+import itdelatrisu.opsu.Utils;
+import static itdelatrisu.opsu.I18n.t;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -106,7 +108,7 @@ public class Opsu extends StateBasedGame {
 		Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
 			@Override
 			public void uncaughtException(Thread t, Throwable e) {
-				ErrorHandler.error("** Uncaught Exception! **", e, true);
+				ErrorHandler.error(t("** Uncaught Exception! **"), e, true);
 				System.exit(1);
 			}
 		});
@@ -128,20 +130,20 @@ public class Opsu extends StateBasedGame {
 				errorAndExit(
 					null,
 					String.format(
-						"%s could not be launched for one of these reasons:\n" +
-						"- An instance of %s is already running.\n" +
-						"- A database is locked for another reason (unlikely). ",
+						t("%s could not be launched for one of these reasons:\n") +
+						t("- An instance of %s is already running.\n") +
+						t("- A database is locked for another reason (unlikely). "),
 						OpsuConstants.PROJECT_NAME,
 						OpsuConstants.PROJECT_NAME
 					),
 					false
 				);
 			} else
-				errorAndExit(e, "The databases could not be initialized.", true);
+				errorAndExit(e, t("The databases could not be initialized."), true);
 		} catch (ClassNotFoundException e) {
-			errorAndExit(e, "Could not load sqlite-JDBC driver.", true);
+			errorAndExit(e, t("Could not load sqlite-JDBC driver."), true);
 		} catch (Exception e) {
-			errorAndExit(e, "The databases could not be initialized.", true);
+			errorAndExit(e, t("The databases could not be initialized."), true);
 		}
 
 		// load natives
@@ -155,7 +157,7 @@ public class Opsu extends StateBasedGame {
 			try {
 				new NativeLoader(nativeDir).loadNatives();
 			} catch (IOException e) {
-				Log.error("Error loading natives.", e);
+				Log.error(t("Error loading natives."), e);
 			}
 		}
 		System.setProperty("org.lwjgl.librarypath", nativeDir.getAbsolutePath());
@@ -178,7 +180,7 @@ public class Opsu extends StateBasedGame {
 					try {
 						Updater.get().checkForUpdates();
 					} catch (Exception e) {
-						Log.warn("Check for updates failed.", e);
+						Log.warn(t("Check for updates failed."), e);
 					}
 				}
 			}.start();
@@ -210,7 +212,7 @@ public class Opsu extends StateBasedGame {
 				}
 			}
 		} catch (SlickException e) {
-			errorAndExit(e, "An error occurred while creating the game container.", true);
+			errorAndExit(e, t("An error occurred while creating the game container."), true);
 		}
 	}
 
@@ -278,9 +280,9 @@ public class Opsu extends StateBasedGame {
 		if (Utils.isJarRunning() && Utils.getRunningDirectory() != null &&
 			Utils.getRunningDirectory().getAbsolutePath().indexOf('!') != -1)
 			ErrorHandler.error(
-				"JARs cannot be run from some paths containing the '!' character. " +
-				"Please rename the file/directories and try again.\n\n" +
-				"Path: " + Utils.getRunningDirectory().getAbsolutePath(),
+				t("JARs cannot be run from some paths containing the '!' character. ") +
+				t("Please rename the file/directories and try again.\n\n") +
+				t("Path: ") + Utils.getRunningDirectory().getAbsolutePath(),
 				null,
 				false
 			);

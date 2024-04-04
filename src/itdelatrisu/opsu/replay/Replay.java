@@ -26,6 +26,8 @@ import itdelatrisu.opsu.io.OsuReader;
 import itdelatrisu.opsu.io.OsuWriter;
 import itdelatrisu.opsu.options.Options;
 
+import static itdelatrisu.opsu.I18n.t;
+
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -273,7 +275,7 @@ public class Replay {
 		File dir = Options.getReplayDir();
 		if (!dir.isDirectory()) {
 			if (!dir.mkdir()) {
-				ErrorHandler.error("Failed to create replay directory.", null, false);
+				ErrorHandler.error(t("Failed to create replay directory."), null, false);
 				return;
 			}
 		}
@@ -346,7 +348,7 @@ public class Replay {
 						try {
 							lzma.write(bytes);
 						} catch (IOException e) {
-							ErrorHandler.error("LZMA encoding of the reply frames failed.", e, true);
+							ErrorHandler.error(t("LZMA encoding of the reply frames failed."), e, true);
 						}
 						lzma.close();
 						bout.close();
@@ -360,7 +362,7 @@ public class Replay {
 
 					writer.close();
 				} catch (IOException e) {
-					ErrorHandler.error("Could not save replay data.", e, true);
+					ErrorHandler.error(t("Could not save replay data."), e, true);
 				}
 			}
 		}.start();

@@ -18,6 +18,8 @@
 
 package itdelatrisu.opsu.io;
 
+import static itdelatrisu.opsu.I18n.t;
+
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.File;
@@ -140,7 +142,7 @@ public class OsuReader {
 			if (b >= 0)
 				return value;  // MSB is zero. End of value.
 		}
-		throw new IOException("ULEB128 too large");
+		throw new IOException(t("ULEB128 too large"));
 	}
 
 	/**
@@ -155,7 +157,7 @@ public class OsuReader {
 		if (kind == 0)
 			return "";
 		if (kind != 0x0B)
-			throw new IOException(String.format("String format error: Expected 0x0B or 0x00, found 0x%02X", kind & 0xFF));
+			throw new IOException(String.format(t("String format error: Expected 0x0B or 0x00, found 0x%02X"), kind & 0xFF));
 		int length = readULEB128();
 		if (length == 0)
 			return "";

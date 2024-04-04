@@ -21,6 +21,8 @@ package itdelatrisu.opsu.beatmap;
 import itdelatrisu.opsu.ErrorHandler;
 import itdelatrisu.opsu.options.Options;
 
+import static itdelatrisu.opsu.I18n.t;
+
 import java.io.IOException;
 import java.nio.file.ClosedWatchServiceException;
 import java.nio.file.FileSystems;
@@ -96,7 +98,7 @@ public class BeatmapWatchService {
 			ws = new BeatmapWatchService();
 			ws.register(Options.getBeatmapDir().toPath());
 		} catch (IOException e) {
-			ErrorHandler.error("An I/O exception occurred while creating the watch service.", e, true);
+			ErrorHandler.error(t("An I/O exception occurred while creating the watch service."), e, true);
 			return;
 		}
 
@@ -118,7 +120,7 @@ public class BeatmapWatchService {
 			ws = null;
 		} catch (IOException e) {
 			ws = null;
-			ErrorHandler.error("An I/O exception occurred while closing the previous watch service.", e, true);
+			ErrorHandler.error(t("An I/O exception occurred while closing the previous watch service."), e, true);
 		}
 	}
 
@@ -203,13 +205,13 @@ public class BeatmapWatchService {
 					try {
 						register(dir);
 					} catch (IOException e) {
-						Log.warn(String.format("Failed to register path '%s' with the watch service.", dir.toString()), e);
+						Log.warn(String.format(t("Failed to register path '%s' with the watch service."), dir.toString()), e);
 					}
 					return FileVisitResult.CONTINUE;
 				}
 			});
 		} catch (IOException e) {
-			Log.warn(String.format("Failed to register paths from root directory '%s' with the watch service.", start.toString()), e);
+			Log.warn(String.format(t("Failed to register paths from root directory '%s' with the watch service."), start.toString()), e);
 		}
 	}
 

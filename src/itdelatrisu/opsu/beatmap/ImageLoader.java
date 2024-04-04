@@ -24,6 +24,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
+import static itdelatrisu.opsu.I18n.t;
+
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.opengl.ImageData;
@@ -98,7 +100,7 @@ public class ImageLoader {
 					data = new LoadedImageData(imageData, textureBuffer);
 			} catch (Exception e) {
 				if (!isInterrupted())
-					Log.warn(String.format("Failed to load background image '%s'.", file), e);
+					Log.warn(String.format(t("Failed to load background image '%s'."), file), e);
 			}
 			this.in = null;
 		}
@@ -129,7 +131,7 @@ public class ImageLoader {
 			try {
 				image = new Image(file.getAbsolutePath());
 			} catch (SlickException e) {
-				Log.warn(String.format("Failed to load background image '%s'.", file), e);
+				Log.warn(String.format(t("Failed to load background image '%s'."), file), e);
 			}
 		}
 	}
@@ -170,7 +172,7 @@ public class ImageLoader {
 			try {
 				image.destroy();
 			} catch (SlickException e) {
-				Log.warn(String.format("Failed to destroy image '%s'.", image.getResourceReference()), e);
+				Log.warn(String.format(t("Failed to destroy image '%s'."), image.getResourceReference()), e);
 			}
 			image = null;
 		}

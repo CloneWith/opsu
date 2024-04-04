@@ -30,6 +30,8 @@ import itdelatrisu.opsu.skins.SkinUnpacker;
 import itdelatrisu.opsu.ui.animations.AnimatedValue;
 import itdelatrisu.opsu.ui.animations.AnimationEquation;
 
+import static itdelatrisu.opsu.I18n.t;
+
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
@@ -283,20 +285,20 @@ public class UI {
 
 		// determine current action
 		if ((file = OszUnpacker.getCurrentFileName()) != null) {
-			text = "Unpacking new beatmaps...";
+			text = t("Unpacking new beatmaps...");
 			progress = OszUnpacker.getUnpackerProgress();
 		} else if ((file = BeatmapParser.getCurrentFileName()) != null) {
 			text = (BeatmapParser.getStatus() == BeatmapParser.Status.INSERTING) ?
-					"Updating database..." : "Loading beatmaps...";
+					t("Updating database...") : t("Loading beatmaps...");
 			progress = BeatmapParser.getParserProgress();
 		} else if ((file = SkinUnpacker.getCurrentFileName()) != null) {
-			text = "Unpacking new skins...";
+			text = t("Unpacking new skins...");
 			progress = SkinUnpacker.getUnpackerProgress();
 		} else if ((file = ReplayImporter.getCurrentFileName()) != null) {
-			text = "Importing replays...";
+			text = t("Importing replays...");
 			progress = ReplayImporter.getLoadingProgress();
 		} else if ((file = SoundController.getCurrentFileName()) != null) {
-			text = "Loading sounds...";
+			text = t("Loading sounds...");
 			progress = SoundController.getLoadingProgress();
 		} else
 			return;
@@ -474,7 +476,7 @@ public class UI {
 		} catch (Exception e) {
 			Log.warn("Could not set system look and feel for exit confirmation.", e);
 		}
-		int n = JOptionPane.showConfirmDialog(null, message, "Warning",
+		int n = JOptionPane.showConfirmDialog(null, message, t("Warning"),
 				JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 		return (n != JOptionPane.YES_OPTION);
 	}

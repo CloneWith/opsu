@@ -32,6 +32,8 @@ import itdelatrisu.opsu.ui.UI;
 import itdelatrisu.opsu.user.UserButton;
 import itdelatrisu.opsu.user.UserList;
 
+import static itdelatrisu.opsu.I18n.t;
+
 import java.awt.Desktop;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
@@ -59,8 +61,10 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 import java.util.jar.JarFile;
+import java.util.ResourceBundle;
 
 import javax.imageio.ImageIO;
 import javax.net.ssl.HttpsURLConnection;
@@ -144,7 +148,7 @@ public class Utils {
 		try {
 			Fonts.init();
 		} catch (Exception e) {
-			ErrorHandler.error("Failed to load fonts.", e, true);
+			ErrorHandler.error(t("Failed to load fonts."), e, true);
 		}
 
 		// load skin
@@ -180,14 +184,36 @@ public class Utils {
 		// warn about software mode
 		if (((Container) container).isSoftwareMode()) {
 			UI.getNotificationManager().sendNotification(
-				"WARNING:\n" +
-				"Running in OpenGL software mode.\n" +
-				"You may experience severely degraded performance.\n\n" +
-				"This can usually be resolved by updating your graphics drivers.",
+				t("WARNING:\nRunning in OpenGL software mode.\nYou may experience severely degraded performance.\n\nThis can usually be resolved by updating your graphics drivers."),
 				Color.red
 			);
 		}
 	}
+
+	public static String GetLang() {
+		Locale loc = Locale.getDefault();
+		// ResourceBundle.getBundle();
+		String lang = loc.getLanguage();
+		return lang;
+	}
+
+	public static String GetLangforDisplay() {
+		Locale loc = Locale.getDefault();
+		// ResourceBundle.getBundle();
+		String dlang = loc.getDisplayLanguage();
+		return dlang;
+	}
+
+	// public static String getString() {
+	// 	String lang = GetLang();
+	// 	if(lang != "en"){
+	// 		bundle = ResourceBundle.getBundle()
+	// 	}
+	// }
+
+	// public static void LocaleInit() {
+	//
+	// }
 
 	/**
 	 * Draws an animation based on its center.
@@ -328,12 +354,12 @@ public class Utils {
 		// create the screenshot directory
 		File dir = Options.getScreenshotDir();
 		if (!dir.isDirectory() && !dir.mkdir()) {
-			ErrorHandler.error(String.format("Failed to create screenshot directory at '%s'.", dir.getAbsolutePath()), null, false);
+			ErrorHandler.error(String.format(t("Failed to create screenshot directory at '%s'."), dir.getAbsolutePath()), null, false);
 			return;
 		}
 
 		// create file name
-		SimpleDateFormat date = new SimpleDateFormat("yyyyMMdd_HHmmss");
+		SimpleDateFormat date = new SimpleDateFormat(t("yyyyMMdd_HHmmss"));
 		final File file = new File(dir, String.format("screenshot_%s.%s",
 				date.format(new Date()), Options.getScreenshotFormat()));
 
@@ -363,7 +389,7 @@ public class Utils {
 					}
 					ImageIO.write(image, Options.getScreenshotFormat(), file);
 					UI.getNotificationManager().sendNotification(
-						String.format("Saved screenshot to %s", file.getAbsolutePath()),
+						String.format(t("Saved screenshot to %s"), file.getAbsolutePath()),
 						Colors.PURPLE,
 						new NotificationListener() {
 							@Override
@@ -371,13 +397,13 @@ public class Utils {
 								try {
 									Utils.openInFileManager(file);
 								} catch (IOException e) {
-									Log.warn("Failed to open screenshot location.", e);
+									Log.warn(t("Failed to open screenshot location."), e);
 								}
 							}
 						}
 					);
 				} catch (Exception e) {
-					ErrorHandler.error("Failed to take a screenshot.", e, true);
+					ErrorHandler.error(t("Failed to take a screenshot."), e, true);
 				}
 			}
 		}.start();
@@ -430,7 +456,7 @@ public class Utils {
 			ZipFile zipFile = new ZipFile(file);
 			zipFile.extractAll(dest.getAbsolutePath());
 		} catch (ZipException e) {
-			ErrorHandler.error(String.format("Failed to unzip file %s to dest %s.",
+			ErrorHandler.error(String.format(t("Failed to unzip file %s to dest %s."),
 					file.getAbsolutePath(), dest.getAbsolutePath()), e, false);
 		}
 	}
@@ -444,9 +470,9 @@ public class Utils {
 	 */
 	public static boolean deleteToTrash(File file) throws IOException {
 		if (file == null)
-			throw new IOException("File cannot be null.");
+			throw new IOException(t("File cannot be null."));
 		if (!file.exists())
-			throw new IOException(String.format("File '%s' does not exist.", file.getAbsolutePath()));
+			throw new IOException(String.format(t("File '%s' does not exist."), file.getAbsolutePath()));
 
 		// move to system trash, if possible
 		FileUtils fileUtils = FileUtils.getInstance();
@@ -455,7 +481,7 @@ public class Utils {
 				fileUtils.moveToTrash(new File[] { file });
 				return true;
 			} catch (IOException e) {
-				Log.warn(String.format("Failed to move file '%s' to trash.", file.getAbsolutePath()), e);
+				Log.warn(String.format(t("Failed to move file '%s' to trash."), file.getAbsolutePath()), e);
 			}
 		}
 
@@ -538,7 +564,7 @@ public class Utils {
 		try {
 			conn.connect();
 		} catch (SocketTimeoutException e) {
-			Log.warn("Connection to server timed out.", e);
+			Log.warn(t("Connection to server timed out."), e);
 			throw e;
 		}
 
@@ -554,7 +580,7 @@ public class Utils {
 				sb.append((char) c);
 			return sb.toString();
 		} catch (SocketTimeoutException e) {
-			Log.warn("Connection to server timed out.", e);
+			Log.warn(t("Connection to server timed out."), e);
 			throw e;
 		}
 	}
@@ -619,7 +645,7 @@ public class Utils {
 				result.append(String.format("%02x", b));
 			return result.toString();
 		} catch (NoSuchAlgorithmException | IOException e) {
-			ErrorHandler.error("Failed to calculate MD5 hash.", e, true);
+			ErrorHandler.error(t("Failed to calculate MD5 hash."), e, true);
 		}
 		return null;
 	}
@@ -631,7 +657,7 @@ public class Utils {
 	 */
 	public static String getTimeString(int seconds) {
 		if (seconds < 60)
-			return (seconds == 1) ? "1 second" : String.format("%d seconds", seconds);
+			return (seconds == 1) ? t("1 second") : String.format(t("%d seconds"), seconds);
 		else if (seconds < 3600)
 			return String.format("%02d:%02d", seconds / 60, seconds % 60);
 		else
@@ -657,7 +683,7 @@ public class Utils {
 		try {
 			return new JarFile(new File(Opsu.class.getProtectionDomain().getCodeSource().getLocation().toURI()), false);
 		} catch (URISyntaxException | IOException e) {
-			Log.error("Could not determine the JAR file.", e);
+			Log.error(t("Could not determine the JAR file."), e);
 			return null;
 		}
 	}
@@ -670,7 +696,7 @@ public class Utils {
 		try {
 			return new File(Opsu.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath());
 		} catch (URISyntaxException e) {
-			Log.error("Could not get the running directory.", e);
+			Log.error(t("Could not get the running directory."), e);
 			return null;
 		}
 	}

@@ -22,6 +22,8 @@ import itdelatrisu.opsu.GameImage;
 import itdelatrisu.opsu.audio.MusicController;
 import itdelatrisu.opsu.ui.animations.AnimationEquation;
 
+import static itdelatrisu.opsu.I18n.t;
+
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -46,7 +48,7 @@ public class BackButton {
 	private static final int ANIMATION_TIME = 500;
 
 	/** Button text. */
-	private static final String BUTTON_TEXT = "back";
+	private static final String BUTTON_TEXT = t("back");
 
 	/** How much time passed for the animations. */
 	private int animationTime;

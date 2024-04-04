@@ -21,6 +21,8 @@ import itdelatrisu.opsu.ErrorHandler;
 import itdelatrisu.opsu.Utils;
 import itdelatrisu.opsu.downloads.DownloadNode;
 
+import static itdelatrisu.opsu.I18n.t;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
@@ -118,7 +120,7 @@ public class YaSOnlineServer extends DownloadServer {
 			String downloadLink = item.getString("downloadLink");
 			return String.format(DOWNLOAD_FETCH_URL, downloadLink);
 		} catch (MalformedURLException | UnsupportedEncodingException e) {
-			ErrorHandler.error(String.format("Problem retrieving download URL for beatmap '%d'.", beatmapSetID), e, true);
+			ErrorHandler.error(String.format(t("Problem retrieving download URL for beatmap '%d'."), beatmapSetID), e, true);
 			return null;
 		} finally {
 			Utils.setSSLCertValidation(true);

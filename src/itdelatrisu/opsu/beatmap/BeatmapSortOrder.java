@@ -20,17 +20,19 @@ package itdelatrisu.opsu.beatmap;
 
 import java.util.Comparator;
 
+import static itdelatrisu.opsu.I18n.t;
+
 /**
  * Beatmap sorting orders.
  */
 public enum BeatmapSortOrder {
-	TITLE   ("Title",       new TitleOrder()),
-	ARTIST  ("Artist",      new ArtistOrder()),
-	CREATOR ("Creator",     new CreatorOrder()),
-	BPM     ("BPM",         new BPMOrder()),
-	LENGTH  ("Length",      new LengthOrder()),
-	DATE    ("Date Added",  new DateOrder()),
-	PLAYS   ("Most Played", new PlayOrder());
+	TITLE   (t("Title"),       new TitleOrder()),
+	ARTIST  (t("Artist"),      new ArtistOrder()),
+	CREATOR (t("Creator"),     new CreatorOrder()),
+	BPM     (t("BPM"),         new BPMOrder()),
+	LENGTH  (t("Length"),      new LengthOrder()),
+	DATE    (t("Date Added"),  new DateOrder()),
+	PLAYS   (t("Most Played"), new PlayOrder());
 
 	/** The name of the sort. */
 	private final String name;

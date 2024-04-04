@@ -63,6 +63,8 @@ import itdelatrisu.opsu.user.UserList;
 import itdelatrisu.opsu.video.FFmpeg;
 import itdelatrisu.opsu.video.Video;
 
+import static itdelatrisu.opsu.I18n.t;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -619,7 +621,7 @@ public class Game extends BasicGameState {
 					Colors.WHITE_FADE.a = (1000 + timeDiff) / 500f;
 				Fonts.MEDIUM.drawString(
 						2 + (width / 100), retryHeight,
-						String.format("%d retries and counting...", retries),
+						String.format(t("%d retries and counting..."), retries),
 						Colors.WHITE_FADE
 				);
 				Colors.WHITE_FADE.a = oldAlpha;
@@ -765,7 +767,7 @@ public class Game extends BasicGameState {
 			g.fillRect(0, 0, width, height);
 
 			// draw overlay text
-			String overlayText = "Click on the pulsing cursor to continue play!";
+			String overlayText = t("Click on the pulsing cursor to continue play!");
 			int textWidth = Fonts.LARGE.getWidth(overlayText), textHeight = Fonts.LARGE.getLineHeight();
 			int textX = (width - textWidth) / 2, textY = (height - textHeight) / 2;
 			int paddingX = 8, paddingY = 4;
@@ -836,7 +838,7 @@ public class Game extends BasicGameState {
 				double distance = Math.hypot(pausedMousePosition.x - mouseX, pausedMousePosition.y - mouseY);
 				int circleRadius = GameImage.HITCIRCLE.getImage().getWidth() / 2;
 				if (distance < circleRadius)
-					UI.updateTooltip(delta, "Click to resume gameplay.", false);
+					UI.updateTooltip(delta, t("Click to resume gameplay."), false);
 			}
 			return;
 		}
@@ -992,7 +994,7 @@ public class Game extends BasicGameState {
 			enter(container, game);
 			if(!GameMod.PERFECT.isActive()) skipIntro();
 		} catch (SlickException e) {
-			ErrorHandler.error("Failed to restart game.", e, false);
+			ErrorHandler.error(t("Failed to restart game."), e, false);
 		}
 	}
 
@@ -1261,7 +1263,7 @@ public class Game extends BasicGameState {
 				int position = (pauseTime > -1) ? pauseTime : trackPosition;
 				if (Options.setCheckpoint(position / 1000)) {
 					playSoundEffect(SoundEffect.MENUCLICK);
-					UI.getNotificationManager().sendBarNotification("Checkpoint saved.");
+					UI.getNotificationManager().sendBarNotification(t("Checkpoint saved."));
 				}
 			}
 			break;
@@ -1296,7 +1298,7 @@ public class Game extends BasicGameState {
 					lastReplayTime = beatmap.objects[objectIndex].getTime();
 					lastTrackPosition = checkpoint;
 				} catch (SlickException e) {
-					ErrorHandler.error("Failed to load checkpoint.", e, false);
+					ErrorHandler.error(t("Failed to load checkpoint."), e, false);
 				}
 			}
 			break;
@@ -1594,7 +1596,7 @@ public class Game extends BasicGameState {
 						gameObjects[i] = new DummyObject(hitObject);
 				} catch (Exception e) {
 					// try to handle the error gracefully: substitute in a dummy GameObject
-					ErrorHandler.error(String.format("Failed to create %s at index %d:\n%s",
+					ErrorHandler.error(String.format(t("Failed to create %s at index %d:\n%s"),
 							hitObject.getTypeName(), i, hitObject.toString()), e, true);
 					gameObjects[i] = new DummyObject(hitObject);
 					continue;
@@ -2151,7 +2153,7 @@ public class Game extends BasicGameState {
 			this.replay = null;
 		} else {
 			if (replay.frames == null) {
-				ErrorHandler.error("Attempting to set a replay with no frames.", null, false);
+				ErrorHandler.error(t("Attempting to set a replay with no frames."), null, false);
 				return;
 			}
 			this.isReplay = true;
@@ -2476,14 +2478,14 @@ public class Game extends BasicGameState {
 	 */
 	private void adjustLocalMusicOffset(int sign) {
 		if (pauseTime > -1) {
-			UI.getNotificationManager().sendBarNotification("Offset can only be changed while game is not paused.");
+			UI.getNotificationManager().sendBarNotification(t("Offset can only be changed while game is not paused."));
 			return;
 		}
 
 		boolean alt = input.isKeyDown(Input.KEY_LALT) || input.isKeyDown(Input.KEY_RALT);
 		int diff = sign * (alt ? 1 : 5);
 		int newOffset = Utils.clamp(beatmap.localMusicOffset + diff, -1000, 1000);
-		UI.getNotificationManager().sendBarNotification(String.format("Local beatmap offset set to %dms", newOffset));
+		UI.getNotificationManager().sendBarNotification(String.format(t("Local beatmap offset set to %dms"), newOffset));
 		if (beatmap.localMusicOffset != newOffset) {
 			beatmap.localMusicOffset = newOffset;
 			BeatmapDB.updateLocalOffset(beatmap);

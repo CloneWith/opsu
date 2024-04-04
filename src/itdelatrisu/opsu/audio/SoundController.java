@@ -27,6 +27,8 @@ import itdelatrisu.opsu.options.Options;
 import itdelatrisu.opsu.ui.NotificationManager.NotificationListener;
 import itdelatrisu.opsu.ui.UI;
 
+import static itdelatrisu.opsu.I18n.t;
+
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
@@ -99,10 +101,10 @@ public class SoundController {
 			AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
 			return loadClip(ref, audioIn);
 		} catch (UnsupportedAudioFileException e) {
-			ErrorHandler.error(String.format("Invalid data found on audio file '%s'.", ref), e, true);
+			ErrorHandler.error(String.format(t("Invalid data found on audio file '%s'."), ref), e, true);
 			return null;
 		} catch (Exception e) {
-			ErrorHandler.error(String.format("Failed to load audio file '%s'.", ref), e, true);
+			ErrorHandler.error(String.format(t("Failed to load audio file '%s'."), ref), e, true);
 			return null;
 		}
 	}
@@ -129,9 +131,7 @@ public class SoundController {
 			// Currently there's no way to decode GSM in WAV containers in Java.
 			// http://www.jsresources.org/faq_audio.html#gsm_in_wav
 			Log.warn(
-				"Failed to load audio file.\n" +
-				"Java cannot decode GSM in WAV containers; " +
-				"please re-encode this file to PCM format or remove it:\n" + ref
+				t("Failed to load audio file.\nJava cannot decode GSM in WAV containers; please re-encode this file to PCM format or remove it:\n") + ref
 			);
 			return null;
 		}
@@ -228,7 +228,7 @@ public class SoundController {
 		// menu and game sounds
 		for (SoundEffect s : SoundEffect.values()) {
 			if ((currentFileName = getSoundFileName(s.getFileName())) == null) {
-				ErrorHandler.error(String.format("Could not find sound file '%s'.", s.getFileName()), null, false);
+				ErrorHandler.error(String.format(t("Could not find sound file '%s'."), s.getFileName()), null, false);
 				continue;
 			}
 			MultiClip newClip = loadClip(currentFileName);
@@ -249,7 +249,7 @@ public class SoundController {
 			for (HitSound s : HitSound.values()) {
 				String filename = String.format("%s-%s", ss.getName(), s.getFileName());
 				if ((currentFileName = getSoundFileName(filename)) == null) {
-					ErrorHandler.error(String.format("Could not find hit sound file '%s'.", filename), null, false);
+					ErrorHandler.error(String.format(t("Could not find hit sound file '%s'."), filename), null, false);
 					continue;
 				}
 				MultiClip newClip = loadClip(currentFileName);
@@ -271,10 +271,11 @@ public class SoundController {
 
 		// show a notification if any files failed to load
 		if (failedCount > 0) {
-			String text = String.format("Failed to load %d audio file%s.", failedCount, failedCount == 1 ? "" : "s");
+			// TODO: Plural
+			String text = String.format(t("Failed to load %d audio file%s."), failedCount, failedCount == 1 ? "" : "s");
 			NotificationListener listener = null;
 			if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.OPEN)) {
-				text += "\nClick for details.";
+				text += t("\nClick for details.");
 				listener = new NotificationListener() {
 					@Override
 					public void click() {
@@ -311,7 +312,7 @@ public class SoundController {
 			try {
 				clip.start(volume, listener);
 			} catch (LineUnavailableException e) {
-				ErrorHandler.error(String.format("Could not start a clip '%s'.", clip.getName()), e, true);
+				ErrorHandler.error(String.format(t("Could not start a clip '%s'."), clip.getName()), e, true);
 			}
 		}
 	}
@@ -426,7 +427,7 @@ public class SoundController {
 
 				@Override
 				public void error() {
-					UI.getNotificationManager().sendBarNotification("Failed to download track preview.");
+					UI.getNotificationManager().sendBarNotification(t("Failed to download track preview."));
 				}
 			});
 			try {
@@ -443,7 +444,7 @@ public class SoundController {
 				playClip(currentTrack, Options.getMusicVolume() * Options.getMasterVolume(), listener);
 				return true;
 			} catch (Exception e) {
-				throw new SlickException(String.format("Failed to load clip '%s'.", url));
+				throw new SlickException(String.format(t("Failed to load clip '%s'."), url));
 			}
 		}
 		return false;

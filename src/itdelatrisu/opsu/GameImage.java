@@ -21,6 +21,8 @@ package itdelatrisu.opsu;
 import itdelatrisu.opsu.options.Options;
 import itdelatrisu.opsu.ui.Fonts;
 
+import static itdelatrisu.opsu.I18n.t;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -714,7 +716,7 @@ public enum GameImage {
 			return;
 		}
 
-		ErrorHandler.error(String.format("Could not find default image '%s'.", filename), null, false);
+		ErrorHandler.error(String.format(t("Could not find default image '%s'."), filename), null, false);
 	}
 
 	/**
@@ -773,7 +775,7 @@ public enum GameImage {
 							img = img.getScaledCopy(0.5f);
 						list.add(img);
 					} catch (SlickException e) {
-						ErrorHandler.error(String.format("Failed to set image '%s'.", name), null, false);
+						ErrorHandler.error(String.format(t("Failed to set image '%s'."), name), null, false);
 						break;
 					}
 				}
@@ -799,7 +801,7 @@ public enum GameImage {
 						img = img.getScaledCopy(0.5f);
 					return img;
 				} catch (SlickException e) {
-					ErrorHandler.error(String.format("Failed to set image '%s'.", filename), null, false);
+					ErrorHandler.error(String.format(t("Failed to set image '%s'."), filename), null, false);
 				}
 			}
 		}
@@ -844,7 +846,7 @@ public enum GameImage {
 				skinImages = null;
 			}
 		} catch (SlickException e) {
-			ErrorHandler.error(String.format("Failed to destroy beatmap skin images for '%s'.", this.name()), e, true);
+			ErrorHandler.error(String.format(t("Failed to destroy beatmap skin images for '%s'."), this.name()), e, true);
 		}
 	}
 

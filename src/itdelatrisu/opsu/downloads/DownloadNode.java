@@ -30,6 +30,8 @@ import itdelatrisu.opsu.ui.Colors;
 import itdelatrisu.opsu.ui.Fonts;
 import itdelatrisu.opsu.ui.UI;
 
+import static itdelatrisu.opsu.I18n.t;
+
 import java.io.File;
 
 import org.newdawn.slick.Color;
@@ -276,12 +278,12 @@ public class DownloadNode {
 		download.setListener(new DownloadListener() {
 			@Override
 			public void completed() {
-				UI.getNotificationManager().sendNotification(String.format("Download complete: %s", getTitle()), Colors.GREEN);
+				UI.getNotificationManager().sendNotification(String.format(t("Download complete: %s"), getTitle()), Colors.GREEN);
 			}
 
 			@Override
 			public void error() {
-				UI.getNotificationManager().sendNotification("Download failed due to a connection error.", Color.red);
+				UI.getNotificationManager().sendNotification(t("Download failed due to a connection error."), Color.red);
 			}
 		});
 		download.setRequestHeaders(server.getDownloadRequestHeaders());
@@ -388,7 +390,7 @@ public class DownloadNode {
 		//g.clearClip();
 		Fonts.DEFAULT.drawString(
 				textX, y + marginY + Fonts.BOLD.getLineHeight(),
-				String.format("Last updated: %s", date), Color.white);
+				String.format(t("Last updated: %s"), date), Color.white);
 		Fonts.DEFAULT.drawString(
 				edgeX - Fonts.DEFAULT.getWidth(creator), y + marginY,
 				creator, Color.white);
@@ -404,7 +406,7 @@ public class DownloadNode {
 	public void drawDownload(Graphics g, float position, int id, boolean hover) {
 		Download download = this.download;  // in case clearDownload() is called asynchronously
 		if (download == null) {
-			ErrorHandler.error("Trying to draw download information for button without Download object.", null, false);
+			ErrorHandler.error(t("Trying to draw download information for button without Download object."), null, false);
 			return;
 		}
 
@@ -427,7 +429,7 @@ public class DownloadNode {
 			info = String.format("%s...", status.getName());
 		else {
 			if (hover && status == Download.Status.DOWNLOADING)
-				info = String.format("%s: %s left (%s)", status.getName(), download.getTimeRemaining(), download.getDownloadSpeed());
+				info = String.format(t("%s: %s left (%s)"), status.getName(), download.getTimeRemaining(), download.getDownloadSpeed());
 			else
 				info = String.format("%s: %.1f%% (%s/%s)", status.getName(), progress,
 						Utils.bytesToString(download.readSoFar()), Utils.bytesToString(download.contentLength()));
@@ -444,6 +446,6 @@ public class DownloadNode {
 
 	@Override
 	public String toString() {
-		return String.format("[%d] %s - %s (by %s)", beatmapSetID, getArtist(), getTitle(), creator);
+		return String.format(t("[%d] %s - %s (by %s)"), beatmapSetID, getArtist(), getTitle(), creator);
 	}
 }

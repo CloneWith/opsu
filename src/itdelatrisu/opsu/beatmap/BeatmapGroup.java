@@ -28,6 +28,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
+import static itdelatrisu.opsu.I18n.t;
+
 import org.newdawn.slick.Image;
 
 /**
@@ -35,10 +37,10 @@ import org.newdawn.slick.Image;
  */
 public enum BeatmapGroup {
 	/** All beatmaps (no filter). */
-	ALL (0, "All Songs", null),
+	ALL (0, t("All Songs"), null),
 
 	/** Most recently played beatmaps. */
-	RECENT (1, "Last Played", "Your recently played beatmaps will appear in this list!") {
+	RECENT (1, t("Last Played"), t("Your recently played beatmaps will appear in this list!")) {
 		/** Number of elements to show. */
 		private static final int K = 20;
 
@@ -81,7 +83,7 @@ public enum BeatmapGroup {
 	},
 
 	/** "Favorite" beatmaps. */
-	FAVORITE (2, "Favorites", "Right-click a beatmap to add it to your Favorites!") {
+	FAVORITE (2, t("Favorites"), t("Right-click a beatmap to add it to your Favorites!")) {
 		@Override
 		public ArrayList<BeatmapSetNode> filter(ArrayList<BeatmapSetNode> list) {
 			// find "favorite" beatmaps

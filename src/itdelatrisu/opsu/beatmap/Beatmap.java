@@ -21,6 +21,8 @@ package itdelatrisu.opsu.beatmap;
 import itdelatrisu.opsu.GameImage;
 import itdelatrisu.opsu.options.Options;
 
+import static itdelatrisu.opsu.I18n.t;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -404,7 +406,7 @@ public class Beatmap implements Comparable<Beatmap> {
 	 */
 	@Override
 	public String toString() {
-		if (!source.isEmpty()) 
+		if (!source.isEmpty())
 			return String.format("%s (%s) - %s [%s]", source, getArtist(), getTitle(), version);
 
 		return String.format("%s - %s [%s]", getArtist(), getTitle(), version);
@@ -474,7 +476,7 @@ public class Beatmap implements Comparable<Beatmap> {
 			try {
 				timingPoints.add(new TimingPoint(tokens[i]));
 			} catch (Exception e) {
-				Log.warn(String.format("Failed to read timing point '%s'.", tokens[i]), e);
+				Log.warn(String.format(t("Failed to read timing point '%s'."), tokens[i]), e);
 			}
 		}
 		timingPoints.trimToSize();
