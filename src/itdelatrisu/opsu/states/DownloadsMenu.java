@@ -571,17 +571,9 @@ public class DownloadsMenu extends BasicGameState {
 		else if (importThread.isFinished()) {
 			BeatmapSetNode importedNode = importThread.getImportedBeatmap();
 			if (importedNode != null) {
-				// stop preview
-				previewID = -1;
-				SoundController.stopTrack();
-
 				// initialize song list
 				BeatmapSetList.get().reset();
 				BeatmapSetList.get().init();
-
-				// focus new beatmap
-				// NOTE: This can't be called in another thread because it makes OpenGL calls.
-				((SongMenu) game.getState(Opsu.STATE_SONGMENU)).setFocus(importedNode, -1, true, true);
 			}
 			importThread = null;
 		}
