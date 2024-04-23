@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Create a report to help us improve
+about: Report critical problems
 title: ''
 labels: 'bug'
 assignees: ''
@@ -29,6 +29,14 @@ If applicable, add screenshots to help explain your problem.
 - Device: [e.g. Laptop / Xiaomi / ...]
 - OS: [e.g. Debian Testing / Windows 11 / MIUI 14 Development Build / ...]
 - opsu! version
+- Java Runtime Environment (JRE) version
+- Display driver or OpenGL type and version
 
 **Additional context**
 Add any other context about the problem here.
+
+**Help?**
+Do you want to fix this problem by yourself? Put a `X` in either of the checkboxes below.
+
+- [ ] Yes
+- [ ] No
