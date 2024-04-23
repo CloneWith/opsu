@@ -43,10 +43,10 @@ public class OpsuConstants {
 	public static final URI CREDITS_URI = URI.create("https://github.com/clonewith/opsu/blob/master/CREDITS.md");
 
 	/** Issue reporting address. */
-	public static final String ISSUES_URL = "https://github.com/clonewith/opsu/issues/new?title=%s&body=%s";
+	public static final String ISSUES_URL = "https://github.com/CloneWith/opsu/discussions/new?category=bug-report&title=%s&body=%s";
 
 	/** Address containing the latest version file. */
-	public static final String VERSION_REMOTE = "https://raw.githubusercontent.com/itdelatrisu/opsu/gh-pages/version";
+	public static final String VERSION_REMOTE = "https://raw.githubusercontent.com/clonewith/opsu/gh-pages/version";
 
 	/** Changelog address. */
 	private static final String CHANGELOG_URL = "https://github.com/clonewith/opsu/releases/tag/%s";

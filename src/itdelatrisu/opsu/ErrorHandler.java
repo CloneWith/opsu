@@ -19,6 +19,7 @@
 package itdelatrisu.opsu;
 
 import itdelatrisu.opsu.options.Options;
+import itdelatrisu.opsu.ui.UI;
 
 import java.awt.Cursor;
 import java.awt.Desktop;
@@ -36,6 +37,7 @@ import javax.swing.JTextArea;
 import javax.swing.UIManager;
 
 import org.lwjgl.opengl.GL11;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.util.Log;
 import org.newdawn.slick.util.ResourceLoader;
 
@@ -47,15 +49,13 @@ public class ErrorHandler {
 	private static final String title = "Error";
 
 	/** Error popup description text. */
-	private static final String
-		desc = "An error occurred. :(",
-		descReport = "Something bad happened. Please report this!";
+	private static final String desc = "An error occurred. :(",
+			descReport = "Something bad happened. Please report this!";
 
 	/** Error popup button options. */
-	private static final String[]
-		optionsLog  = {"View Error Log", "Close"},
-		optionsReport = {"Send Report", "Close"},
-		optionsLogReport = {"Send Report", "View Error Log", "Close"};
+	private static final String[] optionsLog = { "View Error Log", "Close" },
+			optionsReport = { "Send Report", "Close" },
+			optionsLogReport = { "Send Report", "View Error Log", "Close" };
 
 	/** Text area for Exception. */
 	private static final JTextArea textArea = new JTextArea(7, 30);
@@ -72,15 +72,15 @@ public class ErrorHandler {
 	private static final JScrollPane scroll = new JScrollPane(textArea);
 
 	/** Error popup objects. */
-	private static final Object[]
-		message  = { desc, scroll },
-		messageReport = { descReport, scroll };
+	private static final Object[] message = { desc, scroll },
+			messageReport = { descReport, scroll };
 
 	/** OpenGL string (if any). */
 	private static String glString = null;
 
 	// This class should not be instantiated.
-	private ErrorHandler() {}
+	private ErrorHandler() {
+	}
 
 	/**
 	 * Sets the OpenGL version string.
@@ -90,13 +90,57 @@ public class ErrorHandler {
 			String glVersion = GL11.glGetString(GL11.GL_VERSION);
 			String glVendor = GL11.glGetString(GL11.GL_VENDOR);
 			glString = String.format("%s (%s)", glVersion, glVendor);
-		} catch (Exception e) {}
+		} catch (Exception e) {
+		}
+	}
+
+	/**
+	 * Displays an error bar notification and logs the given error.
+	 *
+	 * @author CloneWith
+	 * @param error  a description of the error
+	 * @param e      the exception causing the error
+	 */
+	public static void bar(String des, Throwable e) {
+		if (des == null && e == null)
+			return;
+		if (des == null)
+			Log.error(e);
+		else if (e == null) {
+			Log.error(des);
+			UI.getNotificationManager().sendBarNotification(des);
+		} else {
+			Log.error(des, e);
+			UI.getNotificationManager().sendBarNotification(des);
+		}
 	}
 
 	/**
 	 * Displays an error popup and logs the given error.
-	 * @param error a description of the error
-	 * @param e the exception causing the error
+	 *
+	 * @author CloneWith
+	 * @param error  a description of the error
+	 * @param e      the exception causing the error
+	 */
+	public static void notify(String des, Throwable e) {
+		if (des == null && e == null)
+			return;
+		if (des == null)
+			Log.error(e);
+		else if (e == null) {
+			Log.error(des);
+			UI.getNotificationManager().sendNotification(des, Color.red);
+		} else {
+			Log.error(des, e);
+			UI.getNotificationManager().sendNotification(des, Color.red);
+		}
+	}
+
+	/**
+	 * Displays an error popup and logs the given error.
+	 *
+	 * @param error  a description of the error
+	 * @param e      the exception causing the error
 	 * @param report whether to ask to report the error
 	 */
 	public static void error(String error, Throwable e, boolean report) {
@@ -135,9 +179,10 @@ public class ErrorHandler {
 				isBrowseSupported = desktop.isSupported(Desktop.Action.BROWSE);
 				isOpenSupported = desktop.isSupported(Desktop.Action.OPEN);
 			}
-			if (desktop != null && (isOpenSupported || (report && isBrowseSupported))) {  // try to open the log file and/or issues webpage
-				if (report && isBrowseSupported) {  // ask to report the error
-					if (isOpenSupported) {  // also ask to open the log
+			if (desktop != null && (isOpenSupported || (report && isBrowseSupported))) { // try to open the log file
+																							// and/or issues webpage
+				if (report && isBrowseSupported) { // ask to report the error
+					if (isOpenSupported) { // also ask to open the log
 						int n = JOptionPane.showOptionDialog(null, messageReport, title,
 								JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE,
 								null, optionsLogReport, optionsLogReport[2]);
@@ -145,21 +190,21 @@ public class ErrorHandler {
 							desktop.browse(getIssueURI(error, e, trace));
 						else if (n == 1)
 							desktop.open(Options.LOG_FILE);
-					} else {  // only ask to report the error
+					} else { // only ask to report the error
 						int n = JOptionPane.showOptionDialog(null, message, title,
 								JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE,
 								null, optionsReport, optionsReport[1]);
 						if (n == 0)
 							desktop.browse(getIssueURI(error, e, trace));
 					}
-				} else {  // don't report the error
+				} else { // don't report the error
 					int n = JOptionPane.showOptionDialog(null, message, title,
 							JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE,
 							null, optionsLog, optionsLog[1]);
 					if (n == 0)
 						desktop.open(Options.LOG_FILE);
 				}
-			} else {  // display error only
+			} else { // display error only
 				JOptionPane.showMessageDialog(null, report ? messageReport : message,
 						title, JOptionPane.ERROR_MESSAGE);
 			}
@@ -170,16 +215,16 @@ public class ErrorHandler {
 
 	/**
 	 * Returns the issue reporting URI with the given title and body.
+	 *
 	 * @param title the issue title
-	 * @param body the issue body
+	 * @param body  the issue body
 	 * @return the encoded URI
 	 */
 	public static URI getIssueURI(String title, String body) {
 		try {
 			return URI.create(String.format(OpsuConstants.ISSUES_URL,
-				URLEncoder.encode(title, "UTF-8"),
-				URLEncoder.encode(body, "UTF-8"))
-			);
+					URLEncoder.encode(title, "UTF-8"),
+					URLEncoder.encode(body, "UTF-8")));
 		} catch (UnsupportedEncodingException e) {
 			Log.warn("URLEncoder failed to encode the auto-filled issue report URL.");
 			return URI.create(String.format(OpsuConstants.ISSUES_URL, "", ""));
@@ -209,7 +254,7 @@ public class ErrorHandler {
 			}
 			String timestamp = props.getProperty("build.date");
 			if (timestamp != null &&
-			    !timestamp.equals("${maven.build.timestamp}") && !timestamp.equals("${timestamp}")) {
+					!timestamp.equals("${maven.build.timestamp}") && !timestamp.equals("${timestamp}")) {
 				sb.append("**Build date:** ");
 				sb.append(timestamp);
 				sb.append('\n');
@@ -236,8 +281,9 @@ public class ErrorHandler {
 	/**
 	 * Returns the issue reporting URI.
 	 * This will auto-fill the report with the relevant information if possible.
+	 *
 	 * @param error a description of the error
-	 * @param e the exception causing the error
+	 * @param e     the exception causing the error
 	 * @param trace the stack trace
 	 * @return the created URI
 	 */

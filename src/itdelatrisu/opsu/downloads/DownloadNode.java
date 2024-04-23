@@ -404,7 +404,7 @@ public class DownloadNode {
 	public void drawDownload(Graphics g, float position, int id, boolean hover) {
 		Download download = this.download;  // in case clearDownload() is called asynchronously
 		if (download == null) {
-			ErrorHandler.error("Trying to draw download information for button without Download object.", null, false);
+			ErrorHandler.notify("Trying to draw download information for button without Download object.", null);
 			return;
 		}
 

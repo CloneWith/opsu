@@ -2151,7 +2151,7 @@ public class Game extends BasicGameState {
 			this.replay = null;
 		} else {
 			if (replay.frames == null) {
-				ErrorHandler.error("Attempting to set a replay with no frames.", null, false);
+				ErrorHandler.notify("Attempting to set a replay with no frames.", null);
 				return;
 			}
 			this.isReplay = true;

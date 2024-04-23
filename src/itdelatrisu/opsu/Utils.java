@@ -371,6 +371,8 @@ public class Utils {
 								try {
 									Utils.openInFileManager(file);
 								} catch (IOException e) {
+									UI.getNotificationManager()
+												.sendBarNotification("Failed to open screenshot location.");
 									Log.warn("Failed to open screenshot location.", e);
 								}
 							}

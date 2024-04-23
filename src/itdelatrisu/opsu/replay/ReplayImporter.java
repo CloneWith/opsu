@@ -85,7 +85,7 @@ public class ReplayImporter {
 				r.loadHeader();
 			} catch (IOException e) {
 				moveToFailedDirectory(file);
-				ErrorHandler.error(String.format("Failed to import replay '%s'. The replay file could not be parsed.", file.getName()), e, false);
+				ErrorHandler.notify(String.format("Failed to import replay '%s'. The replay file could not be parsed.", file.getName()), e);
 				continue;
 			}
 			Beatmap beatmap = BeatmapSetList.get().getBeatmapFromHash(r.beatmapHash);
@@ -103,7 +103,7 @@ public class ReplayImporter {
 				}
 			} else {
 				moveToFailedDirectory(file);
-				ErrorHandler.error(String.format("Failed to import replay '%s'. The associated beatmap could not be found.", file.getName()), null, false);
+				ErrorHandler.notify(String.format("Failed to import replay '%s'. The associated beatmap could not be found.", file.getName()), null);
 				continue;
 			}
 		}
