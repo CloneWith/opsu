@@ -30,6 +30,7 @@ public enum SoundEffect implements SoundController.SoundComponent {
 	COUNT3 ("count3s"),
 	FAIL ("failsound"),
 	GO ("gos"),
+	HEARTBEAT("heartbeat"),
 	MENUBACK ("menuback"),
 	MENUCLICK ("menuclick"),
 	MENUHIT ("menuhit"),

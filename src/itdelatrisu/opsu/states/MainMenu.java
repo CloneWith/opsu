@@ -379,6 +379,10 @@ public class MainMenu extends BasicGameState {
 		float ghostScale = logo.getLastScale() / scale * 1.05f;
 		Image ghostLogo = GameImage.MENU_LOGO.getImage().getScaledCopy(ghostScale);
 		ghostLogo.drawCentered(logo.getX(), logo.getY(), Colors.GHOST_LOGO);
+		// TODO: Heartbeat won't play correctly
+		if (position == 0.0f && logo.contains(mouseX, mouseY, 0.25f)) {
+			SoundController.playSound(SoundEffect.HEARTBEAT);
+		}
 
 		// draw music info bar
 		if (MusicController.trackExists()) {
