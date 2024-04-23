@@ -228,7 +228,7 @@ public class SoundController {
 		// menu and game sounds
 		for (SoundEffect s : SoundEffect.values()) {
 			if ((currentFileName = getSoundFileName(s.getFileName())) == null) {
-				ErrorHandler.error(String.format("Could not find sound file '%s'.", s.getFileName()), null, false);
+				ErrorHandler.notify(String.format("Could not find sound file '%s'.", s.getFileName()), null);
 				continue;
 			}
 			MultiClip newClip = loadClip(currentFileName);
@@ -249,7 +249,7 @@ public class SoundController {
 			for (HitSound s : HitSound.values()) {
 				String filename = String.format("%s-%s", ss.getName(), s.getFileName());
 				if ((currentFileName = getSoundFileName(filename)) == null) {
-					ErrorHandler.error(String.format("Could not find hit sound file '%s'.", filename), null, false);
+					ErrorHandler.notify(String.format("Could not find hit sound file '%s'.", filename), null);
 					continue;
 				}
 				MultiClip newClip = loadClip(currentFileName);

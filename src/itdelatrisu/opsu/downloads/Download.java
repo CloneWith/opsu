@@ -457,7 +457,7 @@ public class Download {
 			}
 		} catch (IOException e) {
 			this.status = Status.ERROR;
-			ErrorHandler.error("Failed to cancel download.", e, true);
+			ErrorHandler.notify("Failed to cancel download.", e);
 		}
 	}
 }

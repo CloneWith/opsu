@@ -33,10 +33,8 @@ import itdelatrisu.opsu.beatmap.OszUnpacker;
 import itdelatrisu.opsu.downloads.Download;
 import itdelatrisu.opsu.downloads.DownloadList;
 import itdelatrisu.opsu.downloads.DownloadNode;
-import itdelatrisu.opsu.downloads.servers.BloodcatServer;
 import itdelatrisu.opsu.downloads.servers.DownloadServer;
 import itdelatrisu.opsu.downloads.servers.HexideServer;
-import itdelatrisu.opsu.downloads.servers.MnetworkServer;
 import itdelatrisu.opsu.downloads.servers.RippleServer;
 import itdelatrisu.opsu.downloads.servers.SayobotServer;
 import itdelatrisu.opsu.options.Options;
@@ -99,9 +97,7 @@ public class DownloadsMenu extends BasicGameState {
 	/** Available beatmap download servers. */
 	private static final DownloadServer[] SERVERS = {
 		new RippleServer(),
-		new MnetworkServer(),
 		new HexideServer(),
-		new BloodcatServer(),
 		new SayobotServer()
 	};
 

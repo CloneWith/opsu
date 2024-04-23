@@ -215,7 +215,7 @@ public class BeatmapSetList {
 		try {
 			Utils.deleteToTrash(dir);
 		} catch (IOException e) {
-			ErrorHandler.error("Could not delete song group.", e, true);
+			ErrorHandler.bar("Could not delete song group.", e);
 		}
 		if (ws != null)
 			ws.resume();
@@ -270,7 +270,7 @@ public class BeatmapSetList {
 		try {
 			Utils.deleteToTrash(file);
 		} catch (IOException e) {
-			ErrorHandler.error("Could not delete song.", e, true);
+			ErrorHandler.bar("Could not delete song.", e);
 		}
 		if (ws != null)
 			ws.resume();
