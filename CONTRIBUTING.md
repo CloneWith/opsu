@@ -1,8 +1,8 @@
 # Contributing Guidelines
 
-Thanks for your interest in opsu! This document provides basic guidelines for
-contributing to the repository. If you plan on making major changes, consider
-[opening an issue][issues] first to discuss your ideas.
+Thanks for your interest in opsu!
+
+This document provides basic guidelines for contributing to the repository. If you plan on making major changes, consider [opening an issue][issues] first to discuss your ideas.
 
 [issues]: https://github.com/clonewith/opsu/issues/new
 
@@ -13,6 +13,10 @@ We are happy to see the problems you reported! You can do as belows:
 1. Make sure the problem is not about the device itself, and deal with it when necessary.
 2. Look through the issues list, and see if your issue was reported before by others.
 3. Provide relevant details. The issue template can help you.
+
+If you are unsure about this problem, you can post in our [discussion page][discussions] first.
+
+[discussions]: https://github.com/clonewith/discussions
 
 ## Making a Change
 
@@ -27,10 +31,10 @@ We are happy to see the problems you reported! You can do as belows:
 
 ## Guidelines
 
-- An issue or a pull request should only contain one feature or bug fix (at least, one exact part of the game). If you want to make multiple changes, create branches and open separate issues or pull requests.
-- Don't change more than you need to. In particular, don't change the coding style or move existing blocks around.
+- An issue or a pull request should only contain one feature or bug fix (at least, one exact part of the game). Though PRs with multiple features are also acceptable, those with one exact point are *easier* to review and check.
+- Keep the original stucture of source code, like block orders and styles.
 - In general, follow the same coding style as the file that you're editing. The `.editorconfig` can help set up your IDE.
-- Write comments in your code as needed. At minimum, [Javadoc][Javadoc] comments are expected on all classes, methods, and global variables.
+- Write comments in your code as needed. At minimum, [Javadoc][Javadoc] comments are expected on all classes, methods, and global variables as to make code easier to read and understand.
 
 [Javadoc]: https://en.wikipedia.org/wiki/Javadoc#Technical_architecture
 
@@ -38,8 +42,7 @@ We are happy to see the problems you reported! You can do as belows:
 
 - Use tabs for indenting, not spaces.
 - Indentation and brace placement follow [Java conventions][indent]. Braces are usually not used for single-statement `if`, `while`, and `for`.
-- There is no maximum line length; break long lines (or not) for readability.
-- For now, avoid using features of Java 8 or higher (e.g. streams, lambdas).
+- Avoid upgrading / downgrading dependencies manually.
 
 [indent]: https://en.wikipedia.org/wiki/Indent_style#Variant:_Java
 
@@ -47,6 +50,10 @@ We are happy to see the problems you reported! You can do as belows:
 
 - **Gameplay changes:** Depending on the change, consider playing through a regular or [2B][2B] beatmap, watching a replay, pausing/resuming the game, enabling/disabling experimental sliders, etc.
 - **UI changes:** Be sure to try different client resolutions (such as 800x600 and widescreen) and different skins (if applicable).
-- **Graphics/audio changes:** Test on different operating systems if you can, especially if your change could break Linux audio in any way.
+- **Graphics/audio changes:** Test on different operating systems if you can, I'm lack of usable devices at this time xD
+
+## Consider joining us?
+
+Maintaining this huge project by myself *alone* is a challenging task. So I'm appreciated if you are willing to help me in the long term! When you have made up your mind, please email me using the address on my profile. Thanks a lot!
 
 [2B]: https://osu.ppy.sh/s/90935
