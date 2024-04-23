@@ -2,8 +2,7 @@
 
 This software was created by Jeffrey Han ([@itdelatrisu](https://github.com/itdelatrisu)). [@CloneWith](https://github.com/clonewith) made further changes on it.
 
-All game concepts and designs are based on work by [osu!](https://osu.ppy.sh)
-developer Dean Herbert ([@ppy](https://github.com/ppy)).
+All game concepts and designs are based on work by [osu!](https://osu.ppy.sh) developer Dean Herbert ([@ppy](https://github.com/ppy)).
 
 ## Images
 
