@@ -248,7 +248,7 @@ public class Download {
 							else if (redirectCount > MAX_REDIRECTS)
 								error = String.format("Download for URL '%s' is attempting too many redirects (over %d).", base.toString(), MAX_REDIRECTS);
 							if (error != null) {
-								ErrorHandler.error(error, null, false);
+								ErrorHandler.notify(error, null);
 								throw new IOException();
 							}
 

@@ -371,6 +371,7 @@ public class MainMenu extends BasicGameState {
 		}
 
 		// draw logo (pulsing)
+		// TODO: Refactor, to make pulses smoother.
 		Float position = MusicController.getBeatProgress();
 		if (position == null)  // default to 60bpm
 			position = System.currentTimeMillis() % 1000 / 1000f;
@@ -379,8 +380,8 @@ public class MainMenu extends BasicGameState {
 		float ghostScale = logo.getLastScale() / scale * 1.05f;
 		Image ghostLogo = GameImage.MENU_LOGO.getImage().getScaledCopy(ghostScale);
 		ghostLogo.drawCentered(logo.getX(), logo.getY(), Colors.GHOST_LOGO);
-		// TODO: Heartbeat won't play correctly
-		if (position == 0.0f && logo.contains(mouseX, mouseY, 0.25f)) {
+		// TODO: Heartbeat would randomly play, need refactoring.
+		if (position <= 0.05f && logo.contains(mouseX, mouseY, 0.25f)) {
 			SoundController.playSound(SoundEffect.HEARTBEAT);
 		}
 
