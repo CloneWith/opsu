@@ -568,7 +568,6 @@ public class Options {
 		},
 		DISABLE_MOUSE_WHEEL ("Disable mouse wheel in play mode", "MouseDisableWheel", "During play, you can use the mouse wheel to adjust the volume and pause the game.\nThis will disable that functionality.", false),
 		DISABLE_MOUSE_BUTTONS ("Disable mouse buttons in play mode", "MouseDisableButtons", "This option will disable all mouse buttons.\nSpecifically for people who use their keyboard to click.", false),
-		DISABLE_CURSOR ("Disable cursor", "DisableCursor", "Hides the cursor sprite.", false),
 		BACKGROUND_DIM ("Background dim", "DimLevel", "Percentage to dim the background image during gameplay.", 50, 0, 100),
 		FORCE_DEFAULT_PLAYFIELD ("Force default playfield", "ForceDefaultPlayfield", "Overrides the song background with the default playfield background.", false),
 		ENABLE_VIDEOS ("Background video", "Video", "Enables background video playback.\nIf you get a large amount of lag on beatmaps with video, try disabling this feature.", true),
@@ -1357,12 +1356,6 @@ public class Options {
 		UI.getNotificationManager().sendBarNotification((GameOption.DISABLE_MOUSE_BUTTONS.getBooleanValue()) ?
 			"Mouse buttons are disabled." : "Mouse buttons are enabled.");
 	}
-
-	/**
-	 * Returns whether or not the cursor sprite should be hidden.
-	 * @return true if disabled
-	 */
-	public static boolean isCursorDisabled() { return GameOption.DISABLE_CURSOR.getBooleanValue(); }
 
 	/**
 	 * Returns the left game key.

@@ -90,7 +90,6 @@ public class OptionGroup {
 			GameOption.IGNORE_BEATMAP_SKINS,
 			GameOption.FORCE_SKIN_CURSOR,
 			GameOption.CURSOR_SIZE,
-			GameOption.DISABLE_CURSOR,
 		}),
 		new OptionGroup("Input", GameImage.MENU_NAV_INPUT),
 		new OptionGroup("MOUSE", new GameOption[] {

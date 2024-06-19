@@ -117,7 +117,7 @@ public class Cursor {
 	 */
 	public void draw(int mouseX, int mouseY, boolean mousePressed) {
 		int state = game.getCurrentStateID();
-		if (Options.isCursorDisabled() || (state == Opsu.STATE_GAME && GameMod.CINEMA.isActive()))
+		if (state == Opsu.STATE_GAME && GameMod.CINEMA.isActive())
 			return;
 
 		Skin skin = Options.getSkin();
