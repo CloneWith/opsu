@@ -25,6 +25,8 @@ The images included in opsu! belong to their respective authors.
 * teinecthel
 * Attribo555 - "- mini;pur ft. Jimikawa -"
 * Spoo - "- {S}  5WC 2023"
+* alivemaster - "- Selyui -"
+* Skyline - KuroAoi 1.0 "SL"
 * Teddy Kelley - [Source](https://unsplash.com/photos/weuWmzv7xnU) (main menu background)
 * User icons designed by Freepik - [Main Website](https://www.freepik.com/)
   * [Flat lovely animal avatar collection](https://www.freepik.com/free-vector/flat-lovely-animal-avatar-collection_845660.htm)
