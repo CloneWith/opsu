@@ -1312,17 +1312,29 @@ public class GameData {
 
 		// combo burst
 		if (comboBurstIndex > -1 && Options.isComboBurstEnabled()) {
-			int leftX  = 0;
-			int rightX = width - comboBurstImages[comboBurstIndex].getWidth();
+			// We use a base X value to avoid division by zero.
+			int BurstWidth = comboBurstImages[comboBurstIndex].getWidth();
+			int baseX = width / 40;
+			int leftX = baseX;
+			int rightX = width - BurstWidth - baseX;
+			double XDelta = delta / 2f;
 			if (comboBurstX < leftX) {
-				comboBurstX += (delta / 2f) * GameImage.getUIscale();
+				// Appearing from left, from comboBurstX to leftX
+				comboBurstX += XDelta * GameImage.getUIscale() * (leftX - comboBurstX) / BurstWidth;
 				if (comboBurstX > leftX)
 					comboBurstX = leftX;
 			} else if (comboBurstX > rightX) {
-				comboBurstX -= (delta / 2f) * GameImage.getUIscale();
+				// Appearing from right
+				comboBurstX -= XDelta * GameImage.getUIscale() * (comboBurstX - rightX) / BurstWidth;
 				if (comboBurstX < rightX)
 					comboBurstX = rightX;
-			} else if (comboBurstAlpha > 0f) {
+			}
+			float leftPortion = (leftX - comboBurstX) / BurstWidth;
+			float rightPortion = (comboBurstX - rightX) / BurstWidth;
+			if (comboBurstAlpha > 0f && (leftPortion <= 0.45f && leftPortion >= 0f) || (rightPortion <= 0.45f && rightPortion >= 0f)) {
+				// alpha = 1 / x, 0f -> insivible
+				// float AlphaDelta = 1.0f / delta;
+				// comboBurstAlpha -= AlphaDelta;
 				comboBurstAlpha -= (delta / 1200f);
 				if (comboBurstAlpha < 0f)
 					comboBurstAlpha = 0f;
