@@ -86,7 +86,7 @@ public enum PlaybackSpeed {
 	 */
 	public PlaybackSpeed next() {
 		PlaybackSpeed next = values[(this.ordinal() + 1) % values.length];
-		if ((GameMod.DOUBLE_TIME.isActive() && next == PlaybackSpeed.DOUBLE))
+		if (((GameMod.DOUBLE_TIME.isActive() || GameMod.NIGHTCORE.isActive()) && next == PlaybackSpeed.DOUBLE))
 			next = next.next();
 		return next;
 	}
