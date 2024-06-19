@@ -381,7 +381,7 @@ public class MainMenu extends BasicGameState {
 		Image ghostLogo = GameImage.MENU_LOGO.getImage().getScaledCopy(ghostScale);
 		ghostLogo.drawCentered(logo.getX(), logo.getY(), Colors.GHOST_LOGO);
 		// TODO: Heartbeat would randomly play, need refactoring.
-		if (position <= 0.05f && logo.contains(mouseX, mouseY, 0.25f)) {
+		if (Options.isHeartbeatEnabled() && position <= 0.05f && logo.contains(mouseX, mouseY, 0.25f)) {
 			SoundController.playSound(SoundEffect.HEARTBEAT);
 		}
 

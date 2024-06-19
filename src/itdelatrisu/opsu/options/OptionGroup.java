@@ -80,6 +80,7 @@ public class OptionGroup {
 			GameOption.HITSOUND_VOLUME,
 			GameOption.DISABLE_GAMEPLAY_SOUNDS,
 			GameOption.DISABLE_SOUNDS,
+			GameOption.HEARTBEAT,
 		}),
 		new OptionGroup("OFFSET ADJUSTMENT", new GameOption[] {
 			GameOption.MUSIC_OFFSET,

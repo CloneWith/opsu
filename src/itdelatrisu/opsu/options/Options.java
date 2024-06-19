@@ -547,6 +547,7 @@ public class Options {
 			@Override
 			public boolean isRestartRequired() { return true; }
 		},
+		HEARTBEAT ("Heartbeat sound (unstable)", "Heartbeat", "Play heartbeat sounds when the cursor hovers on the logo. May sounds off beat.", false),
 		KEY_LEFT ("Left game key", "keyOsuLeft", "Select this option to input a key.") {
 			@Override
 			public String getValueString() { return Keyboard.getKeyName(getGameKeyLeft()); }
@@ -1275,6 +1276,14 @@ public class Options {
 	 * @return true if disabled
 	 */
 	public static boolean isSoundDisabled() { return GameOption.DISABLE_SOUNDS.getBooleanValue(); }
+
+	/**
+	 * Returns whether or not heartbeat sounds will be played.
+	 * @return true if enabled
+	 */
+	public static boolean isHeartbeatEnabled() {
+		return GameOption.HEARTBEAT.getBooleanValue();
+	}
 
 	/**
 	 * Returns whether or not to use non-English metadata where available.
