@@ -383,6 +383,7 @@ public enum GameImage {
 	USER ("user", "user%d", "png", false, false),
 
 	// TODO: ensure this image hasn't been modified (checksum?)
+	// TODO: Update: Why do you need to do that???
 	ALPHA_MAP ("alpha", "png", false, false);
 
 	/** Image file types. */

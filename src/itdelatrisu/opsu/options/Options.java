@@ -122,7 +122,7 @@ public class Options {
 
 	/** The user agent to use in HTTP requests. */
 	public static final String USER_AGENT =
-		"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36";
+		"Mozilla/5.0 (Windows NT 10.0; Win64; x64) Firefox/129.0 AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 Edg/126.0.0.0";
 
 	/** The beatmap directory. */
 	private static File beatmapDir;
@@ -145,7 +145,7 @@ public class Options {
 	/** The theme song string: {@code filename,title,artist,length(ms)} */
 	private static String themeString = "theme.mp3,Rainbows,Kevin MacLeod,219350";
 
-	/** The theme song timing point string (for computing beats to pulse the logo) . */
+	/** The theme song timing point string. */
 	private static String themeTimingPoint = "1120,545.454545454545,4,1,0,100,0,0";
 
 	/**
@@ -201,11 +201,12 @@ public class Options {
 
 	/**
 	 * Returns the osu! installation directory.
+	 * This function only works on Windows, based on registry.
 	 * @return the directory, or null if not found
 	 */
 	private static File getOsuInstallationDirectory() {
 		if (!System.getProperty("os.name").startsWith("Win"))
-			return null;  // only works on Windows
+			return null;
 
 		// registry location
 		final WinReg.HKEY rootKey = WinReg.HKEY_CLASSES_ROOT;
@@ -566,8 +567,8 @@ public class Options {
 			@Override
 			public void read(String s) { setGameKeyRight(Keyboard.getKeyIndex(s)); }
 		},
-		DISABLE_MOUSE_WHEEL ("Disable mouse wheel in play mode", "MouseDisableWheel", "During play, you can use the mouse wheel to adjust the volume and pause the game.\nThis will disable that functionality.", false),
-		DISABLE_MOUSE_BUTTONS ("Disable mouse buttons in play mode", "MouseDisableButtons", "This option will disable all mouse buttons.\nSpecifically for people who use their keyboard to click.", false),
+		DISABLE_MOUSE_WHEEL ("Disable mouse wheel in play mode", "MouseDisableWheel", "Disable the functionality to  adjust the volume and pause the game with the mouse wheel during gameplay.", false),
+		DISABLE_MOUSE_BUTTONS ("Disable mouse buttons in play mode", "MouseDisableButtons", "Disable all mouse buttons.\nSpecifically for people who use their keyboard to click.", false),
 		BACKGROUND_DIM ("Background dim", "DimLevel", "Percentage to dim the background image during gameplay.", 50, 0, 100),
 		FORCE_DEFAULT_PLAYFIELD ("Force default playfield", "ForceDefaultPlayfield", "Overrides the song background with the default playfield background.", false),
 		ENABLE_VIDEOS ("Background video", "Video", "Enables background video playback.\nIf you get a large amount of lag on beatmaps with video, try disabling this feature.", true),
