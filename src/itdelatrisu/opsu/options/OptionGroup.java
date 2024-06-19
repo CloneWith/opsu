@@ -70,6 +70,7 @@ public class OptionGroup {
 			GameOption.FORCE_DEFAULT_PLAYFIELD,
 			GameOption.SHOW_HIT_ERROR_BAR,
 			GameOption.ALWAYS_SHOW_KEY_OVERLAY,
+			GameOption.KEEP_AUTO,
 		}),
 		new OptionGroup("Audio", GameImage.MENU_NAV_AUDIO),
 		new OptionGroup("VOLUME", new GameOption[] {

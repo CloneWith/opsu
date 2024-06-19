@@ -574,6 +574,7 @@ public class Options {
 		ENABLE_VIDEOS ("Background video", "Video", "Enables background video playback.\nIf you get a large amount of lag on beatmaps with video, try disabling this feature.", true),
 		IGNORE_BEATMAP_SKINS ("Ignore all beatmap skins", "IgnoreBeatmapSkins", "Defaults game settings to never use skin element overrides provided by beatmaps.", false),
 		FORCE_SKIN_CURSOR ("Always use skin cursor", "UseSkinCursor", "The selected skin's cursor will override any beatmap-specific cursor modifications.", false),
+		KEEP_AUTO ("Keep the Auto mod on", "KeepAuto", "Keep the Auto mod on after gameplay.", false),
 		SNAKING_SLIDERS ("Snaking sliders", "SnakingSliders", "Sliders gradually snake out from their starting point.", true),
 		EXPERIMENTAL_SLIDERS ("Use experimental sliders", "ExperimentalSliders", "Render sliders using the experimental slider style.", false),
 		EXPERIMENTAL_SLIDERS_CAPS ("Draw slider caps", "ExperimentalSliderCaps", "Draw caps (end circles) on sliders.\nOnly applies to experimental sliders.", false),
@@ -1163,6 +1164,12 @@ public class Options {
 	 * @return true if forced
 	 */
 	public static boolean isDefaultPlayfieldForced() { return GameOption.FORCE_DEFAULT_PLAYFIELD.getBooleanValue(); }
+
+	/**
+	 * Returns whether or not to keep the Auto mod on after gameplay.
+	 * @return true if always on
+	 */
+	public static boolean isAutoModAlwaysOn() { return GameOption.KEEP_AUTO.getBooleanValue(); }
 
 	/**
 	 * Returns whether or not beatmap videos are enabled.
