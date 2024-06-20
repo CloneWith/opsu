@@ -580,6 +580,7 @@ public class Options {
 		IGNORE_BEATMAP_SKINS ("Ignore all beatmap skins", "IgnoreBeatmapSkins", "Defaults game settings to never use skin element overrides provided by beatmaps.", false),
 		FORCE_SKIN_CURSOR ("Always use skin cursor", "UseSkinCursor", "The selected skin's cursor will override any beatmap-specific cursor modifications.", false),
 		KEEP_AUTO ("Keep the Auto mod on", "KeepAuto", "Keep the Auto mod on after gameplay.", false),
+		PAUSE_IN_REPLAY ("Enable pause screen in Auto play and replays", "PauseAutoReplay", "Allow players to press Esc to show the pause screen during replays and gameplay with the Auto mod on.", false),
 		SNAKING_SLIDERS ("Snaking sliders", "SnakingSliders", "Sliders gradually snake out from their starting point.", true),
 		EXPERIMENTAL_SLIDERS ("Use experimental sliders", "ExperimentalSliders", "Render sliders using the experimental slider style.", false),
 		EXPERIMENTAL_SLIDERS_CAPS ("Draw slider caps", "ExperimentalSliderCaps", "Draw caps (end circles) on sliders.\nOnly applies to experimental sliders.", false),
@@ -1175,6 +1176,12 @@ public class Options {
 	 * @return true if always on
 	 */
 	public static boolean isAutoModAlwaysOn() { return GameOption.KEEP_AUTO.getBooleanValue(); }
+
+	/**
+	 * Returns whether or not to show the pause screen with Auto mod on or during replay.
+	 * @return true if always on
+	 */
+	public static boolean isPauseAlwaysEnabled() { return GameOption.PAUSE_IN_REPLAY.getBooleanValue(); }
 
 	/**
 	 * Returns whether or not beatmap videos are enabled.

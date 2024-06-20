@@ -759,7 +759,7 @@ public class Game extends BasicGameState {
 		}
 
 		// returning from pause screen
-		if (pauseTime > -1 && pausedMousePosition != null) {
+		if ((!GameMod.AUTO.isActive() && !GameMod.AUTOPILOT.isActive() && !GameMod.CINEMA.isActive()) && pauseTime > -1 && pausedMousePosition != null) {
 			// darken the screen
 			g.setColor(Colors.BLACK_ALPHA);
 			g.fillRect(0, 0, width, height);
@@ -812,7 +812,7 @@ public class Game extends BasicGameState {
 		// returning from pause screen: must click previous mouse position
 		if (pauseTime > -1) {
 			// paused during lead-in or break, or "relax" or "autopilot": continue immediately
-			if (pausedMousePosition == null || (GameMod.RELAX.isActive() || GameMod.AUTOPILOT.isActive() || GameMod.CINEMA.isActive())) {
+			if (pausedMousePosition == null || (GameMod.RELAX.isActive() || GameMod.AUTOPILOT.isActive() || GameMod.CINEMA.isActive() || GameMod.AUTO.isActive())) {
 				pauseTime = -1;
 				if (!isLeadIn())
 					MusicController.resume();
@@ -1220,7 +1220,7 @@ public class Game extends BasicGameState {
 			}
 
 			// "auto" mod or watching replay: go back to song menu
-			if (GameMod.AUTO.isActive() || isReplay || GameMod.CINEMA.isActive()) {
+			if (!Options.isPauseAlwaysEnabled() && (GameMod.AUTO.isActive() || isReplay || GameMod.CINEMA.isActive())) {
 				game.closeRequested();
 				break;
 			}
@@ -1338,7 +1338,7 @@ public class Game extends BasicGameState {
 			return;
 
 		// watching replay
-		if (isReplay || GameMod.AUTO.isActive() || GameMod.CINEMA.isActive()) {
+		if (!Options.isPauseAlwaysEnabled() && (isReplay || GameMod.AUTO.isActive() || GameMod.CINEMA.isActive())) {
 			if (button == Input.MOUSE_MIDDLE_BUTTON)
 				return;
 
