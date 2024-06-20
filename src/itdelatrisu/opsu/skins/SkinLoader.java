@@ -81,7 +81,6 @@ public class SkinLoader {
 					continue;
 				}
 				// TODO: This implied minimal skin settings. Read osu!wiki for details and additions.
-				// TODO: can add the use of commands "Author" and "Name" to show accurate skin name and author instead of folder name
 				switch (line) {
 				case "[General]":
 					while ((line = in.readLine()) != null) {

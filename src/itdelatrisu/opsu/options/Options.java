@@ -366,14 +366,11 @@ public class Options {
 			private String[] itemList = null;
 			private String[] DirList = null;
 
-			@Override
-			public boolean isRestartRequired() { return true; }
 			// <TODO> Can we directly load skins without restart here?
 
 			/** Creates the list of available skins. */
 			private void createSkinList() {
 				File[] dirs = SkinLoader.getSkinDirectories(getSkinRootDir());
-				// <TODO> Here we use skin directory names as display names, need to change it.
 				itemList = new String[dirs.length + 1];
 				DirList = new String[dirs.length + 1];
 				itemList[0] = Skin.DEFAULT_SKIN_NAME;
@@ -398,9 +395,16 @@ public class Options {
 
 			@Override
 			public void selectItem(int index, GameContainer container) {
-				if (itemList == null)
+				if (itemList == null) {
 					createSkinList();
+				}
+				String OriginalName = Options.getSkin().getName();
 				skinName = itemList[index];
+				if (skinName != OriginalName) {
+					Utils.ChangeNewSkin();
+					// TODO: If skin is changed then reload the skin and UI.
+					return;
+				}
 			}
 
 			@Override
