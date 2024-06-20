@@ -795,7 +795,7 @@ public class MainMenu extends BasicGameState {
 		if (repoButton != null && repoButton.contains(x, y)) {
 			SoundController.playSound(SoundEffect.MENUHIT);
 			((ButtonMenu) game.getState(Opsu.STATE_BUTTONMENU)).setMenuState(MenuState.ABOUT);
-			game.enterState(Opsu.STATE_BUTTONMENU);
+			game.enterState(Opsu.STATE_BUTTONMENU, null, new FadeInTransition(Color.black, 100));
 			return;
 		}
 
@@ -864,7 +864,7 @@ public class MainMenu extends BasicGameState {
 		case Input.KEY_ESCAPE:
 		case Input.KEY_Q:
 			((ButtonMenu) game.getState(Opsu.STATE_BUTTONMENU)).setMenuState(MenuState.EXIT);
-			game.enterState(Opsu.STATE_BUTTONMENU);
+			game.enterState(Opsu.STATE_BUTTONMENU, null, new FadeInTransition(Color.black, 100));
 			break;
 		case Input.KEY_P:
 			SoundController.playSound(SoundEffect.MENUHIT);

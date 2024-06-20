@@ -43,6 +43,7 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.FadeInTransition;
 
 /**
  * "Splash Screen" state.
@@ -205,7 +206,7 @@ public class Splash extends BasicGameState {
 			else
 				MusicController.playThemeSong();
 
-			game.enterState(Opsu.STATE_MAINMENU);
+			game.enterState(Opsu.STATE_MAINMENU, null, new FadeInTransition());
 		}
 	}
 

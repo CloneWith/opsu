@@ -880,7 +880,7 @@ public class SongMenu extends BasicGameState {
 					MenuState state = focusNode.getBeatmapSet().isFavorite() ?
 						MenuState.BEATMAP_FAVORITE : MenuState.BEATMAP;
 					((ButtonMenu) game.getState(Opsu.STATE_BUTTONMENU)).setMenuState(state, focusNode);
-					game.enterState(Opsu.STATE_BUTTONMENU);
+					game.enterState(Opsu.STATE_BUTTONMENU, null, new FadeInTransition(Color.black, 100));
 				}
 				return;
 			}
@@ -1164,7 +1164,7 @@ public class SongMenu extends BasicGameState {
 					} else {
 						// score management
 						((ButtonMenu) game.getState(Opsu.STATE_BUTTONMENU)).setMenuState(MenuState.SCORE, focusScores[rank]);
-						game.enterState(Opsu.STATE_BUTTONMENU);
+						game.enterState(Opsu.STATE_BUTTONMENU, null, new FadeInTransition(Color.black, 100));
 					}
 					return;
 				}
@@ -1222,7 +1222,7 @@ public class SongMenu extends BasicGameState {
 				reloadBeatmaps(false);
 			else {
 				((ButtonMenu) game.getState(Opsu.STATE_BUTTONMENU)).setMenuState(MenuState.RELOAD);
-				game.enterState(Opsu.STATE_BUTTONMENU);
+				game.enterState(Opsu.STATE_BUTTONMENU, null, new FadeInTransition(Color.black, 100));
 			}
 			break;
 		case Input.KEY_DELETE:
@@ -1234,7 +1234,7 @@ public class SongMenu extends BasicGameState {
 				MenuState ms = (focusNode.beatmapIndex == -1 || focusNode.getBeatmapSet().size() == 1) ?
 						MenuState.BEATMAP_DELETE_CONFIRM : MenuState.BEATMAP_DELETE_SELECT;
 				((ButtonMenu) game.getState(Opsu.STATE_BUTTONMENU)).setMenuState(ms, focusNode);
-				game.enterState(Opsu.STATE_BUTTONMENU);
+				game.enterState(Opsu.STATE_BUTTONMENU, null, new FadeInTransition(Color.black, 100));
 			}
 			break;
 		case Input.KEY_ENTER:
@@ -1987,7 +1987,7 @@ public class SongMenu extends BasicGameState {
 	private void openModsMenu() {
 		SoundController.playSound(SoundEffect.MENUHIT);
 		((ButtonMenu) game.getState(Opsu.STATE_BUTTONMENU)).setMenuState(MenuState.MODS);
-		game.enterState(Opsu.STATE_BUTTONMENU);
+		game.enterState(Opsu.STATE_BUTTONMENU, null, new FadeInTransition(Color.black, 100));
 	}
 
 	/** Enters the beatmap options menu. */
@@ -1999,7 +1999,7 @@ public class SongMenu extends BasicGameState {
 		MenuState state = focusNode.getBeatmapSet().isFavorite() ?
 			MenuState.BEATMAP_FAVORITE : MenuState.BEATMAP;
 		((ButtonMenu) game.getState(Opsu.STATE_BUTTONMENU)).setMenuState(state, focusNode);
-		game.enterState(Opsu.STATE_BUTTONMENU);
+		game.enterState(Opsu.STATE_BUTTONMENU, null, new FadeInTransition(Color.black, 100));
 	}
 
 	/**
@@ -2027,6 +2027,6 @@ public class SongMenu extends BasicGameState {
 		gameState.loadBeatmap(beatmap);
 		gameState.setPlayState(Game.PlayState.FIRST_LOAD);
 		gameState.setReplay(null);
-		game.enterState(Opsu.STATE_GAME, new EasedFadeOutTransition(), new FadeInTransition());
+		game.enterState(Opsu.STATE_GAME, new EasedFadeOutTransition(Color.black, 250), new FadeInTransition(Color.black, 200));
 	}
 }
