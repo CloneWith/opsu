@@ -581,7 +581,7 @@ public class Game extends BasicGameState {
 				if ((endTimeDiff > 1500 && endTimeDiff < 2000) ||
 					(endTimeDiff > 500 && endTimeDiff < 1000)) {
 					Image arrow = GameImage.WARNINGARROW.getImage();
-					Color color = (Options.getSkin().getVersion() == 1) ? Color.white : Color.red;
+					Color color = (Options.isWarningArrowTintWhite() || Options.getSkin().getVersion() == 1) ? Color.white : Color.red;
 					arrow.setRotation(0);
 					arrow.draw(width * 0.15f, height * 0.15f, color);
 					arrow.draw(width * 0.15f, height * 0.75f, color);
