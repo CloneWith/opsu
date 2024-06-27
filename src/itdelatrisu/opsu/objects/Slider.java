@@ -294,7 +294,7 @@ public class Slider implements GameObject {
 			for (int tcurRepeat = currentRepeats; tcurRepeat <= currentRepeats + 1 && tcurRepeat < repeatCount - 1; tcurRepeat++) {
 				Image arrow = GameImage.REVERSEARROW.getImage();
 				// bouncing animation
-				//arrow = arrow.getScaledCopy((float) (1 + 0.2d * ((trackPosition + sliderTime * tcurRepeat) % 292) / 292));
+				arrow = arrow.getScaledCopy((float) (1 + 0.2d * ((trackPosition + sliderTime * tcurRepeat) % 292) / 292));
 				Color arrowColor = (Utils.getLuminance(color) < 0.8f || Options.isExperimentalSliderStyle()) ?
 					Color.white : Color.black;
 				if (tcurRepeat == 0) {

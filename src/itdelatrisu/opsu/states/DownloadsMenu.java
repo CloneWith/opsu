@@ -732,6 +732,7 @@ public class DownloadsMenu extends BasicGameState {
 						SoundController.playSound(SoundEffect.MENUCLICK);
 						if (index == focusResult) {
 							if (focusTimer >= FOCUS_DELAY) {
+								// TODO: Why not add a button for this?
 								// too slow for double-click
 								focusTimer = 0;
 							} else {
