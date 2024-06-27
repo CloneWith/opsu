@@ -485,13 +485,10 @@ public class Game extends BasicGameState {
 					autoPoint = gameObjects[objectIndex].getPointAt(trackPosition);
 					autoMousePressed = true;
 				}
-			} else {
-				// last object
-				autoPoint = gameObjects[objectIndex - 1].getPointAt(trackPosition);
 			}
 
 			// set mouse coordinates
-			if (autoPoint != null)
+			if (autoPoint != null && hasMoreObjects())
 				autoMousePosition.set(autoPoint.x, autoPoint.y);
 		}
 
