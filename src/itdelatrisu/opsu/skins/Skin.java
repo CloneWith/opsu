@@ -28,9 +28,7 @@ import org.newdawn.slick.Color;
  * Skin configuration (skin.ini).
  */
 public class Skin {
-	// TODO: Add playwarning arrow tinting support (on/off)
 	// TODO: Pulsing effect for arrows and pass/fail indicator
-	// TODO: Animation improvement for combo bursts
 	// TODO: Clarify usage of star2 (partof / zoom)
 	// TODO: Difference between hit results and results
 	// TODO: Spinner versions

@@ -124,6 +124,7 @@ public class SkinLoader {
 								skin.hitCircleOverlayAboveNumber = Utils.parseBoolean(tokens[1]);
 								break;
 							case "spinnerFrequencyModulate":
+								// TODO: Unsupported
 								skin.spinnerFrequencyModulate = Utils.parseBoolean(tokens[1]);
 								break;
 							case "LayeredHitSounds":
@@ -178,7 +179,7 @@ public class SkinLoader {
 							continue;
 							// TODO: Is there valid support for RGBA format? don't know
 						try {
-							String[] rgb = tokens[1].split(",");
+							String[] rgb = tokens[1].replaceAll("//(.*)", "").split(",");
 							Color color = new Color(
 								Integer.parseInt(rgb[0].trim()),
 								Integer.parseInt(rgb[1].trim()),
