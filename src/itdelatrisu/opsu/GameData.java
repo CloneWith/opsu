@@ -1183,7 +1183,7 @@ public class GameData {
 		return (
 			health.getHealth() > 0f
 			|| GameMod.NO_FAIL.isActive()
-			|| GameMod.AUTO.isActive()
+			|| (GameMod.AUTO.isActive() && !Options.isAutoReal())
 			|| GameMod.CINEMA.isActive()
 			|| GameMod.RELAX.isActive()
 			|| GameMod.AUTOPILOT.isActive()

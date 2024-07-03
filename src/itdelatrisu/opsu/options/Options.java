@@ -670,6 +670,7 @@ public class Options {
 		UICOLOR_R ("Interface color Red", "CustomColorR", "Red color value.", 235, 0, 255),
 		UICOLOR_G ("Interface color Green", "CustomColorG", "Green color value.", 117, 0, 255),
 		UICOLOR_B ("Interface color Blue", "CustomColorB", "Blue color value.", 139, 0, 255),
+		REAL_AUTO ("Real Auto player", "RealAuto", "Auto also fails!", true),
 		CHECKPOINT ("Track checkpoint", "Checkpoint", "Press Ctrl+L while playing to load a checkpoint, and Ctrl+S to set one.", 0, 0, 1800) {
 			@Override
 			public String getValueString() {
@@ -1309,6 +1310,14 @@ public class Options {
 	 */
 	public static boolean isHeartbeatEnabled() {
 		return GameOption.HEARTBEAT.getBooleanValue();
+	}
+
+	/**
+	 * Returns whether Auto is set to be real.
+	 * @return real Auto player
+	 */
+	public static boolean isAutoReal() {
+		return GameOption.REAL_AUTO.getBooleanValue();
 	}
 
 	/**
