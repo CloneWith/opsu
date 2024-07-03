@@ -2013,10 +2013,14 @@ public class Game extends BasicGameState {
 	private void setMapModifiers() {
 		// map-based properties, re-initialized each game
 		float multiplier = GameMod.getDifficultyMultiplier();
-		float circleSize = Math.min(beatmap.circleSize * multiplier, 10f);
-		float approachRate = Math.min(beatmap.approachRate * multiplier, 10f);
-		float overallDifficulty = Math.min(beatmap.overallDifficulty * multiplier, 10f);
-		float HPDrainRate = Math.min(beatmap.HPDrainRate * multiplier, 10f);
+		float circleSize = beatmap.circleSize * multiplier;
+		float approachRate = beatmap.approachRate * multiplier;
+		float overallDifficulty = beatmap.overallDifficulty * multiplier;
+		float HPDrainRate = beatmap.HPDrainRate * multiplier;
+		// float circleSize = Math.min(beatmap.circleSize * multiplier, 10f);
+		// float approachRate = Math.min(beatmap.approachRate * multiplier, 10f);
+		// float overallDifficulty = Math.min(beatmap.overallDifficulty * multiplier, 10f);
+		// float HPDrainRate = Math.min(beatmap.HPDrainRate * multiplier, 10f);
 
 		// fixed difficulty overrides
 		if (Options.getFixedCS() > 0f)
