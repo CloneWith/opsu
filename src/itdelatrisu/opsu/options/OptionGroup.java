@@ -112,6 +112,12 @@ public class OptionGroup {
 			GameOption.FIXED_OD,
 			GameOption.FIXED_SPEED,
 		}),
+		new OptionGroup("COLOR", new GameOption[] {
+			GameOption.UICOLOR_CUSTOM,
+			GameOption.UICOLOR_R,
+			GameOption.UICOLOR_G,
+			GameOption.UICOLOR_B,
+		}),
 		new OptionGroup("SEEKING", new GameOption[] {
 			GameOption.CHECKPOINT,
 			GameOption.REPLAY_SEEKING,

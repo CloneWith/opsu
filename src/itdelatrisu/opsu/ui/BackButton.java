@@ -20,6 +20,7 @@ package itdelatrisu.opsu.ui;
 
 import itdelatrisu.opsu.GameImage;
 import itdelatrisu.opsu.audio.MusicController;
+import itdelatrisu.opsu.options.Options;
 import itdelatrisu.opsu.ui.animations.AnimationEquation;
 
 import org.newdawn.slick.Animation;
@@ -37,10 +38,13 @@ public class BackButton {
 	/** Skinned back button. */
 	private MenuButton backButton;
 
+	/** Turn a color into its dark varient. */
+	private static final int darkColorDelta = -32;
+
 	/** Colors. */
 	private static final Color
-		COLOR_PINK = new Color(238, 51, 153),
-		COLOR_DARKPINK = new Color(186, 19, 121);
+		COLOR_MAIN = Options.getAccentColor(),
+		COLOR_DARK = new Color(COLOR_MAIN.getRed() + darkColorDelta, COLOR_MAIN.getGreen() + darkColorDelta, COLOR_MAIN.getBlue() + darkColorDelta);
 
 	/** Target duration, in ms, of the button animations. */
 	private static final int ANIMATION_TIME = 500;
@@ -154,15 +158,15 @@ public class BackButton {
 		realButtonWidth = (int) (firstWidth + secondWidth);
 
 		// right part
-		g.setColor(COLOR_PINK);
+		g.setColor(COLOR_MAIN);
 		g.fillRect(0, buttonYpos, firstWidth + secondWidth - slopeImageSlopeWidth, slopeImageSize);
-		slopeImage.draw(firstWidth + secondWidth - slopeImageSize, buttonYpos, COLOR_PINK);
+		slopeImage.draw(firstWidth + secondWidth - slopeImageSize, buttonYpos, COLOR_MAIN);
 
 		// left part
 		Color hoverColor = new Color(0f, 0f, 0f);
-		hoverColor.r = COLOR_PINK.r + (COLOR_DARKPINK.r - COLOR_PINK.r) * progress;
-		hoverColor.g = COLOR_PINK.g + (COLOR_DARKPINK.g - COLOR_PINK.g) * progress;
-		hoverColor.b = COLOR_PINK.b + (COLOR_DARKPINK.b - COLOR_PINK.b) * progress;
+		hoverColor.r = COLOR_MAIN.r + (COLOR_DARK.r - COLOR_MAIN.r) * progress;
+		hoverColor.g = COLOR_MAIN.g + (COLOR_DARK.g - COLOR_MAIN.g) * progress;
+		hoverColor.b = COLOR_MAIN.b + (COLOR_DARK.b - COLOR_MAIN.b) * progress;
 		g.setColor(hoverColor);
 		g.fillRect(0, buttonYpos, firstWidth - slopeImageSlopeWidth, slopeImageSize);
 		slopeImage.draw(firstWidth - slopeImageSize, buttonYpos, hoverColor);
