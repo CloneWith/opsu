@@ -9,6 +9,7 @@
 		<timestamp>${maven.build.timestamp}</timestamp>
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
 		<mainClassName>itdelatrisu.opsu.Opsu</mainClassName>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<XDG>false</XDG>
 		<exclude>^"..</exclude>  <!-- bogus Ant FileSet pattern to match nothing -->
 	</properties>
