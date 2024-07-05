@@ -270,7 +270,7 @@ public class Options {
 				themeString = s;
 				Beatmap beatmap = getThemeBeatmap();
 				if (beatmap == null) {
-					Log.warn(String.format("The theme song data is invaild.", s));
+					Log.warn(String.format("The theme song \"%s\" data is invaild.", s));
 				} else if (!beatmap.audioFilename.isFile() && !ResourceLoader.resourceExists(beatmap.audioFilename.getName())) {
 					Log.warn(String.format("Cannot find theme song [%s].", beatmap.audioFilename.getAbsolutePath()));
 				}
@@ -286,7 +286,7 @@ public class Options {
 					new TimingPoint(s);
 					themeTimingPoint = s;
 				} catch (Exception e) {
-					Log.warn(String.format("The theme song timing point is invaild.", s));
+					Log.warn(String.format("The theme song timing point \"%s\" is invaild.", s));
 				}
 			}
 		},
@@ -387,7 +387,7 @@ public class Options {
 				}
 				String OriginalName = Options.getSkin().getName();
 				skinName = itemList[index];
-				if (skinName != OriginalName) {
+				if (!skinName.equals(OriginalName)) {
 					Utils.ChangeNewSkin();
 					// TODO: If skin is changed then reload the skin and UI.
 				}
@@ -1724,7 +1724,6 @@ public class Options {
 				writer.write(option.write());
 				writer.newLine();
 			}
-			writer.close();
 		} catch (IOException e) {
 			ErrorHandler.error(String.format("Failed to write to file '%s'.", OPTIONS_FILE.getAbsolutePath()), e, false);
 		}

@@ -50,13 +50,13 @@ public class CurveRenderState {
 	private int vboID;
 
 	/** The HitObject associated with the curve to be drawn. */
-	protected HitObject hitObject;
+	protected final HitObject hitObject;
 
 	/** The points along the curve to be drawn. */
-	protected Vec2f[] curve;
+	protected final Vec2f[] curve;
 
 	/** The indices of the points. */
-	protected int[] pointIndices;
+	protected final int[] pointIndices;
 
 	/**
 	 * Set the width and height of the container that Curves get drawn into.

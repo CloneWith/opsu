@@ -54,10 +54,10 @@ public class LegacyCurveRenderState {
 	public Rendertarget fbo;
 
 	/** The HitObject associated with the curve to be drawn. */
-	protected HitObject hitObject;
+	protected final HitObject hitObject;
 
 	/** The points along the curve to be drawn. */
-	protected Vec2f[] curve;
+	protected final Vec2f[] curve;
 
 	/** The point to which the curve has last been rendered into the texture (as an index into {@code curve}). */
 	private int lastPointDrawn;
@@ -411,7 +411,7 @@ public class LegacyCurveRenderState {
 		 * of a cone with DIVIDES vertices at its base, that is centered around
 		 * (0,0) and has a radius of 1 (so that it can be translated and scaled easily).
 		 */
-		protected static float[] unitCone = new float[(DIVIDES + 2) * 6];
+		protected static final float[] unitCone = new float[(DIVIDES + 2) * 6];
 
 		/** OpenGL shader program ID used to draw and recolor the curve. */
 		protected int program = 0;

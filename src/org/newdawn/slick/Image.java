@@ -58,7 +58,7 @@ public class Image implements Renderable {
 	public static final int BOTTOM_LEFT = 3;
 
 	/** The renderer to use for all GL operations */
-	protected static SGL GL = Renderer.get();
+	protected static final SGL GL = Renderer.get();
 
 	/** The sprite sheet currently in use */
 	protected static Image inUse;

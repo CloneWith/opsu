@@ -39,7 +39,7 @@ import org.newdawn.slick.util.Log;
  */
 public abstract class Curve {
 	/** Points generated along the curve should be spaced this far apart. */
-	protected static float CURVE_POINTS_SEPERATION = 5;
+	protected static final float CURVE_POINTS_SEPERATION = 5;
 
 	/** The curve border color. */
 	protected static Color borderColor;
@@ -48,13 +48,15 @@ public abstract class Curve {
 	private static boolean mmsliderSupported = false;
 
 	/** The associated HitObject. */
-	protected HitObject hitObject;
+	protected final HitObject hitObject;
 
 	/** The scaled starting x, y coordinates. */
-	protected float x, y;
+	protected final float x;
+	protected final float y;
 
 	/** The scaled slider x, y coordinate lists. */
-	protected float[] sliderX, sliderY;
+	protected final float[] sliderX;
+	protected final float[] sliderY;
 
 	/** Per-curve render-state used for the new style curve renders. */
 	private CurveRenderState renderState;

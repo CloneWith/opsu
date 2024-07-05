@@ -256,7 +256,6 @@ public class OptionsOverlay extends AbstractComponent {
 		COLOR_BG = new Color(Color.black),
 		COLOR_WHITE = new Color(Color.white),
 		COLOR_ACCENT = Options.getAccentColor(),
-		COLOR_PINK = new Color(Colors.PINK_OPTION),
 		COLOR_CYAN = new Color(88, 218, 254),
 		COLOR_GREY = new Color(55, 55, 57),
 		COLOR_BLUE = new Color(Colors.BLUE_BACKGROUND),
@@ -397,7 +396,6 @@ public class OptionsOverlay extends AbstractComponent {
 		COLOR_BG.a = BG_ALPHA * mainAlpha;
 		COLOR_WHITE.a = mainAlpha;
 		COLOR_ACCENT.a = mainAlpha;
-		COLOR_PINK.a = mainAlpha;
 		COLOR_CYAN.a = mainAlpha;
 		COLOR_GREY.a = mainAlpha * LINEALPHA;
 		COLOR_BLUE.a = mainAlpha;

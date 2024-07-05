@@ -356,33 +356,33 @@ public class Input {
 	/** The last recorded mouse y position */
 	private int lastMouseY;
 	/** THe state of the mouse buttons */
-	protected boolean[] mousePressed = new boolean[10];
+	protected final boolean[] mousePressed = new boolean[10];
 	/** THe state of the controller buttons */
 	private final boolean[][] controllerPressed = new boolean[100][MAX_BUTTONS];
 
 	/** The character values representing the pressed keys */
-	protected char[] keys = new char[1024];
+	protected final char[] keys = new char[1024];
 	/** True if the key has been pressed since last queries */
-	protected boolean[] pressed = new boolean[1024];
+	protected final boolean[] pressed = new boolean[1024];
 	/** The time since the next key repeat to be fired for the key */
-	protected long[] nextRepeat = new long[1024];
+	protected final long[] nextRepeat = new long[1024];
 
 	/** The control states from the controllers */
 	private final boolean[][] controls = new boolean[10][MAX_BUTTONS+10];
 	/** True if the event has been consumed */
 	protected boolean consumed = false;
 	/** A list of listeners to be notified of input events */
-	protected HashSet allListeners = new HashSet();
+	protected final HashSet allListeners = new HashSet();
 	/** The listeners to notify of key events */
-	protected ArrayList keyListeners = new ArrayList();
+	protected final ArrayList keyListeners = new ArrayList();
 	/** The listener to add */
-	protected ArrayList keyListenersToAdd = new ArrayList();
+	protected final ArrayList keyListenersToAdd = new ArrayList();
 	/** The listeners to notify of mouse events */
-	protected ArrayList mouseListeners = new ArrayList();
+	protected final ArrayList mouseListeners = new ArrayList();
 	/** The listener to add */
-	protected ArrayList mouseListenersToAdd = new ArrayList();
+	protected final ArrayList mouseListenersToAdd = new ArrayList();
 	/** The listener to nofiy of controller events */
-	protected ArrayList controllerListeners = new ArrayList();
+	protected final ArrayList controllerListeners = new ArrayList();
 	/** The current value of the wheel */
 	private int wheel;
 	/** The height of the display */

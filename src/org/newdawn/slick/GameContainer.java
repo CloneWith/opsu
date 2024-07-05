@@ -55,7 +55,7 @@ import java.util.Properties;
  */
 public abstract class GameContainer implements GUIContext {
 	/** The renderer to use for all GL operations */
-	protected static SGL GL = Renderer.get();
+	protected static final SGL GL = Renderer.get();
 	/** The shared drawable if any */
 	protected static Drawable SHARED_DRAWABLE;
 
@@ -75,7 +75,7 @@ public abstract class GameContainer implements GUIContext {
 	/** The height of the display */
 	protected int height;
 	/** The game being managed */
-	protected Game game;
+	protected final Game game;
 
 	/** The default font to use in the graphics context */
 	private Font defaultFont;
