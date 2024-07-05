@@ -394,7 +394,6 @@ public class BeatmapSetList {
 
 		expandedIndex = -1;
 		expandedStartNode = expandedEndNode = null;
-		return;
 	}
 
 	/**

@@ -344,7 +344,7 @@ public class DropdownMenu<E> extends AbstractComponent {
 		}
 		if (!menuClicked(idx))
 			return;
-		this.expanded = (idx == -1) ? !expanded : false;
+		this.expanded = idx == -1 && !expanded;
 		if (idx >= 0 && itemIndex != idx) {
 			this.itemIndex = idx;
 			itemSelected(idx, items[idx]);

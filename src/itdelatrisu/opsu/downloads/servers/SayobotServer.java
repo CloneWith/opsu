@@ -135,11 +135,6 @@ public class SayobotServer extends DownloadServer {
 		return totalResults;
 	}
 
-	@Override
-	public boolean isDownloadInBrowser() {
-		return false;
-	}
-
 	/**
 	 * Returns a formatted date string from a raw date.
 	 *

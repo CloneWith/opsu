@@ -380,7 +380,7 @@ public class ScoreDB {
 	 * Returns a sorted ScoreData array (in reverse order) from a List.
 	 */
 	private static ScoreData[] getSortedArray(List<ScoreData> list) {
-		ScoreData[] scores = list.toArray(new ScoreData[list.size()]);
+		ScoreData[] scores = list.toArray(new ScoreData[0]);
 		Arrays.sort(scores, Collections.reverseOrder());
 		return scores;
 	}
@@ -464,7 +464,6 @@ public class ScoreDB {
 			insertUserStmt.executeUpdate();
 		} catch (SQLException e) {
 			ErrorHandler.error("Failed to update user in database.", e, true);
-			return;
 		}
 	}
 

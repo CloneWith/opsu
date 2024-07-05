@@ -49,8 +49,7 @@ public class Bezier2 extends CurveType {
 		int n = points.length - 1;
 		for (int i = 0; i <= n; i++) {
 			double b = bernstein(i, n, t);
-			Double bb = b;
-			float bf = bb.floatValue();
+			float bf = (float) b;
 			c.x += points[i].x * bf;
 			c.y += points[i].y * bf;
 		}

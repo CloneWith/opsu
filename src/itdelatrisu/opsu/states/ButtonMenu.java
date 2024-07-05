@@ -617,11 +617,10 @@ public class ButtonMenu extends BasicGameState {
 			@Override
 			public void click(GameContainer container, StateBasedGame game) {
 				SoundController.playSound(SoundEffect.MENUHIT);
-				StringBuilder sb = new StringBuilder();
-				sb.append("[Type your description here. Feel free to delete the info below if it's not relevant.]\n\n");
-				sb.append("---\n");
-				sb.append(ErrorHandler.getEnvironmentInfoForIssue());
-				URI uri = ErrorHandler.getIssueURI("", sb.toString());
+				String sb = "[Type your description here. Feel free to delete the info below if it's not relevant.]\n\n" +
+					"---\n" +
+					ErrorHandler.getEnvironmentInfoForIssue();
+				URI uri = ErrorHandler.getIssueURI("", sb);
 				try {
 					Desktop.getDesktop().browse(uri);
 				} catch (Exception e) {
@@ -776,15 +775,12 @@ public class ButtonMenu extends BasicGameState {
 		if (UI.globalKeyPressed(key))
 			return;
 
-		switch (key) {
-			case Input.KEY_ESCAPE:
-				if (menuState != null)
-					menuState.leave(container, game);
-				break;
-			default:
-				if (menuState != null)
-					menuState.keyPress(container, game, key, c);
-				break;
+		if (key == Input.KEY_ESCAPE) {
+			if (menuState != null)
+				menuState.leave(container, game);
+		} else {
+			if (menuState != null)
+				menuState.keyPress(container, game, key, c);
 		}
 	}
 

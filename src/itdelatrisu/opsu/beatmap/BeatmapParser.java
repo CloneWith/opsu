@@ -583,7 +583,7 @@ public class BeatmapParser {
 						}
 					}
 					if (!colors.isEmpty())
-						beatmap.combo = colors.toArray(new Color[colors.size()]);
+						beatmap.combo = colors.toArray(new Color[0]);
 					break;
 				case "[HitObjects]":
 					int type = 0;

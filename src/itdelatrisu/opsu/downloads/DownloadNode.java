@@ -29,12 +29,11 @@ import itdelatrisu.opsu.options.Options;
 import itdelatrisu.opsu.ui.Colors;
 import itdelatrisu.opsu.ui.Fonts;
 import itdelatrisu.opsu.ui.UI;
-
-import java.io.File;
-
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+
+import java.io.File;
 
 /**
  * Node containing song data and a Download object.
@@ -132,7 +131,7 @@ public class DownloadNode {
 		float x = buttonBaseX + buttonWidth * 0.001f;
 		float y = buttonBaseY + (index * buttonOffset) + buttonHeight / 2f;
 		return ((cx > x && cx < x + iconWidth) &&
-		        (cy > y - iconWidth / 2 && cy < y + iconWidth / 2));
+		        (cy > y - (float) iconWidth / 2 && cy < y + (float) iconWidth / 2));
 	}
 
 	/**
@@ -370,7 +369,7 @@ public class DownloadNode {
 
 		// preview button
 		Image img = (previewing) ? GameImage.MUSIC_PAUSE.getImage() : GameImage.MUSIC_PLAY.getImage();
-		img.drawCentered(textX + img.getWidth() / 2, y + buttonHeight / 2f);
+		img.drawCentered(textX + (float) img.getWidth() / 2, y + buttonHeight / 2f);
 		textX += img.getWidth() + buttonWidth * 0.001f;
 
 		// text

@@ -23,23 +23,9 @@ import itdelatrisu.opsu.db.DBController;
 import itdelatrisu.opsu.downloads.DownloadList;
 import itdelatrisu.opsu.downloads.Updater;
 import itdelatrisu.opsu.options.Options;
-import itdelatrisu.opsu.states.ButtonMenu;
-import itdelatrisu.opsu.states.DownloadsMenu;
-import itdelatrisu.opsu.states.Game;
-import itdelatrisu.opsu.states.GamePauseMenu;
-import itdelatrisu.opsu.states.GameRanking;
-import itdelatrisu.opsu.states.MainMenu;
-import itdelatrisu.opsu.states.SongMenu;
-import itdelatrisu.opsu.states.Splash;
+import itdelatrisu.opsu.states.*;
 import itdelatrisu.opsu.ui.UI;
 import itdelatrisu.opsu.video.FFmpeg;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.PrintStream;
-
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
@@ -52,6 +38,8 @@ import org.newdawn.slick.util.Log;
 import org.newdawn.slick.util.ResourceLoader;
 import org.sqlite.SQLiteErrorCode;
 import org.sqlite.SQLiteException;
+
+import java.io.*;
 
 /**
  * Main class.
@@ -243,11 +231,8 @@ public class Opsu extends StateBasedGame {
 		if (DownloadList.get().hasActiveDownloads() &&
 			UI.showExitConfirmation(DownloadList.EXIT_CONFIRMATION))
 			return false;
-		if (Updater.get().getStatus() == Updater.Status.UPDATE_DOWNLOADING &&
-			UI.showExitConfirmation(Updater.EXIT_CONFIRMATION))
-			return false;
-
-		return true;
+		return Updater.get().getStatus() != Updater.Status.UPDATE_DOWNLOADING ||
+			!UI.showExitConfirmation(Updater.EXIT_CONFIRMATION);
 	}
 
 	/**

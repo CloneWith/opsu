@@ -35,6 +35,8 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
+import java.util.Arrays;
+
 /**
  * Data type representing a spinner object.
  */
@@ -218,21 +220,21 @@ public class Spinner implements GameObject {
 		// main spinner elements
 		GameImage.SPINNER_CIRCLE.getImage().setAlpha(alpha);
 		GameImage.SPINNER_CIRCLE.getImage().setRotation(drawRotation * 360f);
-		GameImage.SPINNER_CIRCLE.getImage().drawCentered(width / 2, height / 2);
+		GameImage.SPINNER_CIRCLE.getImage().drawCentered((float) width / 2, (float) height / 2);
 		if (!GameMod.HIDDEN.isActive()) {
 			float approachScale = 1 - Utils.clamp(((float) timeDiff / (hitObject.getTime() - hitObject.getEndTime())), 0f, 1f);
 			Image approachCircleScaled = GameImage.SPINNER_APPROACHCIRCLE.getImage().getScaledCopy(approachScale);
 			approachCircleScaled.setAlpha(alpha);
-			approachCircleScaled.drawCentered(width / 2, height / 2);
+			approachCircleScaled.drawCentered((float) width / 2, (float) height / 2);
 		}
 		GameImage.SPINNER_SPIN.getImage().setAlpha(alpha);
-		GameImage.SPINNER_SPIN.getImage().drawCentered(width / 2, height * 3 / 4);
+		GameImage.SPINNER_SPIN.getImage().drawCentered((float) width / 2, (float) (height * 3) / 4);
 
 		if (spinnerComplete) {
-			GameImage.SPINNER_CLEAR.getImage().drawCentered(width / 2, height / 4);
+			GameImage.SPINNER_CLEAR.getImage().drawCentered((float) width / 2, (float) height / 4);
 			int extraRotations = (int) (rotations - rotationsNeeded);
 			if (extraRotations > 0)
-				data.drawSymbolNumber(extraRotations * 1000, width / 2, height * 2 / 3, 1f, 1f);
+				data.drawSymbolNumber(extraRotations * 1000, (float) width / 2, (float) (height * 2) / 3, 1f, 1f);
 		}
 	}
 
@@ -255,14 +257,14 @@ public class Spinner implements GameObject {
 		else
 			result = GameData.HIT_MISS;
 
-		data.sendHitResult(hitObject.getEndTime(), result, width / 2, height / 2,
+		data.sendHitResult(hitObject.getEndTime(), result, (float) width / 2, (float) height / 2,
 				Color.transparent, true, hitObject, HitObjectType.SPINNER, true, 0, null, false);
 		return result;
 	}
 
 	@Override
 	public boolean mousePressed(int x, int y, int trackPosition) {
-		lastAngle = (float) Math.atan2(x - (height / 2), y - (width / 2));
+		lastAngle = (float) Math.atan2(x - ((double) height / 2), y - ((double) width / 2));
 		return false;
 	}
 
@@ -291,7 +293,7 @@ public class Spinner implements GameObject {
 			angleDiff = delta * SPUN_OUT_MULTIPLIER;
 			isSpinning = true;
 		} else {
-			float angle = (float) Math.atan2(mouseY - (height / 2), mouseX - (width / 2));
+			float angle = (float) Math.atan2(mouseY - ((double) height / 2), mouseX - ((double) width / 2));
 
 			// set initial angle to current mouse position to skip first click
 			if (!isSpinning && (keyPressed || GameMod.RELAX.isActive())) {
@@ -394,8 +396,7 @@ public class Spinner implements GameObject {
 	public void reset() {
 		deltaAngleIndex = 0;
 		sumDeltaAngle = 0;
-		for (int i = 0; i < storedDeltaAngle.length; i++)
-			storedDeltaAngle[i] = 0;
+		Arrays.fill(storedDeltaAngle, 0);
 		drawRotation = 0;
 		rotations = 0;
 		deltaOverflow = 0;

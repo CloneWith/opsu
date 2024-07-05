@@ -111,14 +111,14 @@ public class InputOverlayKey {
 			float progress = downtime / (float) ANIMATION_TIME;
 			scale -= (1f - ACTIVE_SCALE) * progress;
 			g.scale(scale, scale);
-			x /= scale;
-			y /= scale;
+			x = (int) (x / scale);
+			y = (int) (y / scale);
 		}
 		baseImage.drawCentered(x, y, down ? activeColor : Color.white);
 		x -= Fonts.MEDIUMBOLD.getWidth(text) / 2;
 		y -= Fonts.MEDIUMBOLD.getLineHeight() / 2;
 		/*
-		// shadow (TODO)
+		// TODO: shadow
 		g.pushTransform();
 		g.scale(1.1f, 1.1f);
 		float shadowx = x / 1.1f - Fonts.MEDIUMBOLD.getWidth(text) * 0.05f;

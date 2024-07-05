@@ -23,7 +23,6 @@ import itdelatrisu.opsu.options.Options;
 import itdelatrisu.opsu.ui.UI;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -82,7 +81,7 @@ public class OszUnpacker {
 			UI.getNotificationManager().sendNotification(text);
 		}
 
-		return dirs.toArray(new File[dirs.size()]);
+		return dirs.toArray(new File[0]);
 	}
 
 	/**

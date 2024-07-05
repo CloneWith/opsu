@@ -108,7 +108,7 @@ public class Splash extends BasicGameState {
 	public void render(GameContainer container, StateBasedGame game, Graphics g)
 			throws SlickException {
 		g.setBackground(Color.black);
-		GameImage.MENU_LOGO.getImage().drawCentered(container.getWidth() / 2, container.getHeight() / 2);
+		GameImage.MENU_LOGO.getImage().drawCentered((float) container.getWidth() / 2, (float) container.getHeight() / 2);
 		UI.drawLoadingProgress(g, Options.isLoadVerbose() ? 1f : progressAlpha.getValue());
 	}
 

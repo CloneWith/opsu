@@ -112,7 +112,7 @@ public class OsuWriter {
 			byte b = (byte) (value & 0x7F);
 			value >>= 7;
 			if (value != 0)
-				b |= (1 << 7);
+				b |= (byte) (1 << 7);
 			writer.writeByte(b);
 		} while (value != 0);
 	}

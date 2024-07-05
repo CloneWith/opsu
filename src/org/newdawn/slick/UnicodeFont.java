@@ -438,8 +438,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 	 * Clears all loaded and queued glyphs.
 	 */
 	public void clearGlyphs () {
-		for (int i = 0; i < PAGES; i++)
-			glyphs[i] = null;
+		Arrays.fill(glyphs, null);
 
 		for (Object glyphPage : glyphPages) {
 			GlyphPage page = (GlyphPage) glyphPage;
@@ -1042,8 +1041,8 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 		if (ttfFileRef == null) {
 			// Worst case if this UnicodeFont was loaded without a ttfFileRef, try to get the font file from Sun's classes.
 			try {
-				Object font2D = Class.forName("sun.font.FontManager").getDeclaredMethod("getFont2D", new Class[] {Font.class})
-					.invoke(null, new Object[] {font});
+				Object font2D = Class.forName("sun.font.FontManager").getDeclaredMethod("getFont2D", Font.class)
+					.invoke(null, font);
 				Field platNameField = Class.forName("sun.font.PhysicalFont").getDeclaredField("platName");
 				platNameField.setAccessible(true);
 				ttfFileRef = (String)platNameField.get(font2D);

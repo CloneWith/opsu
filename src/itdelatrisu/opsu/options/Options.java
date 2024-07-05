@@ -312,7 +312,7 @@ public class Options {
 						if (res == Resolution.RES_800_600 || (width >= res.getWidth() && height >= res.getHeight()))
 							list.add(res);
 					}
-					itemList = list.toArray(new Resolution[list.size()]);
+					itemList = list.toArray(new Resolution[0]);
 				}
 				return itemList;
 			}
@@ -390,7 +390,6 @@ public class Options {
 				if (skinName != OriginalName) {
 					Utils.ChangeNewSkin();
 					// TODO: If skin is changed then reload the skin and UI.
-					return;
 				}
 			}
 

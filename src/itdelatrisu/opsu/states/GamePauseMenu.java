@@ -27,13 +27,8 @@ import itdelatrisu.opsu.options.Options;
 import itdelatrisu.opsu.ui.MenuButton;
 import itdelatrisu.opsu.ui.UI;
 import itdelatrisu.opsu.ui.animations.AnimationEquation;
-
 import org.lwjgl.input.Keyboard;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Input;
-import org.newdawn.slick.SlickException;
+import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.EasedFadeOutTransition;
@@ -82,7 +77,7 @@ public class GamePauseMenu extends BasicGameState {
 			GameImage.PAUSE_RETRY.hasBeatmapSkinImage() ||
 			GameImage.PAUSE_BACK.hasBeatmapSkinImage();
 		if (!buttonsSkinned || bg.hasBeatmapSkinImage())
-			bg.getImage().drawCentered(container.getWidth() / 2, container.getHeight() / 2);
+			bg.getImage().drawCentered((float) container.getWidth() / 2, (float) container.getHeight() / 2);
 		else
 			g.setBackground(Color.black);
 

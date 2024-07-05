@@ -1028,7 +1028,7 @@ public class GameData {
 					    Options.getSkin().getVersion() == 1) {
 						Image spinnerOsu = GameImage.SPINNER_OSU.getImage();
 						spinnerOsu.setAlpha(hitResult.alpha);
-						spinnerOsu.drawCentered(width / 2, height / 4);
+						spinnerOsu.drawCentered((float) width / 2, (float) height / 4);
 						spinnerOsu.setAlpha(1f);
 					}
 
@@ -1315,12 +1315,12 @@ public class GameData {
 			double XDelta = delta / 2f;
 			if (comboBurstX < leftX) {
 				// Appearing from left, from comboBurstX to leftX
-				comboBurstX += XDelta * GameImage.getUIscale() * (leftX - comboBurstX) / BurstWidth;
+				comboBurstX += (float) (XDelta * GameImage.getUIscale() * (leftX - comboBurstX) / BurstWidth);
 				if (comboBurstX > leftX)
 					comboBurstX = leftX;
 			} else if (comboBurstX > rightX) {
 				// Appearing from right
-				comboBurstX -= XDelta * GameImage.getUIscale() * (comboBurstX - rightX) / BurstWidth;
+				comboBurstX -= (float) (XDelta * GameImage.getUIscale() * (comboBurstX - rightX) / BurstWidth);
 				if (comboBurstX < rightX)
 					comboBurstX = rightX;
 			}

@@ -29,9 +29,9 @@ public class ReplayFrame {
 	/** Key bits. */
 	public static final int
 		KEY_NONE = 0,
-		KEY_M1 = (1 << 0),
+		KEY_M1 = (1),
 		KEY_M2 = (1 << 1),
-		KEY_K1 = (1 << 2) | (1 << 0),
+		KEY_K1 = (1 << 2) | (1),
 		KEY_K2 = (1 << 3) | (1 << 1);
 
 	/** Time, in milliseconds, since the previous action. */

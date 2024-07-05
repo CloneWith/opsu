@@ -213,7 +213,7 @@ public class Cursor {
 		} else {
 			cursor.draw(mouseX, mouseY);
 			if (cursorMiddle != null)
-				cursorMiddle.drawCentered(mouseX + cursor.getWidth() / 2, mouseY + cursor.getHeight() / 2);
+				cursorMiddle.drawCentered(mouseX + (float) cursor.getWidth() / 2, mouseY + (float) cursor.getHeight() / 2);
 		}
 	}
 

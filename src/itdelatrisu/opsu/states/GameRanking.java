@@ -108,18 +108,18 @@ public class GameRanking extends BasicGameState {
 		float parallaxX = 0, parallaxY = 0;
 		if (Options.isParallaxEnabled()) {
 			int offset = (int) (height * (GameImage.PARALLAX_SCALE - 1f));
-			parallaxX = -offset / 2f * (mouseX - width / 2) / (width / 2);
-			parallaxY = -offset / 2f * (mouseY - height / 2) / (height / 2);
+			parallaxX = -offset / 2f * (mouseX - (float) width / 2) / ((float) width / 2);
+			parallaxY = -offset / 2f * (mouseY - (float) height / 2) / ((float) height / 2);
 		}
 		if (!beatmap.drawBackground(width, height, parallaxX, parallaxY, 0.5f, true)) {
 			Image bg = GameImage.MENU_BG.getImage();
 			if (Options.isParallaxEnabled()) {
 				bg = bg.getScaledCopy(GameImage.PARALLAX_SCALE);
 				bg.setAlpha(0.5f);
-				bg.drawCentered(width / 2 + parallaxX, height / 2 + parallaxY);
+				bg.drawCentered((float) width / 2 + parallaxX, (float) height / 2 + parallaxY);
 			} else {
 				bg.setAlpha(0.5f);
-				bg.drawCentered(width / 2, height / 2);
+				bg.drawCentered((float) width / 2, (float) height / 2);
 				bg.setAlpha(1f);
 			}
 		}
@@ -164,10 +164,8 @@ public class GameRanking extends BasicGameState {
 		if (UI.globalKeyPressed(key))
 			return;
 
-		switch (key) {
-		case Input.KEY_ESCAPE:
+		if (key == Input.KEY_ESCAPE) {
 			returnToSongMenu();
-			break;
 		}
 	}
 

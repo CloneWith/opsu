@@ -419,8 +419,8 @@ public class DownloadsMenu extends BasicGameState {
 		float parallaxX = 0, parallaxY = 0;
 		if (Options.isParallaxEnabled()) {
 			int offset = (int) (height * (GameImage.PARALLAX_SCALE - 1f));
-			parallaxX = -offset / 2f * (mouseX - width / 2) / (width / 2);
-			parallaxY = -offset / 2f * (mouseY - height / 2) / (height / 2);
+			parallaxX = -offset / 2f * (mouseX - (float) width / 2) / ((float) width / 2);
+			parallaxY = -offset / 2f * (mouseY - (float) height / 2) / ((float) height / 2);
 		}
 		if (Options.isDynamicBackgroundEnabled() && beatmap != null &&
 				beatmap.drawBackground(width, height, parallaxX, parallaxY, bgAlpha.getValue(), true))
@@ -430,10 +430,10 @@ public class DownloadsMenu extends BasicGameState {
 			if (Options.isParallaxEnabled()) {
 				bg = bg.getScaledCopy(GameImage.PARALLAX_SCALE);
 				bg.setAlpha(bgAlpha.getValue());
-				bg.drawCentered(width / 2 + parallaxX, height / 2 + parallaxY);
+				bg.drawCentered((float) width / 2 + parallaxX, (float) height / 2 + parallaxY);
 			} else {
 				bg.setAlpha(bgAlpha.getValue());
-				bg.drawCentered(width / 2, height / 2);
+				bg.drawCentered((float) width / 2, (float) height / 2);
 			}
 		}
 

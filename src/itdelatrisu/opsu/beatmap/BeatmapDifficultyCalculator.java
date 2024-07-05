@@ -532,7 +532,7 @@ class tpSlider {
 	 * @param time the track position
 	 */
 	public Vec2f getPositionAtTime(int time) {
-		float t = (time - startTime) / sliderTime;
+		float t = (float) (time - startTime) / sliderTime;
 		float floor = (float) Math.floor(t);
 		t = (floor % 2 == 0) ? t - floor : floor + 1 - t;
 		return curve.pointAt(t);

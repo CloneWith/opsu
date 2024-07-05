@@ -341,7 +341,7 @@ public class Game extends BasicGameState {
 		musicBarHeight = height * 0.9f;
 
 		// initialize scoreboard star stream
-		scoreboardStarStream = new StarStream(0, height * 2f / 3f, width / 4, 0, 0);
+		scoreboardStarStream = new StarStream(0, height * 2f / 3f, (float) width / 4, 0, 0);
 		scoreboardStarStream.setPositionSpread(height / 20f);
 		scoreboardStarStream.setDirectionSpread(10f);
 		scoreboardStarStream.setDurationSpread(700, 100);
@@ -388,7 +388,7 @@ public class Game extends BasicGameState {
 			if (Options.isDefaultPlayfieldForced() || !beatmap.drawBackground(width, height, 0, 0, dimLevel, false)) {
 				Image bg = GameImage.MENU_BG.getImage();
 				bg.setAlpha(dimLevel);
-				bg.drawCentered(width / 2, height / 2);
+				bg.drawCentered((float) width / 2, (float) height / 2);
 				bg.setAlpha(1f);
 			}
 		}
@@ -398,7 +398,7 @@ public class Game extends BasicGameState {
 
 		// Auto relevant mods: move cursor automatically
 		// TODO: this should really be in update(), not render()
-		autoMousePosition.set(width / 2, height / 2);
+		autoMousePosition.set((float) width / 2, (float) height / 2);
 		autoMousePressed = false;
 		if (GameMod.AUTO.isActive() || GameMod.AUTOPILOT.isActive() || GameMod.CINEMA.isActive()) {
 			Vec2f autoPoint = null;
@@ -583,7 +583,7 @@ public class Game extends BasicGameState {
 				if (timeDiff < -500)
 					Colors.WHITE_FADE.a = (1000 + timeDiff) / 500f;
 				Fonts.MEDIUM.drawString(
-						2 + (width / 100), retryHeight,
+						2 + ((float) width / 100), retryHeight,
 						String.format("%d retries and counting...", retries),
 						Colors.WHITE_FADE
 				);
@@ -599,7 +599,7 @@ public class Game extends BasicGameState {
 				timeDiff = firstObjectTime - trackPosition;
 				if (timeDiff >= 500 * speedModifier && timeDiff < 3000 * speedModifier) {
 					if (timeDiff >= 1500 * speedModifier) {
-						GameImage.COUNTDOWN_READY.getImage().drawCentered(width / 2, height / 2);
+						GameImage.COUNTDOWN_READY.getImage().drawCentered((float) width / 2, (float) height / 2);
 						if (!countdownReadySound) {
 							playSoundEffect(SoundEffect.READY);
 							countdownReadySound = true;
@@ -620,7 +620,7 @@ public class Game extends BasicGameState {
 						}
 					}
 					if (timeDiff < 1000 * speedModifier) {
-						GameImage.COUNTDOWN_1.getImage().drawCentered(width / 2, height / 2);
+						GameImage.COUNTDOWN_1.getImage().drawCentered((float) width / 2, (float) height / 2);
 						if (!countdown1Sound) {
 							playSoundEffect(SoundEffect.COUNT1);
 							countdown1Sound = true;
@@ -629,7 +629,7 @@ public class Game extends BasicGameState {
 				} else if (timeDiff >= -500 * speedModifier && timeDiff < 500 * speedModifier) {
 					Image go = GameImage.COUNTDOWN_GO.getImage();
 					go.setAlpha((timeDiff < 0) ? 1 - (timeDiff / speedModifier / -500f) : 1);
-					go.drawCentered(width / 2, height / 2);
+					go.drawCentered((float) width / 2, (float) height / 2);
 					if (!countdownGoSound) {
 						playSoundEffect(SoundEffect.GO);
 						countdownGoSound = true;
@@ -688,7 +688,7 @@ public class Game extends BasicGameState {
 		}
 
 		if (GameMod.AUTO.isActive())
-			GameImage.UNRANKED.getImage().drawCentered(width / 2, height * 0.077f);
+			GameImage.UNRANKED.getImage().drawCentered((float) width / 2, height * 0.077f);
 
 		// draw replay speed button
 		if (isReplay || GameMod.AUTO.isActive() || GameMod.CINEMA.isActive())
@@ -714,7 +714,7 @@ public class Game extends BasicGameState {
 			Image bg = GameImage.INPUTOVERLAY_BACKGROUND.getImage();
 			bg = bg.getScaledCopy(BTNSIZE * 4.3f / bg.getWidth());
 			bg.rotate(90f);
-			bg.drawCentered(container.getWidth() - bg.getHeight() / 2, container.getHeight() / 2);
+			bg.drawCentered(container.getWidth() - (float) bg.getHeight() / 2, (float) container.getHeight() / 2);
 			Image keyimg =
 				GameImage.INPUTOVERLAY_KEY.getImage().getScaledCopy((int) BTNSIZE, (int) BTNSIZE);
 			for (int i = 0; i < 4; i++) {
@@ -995,8 +995,8 @@ public class Game extends BasicGameState {
 					replayFrames.addFirst(ReplayFrame.getStartFrame(replaySkipTime));
 					replayFrames.addFirst(ReplayFrame.getStartFrame(0));
 					Replay r = data.getReplay(
-						replayFrames.toArray(new ReplayFrame[replayFrames.size()]),
-						lifeFrames.toArray(new LifeFrame[lifeFrames.size()]),
+						replayFrames.toArray(new ReplayFrame[0]),
+						lifeFrames.toArray(new LifeFrame[0]),
 						beatmap
 					);
 					if (r != null && !unranked)
@@ -1517,9 +1517,7 @@ public class Game extends BasicGameState {
 				HitObject hitObject = beatmap.objects[i];
 
 				// is this the last note in the combo?
-				boolean comboEnd = false;
-				if (i + 1 >= beatmap.objects.length || beatmap.objects[i + 1].isNewCombo())
-					comboEnd = true;
+				boolean comboEnd = i + 1 >= beatmap.objects.length || beatmap.objects[i + 1].isNewCombo();
 
 				// calculate color index if ignoring beatmap skin
 				Color color;
@@ -1557,7 +1555,6 @@ public class Game extends BasicGameState {
 					ErrorHandler.error(String.format("Failed to create %s at index %d:\n%s",
 							hitObject.getTypeName(), i, hitObject), e, true);
 					gameObjects[i] = new DummyObject(hitObject);
-					continue;
 				}
 			}
 
@@ -2257,14 +2254,14 @@ public class Game extends BasicGameState {
 		if (isLeadIn()) {
 			// lead-in: expand area
 			float progress = Math.max((float) (leadInTime - beatmap.audioLeadIn) / approachTime, 0f);
-			flashlightRadius = width - (int) ((width - (height * 2 / 3)) * progress);
+			flashlightRadius = width - (int) ((width - ((float) (height * 2) / 3)) * progress);
 		} else if (firstObject) {
 			// before first object: shrink area
 			int timeDiff = beatmap.objects[0].getTime() - trackPosition;
 			flashlightRadius = width;
 			if (timeDiff < approachTime) {
 				float progress = (float) timeDiff / approachTime;
-				flashlightRadius -= (width - (height * 2 / 3)) * (1 - progress);
+				flashlightRadius -= (int) ((width - ((float) (height * 2) / 3)) * (1 - progress));
 			}
 		} else {
 			// gameplay: size based on combo
@@ -2293,7 +2290,7 @@ public class Game extends BasicGameState {
 				// radius size change
 				float radiusDiff = height * delta / 2000f;
 				if (flashlightRadius > targetRadius) {
-					flashlightRadius -= radiusDiff;
+					flashlightRadius -= (int) radiusDiff;
 					if (flashlightRadius < targetRadius)
 						flashlightRadius = targetRadius;
 				} else {
@@ -2390,7 +2387,7 @@ public class Game extends BasicGameState {
 				}
 			}
 			if (!curvePoints.isEmpty())
-				this.mergedSlider = new FakeCombinedCurve(curvePoints.toArray(new Vec2f[curvePoints.size()]));
+				this.mergedSlider = new FakeCombinedCurve(curvePoints.toArray(new Vec2f[0]));
 		} else {
 			int base = 0;
 			for (GameObject gameObject : gameObjects) {

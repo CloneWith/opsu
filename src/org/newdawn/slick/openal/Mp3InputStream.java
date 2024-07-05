@@ -168,7 +168,7 @@ public class Mp3InputStream extends InputStream implements AudioInputStream {
 			Log.warn("Mp3InputStream: skip: bufLen not yet determined.");
 
 		int skipped = 0;
-		while (skipped + bufLen * 2 < length) {
+		while (skipped + bufLen * 2L < length) {
 			try {
 				header = bitstream.readFrame();
 				if (header == null) {
@@ -178,7 +178,7 @@ public class Mp3InputStream extends InputStream implements AudioInputStream {
 				}
 
 				// last frame that won't be skipped so better read it
-				if (skipped + bufLen * 2 * 4 >= length || bufLen <= 0) {
+				if (skipped + (long) bufLen * 2 * 4 >= length || bufLen <= 0) {
 					buf.clear_buffer();
 					decoder.decodeFrame(header, bitstream);
 					bufLen = buf.getBufferLength();
@@ -191,9 +191,9 @@ public class Mp3InputStream extends InputStream implements AudioInputStream {
 				Log.error(e);
 			}
 		}
-		if (bufLen * 2 - bpos > length - skipped) {
-			bpos += length - skipped;
-			skipped += length - skipped;
+		if (bufLen * 2L - bpos > length - skipped) {
+			bpos += (int) (length - skipped);
+			skipped += (int) (length - skipped);
 		}
 
 		return skipped;

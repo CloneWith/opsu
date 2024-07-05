@@ -24,14 +24,12 @@ import itdelatrisu.opsu.beatmap.BeatmapSetList;
 import itdelatrisu.opsu.db.ScoreDB;
 import itdelatrisu.opsu.options.Options;
 import itdelatrisu.opsu.ui.UI;
+import org.newdawn.slick.util.Log;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
-
-import org.newdawn.slick.util.Log;
 
 /**
  * Importer for replay files.
@@ -99,7 +97,6 @@ public class ReplayImporter {
 			} else {
 				moveToFailedDirectory(file);
 				ErrorHandler.notify(String.format("Failed to import replay '%s'. The associated beatmap could not be found.", file.getName()), null);
-				continue;
 			}
 		}
 

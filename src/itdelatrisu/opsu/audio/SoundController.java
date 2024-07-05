@@ -156,7 +156,7 @@ public class SoundController {
 							+ (newFormat.isBigEndian() == format.isBigEndian() ? 1 : 0)
 							+ newFormat.getSampleRate() / 11025
 							+ newFormat.getChannels()
-							+ newFormat.getSampleSizeInBits() / 8;
+							+ (float) newFormat.getSampleSizeInBits() / 8;
 					if (score > bestScore) {
 						bestIndex = i;
 						bestScore = score;

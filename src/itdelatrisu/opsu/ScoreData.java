@@ -349,7 +349,7 @@ public class ScoreData implements Comparable<ScoreData> {
 		int rectWidth = (int) (145 * GameImage.getUIscale());  //135
 		int rectHeight = data.getScoreSymbolImage('0').getHeight();
 		int vertDistance = rectHeight + 10;
-		int yPos = (int) (vPos + position * vertDistance - rectHeight / 2);
+		int yPos = (int) (vPos + position * vertDistance - (float) rectHeight / 2);
 		int xPaddingLeft = Math.max(4, (int) (rectWidth * 0.04f));
 		int xPaddingRight = Math.max(2, (int) (rectWidth * 0.02f));
 		int yPadding = Math.max(2, (int) (rectHeight * 0.02f));

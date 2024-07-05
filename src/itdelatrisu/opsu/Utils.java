@@ -209,9 +209,7 @@ public class Utils {
 	public static int clamp(int val, int low, int high) {
 		if (val < low)
 			return low;
-		if (val > high)
-			return high;
-		return val;
+		return Math.min(val, high);
 	}
 
 	/**
@@ -225,9 +223,7 @@ public class Utils {
 	public static float clamp(float val, float low, float high) {
 		if (val < low)
 			return low;
-		if (val > high)
-			return high;
-		return val;
+		return Math.min(val, high);
 	}
 
 	/**
@@ -240,9 +236,7 @@ public class Utils {
 	public static double clamp(double val, double low, double high) {
 		if (val < low)
 			return low;
-		if (val > high)
-			return high;
-		return val;
+		return Math.min(val, high);
 	}
 
 	/**
@@ -439,7 +433,7 @@ public class Utils {
 		FileUtils fileUtils = FileUtils.getInstance();
 		if (fileUtils.hasTrash()) {
 			try {
-				fileUtils.moveToTrash(new File[] { file });
+				fileUtils.moveToTrash(file);
 				return true;
 			} catch (IOException e) {
 				Log.warn(String.format("Failed to move file '%s' to trash.", file.getAbsolutePath()), e);
@@ -465,7 +459,7 @@ public class Utils {
 
 		// recursively delete contents of directory
 		File[] files = dir.listFiles();
-		if (files != null && files.length > 0) {
+		if (files != null) {
 			for (File file : files) {
 				if (file.isDirectory())
 					deleteDirectory(file);
@@ -765,7 +759,6 @@ public class Utils {
 
 	public static void ChangeNewSkin() {
 		NewSkinLoader = new Thread(() -> {
-			return;
 		});
 		// Steps: Load, release & reload
 		NewSkinLoader.start();

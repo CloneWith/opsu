@@ -99,9 +99,6 @@ public class NativeLoader {
 				return true;
 		}
 
-		if (name.equals(FFmpeg.DEFAULT_NATIVE_FILENAME.toLowerCase()))
-			return true;
-
-		return false;
+		return name.equals(FFmpeg.DEFAULT_NATIVE_FILENAME.toLowerCase());
 	}
 }

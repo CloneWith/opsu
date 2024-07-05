@@ -147,7 +147,7 @@ public class UserSelectOverlay extends AbstractComponent {
 		this.containerHeight = container.getHeight();
 
 		// overlay positions
-		this.x = containerWidth / 3;
+		this.x = (float) containerWidth / 3;
 		this.y = 0;
 		this.width = containerWidth / 3;
 		this.height = containerHeight;
@@ -291,14 +291,14 @@ public class UserSelectOverlay extends AbstractComponent {
 		// title
 		String title = "User Select";
 		Fonts.XLARGE.drawString(
-			x + (width - Fonts.XLARGE.getWidth(title)) / 2,
+			x + (float) (width - Fonts.XLARGE.getWidth(title)) / 2,
 			(int) (y + titleY - scrolling.getPosition()),
 			title, COLOR_WHITE
 		);
 
 		// users
 		int cx = (int) (x + usersStartX);
-		int cy = (int) (y + -scrolling.getPosition() + usersStartY);
+		int cy = (int) (y - scrolling.getPosition() + usersStartY);
 		for (UserButton button : userButtons) {
 			button.setPosition(cx, cy);
 			if (cy < height)
@@ -322,7 +322,7 @@ public class UserSelectOverlay extends AbstractComponent {
 		// title
 		String title = "Add User";
 		Fonts.XLARGE.drawString(
-			x + (width - Fonts.XLARGE.getWidth(title)) / 2,
+			x + (float) (width - Fonts.XLARGE.getWidth(title)) / 2,
 			(int) (y + titleY),
 			title, COLOR_WHITE
 		);
@@ -330,14 +330,14 @@ public class UserSelectOverlay extends AbstractComponent {
 		// user button
 		int cy = (int) (y + usersStartY);
 		String caption = "Click the profile below to create it.";
-		Fonts.MEDIUM.drawString(x + (width - Fonts.MEDIUM.getWidth(caption)) / 2, cy, caption, COLOR_WHITE);
+		Fonts.MEDIUM.drawString(x + (float) (width - Fonts.MEDIUM.getWidth(caption)) / 2, cy, caption, COLOR_WHITE);
 		cy += Fonts.MEDIUM.getLineHeight();
 		newUserButton.draw(g, alpha);
 		cy += UserButton.getHeight() + Fonts.MEDIUMBOLD.getLineHeight();
 
 		// user name
 		String nameHeader = "Name";
-		Fonts.MEDIUMBOLD.drawString(x + (width - Fonts.MEDIUMBOLD.getWidth(nameHeader)) / 2, cy, nameHeader, COLOR_WHITE);
+		Fonts.MEDIUMBOLD.drawString(x + (float) (width - Fonts.MEDIUMBOLD.getWidth(nameHeader)) / 2, cy, nameHeader, COLOR_WHITE);
 		cy += Fonts.MEDIUMBOLD.getLineHeight();
 		Color textColor = COLOR_WHITE;
 		String name = newUser.getName();
@@ -347,7 +347,7 @@ public class UserSelectOverlay extends AbstractComponent {
 		} else if (!UserList.get().isValidUserName(name))
 			textColor = COLOR_RED;
 		int textWidth = Fonts.LARGE.getWidth(name);
-		int searchTextX = (int) (x + (width - textWidth) / 2);
+		int searchTextX = (int) (x + (float) (width - textWidth) / 2);
 		Fonts.LARGE.drawString(searchTextX, cy, name, textColor);
 		cy += Fonts.LARGE.getLineHeight();
 		g.setColor(textColor);
@@ -366,7 +366,7 @@ public class UserSelectOverlay extends AbstractComponent {
 		// title
 		String title = "Edit User";
 		Fonts.XLARGE.drawString(
-			x + (width - Fonts.XLARGE.getWidth(title)) / 2,
+			x + (float) (width - Fonts.XLARGE.getWidth(title)) / 2,
 			(int) (y + titleY),
 			title, COLOR_WHITE
 		);
@@ -386,7 +386,7 @@ public class UserSelectOverlay extends AbstractComponent {
 
 	/** Renders the user icons. */
 	private void renderUserIcons(Graphics g, int iconId, String header, int cy, float alpha) {
-		Fonts.MEDIUMBOLD.drawString(x + (width - Fonts.MEDIUMBOLD.getWidth(header)) / 2, cy, header, COLOR_WHITE);
+		Fonts.MEDIUMBOLD.drawString(x + (float) (width - Fonts.MEDIUMBOLD.getWidth(header)) / 2, cy, header, COLOR_WHITE);
 		cy += Fonts.MEDIUMBOLD.getLineHeight() + usersPaddingY;
 		int iconSize = UserButton.getIconSize();
 		int paddingX = iconSize / 4;
@@ -397,15 +397,15 @@ public class UserSelectOverlay extends AbstractComponent {
 		scrollOffset -= height - cy;
 		scrollOffset = Math.max(scrollOffset, 0);
 		scrolling.setMinMax(0, scrollOffset);
-		cy += -Math.round(scrolling.getPosition());
+		cy -= Math.round(scrolling.getPosition());
 		for (int i = 0; i < userIcons.length; i += maxPerLine) {
 			// draw line-by-line
 			int n = Math.min(maxPerLine, userIcons.length - i);
-			int cx = (int) (x + usersStartX + (UserButton.getWidth() - iconSize * n - paddingX * (n - 1)) / 2);
+			int cx = (int) (x + usersStartX + (float) (UserButton.getWidth() - iconSize * n - paddingX * (n - 1)) / 2);
 			for (int j = 0; j < n; j++) {
 				MenuButton button = userIcons[i + j];
-				button.setX(cx + iconSize / 2);
-				button.setY(cy + iconSize / 2);
+				button.setX(cx + (float) iconSize / 2);
+				button.setY(cy + (float) iconSize / 2);
 				if (cy < height) {
 					button.getImage().setAlpha((iconId == i + j) ?
 						alpha : alpha * button.getHoverAlpha() * 0.9f

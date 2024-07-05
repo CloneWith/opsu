@@ -176,8 +176,8 @@ public class UserButton {
 		// no user?
 		if (user == null && placeholderText != null) {
 			Fonts.LARGE.drawString(
-				x + (buttonWidth - Fonts.LARGE.getWidth(placeholderText)) / 2,
-				y + (buttonHeight - Fonts.LARGE.getLineHeight()) / 2,
+				x + (float) (buttonWidth - Fonts.LARGE.getWidth(placeholderText)) / 2,
+				y + (float) (buttonHeight - Fonts.LARGE.getLineHeight()) / 2,
 				placeholderText, Colors.WHITE_FADE
 			);
 			Colors.WHITE_FADE.a = oldWhiteAlpha;

@@ -22,7 +22,6 @@ import itdelatrisu.opsu.Utils;
 import itdelatrisu.opsu.ui.UI;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,7 +75,7 @@ public class SkinUnpacker {
 			UI.getNotificationManager().sendNotification(text);
 		}
 
-		return dirs.toArray(new File[dirs.size()]);
+		return dirs.toArray(new File[0]);
 	}
 
 	/**

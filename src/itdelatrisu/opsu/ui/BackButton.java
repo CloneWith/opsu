@@ -168,7 +168,7 @@ public class BackButton {
 
 		// chevron
 		Image chevron = GameImage.MENU_BACK_CHEVRON.getImage().getScaledCopy(chevronSize, chevronSize);
-		chevron.drawCentered((firstWidth - slopeImageSlopeWidth / 2) / 2, buttonYpos + paddingY * 1.5f);
+		chevron.drawCentered((firstWidth - (float) slopeImageSlopeWidth / 2) / 2, buttonYpos + paddingY * 1.5f);
 
 		// text
 		float textY = buttonYpos + paddingY - textOffset;

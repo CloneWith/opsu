@@ -478,12 +478,12 @@ public class OptionsOverlay extends AbstractComponent {
 		String title = "Options";
 		String subtitle = String.format("Change the way %s behaves", OpsuConstants.PROJECT_NAME);
 		Fonts.LARGE.drawString(
-			x + navButtonSize + (width - navButtonSize - Fonts.LARGE.getWidth(title)) / 2,
+			x + navButtonSize + (float) (width - navButtonSize - Fonts.LARGE.getWidth(title)) / 2,
 			(int) (y + textOptionsY - scrolling.getPosition()),
 			title, COLOR_WHITE
 		);
 		Fonts.MEDIUM.drawString(
-			x + navButtonSize + (width - navButtonSize - Fonts.MEDIUM.getWidth(subtitle)) / 2,
+			x + navButtonSize + (float) (width - navButtonSize - Fonts.MEDIUM.getWidth(subtitle)) / 2,
 			(int) (y + textChangeY - scrolling.getPosition()),
 			subtitle, COLOR_ACCENT
 		);
@@ -522,12 +522,12 @@ public class OptionsOverlay extends AbstractComponent {
 			searchText = lastSearchText;
 		int textWidth = width - navButtonSize;
 		if (!invalidSearchAnimation.isFinished())
-			g.rotate(navButtonSize + textWidth / 2, ypos, invalidProgress * invalidSearchTextRotation);
-		int searchTextX = (int) (x + navButtonSize + (width - navButtonSize - Fonts.LARGE.getWidth(searchText) - searchImg.getWidth() - 10) / 2);
+			g.rotate(navButtonSize + (float) textWidth / 2, ypos, invalidProgress * invalidSearchTextRotation);
+		int searchTextX = (int) (x + navButtonSize + (float) (width - navButtonSize - Fonts.LARGE.getWidth(searchText) - searchImg.getWidth() - 10) / 2);
 		Fonts.LARGE.drawString(searchTextX + searchImg.getWidth() + 10, ypos, searchText, searchColor);
 		g.resetTransform();
 		if (!invalidSearchAnimation.isFinished())
-			g.rotate(searchTextX + searchImg.getWidth() / 2, ypos, invalidProgress * invalidSearchImgRotation);
+			g.rotate(searchTextX + (float) searchImg.getWidth() / 2, ypos, invalidProgress * invalidSearchImgRotation);
 		searchImg.draw(
 			searchTextX,
 			ypos + Fonts.LARGE.getLineHeight() * 0.25f,
@@ -537,13 +537,13 @@ public class OptionsOverlay extends AbstractComponent {
 
 		// back arrow
 		backButton.setX(x + backButton.getImage().getWidth());
-		backButton.setY(y + textSearchYOffset + backButton.getImage().getHeight() / 2);
+		backButton.setY(y + textSearchYOffset + (float) backButton.getImage().getHeight() / 2);
 		backButton.draw(COLOR_WHITE);
 
 		// restart button
 		if (showRestartButton) {
 			restartButton.setX(x + width - restartButton.getImage().getWidth() * 1.5f);
-			restartButton.setY(y + textSearchYOffset + restartButton.getImage().getHeight() / 2);
+			restartButton.setY(y + textSearchYOffset + (float) restartButton.getImage().getHeight() / 2);
 			restartButton.draw(COLOR_WHITE);
 		}
 
@@ -567,10 +567,10 @@ public class OptionsOverlay extends AbstractComponent {
 			String prompt = keyEntryLeft ?
 				"Press the new left-click key." : "Press the new right-click key.";
 			String subtext = "Click anywhere or hit ESC to cancel.";
-			float promptY = (containerHeight - Fonts.XLARGE.getLineHeight() - Fonts.DEFAULT.getLineHeight()) / 2 - 2;
+			float promptY = (float) (containerHeight - Fonts.XLARGE.getLineHeight() - Fonts.DEFAULT.getLineHeight()) / 2 - 2;
 			float subtextY = promptY + Fonts.XLARGE.getLineHeight() + 2;
-			Fonts.XLARGE.drawString((containerWidth - Fonts.XLARGE.getWidth(prompt)) / 2, promptY, prompt);
-			Fonts.DEFAULT.drawString((containerWidth - Fonts.DEFAULT.getWidth(subtext)) / 2, subtextY, subtext);
+			Fonts.XLARGE.drawString((float) (containerWidth - Fonts.XLARGE.getWidth(prompt)) / 2, promptY, prompt);
+			Fonts.DEFAULT.drawString((float) (containerWidth - Fonts.DEFAULT.getWidth(subtext)) / 2, subtextY, subtext);
 		}
 	}
 
@@ -629,7 +629,7 @@ public class OptionsOverlay extends AbstractComponent {
 	 */
 	private void renderOptions(Graphics g) throws SlickException {
 		// render all headers and options
-		int cy = (int) (y + -scrolling.getPosition() + optionStartY);
+		int cy = (int) (y - scrolling.getPosition() + optionStartY);
 		int virtualY = 0;
 		for (OptionGroup group : groups) {
 			if (!group.isVisible())
@@ -816,13 +816,13 @@ public class OptionsOverlay extends AbstractComponent {
 		g.setLineWidth(3f);
 		g.setColor(COLOR_ACCENT);
 		if (sliderValue > 0.0001f)
-			g.drawLine(sliderStartX, cy + optionHeight / 2, sliderBallPos, cy + optionHeight / 2);
+			g.drawLine(sliderStartX, cy + (float) optionHeight / 2, sliderBallPos, cy + (float) optionHeight / 2);
 		sliderBallImg.draw(sliderBallPos, cy + controlImagePadding, COLOR_ACCENT);
 		if (sliderValue < 0.999f) {
 			float oldAlpha = COLOR_ACCENT.a;
 			COLOR_ACCENT.a *= 0.45f;
 			g.setColor(COLOR_ACCENT);
-			g.drawLine(sliderBallPos + controlImageSize + 1, cy + optionHeight / 2, sliderEndX, cy + optionHeight / 2);
+			g.drawLine(sliderBallPos + controlImageSize + 1, cy + (float) optionHeight / 2, sliderEndX, cy + (float) optionHeight / 2);
 			COLOR_ACCENT.a = oldAlpha;
 		}
 	}
@@ -972,7 +972,7 @@ public class OptionsOverlay extends AbstractComponent {
 			if (!group.isVisible())
 				continue;
 			virtualY += optionGroupPadding;
-			if (virtualY > Utils.clamp(scrolling.getPosition(), scrolling.getMin(), scrolling.getMax()) + height / 2)
+			if (virtualY > Utils.clamp(scrolling.getPosition(), scrolling.getMin(), scrolling.getMax()) + (float) height / 2)
 				return;
 			if (group.getOptions() == null) {
 				activeGroup = group;

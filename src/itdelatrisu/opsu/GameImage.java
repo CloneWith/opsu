@@ -20,16 +20,15 @@ package itdelatrisu.opsu;
 
 import itdelatrisu.opsu.options.Options;
 import itdelatrisu.opsu.ui.Fonts;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.util.Log;
 import org.newdawn.slick.util.ResourceLoader;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Game images.
@@ -780,7 +779,7 @@ public enum GameImage {
 					}
 				}
 				if (!list.isEmpty())
-					return list.toArray(new Image[list.size()]);
+					return list.toArray(new Image[0]);
 			}
 		}
 		return null;

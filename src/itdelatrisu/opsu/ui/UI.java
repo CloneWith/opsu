@@ -172,8 +172,8 @@ public class UI {
 	 */
 	public static void drawTab(float x, float y, String text, boolean selected, boolean isHover) {
 		Image tabImage = GameImage.MENU_TAB.getImage();
-		float tabTextX = x - (Fonts.MEDIUM.getWidth(text) / 2);
-		float tabTextY = y - (tabImage.getHeight() / 2);
+		float tabTextX = x - ((float) Fonts.MEDIUM.getWidth(text) / 2);
+		float tabTextY = y - ((float) tabImage.getHeight() / 2);
 		Color filter, textColor;
 		if (selected) {
 			filter = Color.white;
@@ -438,7 +438,7 @@ public class UI {
 	 */
 	private static void updateFPS(int delta){
 		// change frame rate when focus is lost/restored
-		boolean focus = (game.getCurrentStateID() == Opsu.STATE_GAME) ? true : container.hasFocus();
+		boolean focus = game.getCurrentStateID() == Opsu.STATE_GAME || container.hasFocus();
 		container.setTargetFrameRate(focus ? Options.getTargetFPS() : IDLE_FPS);
 
 		// update displayed FPS

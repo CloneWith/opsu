@@ -22,22 +22,17 @@ import itdelatrisu.opsu.GameImage;
 import itdelatrisu.opsu.Utils;
 import itdelatrisu.opsu.beatmap.HitObject;
 import itdelatrisu.opsu.objects.curves.Vec2f;
+import org.lwjgl.BufferUtils;
+import org.lwjgl.opengl.*;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.util.Log;
 
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.util.Iterator;
 import java.util.List;
-
-import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.EXTFramebufferObject;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL13;
-import org.lwjgl.opengl.GL15;
-import org.lwjgl.opengl.GL20;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.util.Log;
 
 /**
  * Hold the temporary render state that needs to be restored again after the new
@@ -386,10 +381,10 @@ public class LegacyCurveRenderState {
 		float divy = containerHeight / 2.0f;
 		float offx = -1.0f;
 		float offy = 1.0f;
-		float radius = scale / 2;
+		float radius = (float) scale / 2;
 
 		for (int i = 0; i < NewCurveStyleState.unitCone.length / 6; ++i) {
-			buff.put(NewCurveStyleState.unitCone[i * 6 + 0]);
+			buff.put(NewCurveStyleState.unitCone[i * 6]);
 			buff.put(NewCurveStyleState.unitCone[i * 6 + 1]);
 			buff.put(offx + (x1 + radius * NewCurveStyleState.unitCone[i * 6 + 2]) / divx);
 			buff.put(offy - (y1 + radius * NewCurveStyleState.unitCone[i * 6 + 3]) / divy);

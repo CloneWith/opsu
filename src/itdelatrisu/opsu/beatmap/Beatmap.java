@@ -339,9 +339,9 @@ public class Beatmap implements Comparable<Beatmap> {
 		bgImage = bgImage.getScaledCopy(swidth, sheight);
 		bgImage.setAlpha(alpha);
 		if (!Options.isParallaxEnabled() && offsetX == 0f && offsetY == 0f)
-			bgImage.drawCentered(width / 2, height / 2);
+			bgImage.drawCentered((float) width / 2, (float) height / 2);
 		else
-			bgImage.drawCentered(width / 2 + offsetX, height / 2 + offsetY);
+			bgImage.drawCentered((float) width / 2 + offsetX, (float) height / 2 + offsetY);
 		return true;
 	}
 
@@ -477,7 +477,7 @@ public class Beatmap implements Comparable<Beatmap> {
 			colors.add(new Color(Integer.parseInt(rgb[0]), Integer.parseInt(rgb[1]), Integer.parseInt(rgb[2])));
 		}
 		if (!colors.isEmpty())
-			this.combo = colors.toArray(new Color[colors.size()]);
+			this.combo = colors.toArray(new Color[0]);
 	}
 
 	/**

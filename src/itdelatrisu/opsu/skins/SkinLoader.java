@@ -49,7 +49,7 @@ public class SkinLoader {
 			if (dir.isDirectory())
 				dirs.add(dir);
 		}
-		return dirs.toArray(new File[dirs.size()]);
+		return dirs.toArray(new File[0]);
 	}
 
 	/**
@@ -225,7 +225,7 @@ public class SkinLoader {
 						}
 					}
 					if (!colors.isEmpty())
-						skin.combo = colors.toArray(new Color[colors.size()]);
+						skin.combo = colors.toArray(new Color[0]);
 					break;
 				case "[Fonts]":
 					while ((line = in.readLine()) != null) {

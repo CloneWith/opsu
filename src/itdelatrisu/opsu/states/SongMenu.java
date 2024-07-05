@@ -397,7 +397,7 @@ public class SongMenu extends BasicGameState {
 
 		// initialize group tabs
 		for (BeatmapGroup group : BeatmapGroup.values())
-			group.init(width, headerY - DIVIDER_LINE_WIDTH / 2);
+			group.init(width, headerY - (float) DIVIDER_LINE_WIDTH / 2);
 
 		// initialize score data buttons
 		ScoreData.init(width, headerY + height * 0.01f);
@@ -462,7 +462,7 @@ public class SongMenu extends BasicGameState {
 		});
 
 		// star stream
-		starStream = new StarStream(width, (height - GameImage.STAR.getImage().getHeight()) / 2, -width, 0, MAX_STREAM_STARS);
+		starStream = new StarStream(width, (float) (height - GameImage.STAR.getImage().getHeight()) / 2, -width, 0, MAX_STREAM_STARS);
 		starStream.setPositionSpread(height / 20f);
 		starStream.setDirectionSpread(10f);
 
@@ -503,8 +503,8 @@ public class SongMenu extends BasicGameState {
 		float parallaxX = 0, parallaxY = 0;
 		if (Options.isParallaxEnabled()) {
 			int offset = (int) (height * (GameImage.PARALLAX_SCALE - 1f));
-			parallaxX = -offset / 2f * (mouseX - width / 2) / (width / 2);
-			parallaxY = -offset / 2f * (mouseY - height / 2) / (height / 2);
+			parallaxX = -offset / 2f * (mouseX - (float) width / 2) / ((float) width / 2);
+			parallaxY = -offset / 2f * (mouseY - (float) height / 2) / ((float) height / 2);
 		}
 		if (!lastBgAlpha.isFinished() && lastFadeBeatmap != null && lastFadeBeatmap.hasLoadedBackground())
 			lastFadeBeatmap.drawBackground(width, height, parallaxX, parallaxY, lastBgAlpha.getValue(), true);
@@ -513,10 +513,10 @@ public class SongMenu extends BasicGameState {
 			if (Options.isParallaxEnabled()) {
 				bg = bg.getScaledCopy(GameImage.PARALLAX_SCALE);
 				bg.setAlpha(playfieldAlpha.getValue());
-				bg.drawCentered(width / 2 + parallaxX, height / 2 + parallaxY);
+				bg.drawCentered((float) width / 2 + parallaxX, (float) height / 2 + parallaxY);
 			} else {
 				bg.setAlpha(playfieldAlpha.getValue());
-				bg.drawCentered(width / 2, height / 2);
+				bg.drawCentered((float) width / 2, (float) height / 2);
 				bg.setAlpha(1f);
 			}
 		}
@@ -533,12 +533,12 @@ public class SongMenu extends BasicGameState {
 			node = node.prev;
 			songButtonIndex = -1;
 		}
-		g.setClip(0, (int) (headerY + DIVIDER_LINE_WIDTH / 2), width, (int) (footerY - headerY));
+		g.setClip(0, (int) (headerY + (float) DIVIDER_LINE_WIDTH / 2), width, (int) (footerY - headerY));
 		for (int i = startNodeOffset + songButtonIndex; i < MAX_SONG_BUTTONS + 1 && node != null; i++, node = node.next) {
 			// draw the node
 			float offset = (node == hoverIndex) ? hoverOffset.getValue() : 0f;
 			float ypos = buttonY + (i * buttonOffset);
-			float mid = (height / 2) - ypos - (buttonOffset / 2);
+			float mid = ((float) height / 2) - ypos - (buttonOffset / 2);
 			final float circleRadi = 700 * GameImage.getUIscale();
 			//finds points along a very large circle  (x^2 = h^2 - y^2)
 			float t = circleRadi * circleRadi - (mid * mid);
@@ -558,7 +558,7 @@ public class SongMenu extends BasicGameState {
 						songScrolling.getPosition(),
 						totalNodes * buttonOffset,
 						MAX_SONG_BUTTONS * buttonOffset,
-						width, headerY + DIVIDER_LINE_WIDTH / 2,
+						width, headerY + (float) DIVIDER_LINE_WIDTH / 2,
 						0, MAX_SONG_BUTTONS * buttonOffset,
 						Colors.BLACK_ALPHA, Color.white, true);
 			}
@@ -580,7 +580,7 @@ public class SongMenu extends BasicGameState {
 					continue;
 				long prevScore = (rank + 1 < focusScores.length) ? focusScores[rank + 1].score : -1;
 				boolean focus = ScoreData.buttonContains(mouseX, mouseY - offset, i) && !showOptionsOverlay && !showUserOverlay;
-				float t = Utils.clamp((time - (i * (duration - segmentDuration) / scoreButtons)) / (float) segmentDuration, 0f, 1f);
+				float t = Utils.clamp((time - ((float) (i * (duration - segmentDuration)) / scoreButtons)) / (float) segmentDuration, 0f, 1f);
 				focusScores[rank].draw(g, offset + i * ScoreData.getButtonOffset(), rank, prevScore, focus, t);
 			}
 			g.clearClip();
@@ -735,7 +735,7 @@ public class SongMenu extends BasicGameState {
 			Colors.BLACK_ALPHA.a = 0.15f + searchProgress * 0.15f;
 		}
 		g.setColor(Colors.BLACK_ALPHA);
-		g.fillRect(searchBaseX, headerY + DIVIDER_LINE_WIDTH / 2, width - searchBaseX, searchRectHeight);
+		g.fillRect(searchBaseX, headerY + (float) DIVIDER_LINE_WIDTH / 2, width - searchBaseX, searchRectHeight);
 		Colors.BLACK_ALPHA.a = oldAlpha;
 		Fonts.BOLD.drawString(searchTextX, searchY, "Search:", Colors.GREEN_SEARCH);
 		if (searchEmpty)
@@ -1737,7 +1737,7 @@ public class SongMenu extends BasicGameState {
 
 		// change the scroll position
 		float position = buttonOffset *
-			(focusNode.index + focusNode.beatmapIndex - MAX_SONG_BUTTONS / 2 +
+			(focusNode.index + focusNode.beatmapIndex - (float) MAX_SONG_BUTTONS / 2 +
 			0.5f * ((MAX_SONG_BUTTONS + 1) % 2));
 		if (startNode == null || game.getCurrentStateID() != Opsu.STATE_SONGMENU)
 			songScrolling.setPosition(position);
@@ -1908,7 +1908,7 @@ public class SongMenu extends BasicGameState {
 	 * @param y the y coordinate (will be clamped)
 	 */
 	private void scrollSongsToPosition(int y) {
-		float scrollBase = headerY + DIVIDER_LINE_WIDTH / 2;
+		float scrollBase = headerY + (float) DIVIDER_LINE_WIDTH / 2;
 		float scrollHeight = MAX_SONG_BUTTONS * buttonOffset;
 		float t = Utils.clamp((y - scrollBase) / scrollHeight, 0f, 1f);
 		songScrolling.scrollToPosition(songScrolling.getMin() + t * (songScrolling.getMax() - songScrolling.getMin()));

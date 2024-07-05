@@ -189,10 +189,10 @@ public class MainMenu extends BasicGameState {
 		float exitOffset = (playImg.getWidth() - exitImg.getWidth()) / 3f;
 		logo = new MenuButton(logoImg, width / 2f, height / 2f);
 		playButton = new MenuButton(playImg,
-			width * 0.75f, (height / 2) - (logoImg.getHeight() / 5f)
+			width * 0.75f, ((float) height / 2) - (logoImg.getHeight() / 5f)
 		);
 		exitButton = new MenuButton(exitImg,
-			width * 0.75f - exitOffset, (height / 2) + (exitImg.getHeight() / 2f)
+			width * 0.75f - exitOffset, ((float) height / 2) + (exitImg.getHeight() / 2f)
 		);
 		final int logoAnimationDuration = 350;
 		logo.setHoverAnimationDuration(logoAnimationDuration);
@@ -321,8 +321,8 @@ public class MainMenu extends BasicGameState {
 		float parallaxX = 0, parallaxY = 0;
 		if (Options.isParallaxEnabled()) {
 			int offset = (int) (height * (GameImage.PARALLAX_SCALE - 1f));
-			parallaxX = -offset / 2f * (mouseX - width / 2) / (width / 2);
-			parallaxY = -offset / 2f * (mouseY - height / 2) / (height / 2);
+			parallaxX = -offset / 2f * (mouseX - (float) width / 2) / ((float) width / 2);
+			parallaxY = -offset / 2f * (mouseY - (float) height / 2) / ((float) height / 2);
 		}
 		if (Options.isDynamicBackgroundEnabled() && beatmap != null &&
 			beatmap.drawBackground(width, height, parallaxX, parallaxY, bgAlpha.getValue(), true))
@@ -332,10 +332,10 @@ public class MainMenu extends BasicGameState {
 			if (Options.isParallaxEnabled()) {
 				bg = bg.getScaledCopy(GameImage.PARALLAX_SCALE);
 				bg.setAlpha(bgAlpha.getValue());
-				bg.drawCentered(width / 2 + parallaxX, height / 2 + parallaxY);
+				bg.drawCentered((float) width / 2 + parallaxX, (float) height / 2 + parallaxY);
 			} else {
 				bg.setAlpha(bgAlpha.getValue());
-				bg.drawCentered(width / 2, height / 2);
+				bg.drawCentered((float) width / 2, (float) height / 2);
 			}
 		}
 
@@ -400,7 +400,7 @@ public class MainMenu extends BasicGameState {
 			Colors.WHITE_FADE.a = t;
 			Fonts.MEDIUM.drawString(
 				width - margin - sWidth + animX,
-				musicInfoImg.getHeight() / 2 - Fonts.MEDIUM.getLineHeight() / 2,
+				(float) musicInfoImg.getHeight() / 2 - (float) Fonts.MEDIUM.getLineHeight() / 2,
 				s, Colors.WHITE_FADE);
 			Colors.WHITE_FADE.a = oldWhiteAlpha;
 		}
@@ -816,7 +816,6 @@ public class MainMenu extends BasicGameState {
 			if (logo.contains(x, y, 0.25f)) {
 				SoundController.playSound(SoundEffect.MENUHIT);
 				openLogoMenu();
-				return;
 			}
 		}
 
@@ -825,10 +824,8 @@ public class MainMenu extends BasicGameState {
 			if (logo.contains(x, y, 0.25f) || playButton.contains(x, y, 0.25f)) {
 				SoundController.playSound(SoundEffect.MENUHIT);
 				enterSongMenu();
-				return;
 			} else if (exitButton.contains(x, y, 0.25f)) {
 				container.exit();
-				return;
 			}
 		}
 	}
@@ -927,7 +924,7 @@ public class MainMenu extends BasicGameState {
 	 */
 	public void reset() {
 		// reset logo
-		logo.setX(container.getWidth() / 2);
+		logo.setX((float) container.getWidth() / 2);
 		logoOpen.setTime(0);
 		logoClose.setTime(0);
 		logoButtonAlpha.setTime(0);

@@ -23,13 +23,11 @@ import itdelatrisu.opsu.Utils;
 import itdelatrisu.opsu.objects.curves.Vec2f;
 import itdelatrisu.opsu.ui.animations.AnimatedValue;
 import itdelatrisu.opsu.ui.animations.AnimationEquation;
+import org.newdawn.slick.Image;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
-
-import org.newdawn.slick.Image;
 
 /**
  * Star stream.

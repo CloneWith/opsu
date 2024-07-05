@@ -21,23 +21,14 @@ import itdelatrisu.opsu.GameImage;
 import itdelatrisu.opsu.Utils;
 import itdelatrisu.opsu.beatmap.HitObject;
 import itdelatrisu.opsu.objects.curves.Vec2f;
-
-import java.nio.ByteBuffer;
-import java.nio.FloatBuffer;
-
 import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.ContextCapabilities;
-import org.lwjgl.opengl.EXTFramebufferObject;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-import org.lwjgl.opengl.GL14;
-import org.lwjgl.opengl.GL15;
-import org.lwjgl.opengl.GL20;
-import org.lwjgl.opengl.GL30;
-import org.lwjgl.opengl.GLContext;
+import org.lwjgl.opengl.*;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.util.Log;
+
+import java.nio.ByteBuffer;
+import java.nio.FloatBuffer;
 
 /**
  * Hold the temporary render state that needs to be restored again after the new
@@ -208,7 +199,7 @@ public class CurveRenderState {
 	 * @param bufferID the buffer ID for the OpenGL buffer the vertices should be written into
 	 */
 	private void createVertexBuffer(int bufferID) {
-		float radius = scale / 2;
+		float radius = (float) scale / 2;
 		int triangle_count = NewCurveStyleState.DIVIDES; // for curve caps
 		float last_dx=0, last_dy=0;
 		float last_alpha = 0;
@@ -225,8 +216,8 @@ public class CurveRenderState {
 
 				if (i > 1) {
 					float theta = alpha - last_alpha;
-					if (theta > Math.PI) theta -= 2*Math.PI;
-					if (theta < -Math.PI) theta += 2*Math.PI;
+					if (theta > Math.PI) theta -= (float) (2*Math.PI);
+					if (theta < -Math.PI) theta += (float) (2*Math.PI);
 
 					if (Math.abs(theta) < 2*Math.PI / NewCurveStyleState.DIVIDES) {
 						triangle_count++;
@@ -273,8 +264,8 @@ public class CurveRenderState {
 				if (i > 1) {
 					float cross = last_dx * diff_y - last_dy * diff_x;
 					float theta = alpha - last_alpha;
-					if (theta > Math.PI) theta -= 2*Math.PI;
-					if (theta < -Math.PI) theta += 2*Math.PI;
+					if (theta > Math.PI) theta -= (float) (2*Math.PI);
+					if (theta < -Math.PI) theta += (float) (2*Math.PI);
 
 					if (Math.abs(theta) < 2*Math.PI / NewCurveStyleState.DIVIDES) { // small angle, just render single triangle
 						if (cross > 0) { // going counterclockwise

@@ -21,14 +21,12 @@ package itdelatrisu.opsu.beatmap;
 import itdelatrisu.opsu.GameImage;
 import itdelatrisu.opsu.ui.MenuButton;
 import itdelatrisu.opsu.ui.UI;
+import org.newdawn.slick.Image;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.PriorityQueue;
-
-import org.newdawn.slick.Image;
 
 /**
  * Beatmap groups.
@@ -68,9 +66,7 @@ public enum BeatmapGroup {
 			}
 
 			// return as list
-			ArrayList<BeatmapSetNode> filteredList = new ArrayList<>();
-			for (BeatmapSetNode node : pq)
-				filteredList.add(node);
+			ArrayList<BeatmapSetNode> filteredList = new ArrayList<>(pq);
 			return filteredList;
 		}
 	},

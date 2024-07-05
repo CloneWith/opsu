@@ -184,7 +184,7 @@ public class Replay {
 				Log.warn(String.format("Failed to load life frame: '%s'", frame), e);
 			}
 		}
-		this.lifeFrames = lifeFrameList.toArray(new LifeFrame[lifeFrameList.size()]);
+		this.lifeFrames = lifeFrameList.toArray(new LifeFrame[0]);
 
 		// timestamp
 		this.timestamp = reader.readDate();
@@ -219,7 +219,7 @@ public class Replay {
 					Log.warn(String.format("Failed to parse frame: '%s'", frame), e);
 				}
 			}
-			this.frames = replayFrameList.toArray(new ReplayFrame[replayFrameList.size()]);
+			this.frames = replayFrameList.toArray(new ReplayFrame[0]);
 		}
 	}
 

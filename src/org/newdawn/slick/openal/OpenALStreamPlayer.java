@@ -368,7 +368,7 @@ public class OpenALStreamPlayer {
 			}
 
 			playedPos = streamPos;
-			syncStartTime = (long) (getTime() - (playedPos * 1000 / sampleSize / sampleRate) / pitch);
+			syncStartTime = (long) (getTime() - ((float) (playedPos * 1000) / sampleSize / sampleRate) / pitch);
 
 			startPlayback();
 
