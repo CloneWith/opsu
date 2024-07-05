@@ -20,15 +20,14 @@ package itdelatrisu.opsu.beatmap;
 
 import itdelatrisu.opsu.GameImage;
 import itdelatrisu.opsu.options.Options;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.util.Log;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Map;
-
-import org.newdawn.slick.Color;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.util.Log;
 
 /**
  * Beatmap structure storing data parsed from OSU files.
@@ -61,7 +60,7 @@ public class Beatmap implements Comparable<Beatmap> {
 	public static void clearBackgroundImageCache() { bgImageCache.clear(); }
 
 	/** The OSU File object associated with this beatmap. */
-	private File file;
+	private final File file;
 
 	/** MD5 hash of this file. */
 	public String md5Hash;
@@ -84,18 +83,13 @@ public class Beatmap implements Comparable<Beatmap> {
 	/** The local music offset. */
 	public int localMusicOffset = 0;
 
-	/**
-	 * [General]
-	 */
-
 	/** Audio file object. */
 	public File audioFilename;
 
 	/** Delay time before music starts (in ms). */
 	public int audioLeadIn = 0;
 
-	/** Audio hash (deprecated). */
-//	public String audioHash = "";
+	//	public String audioHash = "";
 
 	/** Start position of music preview (in ms). */
 	public int previewTime = -1;
@@ -121,28 +115,15 @@ public class Beatmap implements Comparable<Beatmap> {
 	/** Whether to show an epilepsy warning. */
 	public boolean epilepsyWarning = false;
 
-	/**
-	 * [Editor]
-	 */
+	//	public int[] bookmarks;
 
-	/** List of editor bookmarks (in ms). */
-//	public int[] bookmarks;
+	//	public float distanceSpacing = 0f;
 
-	/** Multiplier for "Distance Snap". */
-//	public float distanceSpacing = 0f;
+	//	public byte beatDivisor = 0;
 
-	/** Beat division. */
-//	public byte beatDivisor = 0;
+	//	public int gridSize = 0;
 
-	/** Size of grid for "Grid Snap". */
-//	public int gridSize = 0;
-
-	/** Zoom in the editor timeline. */
-//	public int timelineZoom = 0;
-
-	/**
-	 * [Metadata]
-	 */
+	//	public int timelineZoom = 0;
 
 	/** Song title. */
 	public String title = "", titleUnicode = "";
@@ -168,10 +149,6 @@ public class Beatmap implements Comparable<Beatmap> {
 	/** Beatmap set ID. */
 	public int beatmapSetID = 0;
 
-	/**
-	 * [Difficulty]
-	 */
-
 	/** HP: Health drain rate (0:easy ~ 10:hard) */
 	public float HPDrainRate = 5f;
 
@@ -190,10 +167,6 @@ public class Beatmap implements Comparable<Beatmap> {
 	/** Rate at which slider ticks are placed (x per beat). */
 	public float sliderTickRate = 1f;
 
-	/**
-	 * [Events]
-	 */
-
 	/** Background image file. */
 	public File bg;
 
@@ -206,29 +179,17 @@ public class Beatmap implements Comparable<Beatmap> {
 	/** All break periods (start time, end time, ...). */
 	public ArrayList<Integer> breaks;
 
-	/**
-	 * [TimingPoints]
-	 */
-
 	/** All timing points. */
 	public ArrayList<TimingPoint> timingPoints;
 
 	/** Song BPM range. */
 	public int bpmMin = 0, bpmMax = 0;
 
-	/**
-	 * [Colours]
-	 */
-
 	/** Combo colors (max 8). If null, the skin value is used. */
 	public Color[] combo;
 
 	/** Slider border color. If null, the skin value is used. */
 	public Color sliderBorder;
-
-	/**
-	 * [HitObjects]
-	 */
 
 	/** All hit objects. */
 	public HitObject[] objects;
@@ -423,7 +384,7 @@ public class Beatmap implements Comparable<Beatmap> {
 			sb.append(i);
 			sb.append(',');
 		}
-		if (sb.length() > 0)
+		if (!sb.isEmpty())
 			sb.setLength(sb.length() - 1);
 		return sb.toString();
 	}
@@ -454,7 +415,7 @@ public class Beatmap implements Comparable<Beatmap> {
 			sb.append(p.toString());
 			sb.append('|');
 		}
-		if (sb.length() > 0)
+		if (!sb.isEmpty())
 			sb.setLength(sb.length() - 1);
 		return sb.toString();
 	}
@@ -496,7 +457,7 @@ public class Beatmap implements Comparable<Beatmap> {
 			sb.append(c.getBlue());
 			sb.append('|');
 		}
-		if (sb.length() > 0)
+		if (!sb.isEmpty())
 			sb.setLength(sb.length() - 1);
 		return sb.toString();
 	}

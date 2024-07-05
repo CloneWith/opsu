@@ -21,11 +21,11 @@ package itdelatrisu.opsu.objects.curves;
 /**
  * Representation of a Bezier curve with the distance between each point calculated.
  *
- * @author fluddokt (https://github.com/fluddokt)
+ * @author fluddokt (<a href="https://github.com/fluddokt">...</a>)
  */
 public class Bezier2 extends CurveType {
 	/** The control points of the Bezier curve. */
-	private Vec2f[] points;
+	private final Vec2f[] points;
 
 	/**
 	 * Constructor.
@@ -59,7 +59,7 @@ public class Bezier2 extends CurveType {
 
 	/**
 	 * Calculates the binomial coefficient.
-	 * http://en.wikipedia.org/wiki/Binomial_coefficient#Binomial_coefficient_in_programming_languages
+	 * <a href="http://en.wikipedia.org/wiki/Binomial_coefficient#Binomial_coefficient_in_programming_languages">...</a>
 	 */
 	private static long binomialCoefficient(int n, int k) {
 		if (k < 0 || k > n)

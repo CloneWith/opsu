@@ -25,7 +25,7 @@ import java.util.LinkedList;
 /**
  * Representation of Catmull Curve with equidistant points.
  *
- * @author fluddokt (https://github.com/fluddokt)
+ * @author fluddokt (<a href="https://github.com/fluddokt">...</a>)
  */
 public class CatmullCurve extends EqualDistanceMultiCurve {
 	/**

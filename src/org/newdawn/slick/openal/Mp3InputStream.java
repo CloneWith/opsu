@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2013, Slick2D
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  * - Redistributions of source code must retain the above copyright notice,
@@ -12,7 +12,7 @@
  * - Neither the name of the Slick2D nor the names of its contributors may be
  *   used to endorse or promote products derived from this software without
  *   specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -28,41 +28,35 @@
 
 package org.newdawn.slick.openal;
 
+import javazoom.jl.decoder.*;
+import org.newdawn.slick.util.Log;
+
 import java.io.IOException;
 import java.io.InputStream;
-
-import javazoom.jl.decoder.Bitstream;
-import javazoom.jl.decoder.BitstreamException;
-import javazoom.jl.decoder.Decoder;
-import javazoom.jl.decoder.DecoderException;
-import javazoom.jl.decoder.Header;
-import javazoom.jl.decoder.SampleBuffer;
-
-import org.newdawn.slick.util.Log;
 
 /**
  * An input stream that can extract MP3 data.
  *
- * @author fluddokt (https://github.com/fluddokt)
+ * @author fluddokt (<a href="https://github.com/fluddokt">...</a>)
  */
 public class Mp3InputStream extends InputStream implements AudioInputStream {
 	/** The MPEG audio bitstream. */
-	private Bitstream bitstream;
+	private final Bitstream bitstream;
 
 	/** The MPEG decoder. */
-	private Decoder decoder;
+	private final Decoder decoder;
 
 	/** The frame header extractor. */
 	private Header header;
 
 	/** The buffer. */
-	private SampleBuffer buf;
+	private final SampleBuffer buf;
 
 	/** The number of channels. */
-	private int channels;
+	private final int channels;
 
 	/** The sample rate. */
-	private int sampleRate;
+	private final int sampleRate;
 
 	/** The buffer length. */
 	private int bufLen = 0;

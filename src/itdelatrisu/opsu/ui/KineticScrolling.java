@@ -20,9 +20,9 @@ package itdelatrisu.opsu.ui;
 
 /**
  * Drag to scroll based on:
- * http://ariya.ofilabs.com/2013/11/javascript-kinetic-scrolling-part-2.html
+ * <a href="http://ariya.ofilabs.com/2013/11/javascript-kinetic-scrolling-part-2.html">...</a>
  *
- * @author fluddokt (https://github.com/fluddokt)
+ * @author fluddokt (<a href="https://github.com/fluddokt">...</a>)
  */
 public class KineticScrolling {
 	/** The moving averaging constant. */

@@ -32,22 +32,16 @@ import itdelatrisu.opsu.ui.MenuButton;
 import itdelatrisu.opsu.ui.UI;
 import itdelatrisu.opsu.ui.animations.AnimatedValue;
 import itdelatrisu.opsu.ui.animations.AnimationEquation;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
 import org.lwjgl.opengl.Display;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.Input;
-import org.newdawn.slick.SlickException;
+import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.EasedFadeOutTransition;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.util.Log;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /**
  * "Game Ranking" (score card) state.
@@ -67,7 +61,7 @@ public class GameRanking extends BasicGameState {
 	private float retryY, replayY;
 
 	/** Animation progress. */
-	private AnimatedValue animationProgress = new AnimatedValue(6000, 0f, 1f, AnimationEquation.LINEAR);
+	private final AnimatedValue animationProgress = new AnimatedValue(6000, 0f, 1f, AnimationEquation.LINEAR);
 
 	/** The loaded replay, or null if it couldn't be loaded. */
 	private Replay replay = null;

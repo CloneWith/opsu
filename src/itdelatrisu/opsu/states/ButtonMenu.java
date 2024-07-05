@@ -18,13 +18,7 @@
 
 package itdelatrisu.opsu.states;
 
-import itdelatrisu.opsu.ErrorHandler;
-import itdelatrisu.opsu.GameImage;
-import itdelatrisu.opsu.GameMod;
-import itdelatrisu.opsu.Opsu;
-import itdelatrisu.opsu.OpsuConstants;
-import itdelatrisu.opsu.ScoreData;
-import itdelatrisu.opsu.Utils;
+import itdelatrisu.opsu.*;
 import itdelatrisu.opsu.audio.MusicController;
 import itdelatrisu.opsu.audio.SoundController;
 import itdelatrisu.opsu.audio.SoundEffect;
@@ -36,22 +30,19 @@ import itdelatrisu.opsu.ui.MenuButton;
 import itdelatrisu.opsu.ui.UI;
 import itdelatrisu.opsu.ui.animations.AnimatedValue;
 import itdelatrisu.opsu.ui.animations.AnimationEquation;
-
-import java.awt.Desktop;
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.newdawn.slick.Color;
-import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.Input;
-import org.newdawn.slick.SlickException;
+import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.EmptyTransition;
 import org.newdawn.slick.state.transition.FadeInTransition;
+
+import java.awt.*;
+import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Generic button menu state.
@@ -456,7 +447,7 @@ public class ButtonMenu extends BasicGameState {
 		 */
 		public void leave(GameContainer container, StateBasedGame game) {
 		}
-	};
+	}
 
 	/** Button types. */
 	private enum Button {

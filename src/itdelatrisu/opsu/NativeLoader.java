@@ -20,11 +20,7 @@ package itdelatrisu.opsu;
 
 import itdelatrisu.opsu.video.FFmpeg;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.util.Enumeration;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -32,7 +28,7 @@ import java.util.jar.JarFile;
 /**
  * Native loader, based on the JarSplice launcher.
  *
- * @author http://ninjacave.com
+ * @author <a href="https://ninjacave.com">ninjacave</a>
  */
 public class NativeLoader {
 	/** The directory to unpack natives to. */

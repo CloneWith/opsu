@@ -35,10 +35,10 @@ public class FrameBufferCache {
 	private static FrameBufferCache instance = null;
 
 	/** The mapping from hit objects to framebuffers. */
-	private Map<HitObject, Rendertarget> cacheMap;
+	private final Map<HitObject, Rendertarget> cacheMap;
 
 	/** */
-	private ArrayList<Rendertarget> cache;
+	private final ArrayList<Rendertarget> cache;
 
 	/** Container dimensions. */
 	public static int width, height;

@@ -26,7 +26,6 @@ import itdelatrisu.opsu.render.CurveRenderState;
 import itdelatrisu.opsu.render.LegacyCurveRenderState;
 import itdelatrisu.opsu.skins.Skin;
 import itdelatrisu.opsu.ui.Colors;
-
 import org.lwjgl.opengl.ContextCapabilities;
 import org.lwjgl.opengl.GLContext;
 import org.newdawn.slick.Color;
@@ -36,7 +35,7 @@ import org.newdawn.slick.util.Log;
 /**
  * Representation of a curve.
  *
- * @author fluddokt (https://github.com/fluddokt)
+ * @author fluddokt (<a href="https://github.com/fluddokt">...</a>)
  */
 public abstract class Curve {
 	/** Points generated along the curve should be spaced this far apart. */

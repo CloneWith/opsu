@@ -23,26 +23,13 @@ import itdelatrisu.opsu.Utils;
 import itdelatrisu.opsu.db.BeatmapDB;
 import itdelatrisu.opsu.io.MD5InputStreamWrapper;
 import itdelatrisu.opsu.options.Options;
-
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileReader;
-import java.io.FilenameFilter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
 import org.newdawn.slick.Color;
 import org.newdawn.slick.util.Log;
+
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.security.NoSuchAlgorithmException;
+import java.util.*;
 
 /**
  * Parser for beatmaps.
@@ -64,7 +51,7 @@ public class BeatmapParser {
 	private static int totalDirectories = -1;
 
 	/** Parser statuses. */
-	public enum Status { NONE, PARSING, CACHE, INSERTING };
+	public enum Status { NONE, PARSING, CACHE, INSERTING }
 
 	/** The current status. */
 	private static Status status = Status.NONE;
@@ -169,7 +156,7 @@ public class BeatmapParser {
 								cachedBeatmaps.add(beatmap);
 							}
 							continue;
-						} else  // out of sync, delete cache entry and re-parse
+						} else  // out of sync, delete cache entry and reparse
 							BeatmapDB.delete(dir.getName(), file.getName());
 					}
 				}
@@ -263,10 +250,10 @@ public class BeatmapParser {
 		try (
 			InputStream bis = new BufferedInputStream(new FileInputStream(file));
 			MD5InputStreamWrapper md5stream = (!hasNoMD5Algorithm) ? new MD5InputStreamWrapper(bis) : null;
-			BufferedReader in = new BufferedReader(new InputStreamReader((md5stream != null) ? md5stream : bis, "UTF-8"));
+			BufferedReader in = new BufferedReader(new InputStreamReader((md5stream != null) ? md5stream : bis, StandardCharsets.UTF_8))
 		) {
 			String line = in.readLine();
-			String tokens[] = null;
+			String[] tokens = null;
 			while (line != null) {
 				line = line.trim();
 				if (!isValidLine(line)) {
@@ -685,7 +672,7 @@ public class BeatmapParser {
 					break;
 			}
 			if (line == null) {
-				Log.warn(String.format("No hit objects found in Beatmap '%s'.", beatmap.toString()));
+				Log.warn(String.format("No hit objects found in Beatmap '%s'.", beatmap));
 				return;
 			}
 
@@ -730,14 +717,14 @@ public class BeatmapParser {
 					beatmap.objects[objectIndex++] = hitObject;
 				} catch (Exception e) {
 					Log.warn(String.format("Failed to read hit object '%s' for beatmap '%s'.",
-							line, beatmap.toString()), e);
+							line, beatmap), e);
 				}
 			}
 
 			// check that all objects were parsed
 			if (objectIndex != beatmap.objects.length)
 				ErrorHandler.error(String.format("Parsed %d objects for beatmap '%s', %d objects expected.",
-						objectIndex, beatmap.toString(), beatmap.objects.length), null, true);
+						objectIndex, beatmap, beatmap.objects.length), null, true);
 		} catch (IOException e) {
 			ErrorHandler.error(String.format("Failed to read file '%s'.", beatmap.getFile().getAbsolutePath()), e, false);
 		}

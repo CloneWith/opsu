@@ -21,24 +21,16 @@ package itdelatrisu.opsu.audio;
 import itdelatrisu.opsu.ErrorHandler;
 import itdelatrisu.opsu.Utils;
 
+import javax.sound.sampled.*;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.DataLine;
-import javax.sound.sampled.FloatControl;
-import javax.sound.sampled.LineListener;
-import javax.sound.sampled.LineUnavailableException;
-
 /**
  * Extension of Clip that allows playing multiple copies of a Clip simultaneously.
- * http://stackoverflow.com/questions/1854616/
+ * <a href="http://stackoverflow.com/questions/1854616/">...</a>
  *
- * @author fluddokt (https://github.com/fluddokt)
+ * @author fluddokt (<a href="https://github.com/fluddokt">GitHub</a>)
  */
 public class MultiClip {
 	/** Maximum number of extra clips that can be created at one time. */
@@ -60,7 +52,7 @@ public class MultiClip {
 	private LinkedList<Clip> clips = new LinkedList<>();
 
 	/** The audio input stream. */
-	private AudioInputStream audioIn;
+	private final AudioInputStream audioIn;
 
 	/** The format of this audio sample. */
 	private AudioFormat format;
@@ -227,7 +219,7 @@ public class MultiClip {
 	 * Destroys the MultiClip and releases all resources.
 	 */
 	public void destroy() {
-		if (clips.size() > 0) {
+		if (!clips.isEmpty()) {
 			for (Clip c : clips) {
 				c.stop();
 				c.flush();

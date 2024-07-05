@@ -21,16 +21,16 @@ package itdelatrisu.opsu.objects.curves;
 /**
  * Representation of a Centripetal Catmull–Rom spline.
  * (Currently not technically Centripetal Catmull–Rom.)
- * http://en.wikipedia.org/wiki/Centripetal_Catmull%E2%80%93Rom_spline
+ * <a href="http://en.wikipedia.org/wiki/Centripetal_Catmull%E2%80%93Rom_spline">...</a>
  *
- * @author fluddokt (https://github.com/fluddokt)
+ * @author fluddokt (<a href="https://github.com/fluddokt">...</a>)
  */
 public class CentripetalCatmullRom extends CurveType {
 	/** The time values of the Catmull curve. */
-	private float [] time;
+	private final float [] time;
 
 	/** The control points of the Catmull curve. */
-	private Vec2f[] points;
+	private final Vec2f[] points;
 
 	/**
 	 * Constructor.

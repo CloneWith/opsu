@@ -20,26 +20,20 @@ package itdelatrisu.opsu;
 
 import itdelatrisu.opsu.options.Options;
 import itdelatrisu.opsu.ui.UI;
-
-import java.awt.Cursor;
-import java.awt.Desktop;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.io.UnsupportedEncodingException;
-import java.net.URI;
-import java.net.URLEncoder;
-import java.util.Properties;
-
-import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.UIManager;
-
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.util.Log;
 import org.newdawn.slick.util.ResourceLoader;
+
+import javax.swing.*;
+import java.awt.*;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.net.URI;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.Properties;
 
 /**
  * Error handler to log and display errors.
@@ -90,15 +84,14 @@ public class ErrorHandler {
 			String glVersion = GL11.glGetString(GL11.GL_VERSION);
 			String glVendor = GL11.glGetString(GL11.GL_VENDOR);
 			glString = String.format("%s (%s)", glVersion, glVendor);
-		} catch (Exception e) {
-		}
+		} catch (Exception ignored) { }
 	}
 
 	/**
 	 * Displays an error bar notification and logs the given error.
 	 *
 	 * @author CloneWith
-	 * @param error  a description of the error
+	 * @param des	a description of the error
 	 * @param e      the exception causing the error
 	 */
 	public static void bar(String des, Throwable e) {
@@ -119,7 +112,7 @@ public class ErrorHandler {
 	 * Displays an error popup and logs the given error.
 	 *
 	 * @author CloneWith
-	 * @param error  a description of the error
+	 * @param des	a description of the error
 	 * @param e      the exception causing the error
 	 */
 	public static void notify(String des, Throwable e) {
@@ -221,14 +214,9 @@ public class ErrorHandler {
 	 * @return the encoded URI
 	 */
 	public static URI getIssueURI(String title, String body) {
-		try {
-			return URI.create(String.format(OpsuConstants.ISSUES_URL,
-					URLEncoder.encode(title, "UTF-8"),
-					URLEncoder.encode(body, "UTF-8")));
-		} catch (UnsupportedEncodingException e) {
-			Log.warn("URLEncoder failed to encode the auto-filled issue report URL.");
-			return URI.create(String.format(OpsuConstants.ISSUES_URL, "", ""));
-		}
+		return URI.create(String.format(OpsuConstants.ISSUES_URL,
+				URLEncoder.encode(title, StandardCharsets.UTF_8),
+				URLEncoder.encode(body, StandardCharsets.UTF_8)));
 	}
 
 	/**
@@ -247,7 +235,7 @@ public class ErrorHandler {
 				String hash = Utils.getGitHash();
 				if (hash != null) {
 					sb.append(" (");
-					sb.append(hash.substring(0, 12));
+					sb.append(hash, 0, 12);
 					sb.append(')');
 				}
 				sb.append('\n');
@@ -280,7 +268,7 @@ public class ErrorHandler {
 
 	/**
 	 * Returns the issue reporting URI.
-	 * This will auto-fill the report with the relevant information if possible.
+	 * This will autofill the report with the relevant information if possible.
 	 *
 	 * @param error a description of the error
 	 * @param e     the exception causing the error
@@ -304,7 +292,7 @@ public class ErrorHandler {
 			sb.append("```");
 		}
 
-		// return auto-filled URI
+		// return autofilled URI
 		return getIssueURI(issueTitle, sb.toString());
 	}
 }

@@ -21,18 +21,14 @@ package itdelatrisu.opsu.downloads;
 import itdelatrisu.opsu.OpsuConstants;
 import itdelatrisu.opsu.downloads.Download.Status;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Maintains the current downloads list.
  */
 public class DownloadList {
 	/** The single instance of this class. */
-	private static DownloadList list = new DownloadList();
+	private static final DownloadList list = new DownloadList();
 
 	/** The exit confirmation message. */
 	public static final String EXIT_CONFIRMATION = String.format(
@@ -41,10 +37,10 @@ public class DownloadList {
 	);
 
 	/** Current list of downloads. */
-	private List<DownloadNode> nodes;
+	private final List<DownloadNode> nodes;
 
 	/** The map of beatmap set IDs to DownloadNodes for the current downloads. */
-	private Map<Integer, DownloadNode> map;
+	private final Map<Integer, DownloadNode> map;
 
 	/**
 	 * Returns the single instance of this class.

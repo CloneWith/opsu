@@ -21,17 +21,16 @@ package itdelatrisu.opsu.beatmap;
 import itdelatrisu.opsu.db.BeatmapDB;
 import itdelatrisu.opsu.objects.curves.Curve;
 import itdelatrisu.opsu.objects.curves.Vec2f;
+import org.newdawn.slick.util.Log;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.newdawn.slick.util.Log;
-
 /**
  * osu!tp's beatmap difficulty algorithm.
  *
- * @author Tom94 (https://github.com/Tom94/AiModtpDifficultyCalculator)
+ * @author Tom94 (<a href="https://github.com/Tom94/AiModtpDifficultyCalculator">...</a>)
  */
 public class BeatmapDifficultyCalculator {
 	/** Difficulty types. */
@@ -48,8 +47,8 @@ public class BeatmapDifficultyCalculator {
 
 	/**
 	 * In milliseconds. For difficulty calculation we will only look at the highest strain value in each
-	 * time interval of size STRAIN_STEP.This is to eliminate higher influence of stream over aim by simply
-	 * having more HitObjects with high strain. The higher this value, the less strains there will be,
+	 * time interval of size STRAIN_STEP. This is to eliminate higher influence of stream over aim by simply
+	 * having more HitObjects with high strain. The higher this value, the less strain there will be,
 	 * indirectly giving long beatmaps an advantage.
 	 */
 	private static final double STRAIN_STEP = 400;
@@ -67,10 +66,10 @@ public class BeatmapDifficultyCalculator {
 	private double starRating = -1;
 
 	/** The computed difficulties, indexed by the {@code DIFFICULTY_*} constants. */
-	private double[] difficulties = { -1, -1 };
+	private final double[] difficulties = { -1, -1 };
 
 	/** The computed stars, indexed by the {@code DIFFICULTY_*} constants. */
-	private double[] stars = { -1, -1 };
+	private final double[] stars = { -1, -1 };
 
 	/**
 	 * Constructor. Call {@link #calculate()} to run all computations.
@@ -109,7 +108,7 @@ public class BeatmapDifficultyCalculator {
 	public void calculate() {
 		if (beatmap.objects == null || beatmap.timingPoints == null) {
 			Log.error(String.format("Trying to calculate difficulty values for beatmap '%s' with %s not yet loaded.",
-					beatmap.toString(), (beatmap.objects == null) ? "hit objects" : "timing points"));
+				beatmap, (beatmap.objects == null) ? "hit objects" : "timing points"));
 			return;
 		}
 
@@ -307,10 +306,11 @@ class tpHitObject {
 	public final HitObject baseHitObject;
 
 	/** The strain values, indexed by the {@code DIFFICULTY_*} constants. */
-	private double[] strains = { 1, 1 };
+	private final double[] strains = { 1, 1 };
 
 	/** The normalized start and end positions. */
-	private Vec2f normalizedStartPosition, normalizedEndPosition;
+	private final Vec2f normalizedStartPosition;
+	private Vec2f normalizedEndPosition;
 
 	/** The slider lengths. */
 	private float lazySliderLengthFirst = 0, lazySliderLengthSubsequent = 0;

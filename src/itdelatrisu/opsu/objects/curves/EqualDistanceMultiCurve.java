@@ -26,9 +26,9 @@ import java.util.LinkedList;
 
 /**
  * Representation of multiple curve with equidistant points.
- * http://pomax.github.io/bezierinfo/#tracing
+ * <a href="http://pomax.github.io/bezierinfo/#tracing">...</a>
  *
- * @author fluddokt (https://github.com/fluddokt)
+ * @author fluddokt (<a href="https://github.com/fluddokt">...</a>)
  */
 public abstract class EqualDistanceMultiCurve extends Curve {
 	/** The angles of the first and last control points for drawing. */

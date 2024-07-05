@@ -22,23 +22,23 @@ package itdelatrisu.opsu.downloads.servers;
 import itdelatrisu.opsu.ErrorHandler;
 import itdelatrisu.opsu.Utils;
 import itdelatrisu.opsu.downloads.DownloadNode;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.newdawn.slick.util.Log;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.newdawn.slick.util.Log;
-
 /**
- * Download server: https://osu.sayobot.cn/home
+ * Download server: <a href="https://osu.sayobot.cn/home">...</a>
  */
 public class SayobotServer extends DownloadServer {
 	/** Server name. */
@@ -49,14 +49,12 @@ public class SayobotServer extends DownloadServer {
 
 	/**
 	* Format:
-	* {@params}:
 	* 0=%d: Page size
 	* 1=%d: Page index from 0
 	* 2=%d: Beatmap list type:
 	* *
 	* *
 	* * 4: search
-	*
 	* 3=%s: Query
 	* 5=%d: Modes -> 1
 	* 6=%d: Ranked state
@@ -94,7 +92,7 @@ public class SayobotServer extends DownloadServer {
 				PAGE_LIMIT,
 				page - 1,
 				4,
-				(URLEncoder.encode(query, "UTF-8")).replace("+", "%20"),
+				(URLEncoder.encode(query, StandardCharsets.UTF_8)).replace("+", "%20"),
 				1
 			);
 			if (rankedOnly) search += "1";

@@ -18,19 +18,10 @@
 
 package itdelatrisu.opsu.ui;
 
-import itdelatrisu.opsu.ErrorHandler;
-import itdelatrisu.opsu.GameImage;
-import itdelatrisu.opsu.GameMod;
-import itdelatrisu.opsu.Opsu;
-import itdelatrisu.opsu.Utils;
+import itdelatrisu.opsu.*;
 import itdelatrisu.opsu.options.Options;
 import itdelatrisu.opsu.skins.Skin;
 import itdelatrisu.opsu.ui.animations.AnimationEquation;
-
-import java.awt.Point;
-import java.nio.IntBuffer;
-import java.util.LinkedList;
-
 import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLException;
 import org.newdawn.slick.GameContainer;
@@ -38,6 +29,10 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
+
+import java.awt.*;
+import java.nio.IntBuffer;
+import java.util.LinkedList;
 
 /**
  * Updates and draws the cursor.
@@ -65,7 +60,7 @@ public class Cursor {
 	private static final float CURSOR_SCALE_TIME = 125;
 
 	/** Stores all previous cursor locations to display a trail. */
-	private LinkedList<Point> trail = new LinkedList<>();
+	private final LinkedList<Point> trail = new LinkedList<>();
 
 	// game-related variables
 	private static GameContainer container;
@@ -224,7 +219,7 @@ public class Cursor {
 
 	/**
 	 * Adds all points between (x1, y1) and (x2, y2) to the cursor point lists.
-	 * @author http://rosettacode.org/wiki/Bitmap/Bresenham's_line_algorithm#Java
+	 * @author <a href="http://rosettacode.org/wiki/Bitmap/Bresenham">...</a>'s_line_algorithm#Java
 	 */
 	private void addCursorPoints(int x1, int y1, int x2, int y2) {
 		// delta of exact value and rounded value of the dependent variable

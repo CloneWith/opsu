@@ -25,17 +25,6 @@ import itdelatrisu.opsu.beatmap.BeatmapParser;
 import itdelatrisu.opsu.beatmap.TimingPoint;
 import itdelatrisu.opsu.options.Options;
 import itdelatrisu.opsu.ui.UI;
-
-import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.Field;
-import java.nio.IntBuffer;
-import java.util.Map;
-
-import javax.sound.sampled.AudioFileFormat;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.UnsupportedAudioFileException;
-
 import org.lwjgl.BufferUtils;
 import org.lwjgl.openal.AL;
 import org.lwjgl.openal.AL10;
@@ -47,6 +36,15 @@ import org.newdawn.slick.openal.Audio;
 import org.newdawn.slick.openal.SoundStore;
 import org.newdawn.slick.util.ResourceLoader;
 import org.tritonus.share.sampled.file.TAudioFileFormat;
+
+import javax.sound.sampled.AudioFileFormat;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.Field;
+import java.nio.IntBuffer;
+import java.util.Map;
 
 /**
  * Controller for all music.
@@ -398,7 +396,7 @@ public class MusicController {
 	 * Currently only works for MP3s.
 	 * @return the duration, or -1 if no track exists, else the {@code endTime}
 	 *         field of the beatmap loaded
-	 * @author Tom Brito (http://stackoverflow.com/a/3056161)
+	 * @author Tom Brito (<a href="http://stackoverflow.com/a/3056161">...</a>)
 	 */
 	public static int getDuration() {
 		if (!trackExists() || lastBeatmap == null)
@@ -550,11 +548,11 @@ public class MusicController {
 	/**
 	 * Stops and releases all sources, clears each of the specified Audio
 	 * buffers, destroys the OpenAL context, and resets SoundStore for future use.
-	 *
+	 * <p>
 	 * Calling SoundStore.get().init() will re-initialize the OpenAL context
 	 * after a call to destroyOpenAL (Note: AudioLoader.getXXX calls init for you).
 	 *
-	 * @author davedes (http://slick.ninjacave.com/forum/viewtopic.php?t=3920)
+	 * @author davedes (<a href="http://slick.ninjacave.com/forum/viewtopic.php?t=3920">...</a>)
 	 */
 	private static void destroyOpenAL() {
 		if (!trackExists())

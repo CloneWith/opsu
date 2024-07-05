@@ -18,13 +18,7 @@
 
 package itdelatrisu.opsu.io;
 
-import java.io.BufferedOutputStream;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.Calendar;
@@ -36,12 +30,11 @@ import java.util.TimeZone;
  */
 public class OsuWriter {
 	/** Output stream writer. */
-	private DataOutputStream writer;
+	private final DataOutputStream writer;
 
 	/**
 	 * Constructor.
 	 * @param file the file to write to
-	 * @throws FileNotFoundException
 	 */
 	public OsuWriter(File file) throws FileNotFoundException {
 		this(new FileOutputStream(file));
@@ -132,7 +125,7 @@ public class OsuWriter {
 		// 0B <length> <char>* = normal string
 		// <length> is encoded as an LEB, and is the byte length of the rest.
 		// <char>* is encoded as UTF8, and is the string content.
-		if (s == null || s.length() == 0)
+		if (s == null || s.isEmpty())
 			writer.writeByte(0x00);
 		else {
 			writer.writeByte(0x0B);

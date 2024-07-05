@@ -36,20 +36,14 @@ import itdelatrisu.opsu.ui.Fonts;
 import itdelatrisu.opsu.ui.UI;
 import itdelatrisu.opsu.ui.animations.AnimationEquation;
 import itdelatrisu.opsu.user.UserList;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
-import java.util.concurrent.LinkedBlockingDeque;
-
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+
+import java.io.File;
+import java.util.*;
+import java.util.concurrent.LinkedBlockingDeque;
 
 /**
  * Holds game data and renders all related elements.
@@ -162,7 +156,7 @@ public class GameData {
 		HIT_MU               = 14;  // Mu
 
 	/** Random number generator (for score animation). **/
-	private static Random random = new Random();
+	private static final Random random = new Random();
 
 	/** Hit result-related images (indexed by HIT_* constants to HIT_MAX). */
 	private Image[] hitResults;
@@ -316,7 +310,7 @@ public class GameData {
 	private float scorePercentDisplay;
 
 	/** Health. */
-	private Health health = new Health();
+	private final Health health = new Health();
 
 	/** The difficulty multiplier used in the score formula. */
 	private int difficultyMultiplier = 2;
@@ -340,7 +334,8 @@ public class GameData {
 	private boolean isGameplay;
 
 	/** Container dimensions. */
-	private int width, height;
+	private final int width;
+	private final int height;
 
 	/**
 	 * Constructor for gameplay.

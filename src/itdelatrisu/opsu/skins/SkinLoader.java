@@ -20,17 +20,13 @@ package itdelatrisu.opsu.skins;
 
 import itdelatrisu.opsu.ErrorHandler;
 import itdelatrisu.opsu.Utils;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.LinkedList;
-
 import org.newdawn.slick.Color;
 import org.newdawn.slick.util.Log;
+
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  * Loads skin configuration files.
@@ -70,9 +66,9 @@ public class SkinLoader {
 			return skin;
 		}
 
-		try (BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(skinFile), "UTF-8"))) {
+		try (BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(skinFile), StandardCharsets.UTF_8))) {
 			String line = in.readLine();
-			String tokens[] = null;
+			String[] tokens = null;
 			skin.INI_STATUS = true;
 			while (line != null) {
 				line = line.trim();

@@ -20,7 +20,6 @@ package itdelatrisu.opsu.objects;
 
 import itdelatrisu.opsu.beatmap.HitObject;
 import itdelatrisu.opsu.objects.curves.Vec2f;
-
 import org.newdawn.slick.Graphics;
 
 /**
@@ -28,7 +27,7 @@ import org.newdawn.slick.Graphics;
  */
 public class DummyObject implements GameObject {
 	/** The associated HitObject. */
-	private HitObject hitObject;
+	private final HitObject hitObject;
 
 	/** The scaled starting x, y coordinates. */
 	private float x, y;

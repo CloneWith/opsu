@@ -182,5 +182,5 @@ public class OptionGroup {
 	public void setVisible(boolean visible) { this.visible = visible; }
 
 	/** Returns whether this group should be visible. */
-	public boolean isVisible() { return visible; };
+	public boolean isVisible() { return visible; }
 }

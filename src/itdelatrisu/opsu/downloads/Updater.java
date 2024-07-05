@@ -25,6 +25,10 @@ import itdelatrisu.opsu.downloads.Download.DownloadListener;
 import itdelatrisu.opsu.options.Options;
 import itdelatrisu.opsu.ui.Colors;
 import itdelatrisu.opsu.ui.UI;
+import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.util.Log;
+import org.newdawn.slick.util.ResourceLoader;
 
 import java.io.File;
 import java.io.IOException;
@@ -37,17 +41,12 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Properties;
 
-import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.util.Log;
-import org.newdawn.slick.util.ResourceLoader;
-
 /**
  * Handles automatic program updates.
  */
 public class Updater {
 	/** The single instance of this class. */
-	private static Updater updater = new Updater();
+	private static final Updater updater = new Updater();
 
 	/** The exit confirmation message. */
 	public static final String EXIT_CONFIRMATION = String.format(
@@ -97,7 +96,7 @@ public class Updater {
 		 * Returns the status description.
 		 */
 		public String getDescription() { return description; }
-	};
+	}
 
 	/** The current updater status. */
 	private Status status;

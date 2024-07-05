@@ -21,11 +21,7 @@ package itdelatrisu.opsu.user;
 import itdelatrisu.opsu.OpsuConstants;
 import itdelatrisu.opsu.db.ScoreDB;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * List of users.
@@ -47,7 +43,7 @@ public class UserList {
 	private static UserList list;
 
 	/** Map of all users. */
-	private Map<String, User> users = new HashMap<>();
+	private final Map<String, User> users = new HashMap<>();
 
 	/** The current user. */
 	private User currentUser;

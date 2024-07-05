@@ -28,13 +28,13 @@ import java.security.NoSuchAlgorithmException;
  */
 public class MD5InputStreamWrapper extends InputStream {
 	/** The input stream. */
-	private InputStream in;
+	private final InputStream in;
 
 	/** Whether the end of stream has been reached. */
 	private boolean eof = false;
 
 	/** A MessageDigest object that implements the MD5 digest algorithm. */
-	private MessageDigest md;
+	private final MessageDigest md;
 
 	/** The computed MD5 hash. */
 	private String md5;

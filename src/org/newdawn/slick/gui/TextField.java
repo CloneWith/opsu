@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2013, Slick2D
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  * - Redistributions of source code must retain the above copyright notice,
@@ -12,7 +12,7 @@
  * - Neither the name of the Slick2D nor the names of its contributors may be
  *   used to endorse or promote products derived from this software without
  *   specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -29,7 +29,6 @@
 package org.newdawn.slick.gui;
 
 import org.lwjgl.Sys;
-import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Font;
 import org.newdawn.slick.Graphics;
@@ -38,7 +37,7 @@ import org.newdawn.slick.geom.Rectangle;
 
 /**
  * A single text field supporting text entry
- * 
+ *
  * @author kevin
  */
 @SuppressWarnings("unused")
@@ -47,13 +46,13 @@ public class TextField extends AbstractComponent {
 	private static final int INITIAL_KEY_REPEAT_INTERVAL = 400;
 	/** The key repeat interval */
 	private static final int KEY_REPEAT_INTERVAL = 50;
-	
+
 	/** The width of the field */
-	private int width;
+	private final int width;
 
 	/** The height of the field */
-	private int height;
-	
+	private final int height;
+
 	/** The location in the X coordinate */
 	protected int x;
 
@@ -67,7 +66,7 @@ public class TextField extends AbstractComponent {
 	private String value = "";
 
 	/** The font used to render text in the field */
-	private Font font;
+	private final Font font;
 
 	/** The border color - null if no border */
 	private Color border = Color.white;
@@ -86,25 +85,25 @@ public class TextField extends AbstractComponent {
 
 	/** The last key pressed */
 	private int lastKey = -1;
-	
+
 	/** The last character pressed */
 	private char lastChar = 0;
-	
+
 	/** The time since last key repeat */
 	private long repeatTimer;
-	
+
 	/** The text before the paste in */
 	private String oldText;
-	
+
 	/** The cursor position before the paste */
 	private int oldCursorPos;
-	
+
 	/** True if events should be consumed by the field */
 	private boolean consume = true;
-	
+
 	/**
 	 * Create a new text field
-	 * 
+	 *
 	 * @param container
 	 *            The container rendering this field
 	 * @param font
@@ -117,7 +116,7 @@ public class TextField extends AbstractComponent {
 	 *            The width of the text field
 	 * @param height
 	 *            The height of the text field
-	 * @param listener 
+	 * @param listener
 	 * 			  The listener to add to the text field
 	 */
 	public TextField(GUIContext container, Font font, int x, int y, int width,
@@ -125,10 +124,10 @@ public class TextField extends AbstractComponent {
 		this(container,font,x,y,width,height);
 		addListener(listener);
 	}
-	
+
 	/**
 	 * Create a new text field
-	 * 
+	 *
 	 * @param container
 	 *            The container rendering this field
 	 * @param font
@@ -155,23 +154,23 @@ public class TextField extends AbstractComponent {
 
 	/**
 	 * Indicate if the input events should be consumed by this field
-	 * 
+	 *
 	 * @param consume True if events should be consumed by this field
 	 */
 	public void setConsumeEvents(boolean consume) {
 		this.consume = consume;
 	}
-	
+
 	/**
 	 * Deactivate the key input handling for this field
 	 */
 	public void deactivate() {
 		setFocus(false);
 	}
-	
+
 	/**
 	 * Moves the component.
-	 * 
+	 *
 	 * @param x
 	 *            X coordinate
 	 * @param y
@@ -185,7 +184,7 @@ public class TextField extends AbstractComponent {
 
 	/**
 	 * Returns the position in the X coordinate
-	 * 
+	 *
 	 * @return x
 	 */
 	@Override
@@ -195,17 +194,17 @@ public class TextField extends AbstractComponent {
 
 	/**
 	 * Returns the position in the Y coordinate
-	 * 
+	 *
 	 * @return y
 	 */
 	@Override
 	public int getY() {
 		return y;
 	}
-	
+
 	/**
 	 * Get the width of the component
-	 * 
+	 *
 	 * @return The width of the component
 	 */
 	@Override
@@ -215,7 +214,7 @@ public class TextField extends AbstractComponent {
 
 	/**
 	 * Get the height of the component
-	 * 
+	 *
 	 * @return The height of the component
 	 */
 	@Override
@@ -225,7 +224,7 @@ public class TextField extends AbstractComponent {
 
 	/**
 	 * Set the background color. Set to null to disable the background
-	 * 
+	 *
 	 * @param color
 	 *            The color to use for the background
 	 */
@@ -235,7 +234,7 @@ public class TextField extends AbstractComponent {
 
 	/**
 	 * Set the border color. Set to null to disable the border
-	 * 
+	 *
 	 * @param color
 	 *            The color to use for the border
 	 */
@@ -245,7 +244,7 @@ public class TextField extends AbstractComponent {
 
 	/**
 	 * Set the text color.
-	 * 
+	 *
 	 * @param color
 	 *            The color to use for the text
 	 */
@@ -271,7 +270,7 @@ public class TextField extends AbstractComponent {
 		}
 		Rectangle oldClip = g.getClip();
 		g.setWorldClip(x,y,width, height);
-		
+
 		// Someone could have set a color for me to blend...
 		Color clr = g.getColor();
 
@@ -310,7 +309,7 @@ public class TextField extends AbstractComponent {
 
 	/**
 	 * Get the value in the text field
-	 * 
+	 *
 	 * @return The value in the text field
 	 */
 	public String getText() {
@@ -319,7 +318,7 @@ public class TextField extends AbstractComponent {
 
 	/**
 	 * Set the value to be displayed in the text field
-	 * 
+	 *
 	 * @param value
 	 *            The value to be displayed in the text field
 	 */
@@ -332,7 +331,7 @@ public class TextField extends AbstractComponent {
 
 	/**
 	 * Set the position of the cursor
-	 * 
+	 *
 	 * @param pos
 	 *            The new position of the cursor
 	 */
@@ -345,7 +344,7 @@ public class TextField extends AbstractComponent {
 
 	/**
 	 * Indicate whether the mouse cursor should be visible or not
-	 * 
+	 *
 	 * @param visibleCursor
 	 *            True if the mouse cursor should be visible
 	 */
@@ -355,7 +354,7 @@ public class TextField extends AbstractComponent {
 
 	/**
 	 * Set the length of the allowed input
-	 * 
+	 *
 	 * @param length
 	 *            The length of the allowed input
 	 */
@@ -368,17 +367,17 @@ public class TextField extends AbstractComponent {
 
 	/**
 	 * Do the paste into the field, overrideable for custom behaviour
-	 * 
+	 *
 	 * @param text The text to be pasted in
 	 */
 	protected void doPaste(String text) {
 		recordOldPosition();
-		
+
 		for (int i=0;i<text.length();i++) {
 			keyPressed(-1, text.charAt(i));
 		}
 	}
-	
+
 	/**
 	 * Record the old position and content
 	 */
@@ -386,10 +385,10 @@ public class TextField extends AbstractComponent {
 		oldText = getText();
 		oldCursorPos = cursorPos;
 	}
-	
+
 	/**
 	 * Do the undo of the paste, overrideable for custom behaviour
-	 * 
+	 *
 	 * @param oldCursorPos before the paste
 	 * @param oldText The text before the last paste
 	 */
@@ -399,7 +398,7 @@ public class TextField extends AbstractComponent {
 			setCursorPos(oldCursorPos);
 		}
 	}
-	
+
 	/**
 	 * @see org.newdawn.slick.gui.AbstractComponent#keyPressed(int, char)
 	 */
@@ -408,7 +407,7 @@ public class TextField extends AbstractComponent {
 		if (hasFocus()) {
 			if (key != -1)
 			{
-				if ((key == Input.KEY_V) && 
+				if ((key == Input.KEY_V) &&
 				   ((input.isKeyDown(Input.KEY_LCONTROL)) || (input.isKeyDown(Input.KEY_RCONTROL)))) {
 					String text = Sys.getClipboard();
 					if (text != null) {
@@ -416,14 +415,14 @@ public class TextField extends AbstractComponent {
 					}
 					return;
 				}
-				/* if ((key == Input.KEY_Z) && 
+				/* if ((key == Input.KEY_Z) &&
 				   ((input.isKeyDown(Input.KEY_LCONTROL)) || (input.isKeyDown(Input.KEY_RCONTROL)))) {
 					if (oldText != null) {
 						doUndo(oldCursorPos, oldText);
 					}
 					return;
 				} */
-				
+
 				// alt and control keys don't come through here
 				/* if (input.isKeyDown(Input.KEY_LCONTROL) || input.isKeyDown(Input.KEY_RCONTROL)) {
 					return;
@@ -432,7 +431,7 @@ public class TextField extends AbstractComponent {
 					return;
 				}
 			}
-			
+
 			if (lastKey != key) {
 				lastKey = key;
 				repeatTimer = System.currentTimeMillis() + INITIAL_KEY_REPEAT_INTERVAL;
@@ -440,7 +439,7 @@ public class TextField extends AbstractComponent {
 				repeatTimer = System.currentTimeMillis() + KEY_REPEAT_INTERVAL;
 			}
 			lastChar = c;
-			
+
 			if (key == Input.KEY_LEFT) { /*
 				if (cursorPos > 0) {
 					cursorPos--;
@@ -458,7 +457,7 @@ public class TextField extends AbstractComponent {
 					container.getInput().consumeEvent();
 				}
 			*/ } else if (key == Input.KEY_BACK) {
-				if ((cursorPos > 0) && (value.length() > 0)) {
+				if ((cursorPos > 0) && (!value.isEmpty())) {
 					if (input.isKeyDown(Input.KEY_LCONTROL) || input.isKeyDown(Input.KEY_RCONTROL)) {
 						int sp = 0;
 						boolean startSpace = Character.isWhitespace(value.charAt(cursorPos - 1));
@@ -532,7 +531,7 @@ public class TextField extends AbstractComponent {
 	@Override
 	public void setFocus(boolean focus) {
 		lastKey = -1;
-		
+
 		super.setFocus(focus);
 	}
 }

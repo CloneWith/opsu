@@ -69,7 +69,7 @@
 							<goal>exec</goal>
 						</goals>
 						<configuration>
-							<skip>${jar}</skip>
+							<!-- <skip>${jar}</skip> -->
 							<executable>java</executable>
 							<arguments>
 								<argument>-cp</argument>

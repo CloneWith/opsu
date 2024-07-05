@@ -22,21 +22,16 @@ import itdelatrisu.opsu.GameImage;
 import itdelatrisu.opsu.audio.MusicController;
 import itdelatrisu.opsu.options.Options;
 import itdelatrisu.opsu.ui.animations.AnimationEquation;
-
-import org.newdawn.slick.Animation;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
+import org.newdawn.slick.*;
 
 /**
  * Back button.
  *
- * @author yugecin (https://github.com/yugecin)
+ * @author yugecin (<a href="https://github.com/yugecin">...</a>)
  */
 public class BackButton {
 	/** Skinned back button. */
-	private MenuButton backButton;
+	private final MenuButton backButton;
 
 	/** Turn a color into its dark varient. */
 	private static final int darkColorDelta = -32;

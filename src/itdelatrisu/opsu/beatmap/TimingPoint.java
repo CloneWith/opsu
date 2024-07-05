@@ -19,7 +19,6 @@
 package itdelatrisu.opsu.beatmap;
 
 import itdelatrisu.opsu.Utils;
-
 import org.newdawn.slick.util.Log;
 
 /**
@@ -58,14 +57,6 @@ public class TimingPoint {
 	 * @param line the line to be parsed
 	 */
 	public TimingPoint(String line) {
-		/**
-		 * [TIMING POINT FORMATS]
-		 * Non-inherited:
-		 *   offset,msPerBeat,meter,sampleType,sampleSet,volume,inherited,kiai
-		 *
-		 * Inherited:
-		 *   offset,velocity,meter,sampleType,sampleSet,volume,inherited,kiai
-		 */
 		// TODO: better support for old formats
 		String[] tokens = line.split(",");
 		try {

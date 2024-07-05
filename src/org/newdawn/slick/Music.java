@@ -28,14 +28,14 @@
 
 package org.newdawn.slick;
 
-import java.io.InputStream;
-import java.net.URL;
-import java.util.ArrayList;
-
 import org.newdawn.slick.openal.Audio;
 import org.newdawn.slick.openal.AudioImpl;
 import org.newdawn.slick.openal.SoundStore;
 import org.newdawn.slick.util.Log;
+
+import java.io.InputStream;
+import java.net.URL;
+import java.util.ArrayList;
 
 /**
  * A piece of music loaded and playable within the game. Only one piece of music can
@@ -50,7 +50,7 @@ public class Music {
 	private static Music currentMusic;
 
 	/** The lock object for synchronized modification to Music*/
-	private static Object musicLock = new Object();
+	private static final Object musicLock = new Object();
 
 	/**
 	 * Poll the state of the current music. This causes streaming music
@@ -77,11 +77,11 @@ public class Music {
 	}
 
 	/** The sound from FECK representing this music */
-	private Audio sound;
+	private final Audio sound;
 	/** True if the music is playing */
 	private boolean playing;
 	/** The list of listeners waiting for notification that the music ended */
-	private ArrayList listeners = new ArrayList();
+	private final ArrayList listeners = new ArrayList();
 	/** The volume of this music */
 	private float volume = 1.0f;
 	/** Start gain for fading in/out */
@@ -115,7 +115,6 @@ public class Music {
 	 * Create and load a piece of music (either OGG or MOD/XM)
 	 *
 	 * @param ref The location of the music
-	 * @throws SlickException
 	 */
 	public Music(String ref) throws SlickException {
 		this(ref, false);
@@ -125,7 +124,6 @@ public class Music {
 	 * Create and load a piece of music (either OGG or MOD/XM)
 	 *
 	 * @param ref The location of the music
-	 * @throws SlickException
 	 */
 	public Music(URL ref) throws SlickException {
 		this(ref, false);
@@ -163,7 +161,6 @@ public class Music {
 	 *
 	 * @param url The location of the music
 	 * @param streamingHint A hint to indicate whether streaming should be used if possible
-	 * @throws SlickException
 	 */
 	public Music(URL url, boolean streamingHint) throws SlickException {
 		SoundStore.get().init();
@@ -198,7 +195,6 @@ public class Music {
 	 *
 	 * @param ref The location of the music
 	 * @param streamingHint A hint to indicate whether streaming should be used if possible
-	 * @throws SlickException
 	 */
 	public Music(String ref, boolean streamingHint) throws SlickException {
 		SoundStore.get().init();

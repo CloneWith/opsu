@@ -19,10 +19,9 @@
 package itdelatrisu.opsu.skins;
 
 import itdelatrisu.opsu.OpsuConstants;
+import org.newdawn.slick.Color;
 
 import java.io.File;
-
-import org.newdawn.slick.Color;
 
 /**
  * Skin configuration (skin.ini).
@@ -86,11 +85,7 @@ public class Skin {
 	private static final Color DEFAULT_INPUT_OVERLAY_TEXT = new Color(0, 0, 0);
 
 	/** The skin directory. */
-	private File dir;
-
-	/**
-	 * [General]
-	 */
+	private final File dir;
 
 	/** The name of the skin. */
 	protected String name = OpsuConstants.PROJECT_NAME + " Default Skin";
@@ -149,10 +144,6 @@ public class Skin {
 	/** The slider style to use (see STYLE_* constants). */
 	protected byte sliderStyle = STYLE_MMSLIDER;
 
-	/**
-	 * [Colours]
-	 */
-
 	/** Combo colors (max 8). */
 	protected Color[] combo = DEFAULT_COMBO;
 
@@ -179,10 +170,6 @@ public class Skin {
 
 	/** The color of the text on the input overlay. */
 	protected Color inputOverlayText = DEFAULT_INPUT_OVERLAY_TEXT;
-
-	/**
-	 * [Fonts]
-	 */
 
 	/** The prefix for the hitcircle font sprites. */
 	protected String hitCirclePrefix = "default";

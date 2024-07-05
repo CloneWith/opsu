@@ -20,20 +20,19 @@ package itdelatrisu.opsu.objects.curves;
 
 import itdelatrisu.opsu.beatmap.HitObject;
 import itdelatrisu.opsu.render.LegacyCurveRenderState;
+import org.newdawn.slick.Color;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.newdawn.slick.Color;
-
 /**
  * Combined curve (for merging sliders).
  *
- * @author yugecin (https://github.com/yugecin)
+ * @author yugecin (<a href="https://github.com/yugecin">...</a>)
  */
 public class FakeCombinedCurve extends Curve {
 	/** The current points to render (pairs of indices: from, to). */
-	private List<Integer> pointsToRender = new ArrayList<>();
+	private final List<Integer> pointsToRender = new ArrayList<>();
 
 	/**
 	 * Constructor.

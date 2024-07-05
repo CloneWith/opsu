@@ -24,6 +24,9 @@ import itdelatrisu.opsu.ui.Colors;
 import itdelatrisu.opsu.ui.Fonts;
 import itdelatrisu.opsu.ui.UI;
 import itdelatrisu.opsu.ui.animations.AnimationEquation;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,10 +34,6 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-
-import org.newdawn.slick.Color;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
 
 /**
  * Class encapsulating and drawing all score data.
@@ -307,7 +306,7 @@ public class ScoreData implements Comparable<ScoreData> {
 				sb.append(',');
 			}
 		}
-		if (sb.length() > 0) {
+		if (!sb.isEmpty()) {
 			sb.setLength(sb.length() - 1);
 			String modString = sb.toString();
 			Fonts.DEFAULT.drawString(edgeX - Fonts.DEFAULT.getWidth(modString), y + marginY, modString, c);

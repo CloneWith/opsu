@@ -18,29 +18,24 @@
 
 package itdelatrisu.opsu.io;
 
-import java.io.BufferedInputStream;
-import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
 /**
  * Reader for osu! file types.
  *
- * @author Markus Jarderot (http://stackoverflow.com/questions/28788616)
+ * @author Markus Jarderot (<a href="http://stackoverflow.com/questions/28788616">...</a>)
  */
 public class OsuReader {
 	/** Input stream reader. */
-	private DataInputStream reader;
+	private final DataInputStream reader;
 
 	/**
 	 * Constructor.
 	 * @param file the file to read from
-	 * @throws IOException
 	 */
 	public OsuReader(File file) throws IOException {
 		this(new FileInputStream(file));
@@ -161,7 +156,7 @@ public class OsuReader {
 			return "";
 		byte[] utf8bytes = new byte[length];
 		this.reader.readFully(utf8bytes);
-		return new String(utf8bytes, "UTF-8");
+		return new String(utf8bytes, StandardCharsets.UTF_8);
 	}
 
 	/**

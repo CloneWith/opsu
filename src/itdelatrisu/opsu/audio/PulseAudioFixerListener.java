@@ -18,13 +18,12 @@
 
 package itdelatrisu.opsu.audio;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineEvent;
 import javax.sound.sampled.LineEvent.Type;
 import javax.sound.sampled.LineListener;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * This is a LineListener that fixes a problem with the OpenJDK icedtea-sound
@@ -34,7 +33,7 @@ import javax.sound.sampled.LineListener;
  * isActive() will return true. Calling stop explicitly fixes this and will not
  * generate any other STOP events.
  *
- * @author chanceVermilion (https://github.com/itdelatrisu/opsu/pull/252)
+ * @author chanceVermilion (<a href="https://github.com/itdelatrisu/opsu/pull/252">itdelatrisu/opsu #252</a>)
  */
 public class PulseAudioFixerListener implements LineListener {
 	/** The thread pool. */

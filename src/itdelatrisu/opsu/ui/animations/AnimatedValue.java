@@ -31,10 +31,10 @@ public class AnimatedValue {
 	private int time;
 
 	/** The base value. */
-	private float base;
+	private final float base;
 
 	/** The maximum difference from the base value. */
-	private float diff;
+	private final float diff;
 
 	/** The current value. */
 	private float value;

@@ -22,19 +22,14 @@ import itdelatrisu.opsu.ErrorHandler;
 import itdelatrisu.opsu.beatmap.Beatmap;
 import itdelatrisu.opsu.beatmap.BeatmapParser;
 import itdelatrisu.opsu.options.Options;
+import org.newdawn.slick.util.Log;
 
 import java.io.File;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-
-import org.newdawn.slick.util.Log;
 
 /**
  * Handles connections and queries with the cached beatmap database.
@@ -383,7 +378,6 @@ public class BeatmapDB {
 	 * Sets all statement fields using a given beatmap.
 	 * @param stmt the statement to set fields for
 	 * @param beatmap the beatmap
-	 * @throws SQLException
 	 */
 	private static void setStatementFields(PreparedStatement stmt, Beatmap beatmap)
 			throws SQLException {
@@ -533,7 +527,6 @@ public class BeatmapDB {
 	 * Sets all beatmap non-array fields using a given result set.
 	 * @param rs the result set containing the fields
 	 * @param beatmap the beatmap
-	 * @throws SQLException
 	 */
 	private static void setBeatmapFields(ResultSet rs, Beatmap beatmap) throws SQLException {
 		try {
@@ -596,7 +589,6 @@ public class BeatmapDB {
 	 * Sets all Beatmap array fields using a given result set.
 	 * @param rs the result set containing the fields
 	 * @param beatmap the beatmap
-	 * @throws SQLException
 	 */
 	private static void setBeatmapArrayFields(ResultSet rs, Beatmap beatmap) throws SQLException {
 		try {
@@ -688,7 +680,7 @@ public class BeatmapDB {
 			setStarsStmt.executeUpdate();
 		} catch (SQLException e) {
 			ErrorHandler.error(String.format("Failed to save star rating '%.4f' for beatmap '%s' in database.",
-					beatmap.starRating, beatmap.toString()), e, true);
+					beatmap.starRating, beatmap), e, true);
 		}
 	}
 
@@ -708,7 +700,7 @@ public class BeatmapDB {
 			updatePlayStatsStmt.executeUpdate();
 		} catch (SQLException e) {
 			ErrorHandler.error(String.format("Failed to update play statistics for beatmap '%s' in database.",
-					beatmap.toString()), e, true);
+				beatmap), e, true);
 		}
 	}
 
@@ -727,7 +719,7 @@ public class BeatmapDB {
 			setFavoriteStmt.executeUpdate();
 		} catch (SQLException e) {
 			ErrorHandler.error(String.format("Failed to update favorite status for beatmap '%s' in database.",
-					beatmap.toString()), e, true);
+				beatmap), e, true);
 		}
 	}
 
@@ -746,7 +738,7 @@ public class BeatmapDB {
 			setLocalOffsetStmt.executeUpdate();
 		} catch (SQLException e) {
 			ErrorHandler.error(String.format("Failed to update local music offset for beatmap '%s' in database.",
-					beatmap.toString()), e, true);
+				beatmap), e, true);
 		}
 	}
 

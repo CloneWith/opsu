@@ -19,7 +19,6 @@
 package itdelatrisu.opsu.objects;
 
 import itdelatrisu.opsu.objects.curves.Vec2f;
-
 import org.newdawn.slick.Graphics;
 
 /**
@@ -31,7 +30,7 @@ public interface GameObject {
 	 * @param g the graphics context
 	 * @param trackPosition the current track position
 	 */
-	public void draw(Graphics g, int trackPosition);
+	void draw(Graphics g, int trackPosition);
 
 	/**
 	 * Updates the hit object.
@@ -42,7 +41,7 @@ public interface GameObject {
 	 * @param trackPosition the track position
 	 * @return true if object ended
 	 */
-	public boolean update(int delta, int mouseX, int mouseY, boolean keyPressed, int trackPosition);
+	boolean update(int delta, int mouseX, int mouseY, boolean keyPressed, int trackPosition);
 
 	/**
 	 * Processes a mouse click.
@@ -51,28 +50,28 @@ public interface GameObject {
 	 * @param trackPosition the track position
 	 * @return true if a hit result was processed
 	 */
-	public boolean mousePressed(int x, int y, int trackPosition);
+	boolean mousePressed(int x, int y, int trackPosition);
 
 	/**
 	 * Returns the coordinates of the hit object at a given track position.
 	 * @param trackPosition the track position
 	 * @return the position vector
 	 */
-	public Vec2f getPointAt(int trackPosition);
+	Vec2f getPointAt(int trackPosition);
 
 	/**
 	 * Returns the end time of the hit object.
 	 * @return the end time, in milliseconds
 	 */
-	public int getEndTime();
+	int getEndTime();
 
 	/**
 	 * Updates the position of the hit object.
 	 */
-	public void updatePosition();
+	void updatePosition();
 
 	/**
 	 * Resets all internal state so that the hit object can be reused.
 	 */
-	public void reset();
+	void reset();
 }

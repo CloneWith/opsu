@@ -19,11 +19,7 @@
 package itdelatrisu.opsu.beatmap;
 
 import itdelatrisu.opsu.GameMod;
-import itdelatrisu.opsu.objects.curves.CatmullCurve;
-import itdelatrisu.opsu.objects.curves.CircumscribedCircle;
-import itdelatrisu.opsu.objects.curves.Curve;
-import itdelatrisu.opsu.objects.curves.LinearBezier;
-import itdelatrisu.opsu.objects.curves.Vec2f;
+import itdelatrisu.opsu.objects.curves.*;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -88,16 +84,17 @@ public class HitObject {
 	public static void setStackOffset(float offset) { stackOffset = offset; }
 
 	/** Starting coordinates. */
-	private float x, y;
+	private final float x;
+	private final float y;
 
 	/** Start time (in ms). */
-	private int time;
+	private final int time;
 
 	/** Hit object type (TYPE_* bitmask). */
-	private int type;
+	private final int type;
 
 	/** Hit sound type (SOUND_* bitmask). */
-	private short hitSound;
+	private final short hitSound;
 
 	/** Hit sound addition (sampleSet, AdditionSampleSet). */
 	private byte[] addition;
@@ -185,23 +182,7 @@ public class HitObject {
 	 * @param line the line to be parsed
 	 */
 	public HitObject(String line) {
-		/**
-		 * [OBJECT FORMATS]
-		 * Circles:
-		 *   x,y,time,type,hitSound,addition
-		 *   256,148,9466,1,2,0:0:0:0:
-		 *
-		 * Sliders:
-		 *   x,y,time,type,hitSound,sliderType|curveX:curveY|...,repeat,pixelLength,edgeHitsound,edgeAddition,addition
-		 *   300,68,4591,2,0,B|372:100|332:172|420:192,2,180,2|2|2,0:0|0:0|0:0,0:0:0:0:
-		 *
-		 * Spinners:
-		 *   x,y,time,type,hitSound,endTime,addition
-		 *   256,192,654,12,0,4029,0:0:0:0:
-		 *
-		 * NOTE: 'addition' -> sampl:add:cust:vol:hitsound (optional, defaults to "0:0:0:0:")
-		 */
-		String tokens[] = line.split(",");
+		String[] tokens = line.split(",");
 
 		// common fields
 		this.x = Float.parseFloat(tokens[0]);

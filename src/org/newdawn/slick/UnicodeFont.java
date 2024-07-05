@@ -28,23 +28,6 @@
 
 package org.newdawn.slick;
 
-import java.awt.Font;
-import java.awt.FontFormatException;
-import java.awt.FontMetrics;
-import java.awt.Rectangle;
-import java.awt.font.GlyphVector;
-import java.awt.font.TextAttribute;
-import java.io.IOException;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import org.newdawn.slick.font.Glyph;
 import org.newdawn.slick.font.GlyphPage;
 import org.newdawn.slick.font.HieroSettings;
@@ -54,9 +37,19 @@ import org.newdawn.slick.opengl.renderer.Renderer;
 import org.newdawn.slick.opengl.renderer.SGL;
 import org.newdawn.slick.util.ResourceLoader;
 
+import java.awt.Font;
+import java.awt.*;
+import java.awt.font.GlyphVector;
+import java.awt.font.TextAttribute;
+import java.io.IOException;
+import java.lang.reflect.Field;
+import java.util.List;
+import java.util.*;
+import java.util.Map.Entry;
+
 /**
  * A Slick bitmap font that can display unicode glyphs from a TrueTypeFont.
- *
+ * <p>
  * For efficiency, glyphs are packed on to textures. Glyphs can be loaded to the textures on the fly, when they are first needed
  * for display. However, it is best to load the glyphs that are known to be needed at startup.
  * @author Nathan Sweet <misc@n4te.com>
@@ -304,7 +297,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 	/**
 	 * Queues the glyphs in the specified codepoint range (inclusive) to be loaded. Note that the glyphs are not actually loaded
 	 * until {@link #loadGlyphs()} is called.
-	 *
+	 * <p>
 	 * Some characters like combining marks and non-spacing marks can only be rendered with the context of other glyphs. In this
 	 * case, use {@link #addGlyphs(String)}.
 	 *
@@ -489,7 +482,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 	 */
 	public DisplayList drawDisplayList (float x, float y, String text, Color color, int startIndex, int endIndex) {
 		if (text == null) throw new IllegalArgumentException("text cannot be null.");
-		if (text.length() == 0) return EMPTY_DISPLAY_LIST;
+		if (text.isEmpty()) return EMPTY_DISPLAY_LIST;
 		if (color == null) throw new IllegalArgumentException("color cannot be null.");
 
 		x -= paddingLeft;
@@ -719,7 +712,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 	@Override
 	public int getWidth (String text) {
 		if (text == null) throw new IllegalArgumentException("text cannot be null.");
-		if (text.length() == 0) return 0;
+		if (text.isEmpty()) return 0;
 
 		if (displayListCaching) {
 			DisplayList displayList = (DisplayList)displayLists.get(text);
@@ -754,7 +747,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 	@Override
 	public int getHeight (String text) {
 		if (text == null) throw new IllegalArgumentException("text cannot be null.");
-		if (text.length() == 0) return 0;
+		if (text.isEmpty()) return 0;
 
 		if (displayListCaching) {
 			DisplayList displayList = (DisplayList)displayLists.get(text);
@@ -1058,7 +1051,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 			}
 			if (ttfFileRef == null) ttfFileRef = "";
 		}
-		if (ttfFileRef.length() == 0) return null;
+		if (ttfFileRef.isEmpty()) return null;
 		return ttfFileRef;
 	}
 

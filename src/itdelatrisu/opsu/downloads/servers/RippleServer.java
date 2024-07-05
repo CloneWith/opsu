@@ -21,24 +21,24 @@ package itdelatrisu.opsu.downloads.servers;
 import itdelatrisu.opsu.ErrorHandler;
 import itdelatrisu.opsu.Utils;
 import itdelatrisu.opsu.downloads.DownloadNode;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.newdawn.slick.util.Log;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.newdawn.slick.util.Log;
-
 /**
- * Download server: https://ripple.moe/
+ * Download server: <a href="https://ripple.moe/">...</a>
  */
 public class RippleServer extends DownloadServer {
 	/** Server name. */
@@ -78,7 +78,7 @@ public class RippleServer extends DownloadServer {
 
 			// read JSON
 			int offset = (page - 1) * PAGE_LIMIT;
-			String search = String.format(SEARCH_URL, URLEncoder.encode(query, "UTF-8"), PAGE_LIMIT, offset);
+			String search = String.format(SEARCH_URL, URLEncoder.encode(query, StandardCharsets.UTF_8), PAGE_LIMIT, offset);
 			if (rankedOnly)
 				search += "&status=1";
 			JSONArray arr = Utils.readJsonArrayFromUrl(new URL(search));

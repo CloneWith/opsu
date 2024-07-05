@@ -21,20 +21,19 @@ package itdelatrisu.opsu.downloads.servers;
 import itdelatrisu.opsu.ErrorHandler;
 import itdelatrisu.opsu.Utils;
 import itdelatrisu.opsu.downloads.DownloadNode;
-
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLEncoder;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.newdawn.slick.util.Log;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+
 /**
- * Download server: https://osu.hexide.com/
+ * Download server: <a href="https://osu.hexide.com/">...</a>
  */
 public class HexideServer extends DownloadServer {
 	/** Server name. */
@@ -81,7 +80,7 @@ public class HexideServer extends DownloadServer {
 			if (query.isEmpty())
 				search = String.format(HOME_URL, resultIndex);
 			else
-				search = String.format(SEARCH_URL, URLEncoder.encode(query, "UTF-8"), resultIndex);
+				search = String.format(SEARCH_URL, URLEncoder.encode(query, StandardCharsets.UTF_8), resultIndex);
 			URL searchURL = new URL(search);
 			JSONArray arr = null;
 			try {
@@ -129,7 +128,7 @@ public class HexideServer extends DownloadServer {
 			// NOTE: The API doesn't provide a result count without retrieving
 			// all results at once; this approach just gets pagination correct.
 			this.totalResults = arr.length() + resultIndex;
-		} catch (MalformedURLException | UnsupportedEncodingException e) {
+		} catch (MalformedURLException e) {
 			ErrorHandler.error(String.format("Problem loading result list for query '%s'.", query), e, true);
 		} catch (JSONException e) {
 			Log.error(e);

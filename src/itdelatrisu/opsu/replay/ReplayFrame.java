@@ -23,7 +23,7 @@ import itdelatrisu.opsu.beatmap.HitObject;
 /**
  * Captures a single replay frame.
  *
- * @author smoogipooo (https://github.com/smoogipooo/osu-Replay-API/)
+ * @author smoogipooo (<a href="https://github.com/smoogipooo/osu-Replay-API/">...</a>)
  */
 public class ReplayFrame {
 	/** Key bits. */

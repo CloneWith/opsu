@@ -21,7 +21,7 @@ package itdelatrisu.opsu.objects.curves;
 /**
  * Representation of a curve with the distance between each point calculated.
  *
- * @author fluddokt (https://github.com/fluddokt)
+ * @author fluddokt (<a href="https://github.com/fluddokt">...</a>)
  */
 public abstract class CurveType {
 	/** Points along the curve of the Bezier curve. */

@@ -33,17 +33,12 @@ import itdelatrisu.opsu.skins.SkinUnpacker;
 import itdelatrisu.opsu.ui.UI;
 import itdelatrisu.opsu.ui.animations.AnimatedValue;
 import itdelatrisu.opsu.ui.animations.AnimationEquation;
-
-import java.io.File;
-
-import org.newdawn.slick.Color;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Input;
-import org.newdawn.slick.SlickException;
+import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
+
+import java.io.File;
 
 /**
  * "Splash Screen" state.
@@ -73,10 +68,10 @@ public class Splash extends BasicGameState {
 	private boolean watchServiceChange = false;
 
 	/** Logo alpha level. */
-	private AnimatedValue logoAlpha = new AnimatedValue(MIN_SPLASH_TIME, 0f, 1f, AnimationEquation.LINEAR);
+	private final AnimatedValue logoAlpha = new AnimatedValue(MIN_SPLASH_TIME, 0f, 1f, AnimationEquation.LINEAR);
 
 	/** Loading progress alpha level. */
-	private AnimatedValue progressAlpha = new AnimatedValue(MIN_SPLASH_TIME, 0f, 1f, AnimationEquation.OUT_CUBIC);
+	private final AnimatedValue progressAlpha = new AnimatedValue(MIN_SPLASH_TIME, 0f, 1f, AnimationEquation.OUT_CUBIC);
 
 	/** Elapsed time. */
 	private int elapsedTime = 0;

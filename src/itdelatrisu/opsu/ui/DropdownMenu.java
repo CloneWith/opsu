@@ -21,14 +21,7 @@ package itdelatrisu.opsu.ui;
 import itdelatrisu.opsu.GameImage;
 import itdelatrisu.opsu.ui.animations.AnimatedValue;
 import itdelatrisu.opsu.ui.animations.AnimationEquation;
-
-import org.newdawn.slick.Color;
-import org.newdawn.slick.Font;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.Input;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.UnicodeFont;
+import org.newdawn.slick.*;
 import org.newdawn.slick.gui.AbstractComponent;
 import org.newdawn.slick.gui.GUIContext;
 
@@ -66,7 +59,7 @@ public class DropdownMenu<E> extends AbstractComponent {
 	private boolean expanded = false;
 
 	/** The expanding animation progress. */
-	private AnimatedValue expandProgress = new AnimatedValue(300, 0f, 1f, AnimationEquation.LINEAR);
+	private final AnimatedValue expandProgress = new AnimatedValue(300, 0f, 1f, AnimationEquation.LINEAR);
 
 	/** The last update time, in milliseconds. */
 	private long lastUpdateTime;

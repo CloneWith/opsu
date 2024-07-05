@@ -21,13 +21,12 @@ package itdelatrisu.opsu;
 import itdelatrisu.opsu.ui.Fonts;
 import itdelatrisu.opsu.ui.MenuButton;
 import itdelatrisu.opsu.ui.animations.AnimationEquation;
-
-import java.util.Arrays;
-import java.util.Collections;
-
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
+
+import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * Game mods.
@@ -142,7 +141,7 @@ public enum GameMod {
 
 	/**
 	 * Bit value associated with the mod.
-	 * See the osu! API: https://github.com/peppy/osu-api/wiki#mods
+	 * See the <a href="https://github.com/peppy/osu-api/wiki#mods">osu! API</a>
 	 */
 	private final int bit;
 
@@ -292,7 +291,7 @@ public enum GameMod {
 				sb.append(',');
 			}
 		}
-		if (sb.length() > 0) {
+		if (!sb.isEmpty()) {
 			sb.setLength(sb.length() - 1);
 			return sb.toString();
 		} else

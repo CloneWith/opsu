@@ -24,7 +24,7 @@ import java.nio.channels.ReadableByteChannel;
 
 /**
  * Wrapper for a ReadableByteChannel that stores the number of bytes read.
- * @author par (http://stackoverflow.com/a/11068356)
+ * @author par (<a href="http://stackoverflow.com/a/11068356">...</a>)
  */
 public class ReadableByteChannelWrapper implements ReadableByteChannel {
 	/** The wrapped ReadableByteChannel. */

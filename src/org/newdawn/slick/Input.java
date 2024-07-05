@@ -28,13 +28,6 @@
 
 package org.newdawn.slick;
 
-import java.io.IOException;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Iterator;
-
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Controller;
 import org.lwjgl.input.Controllers;
@@ -42,6 +35,13 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.util.Log;
+
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Iterator;
 
 /**
  * A wrapped for all keyboard, mouse and controller input
@@ -349,7 +349,7 @@ public class Input {
 	/** True if the controllers system has been initialised */
 	private static boolean controllersInited = false;
 	/** The list of controllers */
-	private static ArrayList controllers = new ArrayList();
+	private static final ArrayList controllers = new ArrayList();
 
 	/** The last recorded mouse x position */
 	private int lastMouseX;
@@ -358,7 +358,7 @@ public class Input {
 	/** THe state of the mouse buttons */
 	protected boolean[] mousePressed = new boolean[10];
 	/** THe state of the controller buttons */
-	private boolean[][] controllerPressed = new boolean[100][MAX_BUTTONS];
+	private final boolean[][] controllerPressed = new boolean[100][MAX_BUTTONS];
 
 	/** The character values representing the pressed keys */
 	protected char[] keys = new char[1024];
@@ -368,7 +368,7 @@ public class Input {
 	protected long[] nextRepeat = new long[1024];
 
 	/** The control states from the controllers */
-	private boolean[][] controls = new boolean[10][MAX_BUTTONS+10];
+	private final boolean[][] controls = new boolean[10][MAX_BUTTONS+10];
 	/** True if the event has been consumed */
 	protected boolean consumed = false;
 	/** A list of listeners to be notified of input events */

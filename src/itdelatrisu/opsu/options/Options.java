@@ -18,11 +18,10 @@
 
 package itdelatrisu.opsu.options;
 
-import itdelatrisu.opsu.Container;
-import itdelatrisu.opsu.ErrorHandler;
-import itdelatrisu.opsu.GameImage;
-import itdelatrisu.opsu.OpsuConstants;
-import itdelatrisu.opsu.Utils;
+import com.sun.jna.platform.win32.Advapi32Util;
+import com.sun.jna.platform.win32.Win32Exception;
+import com.sun.jna.platform.win32.WinReg;
+import itdelatrisu.opsu.*;
 import itdelatrisu.opsu.audio.MusicController;
 import itdelatrisu.opsu.beatmap.Beatmap;
 import itdelatrisu.opsu.beatmap.TimingPoint;
@@ -31,27 +30,6 @@ import itdelatrisu.opsu.skins.SkinLoader;
 import itdelatrisu.opsu.ui.Colors;
 import itdelatrisu.opsu.ui.Fonts;
 import itdelatrisu.opsu.ui.UI;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.concurrent.TimeUnit;
-import java.util.jar.Attributes;
-import java.util.jar.JarFile;
-import java.util.jar.Manifest;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
@@ -66,9 +44,16 @@ import org.newdawn.slick.util.FileSystemLocation;
 import org.newdawn.slick.util.Log;
 import org.newdawn.slick.util.ResourceLoader;
 
-import com.sun.jna.platform.win32.Advapi32Util;
-import com.sun.jna.platform.win32.Win32Exception;
-import com.sun.jna.platform.win32.WinReg;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
+import java.util.jar.Attributes;
+import java.util.jar.JarFile;
+import java.util.jar.Manifest;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Handles all user options.
@@ -818,8 +803,8 @@ public class Options {
 		public int getMaxValue() { return max; }
 
 		/**
-		 * Returns a list of values to choose from, if applicable.
-		 * @return the list of values, or {@code null} if not applicable
+		 * Returns an array of values to choose from, if applicable.
+		 * @return the array of values, or {@code null} if not applicable
 		 */
 		public Object[] getItemList() { return null; }
 
@@ -920,7 +905,7 @@ public class Options {
 		 * @return true if visible
 		 */
 		public boolean isVisible() { return visible; }
-	};
+	}
 
 	/** Map of option display names to GameOptions. */
 	private static HashMap<String, GameOption> optionMap;
@@ -946,7 +931,8 @@ public class Options {
 		RES_3840_2160 (3840, 2160);
 
 		/** Screen dimensions. */
-		private int width, height;
+		private final int width;
+		private final int height;
 
 		/**
 		 * Constructor.
@@ -990,7 +976,6 @@ public class Options {
 	/** The current skin. */
 	private static Skin skin;
 
-	/** The directory of the skin. */
 	// private static File skinDir = skin.getDirectory();
 
 	/** Frame limiters. */
@@ -1000,7 +985,7 @@ public class Options {
 	private static int targetFPSindex = 0;
 
 	/** Screenshot file formats. */
-	private static String[] screenshotFormat = { "png", "jpg", "bmp" };
+	private static final String[] screenshotFormat = { "png", "jpg", "bmp" };
 
 	/** Index in screenshotFormat[] array. */
 	private static int screenshotFormatIndex = 0;
@@ -1722,7 +1707,7 @@ public class Options {
 	 */
 	public static void saveOptions() {
 		try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
-				new FileOutputStream(OPTIONS_FILE), "utf-8"))) {
+				new FileOutputStream(OPTIONS_FILE), StandardCharsets.UTF_8))) {
 			// header
 			SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE, MMMM dd, yyyy");
 			String date = dateFormat.format(new Date());

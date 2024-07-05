@@ -25,13 +25,12 @@ import itdelatrisu.opsu.beatmap.Beatmap;
 import itdelatrisu.opsu.io.OsuReader;
 import itdelatrisu.opsu.io.OsuWriter;
 import itdelatrisu.opsu.options.Options;
+import org.newdawn.slick.util.Log;
+import org.tukaani.xz.LZMA2Options;
+import org.tukaani.xz.LZMAInputStream;
+import org.tukaani.xz.LZMAOutputStream;
 
-import java.io.BufferedOutputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.nio.CharBuffer;
 import java.nio.charset.CharsetEncoder;
 import java.nio.charset.StandardCharsets;
@@ -41,16 +40,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.newdawn.slick.util.Log;
-import org.tukaani.xz.LZMA2Options;
-import org.tukaani.xz.LZMAInputStream;
-import org.tukaani.xz.LZMAOutputStream;
-
 /**
  * Captures osu! replay data.
- * https://osu.ppy.sh/wiki/Osr_%28file_format%29
+ * <a href="https://osu.ppy.sh/wiki/Osr_%28file_format%29">...</a>
  *
- * @author smoogipooo (https://github.com/smoogipooo/osu-Replay-API/)
+ * @author smoogipooo (<a href="https://github.com/smoogipooo/osu-Replay-API/">...</a>)
  */
 public class Replay {
 	/** The associated file. */
@@ -151,7 +145,6 @@ public class Replay {
 	/**
 	 * Loads the replay header data.
 	 * @param reader the associated reader
-	 * @throws IOException
 	 */
 	private void loadHeader(OsuReader reader) throws IOException {
 		this.mode = reader.readByte();
@@ -174,7 +167,6 @@ public class Replay {
 	/**
 	 * Loads the replay data.
 	 * @param reader the associated reader
-	 * @throws IOException
 	 */
 	private void loadData(OsuReader reader) throws IOException {
 		// life data

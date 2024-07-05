@@ -19,9 +19,9 @@
 
 package itdelatrisu.opsu;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Project-specific constants.
@@ -53,11 +53,7 @@ public class OpsuConstants {
 
 	/** Returns the changelog URI for the given version. */
 	public static URI getChangelogURI(String version) {
-		try {
-			return URI.create(String.format(CHANGELOG_URL, URLEncoder.encode(version, "UTF-8")));
-		} catch (UnsupportedEncodingException e) {
-			return WEBSITE_URI;
-		}
+		return URI.create(String.format(CHANGELOG_URL, URLEncoder.encode(version, StandardCharsets.UTF_8)));
 	}
 
 	// This class should not be instantiated.

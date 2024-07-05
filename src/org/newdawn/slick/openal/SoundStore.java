@@ -28,16 +28,6 @@
 
 package org.newdawn.slick.openal;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.nio.FloatBuffer;
-import java.nio.IntBuffer;
-import java.security.AccessController;
-import java.security.PrivilegedAction;
-import java.util.HashMap;
-
 import org.lwjgl.BufferUtils;
 import org.lwjgl.Sys;
 import org.lwjgl.openal.AL;
@@ -45,6 +35,14 @@ import org.lwjgl.openal.AL10;
 import org.lwjgl.openal.OpenALException;
 import org.newdawn.slick.util.Log;
 import org.newdawn.slick.util.ResourceLoader;
+
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
+import java.util.HashMap;
 
 /**
  * Responsible for holding and playing the sounds used in the game.
@@ -67,14 +65,14 @@ public class SoundStore {
 	/** The number of sound sources enabled - default 8 */
 	private int sourceCount;
 	/** The map of references to IDs of previously loaded sounds */
-	private HashMap loaded = new HashMap();
+	private final HashMap loaded = new HashMap();
 	/** The ID of the buffer containing the music currently being played */
 	private int currentMusic = -1;
 	/** The OpenGL AL sound sources in use */
 	private IntBuffer sources;
 	/** The next source to be used for sound effects */
 	private int nextSource;
-	/** True if the sound system has been initialise */
+	/** True if the sound system has been initialised */
 	private boolean inited = false;
 	/** The MODSound to be updated */
 	private MODSound mod;
@@ -94,9 +92,9 @@ public class SoundStore {
 	private boolean deferred;
 
 	/** The buffer used to set the velocity of a source */
-    private FloatBuffer sourceVel = BufferUtils.createFloatBuffer(3).put(new float[] { 0.0f, 0.0f, 0.0f });
+    private final FloatBuffer sourceVel = BufferUtils.createFloatBuffer(3).put(new float[] { 0.0f, 0.0f, 0.0f });
     /** The buffer used to set the position of a source */
-    private FloatBuffer sourcePos = BufferUtils.createFloatBuffer(3);
+    private final FloatBuffer sourcePos = BufferUtils.createFloatBuffer(3);
 
     /** The maximum number of sources */
     private int maxSources = 64;
@@ -318,23 +316,19 @@ public class SoundStore {
 		Log.info("Initialising sounds..");
 		inited = true;
 
-		AccessController.doPrivileged((PrivilegedAction) () -> {
-			try {
-				AL.create();
-				soundWorks = true;
-				sounds = true;
-				music = true;
-				Log.info("- Sound works");
-			} catch (Exception e) {
-				Log.error("Sound initialisation failure.");
-				Log.error(e);
-				soundWorks = false;
-				sounds = false;
-				music = false;
-			}
-
-			return null;
-});
+		try {
+			AL.create();
+			soundWorks = true;
+			sounds = true;
+			music = true;
+			Log.info("- Sound works");
+		} catch (Exception e) {
+			Log.error("Sound initialisation failure.");
+			Log.error(e);
+			soundWorks = false;
+			sounds = false;
+			music = false;
+		}
 
 		if (soundWorks) {
 			sourceCount = 0;

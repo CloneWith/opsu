@@ -21,6 +21,7 @@ package itdelatrisu.opsu.downloads;
 import itdelatrisu.opsu.ErrorHandler;
 import itdelatrisu.opsu.Utils;
 import itdelatrisu.opsu.options.Options;
+import org.newdawn.slick.util.Log;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -35,8 +36,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.Map;
-
-import org.newdawn.slick.util.Log;
 
 /**
  * File download.
@@ -82,10 +81,10 @@ public class Download {
 	/** Download listener interface. */
 	public interface DownloadListener {
 		/** Indication that a download has completed. */
-		public void completed();
+		void completed();
 
 		/** Indication that an error has occurred. */
-		public void error();
+		void error();
 	}
 
 	/** The local path. */
@@ -274,7 +273,7 @@ public class Download {
 			try (
 				InputStream in = conn.getInputStream();
 				ReadableByteChannel readableByteChannel = Channels.newChannel(in);
-				FileOutputStream fileOutputStream = new FileOutputStream(localPath);
+				FileOutputStream fileOutputStream = new FileOutputStream(localPath)
 			) {
 				rbc = new ReadableByteChannelWrapper(readableByteChannel);
 				fos = fileOutputStream;

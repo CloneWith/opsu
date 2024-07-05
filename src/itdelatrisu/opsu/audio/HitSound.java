@@ -80,7 +80,7 @@ public enum HitSound implements SoundController.SoundComponent {
 	private final String filename;
 
 	/** The Clip associated with the hit sound. */
-	private HashMap<SampleSet, MultiClip> clips;
+	private final HashMap<SampleSet, MultiClip> clips;
 
 	/** Total number of hit sounds. */
 	public static final int SIZE = values().length;

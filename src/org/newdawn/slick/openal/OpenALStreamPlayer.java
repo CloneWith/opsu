@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2013, Slick2D
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  * - Redistributions of source code must retain the above copyright notice,
@@ -12,7 +12,7 @@
  * - Neither the name of the Slick2D nor the names of its contributors may be
  *   used to endorse or promote products derived from this software without
  *   specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -28,11 +28,6 @@
 
 package org.newdawn.slick.openal;
 
-import java.io.IOException;
-import java.net.URL;
-import java.nio.ByteBuffer;
-import java.nio.IntBuffer;
-
 import org.lwjgl.BufferUtils;
 import org.lwjgl.Sys;
 import org.lwjgl.openal.AL10;
@@ -41,30 +36,35 @@ import org.lwjgl.openal.OpenALException;
 import org.newdawn.slick.util.Log;
 import org.newdawn.slick.util.ResourceLoader;
 
+import java.io.IOException;
+import java.net.URL;
+import java.nio.ByteBuffer;
+import java.nio.IntBuffer;
+
 /**
  * A generic tool to work on a supplied stream, pulling out PCM data and buffered it to OpenAL
  * as required.
- * 
+ *
  * @author Kevin Glass
  * @author Nathan Sweet  {@literal <misc@n4te.com>}
- * @author Rockstar play and setPosition cleanup 
+ * @author Rockstar play and setPosition cleanup
  */
 public class OpenALStreamPlayer {
 	/** The number of buffers to maintain */
 	public static final int BUFFER_COUNT = 20;  // 3
 	/** The size of the sections to stream from the stream */
 	private static final int sectionSize = 4096;  // 4096 * 20
-	
+
 	/** The buffer read from the data stream */
-	private byte[] buffer = new byte[sectionSize];
+	private final byte[] buffer = new byte[sectionSize];
 	/** Holds the OpenAL buffer names */
-	private IntBuffer bufferNames;
+	private final IntBuffer bufferNames;
 	/** The byte buffer passed to OpenAL containing the section */
-	private ByteBuffer bufferData = BufferUtils.createByteBuffer(sectionSize);
+	private final ByteBuffer bufferData = BufferUtils.createByteBuffer(sectionSize);
 	/** The buffer holding the names of the OpenAL buffer thats been fully played back */
-	private IntBuffer unqueued = BufferUtils.createIntBuffer(1);
+	private final IntBuffer unqueued = BufferUtils.createIntBuffer(1);
 	/** The source we're playing back on */
-    private int source;
+    private final int source;
 	/** The number of buffers remaining */
     private int remainingBufferCount;
 	/** True if we should loop the track */
@@ -79,8 +79,7 @@ public class OpenALStreamPlayer {
 	private URL url;
 	/** The pitch of the music */
 	private float pitch;
-	/** Position in seconds of the previously played buffers */
-//	private float positionOffset;
+	//	private float positionOffset;
 
 	/** The stream position. */
 	long streamPos = 0;
@@ -98,7 +97,7 @@ public class OpenALStreamPlayer {
 	long musicLength = -1;
 
 	/** The assumed time of when the music position would be 0. */
-	long syncStartTime; 
+	long syncStartTime;
 
 	/** The last value that was returned for the music position. */
 	float lastUpdatePosition = 0;
@@ -111,21 +110,21 @@ public class OpenALStreamPlayer {
 
 	/**
 	 * Create a new player to work on an audio stream
-	 * 
+	 *
 	 * @param source The source on which we'll play the audio
 	 * @param ref A reference to the audio file to stream
 	 */
 	public OpenALStreamPlayer(int source, String ref) {
 		this.source = source;
 		this.ref = ref;
-		
+
 		bufferNames = BufferUtils.createIntBuffer(BUFFER_COUNT);
 		AL10.alGenBuffers(bufferNames);
 	}
 
 	/**
 	 * Create a new player to work on an audio stream
-	 * 
+	 *
 	 * @param source The source on which we'll play the audio
 	 * @param url A reference to the audio file to stream
 	 */
@@ -136,10 +135,10 @@ public class OpenALStreamPlayer {
 		bufferNames = BufferUtils.createIntBuffer(BUFFER_COUNT);
 		AL10.alGenBuffers(bufferNames);
 	}
-	
+
 	/**
 	 * Initialise our connection to the underlying resource
-	 * 
+	 *
 	 * @throws IOException Indicates a failure to open the underling resource
 	 */
 	private void initStreams() throws IOException {
@@ -178,7 +177,7 @@ public class OpenALStreamPlayer {
 				}
 			}
 		}
-		
+
 		this.audio = audio;
 		sampleRate = audio.getRate();
 		if (audio.getChannels() > 1)
@@ -188,18 +187,18 @@ public class OpenALStreamPlayer {
 //		positionOffset = 0;
 		streamPos = 0;
 		playedPos = 0;
-		
+
 	}
-	
+
 	/**
 	 * Get the source of this stream
-	 * 
+	 *
 	 * @return The name of the source of string
 	 */
 	public String getSource() {
 		return (url == null) ? ref : url.toString();
 	}
-	
+
 	/**
 	 * Clean up the buffers applied to the sound source
 	 */
@@ -212,49 +211,49 @@ public class OpenALStreamPlayer {
 			buffer.clear();
 		}
 	}
-	
+
 	/**
 	 * Start this stream playing
-	 * 
-	 * @param loop True if the stream should loop 
+	 *
+	 * @param loop True if the stream should loop
 	 * @throws IOException Indicates a failure to read from the stream
 	 */
 	public synchronized void play(boolean loop) throws IOException {
 		this.loop = loop;
 		initStreams();
-		
+
 		done = false;
 
 		AL10.alSourceStop(source);
-		
+
 		startPlayback();
 		syncStartTime = getTime();
 	}
-	
+
 	/**
 	 * Setup the playback properties
-	 * 
+	 *
 	 * @param pitch The pitch to play back at
 	 */
 	public void setup(float pitch) {
 		this.pitch = pitch;
 		syncPosition();
 	}
-	
+
 	/**
 	 * Check if the playback is complete. Note this will never
 	 * return true if we're looping
-	 * 
+	 *
 	 * @return True if we're looping
 	 */
 	public boolean done() {
 		return done;
 	}
-	
+
 	/**
 	 * Poll the bufferNames - check if we need to fill the bufferNames with another
-	 * section. 
-	 * 
+	 * section.
+	 * <p>
 	 * Most of the time this should be reasonably quick
 	 */
 	public synchronized void update() {
@@ -266,7 +265,7 @@ public class OpenALStreamPlayer {
 		while (processed > 0) {
 			unqueued.clear();
 			AL10.alSourceUnqueueBuffers(source, unqueued);
-			
+
 			int bufferIndex = unqueued.get(0);
 
 			int bufferLength = AL10.alGetBufferi(bufferIndex, AL10.AL_SIZE);
@@ -286,17 +285,17 @@ public class OpenALStreamPlayer {
 			}
 			processed--;
 		}
-		
+
 		int state = AL10.alGetSourcei(source, AL10.AL_SOURCE_STATE);
-		
+
 		if (state != AL10.AL_PLAYING) {
 			AL10.alSourcePlay(source);
 		}
 	}
-	
+
 	/**
 	 * Stream some data from the audio stream to the buffer indicates by the ID
-	 * 
+	 *
 	 * @param bufferId The ID of the buffer to fill
 	 * @return True if another section was available
 	 */
@@ -327,7 +326,7 @@ public class OpenALStreamPlayer {
 					return false;
 				}
 			}
-			
+
 			return true;
 		} catch (IOException e) {
 			Log.error(e);
@@ -337,7 +336,7 @@ public class OpenALStreamPlayer {
 
 	/**
 	 * Seeks to a position in the music.
-	 * 
+	 *
 	 * @param position Position in seconds.
 	 * @return True if the setting of the position was successful
 	 */
@@ -371,7 +370,7 @@ public class OpenALStreamPlayer {
 			playedPos = streamPos;
 			syncStartTime = (long) (getTime() - (playedPos * 1000 / sampleSize / sampleRate) / pitch);
 
-			startPlayback(); 
+			startPlayback();
 
 			return true;
 		} catch (IOException e) {
@@ -400,7 +399,7 @@ public class OpenALStreamPlayer {
 
 	/**
 	 * Return the current playing position in the sound
-	 * 
+	 *
 	 * @return The current position in seconds.
 	 */
 	public float getALPosition() {
@@ -411,7 +410,7 @@ public class OpenALStreamPlayer {
 
 	/**
 	 * Return the current playing position in the sound
-	 * 
+	 *
 	 * @return The current position in seconds.
 	 */
 	public float getPosition() {
@@ -462,9 +461,9 @@ public class OpenALStreamPlayer {
 	public void resuming() {
 		syncStartTime += getTime() - pauseTime;
 	}
-	
+
 	/**
-	 * http://wiki.lwjgl.org/index.php?title=LWJGL_Basics_4_%28Timing%29
+	 * <a href="http://wiki.lwjgl.org/index.php?title=LWJGL_Basics_4_%28Timing%29">...</a>
 	 * Get the time in milliseconds
 	 *
 	 * @return The system time in milliseconds

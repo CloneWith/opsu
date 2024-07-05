@@ -32,7 +32,6 @@ import itdelatrisu.opsu.states.Game;
 import itdelatrisu.opsu.ui.Colors;
 import itdelatrisu.opsu.ui.animations.AnimatedValue;
 import itdelatrisu.opsu.ui.animations.AnimationEquation;
-
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -58,19 +57,19 @@ public class Slider implements GameObject {
 	private static float diameter;
 
 	/** The associated HitObject. */
-	private HitObject hitObject;
+	private final HitObject hitObject;
 
 	/** The scaled starting x, y coordinates. */
 	protected float x, y;
 
 	/** The associated Game object. */
-	private Game game;
+	private final Game game;
 
 	/** The associated GameData object. */
-	private GameData data;
+	private final GameData data;
 
 	/** The color of this slider. */
-	private Color color;
+	private final Color color;
 
 	/** The underlying Curve. */
 	private Curve curve;
@@ -91,7 +90,7 @@ public class Slider implements GameObject {
 	private boolean followCircleActive = false;
 
 	/** Whether the slider result ends the combo streak. */
-	private boolean comboEnd;
+	private final boolean comboEnd;
 
 	/** The number of repeats that have passed so far. */
 	private int currentRepeats = 0;
@@ -106,13 +105,13 @@ public class Slider implements GameObject {
 	private int ticksHit = 0, tickIntervals = 1;
 
 	/** The animation progress for ticks expanding the follow circle. */
-	private AnimatedValue tickExpand = new AnimatedValue(200, 0.1f, 0f, AnimationEquation.LINEAR);
+	private final AnimatedValue tickExpand = new AnimatedValue(200, 0.1f, 0f, AnimationEquation.LINEAR);
 
 	/** The animation progress for the initial expansion of the follow circle. */
-	private AnimatedValue initialExpand = new AnimatedValue(150, 0f, 1f, AnimationEquation.OUT_QUAD);
+	private final AnimatedValue initialExpand = new AnimatedValue(150, 0f, 1f, AnimationEquation.OUT_QUAD);
 
 	/** The animation progress for the release of the follow circle. */
-	private AnimatedValue releaseExpand = new AnimatedValue(100, 0f, 1f, AnimationEquation.IN_QUAD);
+	private final AnimatedValue releaseExpand = new AnimatedValue(100, 0f, 1f, AnimationEquation.IN_QUAD);
 
 	/** Start index of this slider in the merged slider. */
 	public int baseSliderFrom;

@@ -23,9 +23,9 @@ import itdelatrisu.opsu.beatmap.HitObject;
 
 /**
  * Representation of a curve along a Circumscribed Circle of three points.
- * http://en.wikipedia.org/wiki/Circumscribed_circle
+ * <a href="http://en.wikipedia.org/wiki/Circumscribed_circle">...</a>
  *
- * @author fluddokt (https://github.com/fluddokt)
+ * @author fluddokt (<a href="https://github.com/fluddokt">...</a>)
  */
 public class CircumscribedCircle extends Curve {
 	/** PI constants. */
@@ -34,19 +34,24 @@ public class CircumscribedCircle extends Curve {
 		HALF_PI = (float) (Math.PI / 2);
 
 	/** The center of the Circumscribed Circle. */
-	private Vec2f circleCenter;
+	private final Vec2f circleCenter;
 
 	/** The radius of the Circumscribed Circle. */
-	private float radius;
+	private final float radius;
 
 	/** The three points to create the Circumscribed Circle from. */
-	private Vec2f start, mid, end;
+	private final Vec2f start;
+	private final Vec2f mid;
+	private final Vec2f end;
 
 	/** The three angles relative to the circle center. */
-	private float startAng, endAng, midAng;
+	private float startAng;
+	private float endAng;
+	private final float midAng;
 
 	/** The start and end angles for drawing. */
-	private float drawStartAngle, drawEndAngle;
+	private final float drawStartAngle;
+	private final float drawEndAngle;
 
 	/**
 	 * Constructor.
@@ -130,7 +135,7 @@ public class CircumscribedCircle extends Curve {
 	/**
 	 * Finds the point of intersection between the two parametric lines
 	 * {@code A = a + ta*t} and {@code B = b + tb*u}.
-	 * http://gamedev.stackexchange.com/questions/44720/
+	 * <a href="http://gamedev.stackexchange.com/questions/44720/">...</a>
 	 * @param a  the initial position of the line A
 	 * @param ta the direction of the line A
 	 * @param b  the initial position of the line B

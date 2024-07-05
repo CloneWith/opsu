@@ -18,6 +18,7 @@
 
 package itdelatrisu.opsu;
 
+import com.sun.jna.platform.FileUtils;
 import itdelatrisu.opsu.audio.SoundController;
 import itdelatrisu.opsu.audio.SoundEffect;
 import itdelatrisu.opsu.beatmap.HitObject;
@@ -27,24 +28,34 @@ import itdelatrisu.opsu.options.Options;
 import itdelatrisu.opsu.replay.PlaybackSpeed;
 import itdelatrisu.opsu.ui.Colors;
 import itdelatrisu.opsu.ui.Fonts;
-import itdelatrisu.opsu.ui.NotificationManager.NotificationListener;
 import itdelatrisu.opsu.ui.UI;
 import itdelatrisu.opsu.user.UserButton;
 import itdelatrisu.opsu.user.UserList;
+import net.lingala.zip4j.ZipFile;
+import net.lingala.zip4j.exception.ZipException;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.lwjgl.BufferUtils;
+import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.GL11;
+import org.newdawn.slick.Animation;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Input;
+import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.util.Log;
 
-import java.awt.Desktop;
-import java.awt.Toolkit;
+import javax.imageio.ImageIO;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.image.BufferedImage;
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.SocketTimeoutException;
 import java.net.URISyntaxException;
@@ -61,30 +72,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 import java.util.jar.JarFile;
-
-import javax.imageio.ImageIO;
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.Display;
-import org.lwjgl.opengl.GL11;
-import org.newdawn.slick.Animation;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Input;
-import org.newdawn.slick.state.StateBasedGame;
-import org.newdawn.slick.util.Log;
-
-import com.sun.jna.platform.FileUtils;
-
-import net.lingala.zip4j.ZipFile;
-import net.lingala.zip4j.exception.ZipException;
 
 /**
  * Contains miscellaneous utilities.
@@ -326,7 +313,7 @@ public class Utils {
 
 	/**
 	 * Takes a screenshot.
-	 * @author http://wiki.lwjgl.org/index.php?title=Taking_Screen_Shots
+	 * @author <a href="http://wiki.lwjgl.org/index.php?title=Taking_Screen_Shots">LWJGL wiki</a>
 	 */
 	public static void takeScreenShot() {
 		// create the screenshot directory
@@ -387,7 +374,7 @@ public class Utils {
 	 * Returns a human-readable representation of a given number of bytes.
 	 * @param bytes the number of bytes
 	 * @return the string representation
-	 * @author aioobe (http://stackoverflow.com/a/3758880)
+	 * @author aioobe (<a href="http://stackoverflow.com/a/3758880">...</a>)
 	 */
 	public static String bytesToString(long bytes) {
 		if (bytes < 1024)
@@ -402,7 +389,7 @@ public class Utils {
 	 * @param badFileName the original name string
 	 * @param replace the character to replace illegal characters with (or 0 if none)
 	 * @return the cleaned file name
-	 * @author Sarel Botha (http://stackoverflow.com/a/5626340)
+	 * @author Sarel Botha (<a href="http://stackoverflow.com/a/5626340">...</a>)
 	 */
 	public static String cleanFileName(String badFileName, char replace) {
 		if (badFileName == null)
@@ -525,7 +512,7 @@ public class Utils {
 	 * Returns a the contents of a URL as a string.
 	 * @param url the remote URL
 	 * @return the contents as a string, or null if any error occurred
-	 * @author Roland Illig (http://stackoverflow.com/a/4308662)
+	 * @author Roland Illig (<a href="http://stackoverflow.com/a/4308662">...</a>)
 	 * @throws IOException if an I/O exception occurs
 	 */
 	public static String readDataFromUrl(URL url) throws IOException {
@@ -586,7 +573,7 @@ public class Utils {
 	/**
 	 * Converts an input stream to a string.
 	 * @param is the input stream
-	 * @author Pavel Repin, earcam (http://stackoverflow.com/a/5445161)
+	 * @author Pavel Repin, earcam (<a href="http://stackoverflow.com/a/5445161">...</a>)
 	 */
 	public static String convertStreamToString(InputStream is) {
 		try (Scanner s = new Scanner(is)) {
@@ -721,8 +708,9 @@ public class Utils {
 	/**
 	 * Switches validation of SSL certificates on or off by installing a default
 	 * all-trusting {@link TrustManager}.
+	 *
 	 * @param enabled whether to validate SSL certificates
-	 * @author neu242 (http://stackoverflow.com/a/876785)
+	 * @author neu242 (<a href="http://stackoverflow.com/a/876785">...</a>)
 	 */
 	public static void setSSLCertValidation(boolean enabled) {
 		// create a trust manager that does not validate certificate chains

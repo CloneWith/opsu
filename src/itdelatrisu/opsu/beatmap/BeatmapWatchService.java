@@ -20,19 +20,10 @@ package itdelatrisu.opsu.beatmap;
 
 import itdelatrisu.opsu.ErrorHandler;
 import itdelatrisu.opsu.options.Options;
+import org.newdawn.slick.util.Log;
 
 import java.io.IOException;
-import java.nio.file.ClosedWatchServiceException;
-import java.nio.file.FileSystems;
-import java.nio.file.FileVisitResult;
-import java.nio.file.Files;
-import java.nio.file.LinkOption;
-import java.nio.file.Path;
-import java.nio.file.SimpleFileVisitor;
-import java.nio.file.StandardWatchEventKinds;
-import java.nio.file.WatchEvent;
-import java.nio.file.WatchKey;
-import java.nio.file.WatchService;
+import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,8 +31,6 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import org.newdawn.slick.util.Log;
 
 /*
  * Copyright (c) 2008, 2010, Oracle and/or its affiliates. All rights reserved.
@@ -77,7 +66,7 @@ import org.newdawn.slick.util.Log;
 /**
  * Watches the beatmap directory tree for changes.
  *
- * @author The Java Tutorials (http://docs.oracle.com/javase/tutorial/essential/io/examples/WatchDir.java) (base)
+ * @author The Java Tutorials (<a href="http://docs.oracle.com/javase/tutorial/essential/io/examples/WatchDir.java">...</a>) (base)
  */
 public class BeatmapWatchService {
 	/** Beatmap watcher service instance. */
@@ -134,7 +123,7 @@ public class BeatmapWatchService {
 		 * @param kind the event kind
 		 * @param child the child directory
 		 */
-		public void eventReceived(WatchEvent.Kind<?> kind, Path child);
+		void eventReceived(WatchEvent.Kind<?> kind, Path child);
 	}
 
 	/** The list of listeners. */
@@ -192,7 +181,7 @@ public class BeatmapWatchService {
 	}
 
 	/**
-	 * Register the given directory, and all its sub-directories, with the WatchService.
+	 * Register the given directory, and all its subdirectories, with the WatchService.
 	 * @param start the root directory to register
 	 */
 	public void registerAll(final Path start) {
@@ -203,13 +192,13 @@ public class BeatmapWatchService {
 					try {
 						register(dir);
 					} catch (IOException e) {
-						Log.warn(String.format("Failed to register path '%s' with the watch service.", dir.toString()), e);
+						Log.warn(String.format("Failed to register path '%s' with the watch service.", dir), e);
 					}
 					return FileVisitResult.CONTINUE;
 				}
 			});
 		} catch (IOException e) {
-			Log.warn(String.format("Failed to register paths from root directory '%s' with the watch service.", start.toString()), e);
+			Log.warn(String.format("Failed to register paths from root directory '%s' with the watch service.", start), e);
 		}
 	}
 
@@ -264,7 +253,7 @@ public class BeatmapWatchService {
 						listener.eventReceived(kind, child);
 				}
 
-				// if directory is created, then register it and its sub-directories
+				// if directory is created, then register it and its subdirectories
 				if (kind == StandardWatchEventKinds.ENTRY_CREATE) {
 					if (Files.isDirectory(child, LinkOption.NOFOLLOW_LINKS))
 						registerAll(child);

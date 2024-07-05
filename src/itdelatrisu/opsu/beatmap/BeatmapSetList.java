@@ -26,13 +26,7 @@ import itdelatrisu.opsu.options.Options;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -49,7 +43,7 @@ public class BeatmapSetList {
 	);
 
 	/** List containing all parsed nodes. */
-	private ArrayList<BeatmapSetNode> parsedNodes;
+	private final ArrayList<BeatmapSetNode> parsedNodes;
 
 	/** Total number of beatmaps (i.e. Beatmap objects). */
 	private int mapCount = 0;
@@ -61,10 +55,10 @@ public class BeatmapSetList {
 	private ArrayList<BeatmapSetNode> nodes;
 
 	/** Set of all beatmap set IDs for the parsed beatmaps. */
-	private HashSet<Integer> MSIDdb;
+	private final HashSet<Integer> MSIDdb;
 
 	/** Map of all MD5 hashes to beatmaps. */
-	private HashMap<String, Beatmap> beatmapHashDB;
+	private final HashMap<String, Beatmap> beatmapHashDB;
 
 	/** Index of current expanded node (-1 if no node is expanded). */
 	private int expandedIndex;

@@ -20,21 +20,19 @@ package itdelatrisu.opsu.ui;
 
 import itdelatrisu.opsu.GameImage;
 import itdelatrisu.opsu.options.Options;
-
-import java.awt.Font;
-import java.awt.FontFormatException;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.UnicodeFont;
 import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.font.effects.Effect;
 import org.newdawn.slick.util.Log;
 import org.newdawn.slick.util.ResourceLoader;
+
+import java.awt.*;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 
 /**
  * Fonts used for drawing.
@@ -43,7 +41,7 @@ public class Fonts {
 	public static UnicodeFont DEFAULT, BOLD, XLARGE, LARGE, MEDIUM, MEDIUMBOLD, SMALL, SMALLBOLD;
 
 	/** Set of all Unicode strings already loaded per font. */
-	private static HashMap<UnicodeFont, HashSet<String>> loadedGlyphs = new HashMap<>();
+	private static final HashMap<UnicodeFont, HashSet<String>> loadedGlyphs = new HashMap<>();
 
 	// This class should not be instantiated.
 	private Fonts() {}
@@ -144,7 +142,7 @@ public class Fonts {
 	 * @param width the maximum width of a line
 	 * @param newlines true if the "\n" character should break a line
 	 * @return the list of split strings
-	 * @author davedes (http://slick.ninjacave.com/forum/viewtopic.php?t=3778)
+	 * @author davedes (<a href="http://slick.ninjacave.com/forum/viewtopic.php?t=3778">...</a>)
 	 */
 	public static List<String> wrap(org.newdawn.slick.Font font, String text, int width, boolean newlines) {
 		List<String> list = new ArrayList<>();
@@ -172,7 +170,7 @@ public class Fonts {
 				i++;
 			}
 		}
-		if (str.length() != 0)
+		if (!str.isEmpty())
 			list.add(str);
 		return list;
 	}

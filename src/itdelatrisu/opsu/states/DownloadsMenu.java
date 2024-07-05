@@ -25,11 +25,7 @@ import itdelatrisu.opsu.Utils;
 import itdelatrisu.opsu.audio.MusicController;
 import itdelatrisu.opsu.audio.SoundController;
 import itdelatrisu.opsu.audio.SoundEffect;
-import itdelatrisu.opsu.beatmap.Beatmap;
-import itdelatrisu.opsu.beatmap.BeatmapParser;
-import itdelatrisu.opsu.beatmap.BeatmapSetList;
-import itdelatrisu.opsu.beatmap.BeatmapSetNode;
-import itdelatrisu.opsu.beatmap.OszUnpacker;
+import itdelatrisu.opsu.beatmap.*;
 import itdelatrisu.opsu.downloads.Download;
 import itdelatrisu.opsu.downloads.DownloadList;
 import itdelatrisu.opsu.downloads.DownloadNode;
@@ -38,38 +34,26 @@ import itdelatrisu.opsu.downloads.servers.HexideServer;
 import itdelatrisu.opsu.downloads.servers.RippleServer;
 import itdelatrisu.opsu.downloads.servers.SayobotServer;
 import itdelatrisu.opsu.options.Options;
-import itdelatrisu.opsu.ui.Colors;
-import itdelatrisu.opsu.ui.DropdownMenu;
-import itdelatrisu.opsu.ui.Fonts;
-import itdelatrisu.opsu.ui.KineticScrolling;
-import itdelatrisu.opsu.ui.MenuButton;
-import itdelatrisu.opsu.ui.NotificationManager.NotificationListener;
-import itdelatrisu.opsu.ui.UI;
+import itdelatrisu.opsu.ui.*;
 import itdelatrisu.opsu.ui.animations.AnimatedValue;
 import itdelatrisu.opsu.ui.animations.AnimationEquation;
-
-import java.awt.Desktop;
-import java.io.File;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-
-import javax.sound.sampled.LineEvent;
-import javax.sound.sampled.LineListener;
-
 import org.newdawn.slick.Color;
-import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.Input;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.UnicodeFont;
+import org.newdawn.slick.*;
 import org.newdawn.slick.gui.TextField;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.EasedFadeOutTransition;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.util.Log;
+
+import javax.sound.sampled.LineEvent;
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 /**
  * Downloads menu.
@@ -83,7 +67,7 @@ public class DownloadsMenu extends BasicGameState {
 	private static final float BG_MAX_ALPHA = 0.5f;
 
 	/** Background alpha level (for fade-in effect). */
-	private AnimatedValue bgAlpha = new AnimatedValue(1100, 0f, BG_MAX_ALPHA, AnimationEquation.LINEAR);
+	private final AnimatedValue bgAlpha = new AnimatedValue(1100, 0f, BG_MAX_ALPHA, AnimationEquation.LINEAR);
 
 	/** Delay time, in milliseconds, between each search. */
 	private static final int SEARCH_DELAY = 700;
@@ -111,7 +95,7 @@ public class DownloadsMenu extends BasicGameState {
 	private int focusTimer = 0;
 
 	/** Current start result button (topmost entry). */
-	private KineticScrolling startResultPos = new KineticScrolling();
+	private final KineticScrolling startResultPos = new KineticScrolling();
 
 	/** Total number of results for current query. */
 	private int totalResults = 0;
@@ -123,7 +107,7 @@ public class DownloadsMenu extends BasicGameState {
 	private int pageResultTotal = 0;
 
 	/** Page navigation. */
-	private enum Page { RESET, CURRENT, PREVIOUS, NEXT };
+	private enum Page { RESET, CURRENT, PREVIOUS, NEXT }
 
 	/** Page direction for next query. */
 	private Page pageDir = Page.RESET;
@@ -132,7 +116,7 @@ public class DownloadsMenu extends BasicGameState {
 	private boolean rankedOnly = true;
 
 	/** Current start download index. */
-	private KineticScrolling startDownloadIndexPos = new KineticScrolling();
+	private final KineticScrolling startDownloadIndexPos = new KineticScrolling();
 
 	/** Query thread. */
 	private Thread queryThread;
@@ -286,7 +270,7 @@ public class DownloadsMenu extends BasicGameState {
 			} finally {
 				finished = true;
 			}
-		};
+		}
 
 		/** Imports all packed beatmaps. */
 		private void importBeatmaps() {
@@ -607,7 +591,7 @@ public class DownloadsMenu extends BasicGameState {
 			String query = search.getText().trim().toLowerCase();
 			DownloadServer server = serverMenu.getSelectedItem();
 			if ((lastQuery == null || !query.equals(lastQuery)) &&
-			    (query.length() == 0 || query.length() >= server.minQueryLength())) {
+			    (query.isEmpty() || query.length() >= server.minQueryLength())) {
 				lastQuery = query;
 				lastQueryDir = pageDir;
 

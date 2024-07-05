@@ -27,7 +27,7 @@ import org.newdawn.slick.Image;
 /**
  * Input overlay key.
  *
- * @author yugecin (https://github.com/yugecin)
+ * @author yugecin (<a href="https://github.com/yugecin">...</a>)
  */
 public class InputOverlayKey {
 	/** Time, in ms, of the shrink/expand key animation. */

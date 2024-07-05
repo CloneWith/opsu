@@ -26,26 +26,17 @@ import itdelatrisu.opsu.downloads.Download.DownloadListener;
 import itdelatrisu.opsu.options.Options;
 import itdelatrisu.opsu.ui.NotificationManager.NotificationListener;
 import itdelatrisu.opsu.ui.UI;
-
-import java.awt.Desktop;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.DataLine;
-import javax.sound.sampled.LineListener;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
-
 import org.newdawn.slick.Color;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.util.Log;
 import org.newdawn.slick.util.ResourceLoader;
+
+import javax.sound.sampled.*;
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 
 /**
  * Controller for all (non-music) sound components.
@@ -58,7 +49,7 @@ public class SoundController {
 		 * Returns the Clip associated with the sound component.
 		 * @return the Clip
 		 */
-		public MultiClip getClip();
+		MultiClip getClip();
 	}
 
 	/** The current track being played, if any. */

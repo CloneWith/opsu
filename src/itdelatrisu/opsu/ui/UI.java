@@ -29,17 +29,11 @@ import itdelatrisu.opsu.replay.ReplayImporter;
 import itdelatrisu.opsu.skins.SkinUnpacker;
 import itdelatrisu.opsu.ui.animations.AnimatedValue;
 import itdelatrisu.opsu.ui.animations.AnimationEquation;
-
-import javax.swing.JOptionPane;
-import javax.swing.UIManager;
-
-import org.newdawn.slick.Color;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.Input;
+import org.newdawn.slick.*;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.util.Log;
+
+import javax.swing.*;
 
 /**
  * Draws common UI components.
@@ -49,7 +43,7 @@ public class UI {
 	private static final int IDLE_FPS = 30;
 
 	/** Cursor. */
-	private static Cursor cursor = new Cursor();
+	private static final Cursor cursor = new Cursor();
 
 	/** Back button. */
 	private static BackButton backButton;
@@ -67,7 +61,7 @@ public class UI {
 	private static boolean tooltipNewlines;
 
 	/** The alpha level of the current tooltip (if any). */
-	private static AnimatedValue tooltipAlpha = new AnimatedValue(200, 0f, 1f, AnimationEquation.LINEAR);
+	private static final AnimatedValue tooltipAlpha = new AnimatedValue(200, 0f, 1f, AnimationEquation.LINEAR);
 
 	/** The displayed FPS. */
 	private static float fpsDisplay = 0f;

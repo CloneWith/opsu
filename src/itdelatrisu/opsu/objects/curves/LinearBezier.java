@@ -24,9 +24,9 @@ import java.util.LinkedList;
 
 /**
  * Representation of Bezier curve with equidistant points.
- * http://pomax.github.io/bezierinfo/#tracing
+ * <a href="http://pomax.github.io/bezierinfo/#tracing">...</a>
  *
- * @author fluddokt (https://github.com/fluddokt)
+ * @author fluddokt (<a href="https://github.com/fluddokt">...</a>)
  */
 public class LinearBezier extends EqualDistanceMultiCurve {
 	/**

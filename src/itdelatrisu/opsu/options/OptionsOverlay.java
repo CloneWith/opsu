@@ -25,33 +25,22 @@ import itdelatrisu.opsu.audio.SoundController;
 import itdelatrisu.opsu.audio.SoundEffect;
 import itdelatrisu.opsu.options.Options.GameOption;
 import itdelatrisu.opsu.options.Options.GameOption.OptionType;
-import itdelatrisu.opsu.ui.Colors;
-import itdelatrisu.opsu.ui.DropdownMenu;
-import itdelatrisu.opsu.ui.Fonts;
-import itdelatrisu.opsu.ui.KineticScrolling;
-import itdelatrisu.opsu.ui.MenuButton;
-import itdelatrisu.opsu.ui.UI;
+import itdelatrisu.opsu.ui.*;
 import itdelatrisu.opsu.ui.animations.AnimatedValue;
 import itdelatrisu.opsu.ui.animations.AnimationEquation;
+import org.newdawn.slick.*;
+import org.newdawn.slick.gui.AbstractComponent;
+import org.newdawn.slick.gui.GUIContext;
+import org.newdawn.slick.gui.TextField;
 
 import java.util.IdentityHashMap;
 import java.util.Map;
 import java.util.Random;
 
-import org.newdawn.slick.Color;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.Input;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.gui.AbstractComponent;
-import org.newdawn.slick.gui.GUIContext;
-import org.newdawn.slick.gui.TextField;
-
 /**
  * Options overlay.
  *
- * @author yugecin (https://github.com/yugecin) (base, heavily modified)
+ * @author yugecin (<a href="https://github.com/yugecin">...</a>) (base, heavily modified)
  */
 public class OptionsOverlay extends AbstractComponent {
 	/** Listener for events. */
@@ -82,7 +71,7 @@ public class OptionsOverlay extends AbstractComponent {
 	private final int iconSize;
 
 	/** Search image. */
-	private Image searchImg;
+	private final Image searchImg;
 
 	/** Target duration, in ms, of the move animation for the indicator. */
 	private static final int INDICATOR_MOVE_ANIMATION_TIME = 166;
@@ -118,19 +107,19 @@ public class OptionsOverlay extends AbstractComponent {
 	private int width;
 
 	/** Size of a button in the navigation bar. */
-	private int navButtonSize;
+	private final int navButtonSize;
 
 	/** Start Y position of buttons in the navigation bar. */
-	private int navStartY;
+	private final int navStartY;
 
 	/** The width of the navigation bar. */
-	private int navTargetWidth;
+	private final int navTargetWidth;
 
 	/** The real width of the navigation bar, altered by hiding state and animations. */
 	private int navWidth;
 
 	/** The width of the indicator in the navigation bar. */
-	private int navIndicatorWidth;
+	private final int navIndicatorWidth;
 
 	/** How long the mouse has been hovering over the navigation bar, for animations. */
 	private int navHoverTime;
@@ -145,40 +134,41 @@ public class OptionsOverlay extends AbstractComponent {
 	private final int optionStartX, optionStartY;
 
 	/** The dimensions of an option. */
-	private int optionWidth, optionHeight;
+	private int optionWidth;
+	private final int optionHeight;
 
 	/** Y offset from the option position to the option text position. */
-	private int optionTextOffsetY;
+	private final int optionTextOffsetY;
 
 	/** The size of the control images (sliderball, checkbox). */
-	private int controlImageSize;
+	private final int controlImageSize;
 
 	/** The vertical padding for the control images to vertical align them. */
-	private int controlImagePadding;
+	private final int controlImagePadding;
 
 	/** The width of the grey line next to groups. */
 	private static final int LINE_WIDTH = 3;
 
 	/** Right padding. */
-	private int paddingRight;
+	private final int paddingRight;
 
 	/** Left padding to the grey line. */
-	private int paddingLeft;
+	private final int paddingLeft;
 
 	/** Left padding to the option text. */
-	private int paddingTextLeft;
+	private final int paddingTextLeft;
 
 	/** Y position of the options text. */
-	private int textOptionsY;
+	private final int textOptionsY;
 
 	/** Y position of the change text. */
-	private int textChangeY;
+	private final int textChangeY;
 
 	/** Y position of the search block. */
-	private int searchY;
+	private final int searchY;
 
 	/** Y offset from the search block to the search text. */
-	private int textSearchYOffset;
+	private final int textSearchYOffset;
 
 	/** The padding for an option group title. */
 	private final int optionGroupPadding;
@@ -238,7 +228,7 @@ public class OptionsOverlay extends AbstractComponent {
 	private boolean showRestartButton = false;
 
 	/** Textfield used for searching options. */
-	private TextField searchField;
+	private final TextField searchField;
 
 	/** Last search text. */
 	private String lastSearchText;
@@ -250,7 +240,7 @@ public class OptionsOverlay extends AbstractComponent {
 	private int invalidSearchTextRotation;
 
 	/** The 'invalid search' animation progress. */
-	private AnimatedValue invalidSearchAnimation = new AnimatedValue(500, 1f, 0f, AnimationEquation.LINEAR);
+	private final AnimatedValue invalidSearchAnimation = new AnimatedValue(500, 1f, 0f, AnimationEquation.LINEAR);
 
 	/** Desired alpha values for specific colors. */
 	private static final float
@@ -280,9 +270,10 @@ public class OptionsOverlay extends AbstractComponent {
 		COLOR_NAV_FILTERED_HOVERED = new Color(58, 58, 58);
 
 	// game-related variables
-	private GameContainer container;
-	private Input input;
-	private int containerWidth, containerHeight;
+	private final GameContainer container;
+	private final Input input;
+	private final int containerWidth;
+	private final int containerHeight;
 
 	/**
 	 * Creates the options overlay.
@@ -527,7 +518,7 @@ public class OptionsOverlay extends AbstractComponent {
 			invalidProgress = 1f - invalidProgress;
 		}
 		String searchText = "Type to search!";
-		if (lastSearchText.length() > 0)
+		if (!lastSearchText.isEmpty())
 			searchText = lastSearchText;
 		int textWidth = width - navButtonSize;
 		if (!invalidSearchAnimation.isFinished())
@@ -1305,7 +1296,7 @@ public class OptionsOverlay extends AbstractComponent {
 
 		// esc: close open list option, otherwise close overlay
 		if (key == Input.KEY_ESCAPE) {
-			if (lastSearchText.length() > 0)
+			if (!lastSearchText.isEmpty())
 				resetSearch();
 			else
 				listener.close();

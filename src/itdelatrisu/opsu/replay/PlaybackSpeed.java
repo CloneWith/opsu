@@ -21,13 +21,12 @@ package itdelatrisu.opsu.replay;
 import itdelatrisu.opsu.GameImage;
 import itdelatrisu.opsu.GameMod;
 import itdelatrisu.opsu.ui.MenuButton;
-
 import org.newdawn.slick.Image;
 
 /**
  * Playback speeds for replays.
  *
- * @author DarkTigrus (https://github.com/DarkTigrus)
+ * @author DarkTigrus (<a href="https://github.com/DarkTigrus">...</a>)
  */
 public enum PlaybackSpeed {
 	NORMAL (GameImage.REPLAY_PLAYBACK_NORMAL, 1f),
@@ -44,7 +43,7 @@ public enum PlaybackSpeed {
 	private MenuButton button;
 
 	/** Enum values. */
-	private static PlaybackSpeed[] values = PlaybackSpeed.values();
+	private static final PlaybackSpeed[] values = PlaybackSpeed.values();
 
 	/**
 	 * Initializes the playback buttons.

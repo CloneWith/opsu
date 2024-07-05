@@ -33,37 +33,29 @@ import itdelatrisu.opsu.options.OptionGroup;
 import itdelatrisu.opsu.options.Options;
 import itdelatrisu.opsu.options.OptionsOverlay;
 import itdelatrisu.opsu.states.ButtonMenu.MenuState;
-import itdelatrisu.opsu.ui.Colors;
-import itdelatrisu.opsu.ui.Fonts;
-import itdelatrisu.opsu.ui.MenuButton;
+import itdelatrisu.opsu.ui.*;
 import itdelatrisu.opsu.ui.MenuButton.Expand;
-import itdelatrisu.opsu.ui.NotificationManager.NotificationListener;
-import itdelatrisu.opsu.ui.StarFountain;
-import itdelatrisu.opsu.ui.UI;
 import itdelatrisu.opsu.ui.animations.AnimatedValue;
 import itdelatrisu.opsu.ui.animations.AnimationEquation;
 import itdelatrisu.opsu.user.UserButton;
 import itdelatrisu.opsu.user.UserList;
 import itdelatrisu.opsu.user.UserSelectOverlay;
-
-import java.awt.Desktop;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Stack;
-
 import org.newdawn.slick.Color;
-import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.Input;
-import org.newdawn.slick.SlickException;
+import org.newdawn.slick.*;
 import org.newdawn.slick.fills.GradientFill;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.EasedFadeOutTransition;
 import org.newdawn.slick.state.transition.FadeInTransition;
+
+import java.awt.*;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Stack;
 
 /**
  * "Main Menu" state.
@@ -117,7 +109,7 @@ public class MainMenu extends BasicGameState {
 	private Stack<Integer> previous;
 
 	/** Background alpha level (for fade-in effect). */
-	private AnimatedValue bgAlpha = new AnimatedValue(1100, 0f, BG_MAX_ALPHA, AnimationEquation.LINEAR);
+	private final AnimatedValue bgAlpha = new AnimatedValue(1100, 0f, BG_MAX_ALPHA, AnimationEquation.LINEAR);
 
 	/** Whether a notification was already sent upon entering. */
 	private boolean enterNotification = false;
@@ -141,7 +133,7 @@ public class MainMenu extends BasicGameState {
 	private GradientFill musicInfoFill;
 
 	/** Music info bar animation progress. */
-	private AnimatedValue musicInfoProgress = new AnimatedValue(600, 0f, 1f, AnimationEquation.OUT_CUBIC);
+	private final AnimatedValue musicInfoProgress = new AnimatedValue(600, 0f, 1f, AnimationEquation.OUT_CUBIC);
 
 	/** Options overlay. */
 	private OptionsOverlay optionsOverlay;
@@ -150,7 +142,7 @@ public class MainMenu extends BasicGameState {
 	private boolean showOptionsOverlay = false;
 
 	/** The options overlay show/hide animation progress. */
-	private AnimatedValue optionsOverlayProgress = new AnimatedValue(500, 0f, 1f, AnimationEquation.LINEAR);
+	private final AnimatedValue optionsOverlayProgress = new AnimatedValue(500, 0f, 1f, AnimationEquation.LINEAR);
 
 	/** The user button. */
 	private UserButton userButton;
@@ -165,7 +157,7 @@ public class MainMenu extends BasicGameState {
 	private boolean showUserOverlay = false;
 
 	/** The user overlay show/hide animation progress. */
-	private AnimatedValue userOverlayProgress = new AnimatedValue(750, 0f, 1f, AnimationEquation.OUT_CUBIC);
+	private final AnimatedValue userOverlayProgress = new AnimatedValue(750, 0f, 1f, AnimationEquation.OUT_CUBIC);
 
 	// game-related variables
 	private GameContainer container;

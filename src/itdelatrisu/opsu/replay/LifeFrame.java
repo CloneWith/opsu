@@ -21,7 +21,7 @@ package itdelatrisu.opsu.replay;
 /**
  * Captures a single life frame.
  *
- * @author smoogipooo (https://github.com/smoogipooo/osu-Replay-API/)
+ * @author smoogipooo (<a href="https://github.com/smoogipooo/osu-Replay-API/">...</a>)
  */
 public class LifeFrame {
 	/** The sample interval, in milliseconds, when saving replays. */

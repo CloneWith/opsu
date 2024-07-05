@@ -23,7 +23,6 @@ import itdelatrisu.opsu.ui.Colors;
 import itdelatrisu.opsu.ui.Fonts;
 import itdelatrisu.opsu.ui.animations.AnimatedValue;
 import itdelatrisu.opsu.ui.animations.AnimationEquation;
-
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -42,19 +41,19 @@ public class UserButton {
 	private int x, y;
 
 	/** Background color. */
-	private Color bgColor;
+	private final Color bgColor;
 
 	/** Background alpha level. */
 	private AnimatedValue bgAlpha = new AnimatedValue(200, 0f, 1f, AnimationEquation.OUT_QUAD);
 
 	/** Bar colors. */
-	private Color
-		barBgColor = new Color(Color.darkGray),
-		barBorderColor = new Color(Color.lightGray),
-		barFillColor = new Color(Colors.YELLOW_FILL);
+	private final Color
+		barBgColor = new Color(Color.darkGray);
+	private final Color barBorderColor = new Color(Color.lightGray);
+	private final Color barFillColor = new Color(Colors.YELLOW_FILL);
 
 	/** Flash color. */
-	private Color flashColor = new Color(218, 28, 63);
+	private final Color flashColor = new Color(218, 28, 63);
 
 	/** Whether the button is currently flashing. */
 	private boolean flashing = false;

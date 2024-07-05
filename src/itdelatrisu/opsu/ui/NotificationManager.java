@@ -19,17 +19,11 @@
 package itdelatrisu.opsu.ui;
 
 import itdelatrisu.opsu.ui.animations.AnimationEquation;
+import org.newdawn.slick.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import org.newdawn.slick.Color;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Input;
-import org.newdawn.slick.MouseListener;
-import org.newdawn.slick.UnicodeFont;
 
 /**
  * Notification manager.
@@ -47,7 +41,7 @@ public class NotificationManager {
 	/** Listener for notification clicks. */
 	public interface NotificationListener {
 		/** Fired when this notification is clicked. */
-		public void click();
+		void click();
 	}
 
 	/** Notification. */
@@ -208,7 +202,7 @@ public class NotificationManager {
 	}
 
 	/** All bubble notifications. */
-	private List<BubbleNotification> notifications;
+	private final List<BubbleNotification> notifications;
 
 	/** The current bar notification string. */
 	private String barNotif;

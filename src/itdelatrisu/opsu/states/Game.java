@@ -18,29 +18,15 @@
 
 package itdelatrisu.opsu.states;
 
-import itdelatrisu.opsu.ErrorHandler;
-import itdelatrisu.opsu.GameData;
-import itdelatrisu.opsu.GameImage;
-import itdelatrisu.opsu.GameMod;
-import itdelatrisu.opsu.Opsu;
-import itdelatrisu.opsu.ScoreData;
-import itdelatrisu.opsu.Utils;
+import itdelatrisu.opsu.*;
 import itdelatrisu.opsu.audio.HitSound;
 import itdelatrisu.opsu.audio.MusicController;
 import itdelatrisu.opsu.audio.SoundController;
 import itdelatrisu.opsu.audio.SoundEffect;
-import itdelatrisu.opsu.beatmap.Beatmap;
-import itdelatrisu.opsu.beatmap.BeatmapHPDropRateCalculator;
-import itdelatrisu.opsu.beatmap.BeatmapParser;
-import itdelatrisu.opsu.beatmap.HitObject;
-import itdelatrisu.opsu.beatmap.TimingPoint;
+import itdelatrisu.opsu.beatmap.*;
 import itdelatrisu.opsu.db.BeatmapDB;
 import itdelatrisu.opsu.db.ScoreDB;
-import itdelatrisu.opsu.objects.Circle;
-import itdelatrisu.opsu.objects.DummyObject;
-import itdelatrisu.opsu.objects.GameObject;
-import itdelatrisu.opsu.objects.Slider;
-import itdelatrisu.opsu.objects.Spinner;
+import itdelatrisu.opsu.objects.*;
 import itdelatrisu.opsu.objects.curves.Curve;
 import itdelatrisu.opsu.objects.curves.FakeCombinedCurve;
 import itdelatrisu.opsu.objects.curves.Vec2f;
@@ -50,38 +36,16 @@ import itdelatrisu.opsu.replay.LifeFrame;
 import itdelatrisu.opsu.replay.PlaybackSpeed;
 import itdelatrisu.opsu.replay.Replay;
 import itdelatrisu.opsu.replay.ReplayFrame;
-import itdelatrisu.opsu.ui.Colors;
-import itdelatrisu.opsu.ui.Fonts;
-import itdelatrisu.opsu.ui.InputOverlayKey;
-import itdelatrisu.opsu.ui.MenuButton;
-import itdelatrisu.opsu.ui.StarStream;
-import itdelatrisu.opsu.ui.UI;
+import itdelatrisu.opsu.ui.*;
 import itdelatrisu.opsu.ui.animations.AnimatedValue;
 import itdelatrisu.opsu.ui.animations.AnimationEquation;
 import itdelatrisu.opsu.user.User;
 import itdelatrisu.opsu.user.UserList;
 import itdelatrisu.opsu.video.FFmpeg;
 import itdelatrisu.opsu.video.Video;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.IdentityHashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Stack;
-
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
-import org.newdawn.slick.Animation;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.Input;
-import org.newdawn.slick.SlickException;
+import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.DelayedFadeOutTransition;
@@ -89,6 +53,10 @@ import org.newdawn.slick.state.transition.EasedFadeOutTransition;
 import org.newdawn.slick.state.transition.EmptyTransition;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.util.Log;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
 
 /**
  * "Game" state.
@@ -306,7 +274,7 @@ public class Game extends BasicGameState {
 	private boolean gameFinished = false;
 
 	/** Timer after game has finished, before changing states. */
-	private AnimatedValue gameFinishedTimer = new AnimatedValue(2500, 0, 1, AnimationEquation.LINEAR);
+	private final AnimatedValue gameFinishedTimer = new AnimatedValue(2500, 0, 1, AnimationEquation.LINEAR);
 
 	/** The HP drop rate. */
 	private float hpDropRate = 0.05f;
@@ -327,7 +295,7 @@ public class Game extends BasicGameState {
 	private FakeCombinedCurve mergedSlider;
 
 	/** The objects holding data for the input overlay. */
-	private InputOverlayKey[] inputOverlayKeys;
+	private final InputOverlayKey[] inputOverlayKeys;
 
 	/** Music position bar background colors. */
 	private static final Color
@@ -1587,7 +1555,7 @@ public class Game extends BasicGameState {
 				} catch (Exception e) {
 					// try to handle the error gracefully: substitute in a dummy GameObject
 					ErrorHandler.error(String.format("Failed to create %s at index %d:\n%s",
-							hitObject.getTypeName(), i, hitObject.toString()), e, true);
+							hitObject.getTypeName(), i, hitObject), e, true);
 					gameObjects[i] = new DummyObject(hitObject);
 					continue;
 				}
@@ -2340,7 +2308,7 @@ public class Game extends BasicGameState {
 	/**
 	 * Performs stacking calculations on all hit objects, and updates their
 	 * positions if necessary.
-	 * @author peppy (https://gist.github.com/peppy/1167470)
+	 * @author peppy (<a href="https://gist.github.com/peppy/1167470">...</a>)
 	 */
 	private void calculateStacks() {
 		// reverse pass for stack calculation
