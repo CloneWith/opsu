@@ -461,25 +461,25 @@ public class HitObject {
 	public int getComboNumber() { return comboNumber; }
 
 	/**
-	 * Returns whether or not the hit object is a circle.
+	 * Returns whether the hit object is a circle.
 	 * @return true if circle
 	 */
 	public boolean isCircle() { return (type & TYPE_CIRCLE) > 0; }
 
 	/**
-	 * Returns whether or not the hit object is a slider.
+	 * Returns whether the hit object is a slider.
 	 * @return true if slider
 	 */
 	public boolean isSlider() { return (type & TYPE_SLIDER) > 0; }
 
 	/**
-	 * Returns whether or not the hit object is a spinner.
+	 * Returns whether the hit object is a spinner.
 	 * @return true if spinner
 	 */
 	public boolean isSpinner() { return (type & TYPE_SPINNER) > 0; }
 
 	/**
-	 * Returns whether or not the hit object starts a new combo.
+	 * Returns whether the hit object starts a new combo.
 	 * @return true if new combo
 	 */
 	public boolean isNewCombo() { return (type & TYPE_NEWCOMBO) > 0; }

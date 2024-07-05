@@ -401,12 +401,12 @@ public enum GameImage {
 	private final byte type;
 
 	/**
-	 * Whether or not the image is skinnable by a beatmap.
+	 * Whether the image is skinnable by a beatmap.
 	 * These images are typically related to gameplay.
 	 */
 	private final boolean beatmapSkinnable;
 
-	/** Whether or not to preload the image when the program starts. */
+	/** Whether to preload the image when the program starts. */
 	private final boolean preload;
 
 	/** The default image. */
@@ -559,8 +559,8 @@ public enum GameImage {
 	 * Constructor for general images.
 	 * @param filename the image file name
 	 * @param type the file types (separated by '|')
-	 * @param beatmapSkinnable whether or not the image is beatmap-skinnable
-	 * @param preload whether or not to preload the image
+	 * @param beatmapSkinnable whether the image is beatmap-skinnable
+	 * @param preload whether to preload the image
 	 */
 	GameImage(String filename, String type, boolean beatmapSkinnable, boolean preload) {
 		this.filename = filename;
@@ -574,8 +574,8 @@ public enum GameImage {
 	 * @param filename the image file name
 	 * @param filenameFormat the formatted file name string (for loading multiple images)
 	 * @param type the file types (separated by '|')
-	 * @param beatmapSkinnable whether or not the image is beatmap-skinnable
-	 * @param preload whether or not to preload the image
+	 * @param beatmapSkinnable whether the image is beatmap-skinnable
+	 * @param preload whether to preload the image
 	 */
 	GameImage(String filename, String filenameFormat, String type, boolean beatmapSkinnable, boolean preload) {
 		this(filename, type, beatmapSkinnable, preload);
@@ -583,13 +583,13 @@ public enum GameImage {
 	}
 
 	/**
-	 * Returns whether or not the image is beatmap-skinnable.
+	 * Returns whether the image is beatmap-skinnable.
 	 * @return true if beatmap-skinnable
 	 */
 	public boolean isBeatmapSkinnable() { return beatmapSkinnable; }
 
 	/**
-	 * Returns whether or not to preload the image when the program starts.
+	 * Returns whether to preload the image when the program starts.
 	 * @return true if preload
 	 */
 	public boolean isPreload() { return preload; }

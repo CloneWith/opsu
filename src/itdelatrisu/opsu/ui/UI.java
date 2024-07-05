@@ -63,7 +63,7 @@ public class UI {
 	/** The current tooltip. */
 	private static String tooltip;
 
-	/** Whether or not to check the current tooltip for line breaks. */
+	/** Whether to check the current tooltip for line breaks. */
 	private static boolean tooltipNewlines;
 
 	/** The alpha level of the current tooltip (if any). */
@@ -133,7 +133,7 @@ public class UI {
 	 * @param g the graphics context
 	 * @param mouseX the mouse x coordinate
 	 * @param mouseY the mouse y coordinate
-	 * @param mousePressed whether or not the mouse button is pressed
+	 * @param mousePressed whether the mouse button is pressed
 	 */
 	public static void draw(Graphics g, int mouseX, int mouseY, boolean mousePressed) {
 		notificationManager.draw(g);
@@ -338,7 +338,7 @@ public class UI {
 	 * @param scrollAreaHeight the height of the scroll area
 	 * @param bgColor the scroll bar area background color (null if none)
 	 * @param scrollbarColor the scroll bar color
-	 * @param right whether or not to place the scroll bar on the right side of the unit
+	 * @param right whether to place the scroll bar on the right side of the unit
 	 */
 	public static void drawScrollbar(
 			Graphics g, float position, float totalLength, float lengthShown,

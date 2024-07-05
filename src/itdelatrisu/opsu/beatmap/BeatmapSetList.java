@@ -527,7 +527,7 @@ public class BeatmapSetList {
 	}
 
 	/**
-	 * Returns whether or not the list contains the given beatmap set ID.
+	 * Returns whether the list contains the given beatmap set ID.
 	 * <p>
 	 * Note that IDs for older maps might have been improperly parsed, so
 	 * there is no guarantee that this method will return an accurate value.

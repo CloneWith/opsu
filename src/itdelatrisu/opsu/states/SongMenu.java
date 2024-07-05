@@ -177,7 +177,7 @@ public class SongMenu extends BasicGameState {
 	/** The selection buttons. */
 	private MenuButton selectModsButton, selectRandomButton, selectMapOptionsButton, selectOptionsButton;
 
-	/** The search textfield. */
+	/** The search text field. */
 	private TextField search;
 
 	/** The search font. */
@@ -195,10 +195,10 @@ public class SongMenu extends BasicGameState {
 	/** Loader animation. */
 	private Animation loader;
 
-	/** Whether or not to reset game data upon entering the state. */
+	/** Whether to reset game data upon entering the state. */
 	private boolean resetGame = false;
 
-	/** Whether or not to reset music track upon entering the state. */
+	/** Whether to reset music track upon entering the state. */
 	private boolean resetTrack = false;
 
 	/** If non-null, determines the action to perform upon entering the state. */
@@ -1859,7 +1859,7 @@ public class SongMenu extends BasicGameState {
 	 * Returns all the score data for an BeatmapSetNode from scoreMap.
 	 * If no score data is available for the node, return null.
 	 * @param node the BeatmapSetNode
-	 * @param setTimeSince whether or not to set the "time since" field for the scores
+	 * @param setTimeSince whether to set the "time since" field for the scores
 	 * @return the ScoreData array
 	 */
 	private ScoreData[] getScoreDataForNode(BeatmapSetNode node, boolean setTimeSince) {

@@ -47,10 +47,10 @@ public class TimingPoint {
 	/** Volume of samples. [0, 100] */
 	private int sampleVolume = 100;
 
-	/** Whether or not this timing point is inherited. */
+	/** Whether this timing point is inherited. */
 	private boolean inherited = false;
 
-	/** Whether or not Kiai Mode is active. */
+	/** Whether Kiai Mode is active. */
 	private boolean kiai = false;
 
 	/**
@@ -142,13 +142,13 @@ public class TimingPoint {
 	public float getSampleVolume() { return sampleVolume / 100f; }
 
 	/**
-	 * Returns whether or not this timing point is inherited.
+	 * Returns whether this timing point is inherited.
 	 * @return the inherited
 	 */
 	public boolean isInherited() { return inherited; }
 
 	/**
-	 * Returns whether or not Kiai Time is active.
+	 * Returns whether Kiai Time is active.
 	 * @return true if active
 	 */
 	public boolean isKiaiTimeActive() { return kiai; }

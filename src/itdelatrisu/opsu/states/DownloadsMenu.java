@@ -152,7 +152,7 @@ public class DownloadsMenu extends BasicGameState {
 	/** Information text to display based on the search query. */
 	private String searchResultString;
 
-	/** Whether or not the search timer has been manually reset; reset after search delay passes. */
+	/** Whether the search timer has been manually reset; reset after search delay passes. */
 	private boolean searchTimerReset = false;
 
 	/** The last search query. */

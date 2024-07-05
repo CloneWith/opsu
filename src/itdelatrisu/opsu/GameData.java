@@ -271,10 +271,10 @@ public class GameData {
 		/** Slider curve. */
 		public final Curve curve;
 
-		/** Whether or not to expand when animating. */
+		/** Whether to expand when animating. */
 		public final boolean expand;
 
-		/** Whether or not to hide the hit result. */
+		/** Whether to hide the hit result. */
 		public final boolean hideResult;
 
 		/** Alpha level (for fading out). */
@@ -289,8 +289,8 @@ public class GameData {
 		 * @param color the color of the hit object
 		 * @param hitResultType the hit object type
 		 * @param curve the slider curve (or null if not applicable)
-		 * @param expand whether or not the hit result animation should expand (if applicable)
-		 * @param hideResult whether or not to hide the hit result (but still show the other animations)
+		 * @param expand whether the hit result animation should expand (if applicable)
+		 * @param hideResult whether to hide the hit result (but still show the other animations)
 		 */
 		public HitObjectResult(int time, int result, float x, float y, Color color,
 				HitObjectType hitResultType, Curve curve, boolean expand, boolean hideResult) {
@@ -1240,7 +1240,7 @@ public class GameData {
 	 * @param hit100 the number of 100s
 	 * @param hit50 the number of 50s
 	 * @param miss the number of misses
-	 * @param silver whether or not a silver SS/S should be awarded (if applicable)
+	 * @param silver whether a silver SS/S should be awarded (if applicable)
 	 * @return the current Grade
 	 */
 	public static Grade getGrade(int hit300, int hit100, int hit50, int miss, boolean silver) {
@@ -1449,7 +1449,7 @@ public class GameData {
 	 * @param x the x coordinate
 	 * @param y the y coordinate
 	 * @param color the slider color
-	 * @param expand whether or not the hit result animation should expand
+	 * @param expand whether the hit result animation should expand
 	 */
 	public void sendSliderStartResult(int time, float x, float y, Color color, boolean expand) {
 		hitResultList.add(new HitObjectResult(time, HIT_ANIMATION_RESULT, x, y, color, HitObjectType.CIRCLE, null, expand, true));
@@ -1665,10 +1665,10 @@ public class GameData {
 	 * @param end true if this is the last hit object in the combo
 	 * @param hitObject the hit object
 	 * @param hitResultType the type of hit object for the result
-	 * @param expand whether or not the hit result animation should expand (if applicable)
+	 * @param expand whether the hit result animation should expand (if applicable)
 	 * @param repeat the current repeat number (for sliders, or 0 otherwise)
 	 * @param curve the slider curve (or null if not applicable)
-	 * @param sliderHeldToEnd whether or not the slider was held to the end (if applicable)
+	 * @param sliderHeldToEnd whether the slider was held to the end (if applicable)
 	 */
 	public void sendHitResult(
 		int time, int result, float x, float y, Color color,
@@ -1777,13 +1777,13 @@ public class GameData {
 	public void setReplay(Replay replay) { this.replay = replay; }
 
 	/**
-	 * Returns whether or not this object is used for gameplay.
+	 * Returns whether this object is used for gameplay.
 	 * @return true if gameplay, false if score viewing
 	 */
 	public boolean isGameplay() { return isGameplay; }
 
 	/**
-	 * Sets whether or not this object is used for gameplay.
+	 * Sets whether this object is used for gameplay.
 	 * @param gameplay true if gameplay, false if score viewing
 	 */
 	public void setGameplay(boolean gameplay) { this.isGameplay = gameplay; }

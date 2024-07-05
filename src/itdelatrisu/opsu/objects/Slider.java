@@ -81,16 +81,16 @@ public class Slider implements GameObject {
 	/** The time duration of the slider including repeats, in milliseconds. */
 	private float sliderTimeTotal = 0f;
 
-	/** Whether or not the result of the initial hit circle has been processed. */
+	/** Whether the result of the initial hit circle has been processed. */
 	private boolean sliderClickedInitial = false;
 
-	/** Whether or not the slider was held to the end. */
+	/** Whether the slider was held to the end. */
 	private boolean sliderHeldToEnd = false;
 
-	/** Whether or not to show the follow circle. */
+	/** Whether to show the follow circle. */
 	private boolean followCircleActive = false;
 
-	/** Whether or not the slider result ends the combo streak. */
+	/** Whether the slider result ends the combo streak. */
 	private boolean comboEnd;
 
 	/** The number of repeats that have passed so far. */

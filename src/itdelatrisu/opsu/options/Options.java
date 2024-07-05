@@ -916,7 +916,7 @@ public class Options {
 		public void setVisible(boolean visible) { this.visible = visible; }
 
 		/**
-		 * Returns whether or not this option should be visible.
+		 * Returns whether this option should be visible.
 		 * @return true if visible
 		 */
 		public boolean isVisible() { return visible; }
@@ -1115,13 +1115,13 @@ public class Options {
 	}
 
 	/**
-	 * Returns whether or not fullscreen mode is enabled.
+	 * Returns whether fullscreen mode is enabled.
 	 * @return true if enabled
 	 */
 	public static boolean isFullscreen() { return GameOption.FULLSCREEN.getBooleanValue(); }
 
 	/**
-	 * Returns whether or not the FPS counter display is enabled.
+	 * Returns whether the FPS counter display is enabled.
 	 * @return true if enabled
 	 */
 	public static boolean isFPSCounterEnabled() { return GameOption.SHOW_FPS.getBooleanValue(); }
@@ -1132,19 +1132,19 @@ public class Options {
 	public static void toggleFPSCounter() { GameOption.SHOW_FPS.toggle(null); }
 
 	/**
-	 * Returns whether or not hit lighting effects are enabled.
+	 * Returns whether hit lighting effects are enabled.
 	 * @return true if enabled
 	 */
 	public static boolean isHitLightingEnabled() { return GameOption.SHOW_HIT_LIGHTING.getBooleanValue(); }
 
 	/**
-	 * Returns whether or not combo burst effects are enabled.
+	 * Returns whether combo burst effects are enabled.
 	 * @return true if enabled
 	 */
 	public static boolean isComboBurstEnabled() { return GameOption.SHOW_COMBO_BURSTS.getBooleanValue(); }
 
 	/**
-	 * Returns whether or not warningarrow is tinted white
+	 * Returns whether warningarrow is tinted white
 	 * @return true if enabled
 	 */
 	public static boolean isWarningArrowTintWhite() {
@@ -1158,19 +1158,19 @@ public class Options {
 	public static float getCursorScale() { return GameOption.CURSOR_SIZE.getIntegerValue() / 100f; }
 
 	/**
-	 * Returns whether or not the main menu background should be the current beatmap background image.
+	 * Returns whether the main menu background should be the current beatmap background image.
 	 * @return true if enabled
 	 */
 	public static boolean isDynamicBackgroundEnabled() { return GameOption.DYNAMIC_BACKGROUND.getBooleanValue(); }
 
 	/**
-	 * Returns whether or not to show perfect hit result bursts.
+	 * Returns whether to show perfect hit result bursts.
 	 * @return true if enabled
 	 */
 	public static boolean isPerfectHitBurstEnabled() { return GameOption.SHOW_PERFECT_HIT.getBooleanValue(); }
 
 	/**
-	 * Returns whether or not to show follow points.
+	 * Returns whether to show follow points.
 	 * @return true if enabled
 	 */
 	public static boolean isFollowPointEnabled() { return GameOption.SHOW_FOLLOW_POINTS.getBooleanValue(); }
@@ -1182,69 +1182,69 @@ public class Options {
 	public static float getBackgroundDim() { return (100 - GameOption.BACKGROUND_DIM.getIntegerValue()) / 100f; }
 
 	/**
-	 * Returns whether or not to override the beatmap background with the default playfield background.
+	 * Returns whether to override the beatmap background with the default playfield background.
 	 * @return true if forced
 	 */
 	public static boolean isDefaultPlayfieldForced() { return GameOption.FORCE_DEFAULT_PLAYFIELD.getBooleanValue(); }
 
 	/**
-	 * Returns whether or not to keep the Auto mod on after gameplay.
+	 * Returns whether to keep the Auto mod on after gameplay.
 	 * @return true if always on
 	 */
 	public static boolean isAutoModAlwaysOn() { return GameOption.KEEP_AUTO.getBooleanValue(); }
 
 	/**
-	 * Returns whether or not to show the pause screen with Auto mod on or during replay.
+	 * Returns whether to show the pause screen with Auto mod on or during replay.
 	 * @return true if always on
 	 */
 	public static boolean isPauseAlwaysEnabled() { return GameOption.PAUSE_IN_REPLAY.getBooleanValue(); }
 
 	/**
-	 * Returns whether or not beatmap videos are enabled.
+	 * Returns whether beatmap videos are enabled.
 	 * @return true if enabled
 	 */
 	public static boolean isBeatmapVideoEnabled() { return GameOption.ENABLE_VIDEOS.getBooleanValue(); }
 
 	/**
-	 * Returns whether or not beatmap skins are ignored.
+	 * Returns whether beatmap skins are ignored.
 	 * @return true if ignored
 	 */
 	public static boolean isBeatmapSkinIgnored() { return GameOption.IGNORE_BEATMAP_SKINS.getBooleanValue(); }
 
 	/**
-	 * Returns whether or not to override the beatmap cursor with the current skin's cursor.
+	 * Returns whether to override the beatmap cursor with the current skin's cursor.
 	 * @return true if forced
 	 */
 	public static boolean isSkinCursorForced() { return GameOption.FORCE_SKIN_CURSOR.getBooleanValue(); }
 
 	/**
-	 * Returns whether or not sliders should snake in or just appear fully at once.
+	 * Returns whether sliders should snake in or just appear fully at once.
 	 * @return true if sliders should snake in
 	 */
 	public static boolean isSliderSnaking() { return GameOption.SNAKING_SLIDERS.getBooleanValue(); }
 
 	/**
-	 * Returns whether or not to use the experimental slider style.
+	 * Returns whether to use the experimental slider style.
 	 * @return true if enabled
 	 */
 	public static boolean isExperimentalSliderStyle() { return GameOption.EXPERIMENTAL_SLIDERS.getBooleanValue(); }
 
 	/**
-	 * Returns whether or not slider caps (end circles) should be drawn.
+	 * Returns whether slider caps (end circles) should be drawn.
 	 * Only applies to experimental sliders.
 	 * @return true if slider caps should be drawn
 	 */
 	public static boolean isExperimentalSliderCapsDrawn() { return GameOption.EXPERIMENTAL_SLIDERS_CAPS.getBooleanValue(); }
 
 	/**
-	 * Returns whether or not sliders should shrink toward their ending point.
+	 * Returns whether sliders should shrink toward their ending point.
 	 * Only applies to experimental sliders.
 	 * @return true if sliders should shrink
 	 */
 	public static boolean isExperimentalSliderShrinking() { return GameOption.EXPERIMENTAL_SLIDERS_SHRINK.getBooleanValue(); }
 
 	/**
-	 * Returns whether or not to merge overlapping sliders together when drawing.
+	 * Returns whether to merge overlapping sliders together when drawing.
 	 * Only applies to experimental sliders.
 	 * @return true if sliders should be merged
 	 */
@@ -1281,7 +1281,7 @@ public class Options {
 	public static float getFixedSpeed() { return GameOption.FIXED_SPEED.getIntegerValue() / 100f; }
 
 	/**
-	 * Returns whether or not to render loading text in the splash screen.
+	 * Returns whether to render loading text in the splash screen.
 	 * @return true if enabled
 	 */
 	public static boolean isLoadVerbose() { return GameOption.LOAD_VERBOSE.getBooleanValue(); }
@@ -1293,19 +1293,19 @@ public class Options {
 	public static int getCheckpoint() { return GameOption.CHECKPOINT.getIntegerValue() * 1000; }
 
 	/**
-	 * Returns whether or not sound effects are disabled during gameplay.
+	 * Returns whether sound effects are disabled during gameplay.
 	 * @return true if disabled
 	 */
 	public static boolean isGameplaySoundDisabled() { return GameOption.DISABLE_GAMEPLAY_SOUNDS.getBooleanValue(); }
 
 	/**
-	 * Returns whether or not all sound effects are disabled.
+	 * Returns whether all sound effects are disabled.
 	 * @return true if disabled
 	 */
 	public static boolean isSoundDisabled() { return GameOption.DISABLE_SOUNDS.getBooleanValue(); }
 
 	/**
-	 * Returns whether or not heartbeat sounds will be played.
+	 * Returns whether heartbeat sounds will be played.
 	 * @return true if enabled
 	 */
 	public static boolean isHeartbeatEnabled() {
@@ -1321,7 +1321,7 @@ public class Options {
 	}
 
 	/**
-	 * Returns whether or not to use non-English metadata where available.
+	 * Returns whether to use non-English metadata where available.
 	 * @return true if Unicode preferred
 	 */
 	public static boolean useUnicodeMetadata() { return GameOption.SHOW_UNICODE.getBooleanValue(); }
@@ -1333,25 +1333,25 @@ public class Options {
 	public static boolean isParallaxEnabled() { return GameOption.PARALLAX.getBooleanValue(); }
 
 	/**
-	 * Returns whether or not to play the theme song.
+	 * Returns whether to play the theme song.
 	 * @return true if enabled
 	 */
 	public static boolean isThemeSongEnabled() { return GameOption.ENABLE_THEME_SONG.getBooleanValue(); }
 
 	/**
-	 * Returns whether or not replay seeking is enabled.
+	 * Returns whether replay seeking is enabled.
 	 * @return true if enabled
 	 */
 	public static boolean isReplaySeekingEnabled() { return GameOption.REPLAY_SEEKING.getBooleanValue(); }
 
 	/**
-	 * Returns whether or not automatic checking for updates is disabled.
+	 * Returns whether automatic checking for updates is disabled.
 	 * @return true if disabled
 	 */
 	public static boolean isUpdaterDisabled() { return GameOption.DISABLE_UPDATER.getBooleanValue(); }
 
 	/**
-	 * Returns whether or not the beatmap watch service is enabled.
+	 * Returns whether the beatmap watch service is enabled.
 	 * @return true if enabled
 	 */
 	public static boolean isWatchServiceEnabled() { return GameOption.ENABLE_WATCH_SERVICE.getBooleanValue(); }
@@ -1370,31 +1370,31 @@ public class Options {
 	}
 
 	/**
-	 * Returns whether or not to show the hit error bar.
+	 * Returns whether to show the hit error bar.
 	 * @return true if enabled
 	 */
 	public static boolean isHitErrorBarEnabled() { return GameOption.SHOW_HIT_ERROR_BAR.getBooleanValue(); }
 
 	/**
-	 * Returns whether or not to show the key overlay on non-replay game sessions.
+	 * Returns whether to show the key overlay on non-replay game sessions.
 	 * @return true if enabled
 	 */
 	public static boolean alwaysShowKeyOverlay() { return GameOption.ALWAYS_SHOW_KEY_OVERLAY.getBooleanValue(); }
 
 	/**
-	 * Returns whether or not to load HD (@2x) images.
+	 * Returns whether to load HD (@2x) images.
 	 * @return true if HD images are enabled, false if only SD images should be loaded
 	 */
 	public static boolean loadHDImages() { return GameOption.LOAD_HD_IMAGES.getBooleanValue(); }
 
 	/**
-	 * Returns whether or not the mouse wheel is disabled during gameplay.
+	 * Returns whether the mouse wheel is disabled during gameplay.
 	 * @return true if disabled
 	 */
 	public static boolean isMouseWheelDisabled() { return GameOption.DISABLE_MOUSE_WHEEL.getBooleanValue(); }
 
 	/**
-	 * Returns whether or not the mouse buttons are disabled during gameplay.
+	 * Returns whether the mouse buttons are disabled during gameplay.
 	 * @return true if disabled
 	 */
 	public static boolean isMouseDisabled() { return GameOption.DISABLE_MOUSE_BUTTONS.getBooleanValue(); }

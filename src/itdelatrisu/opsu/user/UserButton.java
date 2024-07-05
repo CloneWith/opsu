@@ -227,7 +227,7 @@ public class UserButton {
 	}
 
 	/**
-	 * Processes a hover action depending on whether or not the cursor
+	 * Processes a hover action depending on whether the cursor
 	 * is hovering over the button.
 	 * @param delta the delta interval
 	 * @param isHover true if the cursor is currently hovering over the button

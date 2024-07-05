@@ -119,7 +119,7 @@ public class MainMenu extends BasicGameState {
 	/** Background alpha level (for fade-in effect). */
 	private AnimatedValue bgAlpha = new AnimatedValue(1100, 0f, BG_MAX_ALPHA, AnimationEquation.LINEAR);
 
-	/** Whether or not a notification was already sent upon entering. */
+	/** Whether a notification was already sent upon entering. */
 	private boolean enterNotification = false;
 
 	/** Music position bar coordinates and dimensions. */

@@ -46,7 +46,7 @@ public class InputOverlayKey {
 
 	/** How long the key has been down, used for the scale animation. */
 	private int downtime;
-	/** Whether or not this key is currently down */
+	/** Whether this key is currently down */
 	private boolean down;
 	/** The text that will be displayed on this button.*/
 	private String text;

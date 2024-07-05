@@ -38,7 +38,7 @@ public interface GameObject {
 	 * @param delta the delta interval since the last call
 	 * @param mouseX the x coordinate of the mouse
 	 * @param mouseY the y coordinate of the mouse
-	 * @param keyPressed whether or not a game key is currently pressed
+	 * @param keyPressed whether a game key is currently pressed
 	 * @param trackPosition the track position
 	 * @return true if object ended
 	 */

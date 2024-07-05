@@ -183,7 +183,7 @@ public class BackButton {
 	}
 
 	/**
-	 * Processes a hover action depending on whether or not the cursor
+	 * Processes a hover action depending on whether the cursor
 	 * is hovering over the button.
 	 * @param delta the delta interval
 	 * @param cx the x coordinate

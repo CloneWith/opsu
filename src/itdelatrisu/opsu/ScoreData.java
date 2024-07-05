@@ -58,7 +58,7 @@ public class ScoreData implements Comparable<ScoreData> {
 	/** The max combo. */
 	public int combo;
 
-	/** Whether or not a full combo was achieved. */
+	/** Whether a full combo was achieved. */
 	public boolean perfect;
 
 	/** Game mod bitmask. */

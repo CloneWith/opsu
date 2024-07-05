@@ -158,7 +158,7 @@ public enum GameMod {
 	/** The description of the mod. */
 	private final String description;
 
-	/** Whether or not this mod is active. */
+	/** Whether this mod is active. */
 	private boolean active = false;
 
 	/** The button containing the mod image (displayed in OptionsMenu screen). */
@@ -421,7 +421,7 @@ public enum GameMod {
 	}
 
 	/**
-	 * Returns whether or not the mod is active.
+	 * Returns whether the mod is active.
 	 * @return true if active
 	 */
 	public boolean isActive() { return active; }
@@ -451,7 +451,7 @@ public enum GameMod {
 	public void resetHover() { button.resetHover(); }
 
 	/**
-	 * Updates the scale of the button depending on whether or not the cursor
+	 * Updates the scale of the button depending on whether the cursor
 	 * is hovering over the button.
 	 * @param delta the delta interval
 	 * @param x the x coordinate
@@ -460,7 +460,7 @@ public enum GameMod {
 	public void hoverUpdate(int delta, float x, float y) { button.hoverUpdate(delta, x, y); }
 
 	/**
-	 * Updates the scale of the button depending on whether or not the cursor
+	 * Updates the scale of the button depending on whether the cursor
 	 * is hovering over the button.
 	 * @param delta the delta interval
 	 * @param isHover true if the cursor is currently hovering over the button

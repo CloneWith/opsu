@@ -55,7 +55,7 @@ public class Cursor {
 	/** The time in milliseconds when the cursor was last pressed, used for the scaling animation. */
 	private long lastCursorPressTime = 0L;
 
-	/** Whether or not the cursor was pressed in the last frame, used for the scaling animation. */
+	/** Whether the cursor was pressed in the last frame, used for the scaling animation. */
 	private boolean lastCursorPressState = false;
 
 	/** The amount the cursor scale increases, if enabled, when pressed. */
@@ -113,7 +113,7 @@ public class Cursor {
 	 * Draws the cursor.
 	 * @param mouseX the mouse x coordinate
 	 * @param mouseY the mouse y coordinate
-	 * @param mousePressed whether or not the mouse button is pressed
+	 * @param mousePressed whether the mouse button is pressed
 	 */
 	public void draw(int mouseX, int mouseY, boolean mousePressed) {
 		int state = game.getCurrentStateID();
@@ -306,7 +306,7 @@ public class Cursor {
 	}
 
 	/**
-	 * Returns whether or not the cursor is skinned.
+	 * Returns whether the cursor is skinned.
 	 */
 	public boolean isBeatmapSkinned() {
 		return (GameImage.CURSOR.hasBeatmapSkinImage() ||

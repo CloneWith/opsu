@@ -643,7 +643,7 @@ public class Utils {
 	}
 
 	/**
-	 * Returns whether or not the application is running within a JAR.
+	 * Returns whether the application is running within a JAR.
 	 * @return true if JAR, false if file
 	 */
 	public static boolean isJarRunning() {

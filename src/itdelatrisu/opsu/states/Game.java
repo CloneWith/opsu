@@ -224,7 +224,7 @@ public class Game extends BasicGameState {
 	/** Number of retries. */
 	private int retries = 0;
 
-	/** Whether or not this game is a replay. */
+	/** Whether this game is a replay. */
 	private boolean isReplay = false;
 
 	/** The replay, if any. */
@@ -272,7 +272,7 @@ public class Game extends BasicGameState {
 	/** The cursor coordinates using the "auto" or "relax" mods. */
 	private Vec2f autoMousePosition;
 
-	/** Whether or not the cursor should be pressed using the "auto" mod. */
+	/** Whether the cursor should be pressed using the "auto" mod. */
 	private boolean autoMousePressed;
 
 	/** Playback speed (used in replays and "auto" mod). */
@@ -2086,7 +2086,7 @@ public class Game extends BasicGameState {
 	public PlayState getPlayState() { return playState; }
 
 	/**
-	 * Returns whether or not the track is in the lead-in time state.
+	 * Returns whether the track is in the lead-in time state.
 	 */
 	public boolean isLeadIn() { return leadInTime > 0; }
 

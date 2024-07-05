@@ -127,7 +127,7 @@ public class Updater {
 	public Status getStatus() { return status; }
 
 	/**
-	 * Returns whether or not the updater button should be displayed.
+	 * Returns whether the updater button should be displayed.
 	 */
 	public boolean showButton() {
 		return (status == Status.UPDATE_AVAILABLE || status == Status.UPDATE_DOWNLOADED || status == Status.UPDATE_DOWNLOADING);
@@ -170,7 +170,7 @@ public class Updater {
 	}
 
 	/**
-	 * Returns whether or not the program was just updated.
+	 * Returns whether the program was just updated.
 	 */
 	public boolean justUpdated() { return (updatedFromVersion != null && updatedToVersion != null); }
 

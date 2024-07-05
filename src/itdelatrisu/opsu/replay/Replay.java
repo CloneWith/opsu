@@ -59,7 +59,7 @@ public class Replay {
 	/** The associated score data. */
 	private ScoreData scoreData;
 
-	/** Whether or not the replay data has been loaded from the file. */
+	/** Whether the replay data has been loaded from the file. */
 	public boolean loaded = false;
 
 	/** The game mode. */
@@ -86,7 +86,7 @@ public class Replay {
 	/** The max combo. */
 	public short combo;
 
-	/** Whether or not a full combo was achieved. */
+	/** Whether a full combo was achieved. */
 	public boolean perfect;
 
 	/** Game mod bitmask. */

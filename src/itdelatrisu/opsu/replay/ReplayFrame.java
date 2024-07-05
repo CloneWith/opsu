@@ -112,7 +112,7 @@ public class ReplayFrame {
 	public int getKeys() { return keys; }
 
 	/**
-	 * Returns whether or not a key is pressed.
+	 * Returns whether a key is pressed.
 	 */
 	public boolean isKeyPressed() { return (keys != KEY_NONE); }
 

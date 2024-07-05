@@ -57,7 +57,7 @@ public class Splash extends BasicGameState {
 	/** Minimum elapsed time, in milliseconds, before displaying progress information (if non-verbose). */
 	private static final int PROGRESS_START_TIME = 1000;
 
-	/** Whether or not loading has completed. */
+	/** Whether loading has completed. */
 	private boolean finished = false;
 
 	/** Loading thread. */
