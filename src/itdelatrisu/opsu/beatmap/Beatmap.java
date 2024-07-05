@@ -39,7 +39,7 @@ public class Beatmap implements Comparable<Beatmap> {
 
 	/** Background image cache. */
 	@SuppressWarnings("serial")
-	private static final LRUCache<File, ImageLoader> bgImageCache = new LRUCache<File, ImageLoader>(10) {
+	private static final LRUCache<File, ImageLoader> bgImageCache = new LRUCache<>(10) {
 		@Override
 		public void eldestRemoved(Map.Entry<File, ImageLoader> eldest) {
 			if (eldest.getKey() == lastBG)
@@ -404,7 +404,7 @@ public class Beatmap implements Comparable<Beatmap> {
 	 */
 	@Override
 	public String toString() {
-		if (!source.isEmpty()) 
+		if (!source.isEmpty())
 			return String.format("%s (%s) - %s [%s]", source, getArtist(), getTitle(), version);
 
 		return String.format("%s - %s [%s]", getArtist(), getTitle(), version);
@@ -436,10 +436,9 @@ public class Beatmap implements Comparable<Beatmap> {
 		if (s == null)
 			return;
 
-		this.breaks = new ArrayList<Integer>();
+		this.breaks = new ArrayList<>();
 		String[] tokens = s.split(",");
-		for (int i = 0; i < tokens.length; i++)
-			breaks.add(Integer.parseInt(tokens[i]));
+		for (String token : tokens) breaks.add(Integer.parseInt(token));
 	}
 
 	/**
@@ -465,16 +464,16 @@ public class Beatmap implements Comparable<Beatmap> {
 	 * @param s the string
 	 */
 	public void timingPointsFromString(String s) {
-		this.timingPoints = new ArrayList<TimingPoint>();
+		this.timingPoints = new ArrayList<>();
 		if (s == null)
 			return;
 
 		String[] tokens = s.split("\\|");
-		for (int i = 0; i < tokens.length; i++) {
+		for (String token : tokens) {
 			try {
-				timingPoints.add(new TimingPoint(tokens[i]));
+				timingPoints.add(new TimingPoint(token));
 			} catch (Exception e) {
-				Log.warn(String.format("Failed to read timing point '%s'.", tokens[i]), e);
+				Log.warn(String.format("Failed to read timing point '%s'.", token), e);
 			}
 		}
 		timingPoints.trimToSize();
@@ -489,8 +488,7 @@ public class Beatmap implements Comparable<Beatmap> {
 			return null;
 
 		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < combo.length; i++) {
-			Color c = combo[i];
+		for (Color c : combo) {
 			sb.append(c.getRed());
 			sb.append(',');
 			sb.append(c.getGreen());
@@ -511,10 +509,10 @@ public class Beatmap implements Comparable<Beatmap> {
 		if (s == null)
 			return;
 
-		LinkedList<Color> colors = new LinkedList<Color>();
+		LinkedList<Color> colors = new LinkedList<>();
 		String[] tokens = s.split("\\|");
-		for (int i = 0; i < tokens.length; i++) {
-			String[] rgb = tokens[i].split(",");
+		for (String token : tokens) {
+			String[] rgb = token.split(",");
 			colors.add(new Color(Integer.parseInt(rgb[0]), Integer.parseInt(rgb[1]), Integer.parseInt(rgb[2])));
 		}
 		if (!colors.isEmpty())

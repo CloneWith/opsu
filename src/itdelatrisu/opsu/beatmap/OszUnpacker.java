@@ -47,15 +47,10 @@ public class OszUnpacker {
 	 * @return an array containing the new (unpacked) directories
 	 */
 	public static File[] unpackAllFiles(File root, File dest) {
-		List<File> dirs = new ArrayList<File>();
+		List<File> dirs = new ArrayList<>();
 
 		// find all OSZ files
-		files = root.listFiles(new FilenameFilter() {
-			@Override
-			public boolean accept(File dir, String name) {
-				return name.toLowerCase().endsWith(".osz");
-			}
-		});
+		files = root.listFiles((dir, name) -> name.toLowerCase().endsWith(".osz"));
 		if (files == null || files.length < 1) {
 			files = null;
 			return new File[0];

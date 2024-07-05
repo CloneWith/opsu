@@ -47,7 +47,7 @@ public class UserList {
 	private static UserList list;
 
 	/** Map of all users. */
-	private Map<String, User> users = new HashMap<String, User>();
+	private Map<String, User> users = new HashMap<>();
 
 	/** The current user. */
 	private User currentUser;
@@ -85,7 +85,7 @@ public class UserList {
 
 	/** Returns all users. */
 	public List<User> getUsers() {
-		List<User> l = new ArrayList<User>(users.values());
+		List<User> l = new ArrayList<>(users.values());
 		Collections.sort(l);
 		return l;
 	}

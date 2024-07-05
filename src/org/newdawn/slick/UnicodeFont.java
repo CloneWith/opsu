@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2013, Slick2D
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  * - Redistributions of source code must retain the above copyright notice,
@@ -12,7 +12,7 @@
  * - Neither the name of the Slick2D nor the names of its contributors may be
  *   used to endorse or promote products derived from this software without
  *   specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -56,7 +56,7 @@ import org.newdawn.slick.util.ResourceLoader;
 
 /**
  * A Slick bitmap font that can display unicode glyphs from a TrueTypeFont.
- * 
+ *
  * For efficiency, glyphs are packed on to textures. Glyphs can be loaded to the textures on the fly, when they are first needed
  * for display. However, it is best to load the glyphs that are known to be needed at startup.
  * @author Nathan Sweet <misc@n4te.com>
@@ -78,7 +78,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 
 	/**
 	 * Utility to create a Java font for a TTF file reference
-	 * 
+	 *
 	 * @param ttfFileRef The file system or classpath location of the TrueTypeFont file.
 	 * @return The font created
 	 * @throws SlickException Indicates a failure to locate or load the font into Java's font
@@ -97,13 +97,8 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 	/**
 	 * Sorts glyphs by height, tallest first.
 	 */
-	private static final Comparator heightComparator = new Comparator() {
-		@Override
-		public int compare (Object o1, Object o2) {
-			return ((Glyph)o1).getHeight() - ((Glyph)o2).getHeight();
-		}
-	};
-	
+	private static final Comparator heightComparator = Comparator.comparingInt(o -> ((Glyph) o).getHeight());
+
 	/** The AWT font that is being rendered */
 	private Font font;
 	/** The reference to the True Type Font file that has kerning information */
@@ -124,7 +119,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 	private final List queuedGlyphs = new ArrayList(256);
 	/** The effects that need to be applied to the font */
 	private final List effects = new ArrayList();
-	
+
 	/** The padding applied in pixels to the top of the glyph rendered area */
 	private int paddingTop;
 	/** The padding applied in pixels to the left of the glyph rendered area */
@@ -144,7 +139,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 	private int glyphPageWidth = 512;
 	/** The height of the glyph page generated */
 	private int glyphPageHeight = 512;
-	
+
 	/** True if display list caching is turned on */
 	private boolean displayListCaching = true;
 	/** The based display list ID */
@@ -169,7 +164,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 
 	/**
 	 * Create a new unicode font based on a TTF file
-	 * 
+	 *
 	 * @param ttfFileRef The file system or classpath location of the TrueTypeFont file.
 	 * @param hieroFileRef The file system or classpath location of the Hiero settings file.
 	 * @throws SlickException if the UnicodeFont could not be initialized.
@@ -180,7 +175,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 
 	/**
 	 * Create a new unicode font based on a TTF file and a set of heiro configuration
-	 * 
+	 *
 	 * @param ttfFileRef The file system or classpath location of the TrueTypeFont file.
 	 * @param settings The settings configured via the Hiero tool
 	 * @throws SlickException if the UnicodeFont could not be initialized.
@@ -194,7 +189,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 
 	/**
 	 * Create a new unicode font based on a TTF file alone
-	 * 
+	 *
 	 * @param ttfFileRef The file system or classpath location of the TrueTypeFont file.
 	 * @param size The point size of the font to generated
 	 * @param bold True if the font should be rendered in bold typeface
@@ -208,7 +203,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 
 	/**
 	 * Creates a new UnicodeFont.
-	 * 
+	 *
 	 * @param font The AWT font to render
 	 * @param hieroFileRef The file system or classpath location of the Hiero settings file.
 	 * @throws SlickException if the UnicodeFont could not be initialized.
@@ -219,7 +214,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 
 	/**
 	 * Creates a new UnicodeFont.
-	 * 
+	 *
 	 * @param font The AWT font to render
 	 * @param settings The settings configured via the Hiero tool
 	 */
@@ -230,7 +225,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 
 	/**
 	 * Creates a new UnicodeFont.
-	 * 
+	 *
 	 * @param font The AWT font to render
 	 */
 	public UnicodeFont (Font font) {
@@ -239,7 +234,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 
 	/**
 	 * Creates a new UnicodeFont.
-	 * 
+	 *
 	 * @param font The AWT font to render
 	 * @param size The point size of the font to generated
 	 * @param bold True if the font should be rendered in bold typeface
@@ -251,7 +246,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 
 	/**
 	 * Initialise the font to be used based on configuration
-	 * 
+	 *
 	 * @param baseFont The AWT font to render
 	 * @param size The point size of the font to generated
 	 * @param bold True if the font should be rendered in bold typeface
@@ -259,7 +254,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 	 */
 	private void initializeFont(Font baseFont, int size, boolean bold, boolean italic) {
 		Map attributes = baseFont.getAttributes();
-		attributes.put(TextAttribute.SIZE, new Float(size));
+		attributes.put(TextAttribute.SIZE, (float) size);
 		attributes.put(TextAttribute.WEIGHT, bold ? TextAttribute.WEIGHT_BOLD : TextAttribute.WEIGHT_REGULAR);
 		attributes.put(TextAttribute.POSTURE, italic ? TextAttribute.POSTURE_OBLIQUE : TextAttribute.POSTURE_REGULAR);
 		try {
@@ -273,7 +268,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 		ascent = metrics.getAscent();
 		descent = metrics.getDescent();
 		leading = metrics.getLeading();
-		
+
 		// Determine width of space glyph (getGlyphPixelBounds gives a width of zero).
 		char[] chars = " ".toCharArray();
 		GlyphVector vector = font.layoutGlyphVector(GlyphPage.renderContext, chars, 0, chars.length, Font.LAYOUT_LEFT_TO_RIGHT);
@@ -282,7 +277,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 
 	/**
 	 * Load the hiero setting and configure the unicode font's rendering
-	 * 
+	 *
 	 * @param settings The settings to be applied
 	 */
 	private void loadSettings(HieroSettings settings) {
@@ -299,7 +294,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 
 	/**
 	 * Adds a backup font to render non-displayable glyphs.
-	 * 
+	 *
 	 * @param backup The backup font
 	 */
 	public void addBackupFont(UnicodeFont backup) {
@@ -309,10 +304,10 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 	/**
 	 * Queues the glyphs in the specified codepoint range (inclusive) to be loaded. Note that the glyphs are not actually loaded
 	 * until {@link #loadGlyphs()} is called.
-	 * 
+	 *
 	 * Some characters like combining marks and non-spacing marks can only be rendered with the context of other glyphs. In this
 	 * case, use {@link #addGlyphs(String)}.
-	 * 
+	 *
 	 * @param startCodePoint The code point of the first glyph to add
 	 * @param endCodePoint The code point of the last glyph to add
 	 */
@@ -324,7 +319,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 	/**
 	 * Queues the glyphs in the specified text to be loaded. Note that the glyphs are not actually loaded until
 	 * {@link #loadGlyphs()} is called.
-	 * 
+	 *
 	 * @param text The text containing the glyphs to be added
 	 */
 	public void addGlyphs(String text) {
@@ -346,7 +341,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 	/**
 	 * Queues the backup glyphs in the specified text to be loaded. Note that
 	 * the glyphs are not actually loaded until {@link #loadGlyphs()} is called.
-	 * 
+	 *
 	 * @param text The text containing the glyphs to be added
 	 */
 	private void addBackupGlyphs(String text) {
@@ -383,7 +378,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 	 * Loads all queued glyphs to the backing textures. Glyphs that are typically displayed together should be added and loaded at
 	 * the same time so that they are stored on the same backing texture. This reduces the number of backing texture binds required
 	 * to draw glyphs.
-	 * 
+	 *
 	 * @return True if the glyphs were loaded entirely
 	 * @throws SlickException if the glyphs could not be loaded.
 	 */
@@ -394,7 +389,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 	/**
 	 * Loads up to the specified number of queued glyphs to the backing textures. This is typically called from the game loop to
 	 * load glyphs on the fly that were requested for display but have not yet been loaded.
-	 * 
+	 *
 	 * @param maxGlyphsToLoad The maximum number of glyphs to be loaded this time
 	 * @return True if the glyphs were loaded entirely
 	 * @throws SlickException if the glyphs could not be loaded.
@@ -425,11 +420,11 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 			}
 		}
 
-		Collections.sort(queuedGlyphs, heightComparator);
+		queuedGlyphs.sort(heightComparator);
 
 		// Add to existing pages.
-		for (Iterator iter = glyphPages.iterator(); iter.hasNext();) {
-			GlyphPage glyphPage = (GlyphPage)iter.next();
+		for (Object page : glyphPages) {
+			GlyphPage glyphPage = (GlyphPage) page;
 			maxGlyphsToLoad -= glyphPage.loadGlyphs(queuedGlyphs, maxGlyphsToLoad);
 			if (maxGlyphsToLoad == 0 || queuedGlyphs.isEmpty())
 				return true;
@@ -453,8 +448,8 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 		for (int i = 0; i < PAGES; i++)
 			glyphs[i] = null;
 
-		for (Iterator iter = glyphPages.iterator(); iter.hasNext();) {
-			GlyphPage page = (GlyphPage)iter.next();
+		for (Object glyphPage : glyphPages) {
+			GlyphPage page = (GlyphPage) glyphPage;
 			try {
 				page.getImage().destroy();
 			} catch (SlickException ignored) {
@@ -481,9 +476,9 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 	}
 
 	/**
-	 * Identical to {@link #drawString(float, float, String, Color, int, int)} but returns a 
+	 * Identical to {@link #drawString(float, float, String, Color, int, int)} but returns a
 	 * DisplayList which provides access to the width and height of the text drawn.
-	 * 
+	 *
 	 * @param text The text to render
 	 * @param x The horizontal location to render at
 	 * @param y The vertical location to render at
@@ -647,13 +642,13 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 	}
 
 	/**
-	 * Returns the glyph for the specified codePoint. If the glyph does not exist yet, 
+	 * Returns the glyph for the specified codePoint. If the glyph does not exist yet,
 	 * it is created and queued to be loaded.
-	 * 
+	 *
 	 * @param glyphCode The code of the glyph to locate
 	 * @param codePoint The code point associated with the glyph
 	 * @param bounds The bounds of the glyph on the page
-	 * @param vector The vector the glyph is part of  
+	 * @param vector The vector the glyph is part of
 	 * @param index The index of the glyph within the vector
 	 * @return The glyph requested
 	 */
@@ -662,13 +657,13 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 	}
 
 	/**
-	 * Returns the glyph for the specified codePoint. If the glyph does not exist yet, 
+	 * Returns the glyph for the specified codePoint. If the glyph does not exist yet,
 	 * it is created and queued to be loaded.
-	 * 
+	 *
 	 * @param glyphCode The code of the glyph to locate
 	 * @param codePoint The code point associated with the glyph
 	 * @param bounds The bounds of the glyph on the page
-	 * @param vector The vector the glyph is part of  
+	 * @param vector The vector the glyph is part of
 	 * @param index The index of the glyph within the vector
 	 * @param f The font to use
 	 * @return The glyph requested
@@ -700,7 +695,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 
 	/**
 	 * Returns the bounds of the specified glyph.
-	 * 
+	 *
 	 * @param vector The vector the glyph is part of
 	 * @param index The index of the glyph within the vector
 	 * @param codePoint The code point associated with the glyph
@@ -787,10 +782,10 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 	}
 
 	/**
-	 * Returns the distance from the y drawing location to the top most pixel of the 
+	 * Returns the distance from the y drawing location to the top most pixel of the
 	 * specified text.
-	 * 
-	 * @param text The text to analyse 
+	 *
+	 * @param text The text to analyse
 	 * @return The distance fro the y drawing location ot the top most pixel of the specified text
 	 */
 	public int getYOffset (String text) {
@@ -808,15 +803,15 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 		GlyphVector vector = font.layoutGlyphVector(GlyphPage.renderContext, chars, 0, chars.length, Font.LAYOUT_LEFT_TO_RIGHT);
 		int yOffset = ascent + vector.getPixelBounds(null, 0, 0).y;
 
-		if (displayList != null) displayList.yOffset = new Short((short)yOffset);
+		if (displayList != null) displayList.yOffset = (short) yOffset;
 
 		return yOffset;
 	}
 
 	/**
 	 * Returns the TrueTypeFont for this UnicodeFont.
-	 * 
-	 * @return The AWT Font being rendered 
+	 *
+	 * @return The AWT Font being rendered
 	 */
 	public Font getFont() {
 		return font;
@@ -824,7 +819,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 
 	/**
 	 * Returns the padding above a glyph on the GlyphPage to allow for effects to be drawn.
-	 * 
+	 *
 	 * @return The padding at the top of the glyphs when drawn
 	 */
 	public int getPaddingTop() {
@@ -833,7 +828,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 
 	/**
 	 * Sets the padding above a glyph on the GlyphPage to allow for effects to be drawn.
-	 * 
+	 *
 	 * @param paddingTop The padding at the top of the glyphs when drawn
 	 */
 	public void setPaddingTop(int paddingTop) {
@@ -842,7 +837,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 
 	/**
 	 * Returns the padding to the left of a glyph on the GlyphPage to allow for effects to be drawn.
-	 * 
+	 *
 	 * @return The padding at the left of the glyphs when drawn
 	 */
 	public int getPaddingLeft() {
@@ -851,7 +846,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 
 	/**
 	 * Sets the padding to the left of a glyph on the GlyphPage to allow for effects to be drawn.
-	 * 
+	 *
 	 * @param paddingLeft The padding at the left of the glyphs when drawn
 	 */
 	public void setPaddingLeft(int paddingLeft) {
@@ -860,7 +855,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 
 	/**
 	 * Returns the padding below a glyph on the GlyphPage to allow for effects to be drawn.
-	 * 
+	 *
 	 * @return The padding at the bottom of the glyphs when drawn
 	 */
 	public int getPaddingBottom() {
@@ -869,7 +864,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 
 	/**
 	 * Sets the padding below a glyph on the GlyphPage to allow for effects to be drawn.
-	 * 
+	 *
 	 * @param paddingBottom The padding at the bottom of the glyphs when drawn
 	 */
 	public void setPaddingBottom(int paddingBottom) {
@@ -878,7 +873,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 
 	/**
 	 * Returns the padding to the right of a glyph on the GlyphPage to allow for effects to be drawn.
-	 * 
+	 *
 	 * @return The padding at the right of the glyphs when drawn
 	 */
 	public int getPaddingRight () {
@@ -887,7 +882,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 
 	/**
 	 * Sets the padding to the right of a glyph on the GlyphPage to allow for effects to be drawn.
-	 * 
+	 *
 	 * @param paddingRight The padding at the right of the glyphs when drawn
 	 */
 	public void setPaddingRight (int paddingRight) {
@@ -896,7 +891,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 
 	/**
 	 * Gets the additional amount to offset glyphs on the x axis.
-	 * 
+	 *
 	 * @return The padding applied for each horizontal advance (i.e. when a glyph is rendered)
 	 */
 	public int getPaddingAdvanceX() {
@@ -906,7 +901,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 	/**
 	 * Sets the additional amount to offset glyphs on the x axis. This is typically set to a negative number when left or right
 	 * padding is used so that glyphs are not spaced too far apart.
-	 * 
+	 *
 	 * @param paddingAdvanceX The padding applied for each horizontal advance (i.e. when a glyph is rendered)
 	 */
 	public void setPaddingAdvanceX (int paddingAdvanceX) {
@@ -915,7 +910,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 
 	/**
 	 * Gets the additional amount to offset a line of text on the y axis.
-	 * 
+	 *
 	 * @return The padding applied for each vertical advance (i.e. when a glyph is rendered)
 	 */
 	public int getPaddingAdvanceY () {
@@ -925,7 +920,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 	/**
 	 * Sets the additional amount to offset a line of text on the y axis. This is typically set to a negative number when top or
 	 * bottom padding is used so that lines of text are not spaced too far apart.
-	 * 
+	 *
 	 * @param paddingAdvanceY The padding applied for each vertical advance (i.e. when a glyph is rendered)
 	 */
 	public void setPaddingAdvanceY (int paddingAdvanceY) {
@@ -943,7 +938,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 
 	/**
 	 * Gets the distance from the baseline to the y drawing location.
-	 * 
+	 *
 	 * @return The ascent of this font
 	 */
 	public int getAscent() {
@@ -951,9 +946,9 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 	}
 
 	/**
-	 * Gets the distance from the baseline to the bottom of most alphanumeric characters 
+	 * Gets the distance from the baseline to the bottom of most alphanumeric characters
 	 * with descenders.
-	 * 
+	 *
 	 * @return The distance from the baseline to the bottom of the font
 	 */
 	public int getDescent () {
@@ -962,7 +957,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 
 	/**
 	 * Gets the extra distance between the descent of one line of text to the ascent of the next.
-	 * 
+	 *
 	 * @return The leading edge of the font
 	 */
 	public int getLeading () {
@@ -971,7 +966,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 
 	/**
 	 * Returns the width of the backing textures.
-	 * 
+	 *
 	 * @return The width of the glyph pages in this font
 	 */
 	public int getGlyphPageWidth () {
@@ -980,7 +975,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 
 	/**
 	 * Sets the width of the backing textures. Default is 512.
-	 * 
+	 *
 	 * @param glyphPageWidth The width of the glyph pages in this font
 	 */
 	public void setGlyphPageWidth(int glyphPageWidth) {
@@ -989,7 +984,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 
 	/**
 	 * Returns the height of the backing textures.
-	 * 
+	 *
 	 * @return The height of the glyph pages in this font
 	 */
 	public int getGlyphPageHeight() {
@@ -998,7 +993,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 
 	/**
 	 * Sets the height of the backing textures. Default is 512.
-	 * 
+	 *
 	 * @param glyphPageHeight The width of the glyph pages in this font
 	 */
 	public void setGlyphPageHeight(int glyphPageHeight) {
@@ -1007,7 +1002,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 
 	/**
 	 * Returns the GlyphPages for this UnicodeFont.
-	 * 
+	 *
 	 * @return The glyph pages that have been loaded into this font
 	 */
 	public List getGlyphPages () {
@@ -1015,9 +1010,9 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 	}
 
 	/**
-	 * Returns a list of {@link org.newdawn.slick.font.effects.Effect}s that will be applied 
+	 * Returns a list of {@link org.newdawn.slick.font.effects.Effect}s that will be applied
 	 * to the glyphs.
-	 * 
+	 *
 	 * @return The list of effects to be applied to the font
 	 */
 	public List getEffects () {
@@ -1025,9 +1020,9 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 	}
 
 	/**
-	 * Returns true if this UnicodeFont caches the glyph drawing instructions to 
+	 * Returns true if this UnicodeFont caches the glyph drawing instructions to
 	 * improve performance.
-	 * 
+	 *
 	 * @return True if caching is turned on
 	 */
 	public boolean isCaching () {
@@ -1035,9 +1030,9 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 	}
 
 	/**
-	 * Sets if this UnicodeFont caches the glyph drawing instructions to improve performance. 
+	 * Sets if this UnicodeFont caches the glyph drawing instructions to improve performance.
 	 * Default is true. Text rendering is very slow without display list caching.
-	 * 
+	 *
 	 * @param displayListCaching True if caching should be turned on
 	 */
 	public void setDisplayListCaching (boolean displayListCaching) {
@@ -1047,7 +1042,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 	/**
 	 * Returns the path to the TTF file for this UnicodeFont, or null. If this UnicodeFont was created without specifying the TTF
 	 * file, it will try to determine the path using Sun classes. If this fails, null is returned.
-	 * 
+	 *
 	 * @return The reference to the font file that the kerning was loaded from
 	 */
 	public String getFontFile () {

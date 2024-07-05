@@ -49,7 +49,7 @@ import org.newdawn.slick.util.Log;
  */
 public class BeatmapParser {
 	/** The string lookup database. */
-	private static HashMap<String, String> stringdb = new HashMap<String, String>();
+	private static HashMap<String, String> stringdb = new HashMap<>();
 
 	/** The expected pattern for beatmap directories, used to find beatmap set IDs. */
 	private static final String DIR_MSID_PATTERN = "^\\d+ .*";
@@ -130,9 +130,9 @@ public class BeatmapParser {
 		Map<String, BeatmapDB.LastModifiedMapEntry> lastModifiedMap = BeatmapDB.getLastModifiedMap();
 
 		// beatmap lists
-		List<ArrayList<Beatmap>> allBeatmaps = new LinkedList<ArrayList<Beatmap>>();
-		List<Beatmap> cachedBeatmaps = new LinkedList<Beatmap>();  // loaded from database
-		List<Beatmap> parsedBeatmaps = new LinkedList<Beatmap>();  // loaded from parser
+		List<ArrayList<Beatmap>> allBeatmaps = new LinkedList<>();
+		List<Beatmap> cachedBeatmaps = new LinkedList<>();  // loaded from database
+		List<Beatmap> parsedBeatmaps = new LinkedList<>();  // loaded from parser
 
 		// watch service
 		BeatmapWatchService ws = (Options.isWatchServiceEnabled()) ? BeatmapWatchService.get() : null;
@@ -146,17 +146,12 @@ public class BeatmapParser {
 				continue;
 
 			// find all OSU files
-			File[] files = dir.listFiles(new FilenameFilter() {
-				@Override
-				public boolean accept(File dir, String name) {
-					return name.toLowerCase().endsWith(".osu");
-				}
-			});
+			File[] files = dir.listFiles((dir1, name) -> name.toLowerCase().endsWith(".osu"));
 			if (files == null || files.length < 1)
 				continue;
 
 			// create a new group entry
-			ArrayList<Beatmap> beatmaps = new ArrayList<Beatmap>(files.length);
+			ArrayList<Beatmap> beatmaps = new ArrayList<>(files.length);
 			for (File file : files) {
 				currentFile = file;
 
@@ -238,7 +233,7 @@ public class BeatmapParser {
 		}
 
 		// clear string DB
-		stringdb = new HashMap<String, String>();
+		stringdb = new HashMap<>();
 
 		// add beatmap entries to database
 		if (!parsedBeatmaps.isEmpty()) {
@@ -263,7 +258,7 @@ public class BeatmapParser {
 	 */
 	private static Beatmap parseFile(File file, File dir, ArrayList<Beatmap> beatmaps, boolean parseObjects) {
 		Beatmap beatmap = new Beatmap(file);
-		beatmap.timingPoints = new ArrayList<TimingPoint>();
+		beatmap.timingPoints = new ArrayList<>();
 
 		try (
 			InputStream bis = new BufferedInputStream(new FileInputStream(file));
@@ -294,7 +289,7 @@ public class BeatmapParser {
 								File audioFileName = new File(dir, tokens[1]);
 								if (!beatmaps.isEmpty()) {
 									// if possible, reuse the same File object from another Beatmap in the group
-									File groupAudioFileName = beatmaps.get(0).audioFilename;
+									File groupAudioFileName = beatmaps.getFirst().audioFilename;
 									if (groupAudioFileName != null &&
 									    tokens[1].equalsIgnoreCase(groupAudioFileName.getName()))
 										audioFileName = groupAudioFileName;
@@ -514,7 +509,7 @@ public class BeatmapParser {
 						case "2":  // break periods
 							try {
 								if (beatmap.breaks == null)  // optional, create if needed
-									beatmap.breaks = new ArrayList<Integer>();
+									beatmap.breaks = new ArrayList<>();
 								beatmap.breaks.add(Integer.parseInt(tokens[1]));
 								beatmap.breaks.add(Integer.parseInt(tokens[2]));
 							} catch (Exception e) {
@@ -562,7 +557,7 @@ public class BeatmapParser {
 					beatmap.timingPoints.trimToSize();
 					break;
 				case "[Colours]":
-					LinkedList<Color> colors = new LinkedList<Color>();
+					LinkedList<Color> colors = new LinkedList<>();
 					while ((line = in.readLine()) != null) {
 						line = line.trim();
 						if (!isValidLine(line))

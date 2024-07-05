@@ -275,13 +275,10 @@ public class SoundController {
 			NotificationListener listener = null;
 			if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.OPEN)) {
 				text += "\nClick for details.";
-				listener = new NotificationListener() {
-					@Override
-					public void click() {
-						try {
-							Desktop.getDesktop().open(Options.LOG_FILE);
-						} catch (Exception e) {}
-					}
+				listener = () -> {
+					try {
+						Desktop.getDesktop().open(Options.LOG_FILE);
+					} catch (Exception e) {}
 				};
 			}
 			UI.getNotificationManager().sendNotification(text, Color.red, listener);

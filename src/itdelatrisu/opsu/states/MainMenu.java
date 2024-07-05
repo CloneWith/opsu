@@ -185,7 +185,7 @@ public class MainMenu extends BasicGameState {
 		this.input = container.getInput();
 
 		programStartTime = System.currentTimeMillis();
-		previous = new Stack<Integer>();
+		previous = new Stack<>();
 
 		int width = container.getWidth();
 		int height = container.getHeight();
@@ -291,14 +291,11 @@ public class MainMenu extends BasicGameState {
 		logoButtonAlpha = new AnimatedValue(200, 0f, 1f, AnimationEquation.LINEAR);
 
 		// options overlay
-		optionsOverlay = new OptionsOverlay(container, OptionGroup.ALL_OPTIONS, new OptionsOverlay.OptionsOverlayListener() {
-			@Override
-			public void close() {
-				showOptionsOverlay = false;
-				optionsOverlay.deactivate();
-				optionsOverlay.reset();
-				optionsOverlayProgress.setTime(0);
-			}
+		optionsOverlay = new OptionsOverlay(container, OptionGroup.ALL_OPTIONS, () -> {
+			showOptionsOverlay = false;
+			optionsOverlay.deactivate();
+			optionsOverlay.reset();
+			optionsOverlayProgress.setTime(0);
 		});
 		optionsOverlay.setConsumeAndClose(true);
 
@@ -306,15 +303,12 @@ public class MainMenu extends BasicGameState {
 		userButton = new UserButton(0, 0, Color.white);
 
 		// initialize user selection overlay
-		userOverlay = new UserSelectOverlay(container, new UserSelectOverlay.UserSelectOverlayListener() {
-			@Override
-			public void close(boolean userChanged) {
-				showUserOverlay = false;
-				userOverlay.deactivate();
-				userOverlayProgress.setTime(0);
-				if (userChanged)
-					userButton.flash();
-			}
+		userOverlay = new UserSelectOverlay(container, userChanged -> {
+			showUserOverlay = false;
+			userOverlay.deactivate();
+			userOverlayProgress.setTime(0);
+			if (userChanged)
+				userButton.flash();
 		});
 		userOverlay.setConsumeAndClose(true);
 
@@ -669,14 +663,11 @@ public class MainMenu extends BasicGameState {
 				final String version = Updater.get().getCurrentVersion();
 				if (version != null && Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
 					updateMessage += "\nClick to see what changed!";
-					UI.getNotificationManager().sendNotification(updateMessage, Colors.GREEN, new NotificationListener() {
-						@Override
-						public void click() {
-							try {
-								Desktop.getDesktop().browse(OpsuConstants.getChangelogURI(version));
-							} catch (IOException e) {
-								UI.getNotificationManager().sendBarNotification("The web page could not be opened.");
-							}
+					UI.getNotificationManager().sendNotification(updateMessage, Colors.GREEN, () -> {
+						try {
+							Desktop.getDesktop().browse(OpsuConstants.getChangelogURI(version));
+						} catch (IOException e) {
+							UI.getNotificationManager().sendBarNotification("The web page could not be opened.");
 						}
 					});
 				} else

@@ -54,7 +54,7 @@ public class BeatmapDB {
 	 * @return a list of SQL queries
 	 */
 	private static List<String> getUpdateQueries(int version) {
-		List<String> list = new LinkedList<String>();
+		List<String> list = new LinkedList<>();
 		if (version < 20161222) {
 			list.add("ALTER TABLE beatmaps ADD COLUMN dateAdded INTEGER");
 			list.add("ALTER TABLE beatmaps ADD COLUMN favorite BOOLEAN");
@@ -357,9 +357,9 @@ public class BeatmapDB {
 				insertStmt.addBatch();
 			}
 			int[] results = insertStmt.executeBatch();
-			for (int i = 0; i < results.length; i++) {
-				if (results[i] > 0)
-					cacheSize += results[i];
+			for (int result : results) {
+				if (result > 0)
+					cacheSize += result;
 			}
 
 			// re-create indexes
@@ -490,15 +490,11 @@ public class BeatmapDB {
 
 		try (Statement stmt = connection.createStatement()) {
 			// create map
-			HashMap<String, HashMap<String, Beatmap>> map = new HashMap<String, HashMap<String, Beatmap>>();
+			HashMap<String, HashMap<String, Beatmap>> map = new HashMap<>();
 			for (Beatmap beatmap : batch) {
 				String parent = beatmap.getFile().getParentFile().getName();
 				String name = beatmap.getFile().getName();
-				HashMap<String, Beatmap> m = map.get(parent);
-				if (m == null) {
-					m = new HashMap<String, Beatmap>();
-					map.put(parent, m);
-				}
+				HashMap<String, Beatmap> m = map.computeIfAbsent(parent, k -> new HashMap<>());
 				m.put(name, beatmap);
 			}
 
@@ -623,7 +619,7 @@ public class BeatmapDB {
 			return null;
 
 		try (Statement stmt = connection.createStatement()) {
-			Map<String, LastModifiedMapEntry> map = new HashMap<String, LastModifiedMapEntry>();
+			Map<String, LastModifiedMapEntry> map = new HashMap<>();
 			String sql = "SELECT dir, file, lastModified, mode FROM beatmaps";
 			ResultSet rs = stmt.executeQuery(sql);
 			stmt.setFetchSize(100);

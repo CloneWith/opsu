@@ -47,14 +47,14 @@ public class LinearBezier extends EqualDistanceMultiCurve {
 	public LinearBezier(HitObject hitObject, boolean line, boolean scaled) {
 		super(hitObject, scaled);
 
-		LinkedList<CurveType> beziers = new LinkedList<CurveType>();
+		LinkedList<CurveType> beziers = new LinkedList<>();
 
 		// Beziers: splits points into different Beziers if has the same points (red points)
 		// a b c - c d - d e f g
 		// Lines: generate a new curve for each sequential pair
 		// ab  bc  cd  de  ef  fg
 		int controlPoints = hitObject.getSliderX().length + 1;
-		LinkedList<Vec2f> points = new LinkedList<Vec2f>();  // temporary list of points to separate different Bezier curves
+		LinkedList<Vec2f> points = new LinkedList<>();  // temporary list of points to separate different Bezier curves
 		Vec2f lastPoi = null;
 		for (int i = 0; i < controlPoints; i++) {
 			Vec2f tpoi = new Vec2f(getX(i), getY(i));

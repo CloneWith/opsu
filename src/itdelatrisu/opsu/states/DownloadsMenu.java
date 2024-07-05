@@ -387,8 +387,8 @@ public class DownloadsMenu extends BasicGameState {
 
 		// dropdown menu
 		int serverWidth = (int) (width * 0.12f);
-		serverMenu = new DropdownMenu<DownloadServer>(container, SERVERS,
-				baseX + searchWidth + buttonMarginX * 3f + resetButtonWidth + rankedButtonWidth, searchY, serverWidth) {
+		serverMenu = new DropdownMenu<>(container, SERVERS,
+			baseX + searchWidth + buttonMarginX * 3f + resetButtonWidth + rankedButtonWidth, searchY, serverWidth) {
 			@Override
 			public void itemSelected(int index, DownloadServer item) {
 				resultList = null;
@@ -695,32 +695,26 @@ public class DownloadsMenu extends BasicGameState {
 								// play preview
 								final String url = serverMenu.getSelectedItem().getPreviewURL(node.getID());
 								MusicController.pause();
-								new Thread() {
-									@Override
-									public void run() {
-										try {
-											previewID = -1;
-											boolean playing = SoundController.playTrack(
-												url,
-												String.format("%d.mp3", node.getID()),
-													new LineListener() {
-													@Override
-													public void update(LineEvent event) {
-														if (event.getType() == LineEvent.Type.STOP) {
-															if (previewID != -1)
-																previewID = -1;
-														}
-													}
+								new Thread(() -> {
+									try {
+										previewID = -1;
+										boolean playing = SoundController.playTrack(
+											url,
+											String.format("%d.mp3", node.getID()),
+											event -> {
+												if (event.getType() == LineEvent.Type.STOP) {
+													if (previewID != -1)
+														previewID = -1;
 												}
-											);
-											if (playing)
-												previewID = node.getID();
-										} catch (SlickException e) {
-											UI.getNotificationManager().sendBarNotification("Failed to load track preview. See log for details.");
-											Log.error(e);
-										}
+											}
+										);
+										if (playing)
+											previewID = node.getID();
+									} catch (SlickException e) {
+										UI.getNotificationManager().sendBarNotification("Failed to load track preview. See log for details.");
+										Log.error(e);
 									}
-								}.start();
+								}).start();
 							}
 							return;
 						}
@@ -1042,14 +1036,11 @@ public class DownloadsMenu extends BasicGameState {
 			} else {
 				// browse not supported: copy URL instead
 				String text = String.format("Click here to copy the download URL for \"%s\".", node.getTitle());
-				UI.getNotificationManager().sendNotification(text, Color.white, new NotificationListener() {
-					@Override
-					public void click() {
-						try {
-							Utils.copyToClipboard(downloadURL);
-							UI.getNotificationManager().sendNotification(importText);
-						} catch (Exception e) {}
-					}
+				UI.getNotificationManager().sendNotification(text, Color.white, () -> {
+					try {
+						Utils.copyToClipboard(downloadURL);
+						UI.getNotificationManager().sendNotification(importText);
+					} catch (Exception e) {}
 				});
 			}
 		}

@@ -480,10 +480,10 @@ public enum GameImage {
 	private static byte getType(String type) {
 		byte b = 0;
 		String[] s = type.split("\\|");
-		for (int i = 0; i < s.length; i++) {
-			if (s[i].equals("png"))
+		for (String string : s) {
+			if (string.equals("png"))
 				b |= IMG_PNG;
-			else if (s[i].equals("jpg"))
+			else if (string.equals("jpg"))
 				b |= IMG_JPG;
 		}
 		return b;
@@ -500,7 +500,7 @@ public enum GameImage {
 	 * @return the full file name, or null if no file found
 	 */
 	private static String getImageFileName(String filename, File dir, byte type, boolean dirOnly) {
-		ArrayList<String> names = new ArrayList<String>(2);
+		ArrayList<String> names = new ArrayList<>(2);
 		if ((type & IMG_PNG) != 0)
 			names.add(String.format("%s.png", filename));
 		if ((type & IMG_JPG) != 0)
@@ -509,8 +509,8 @@ public enum GameImage {
 
 		// look through directory
 		if (dir != null) {
-			for (int i = 0; i < size; i++) {
-				File file = new File(dir, names.get(i));
+			for (String name : names) {
+				File file = new File(dir, name);
 				if (file.isFile())
 					return file.getAbsolutePath();
 			}
@@ -759,7 +759,7 @@ public enum GameImage {
 	private Image[] loadImageArray(File dir) {
 		if (filenameFormat != null) {
 			for (String suffix : getSuffixes()) {
-				List<Image> list = new ArrayList<Image>();
+				List<Image> list = new ArrayList<>();
 				int i = 0;
 				while (true) {
 					// look for next image
@@ -839,9 +839,9 @@ public enum GameImage {
 				skinImage = null;
 			}
 			if (skinImages != null) {
-				for (int i = 0; i < skinImages.length; i++) {
-					if (!skinImages[i].isDestroyed())
-						skinImages[i].destroy();
+				for (Image image : skinImages) {
+					if (!image.isDestroyed())
+						image.destroy();
 				}
 				skinImages = null;
 			}

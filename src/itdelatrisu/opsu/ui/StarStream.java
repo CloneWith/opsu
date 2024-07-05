@@ -138,7 +138,7 @@ public class StarStream {
 		this.direction = new Vec2f(dirX, dirY);
 		this.maxStars = k;
 		this.starImg = GameImage.STAR2.getImage().copy();
-		this.stars = new ArrayList<Star>(k);
+		this.stars = new ArrayList<>(k);
 		this.random = new Random();
 	}
 
@@ -200,12 +200,7 @@ public class StarStream {
 	 */
 	public void update(int delta) {
 		// update current stars
-		Iterator<Star> iter = stars.iterator();
-		while (iter.hasNext()) {
-			Star star = iter.next();
-			if (!star.update(delta))
-				iter.remove();
-		}
+		stars.removeIf(star -> !star.update(delta));
 
 		// create new stars
 		for (int i = stars.size(); i < maxStars; i++) {

@@ -1401,7 +1401,7 @@ public class OptionsOverlay extends AbstractComponent {
 
 	/** Creates the dropdown menus. */
 	private void createDropdownMenus() {
-		this.dropdownMenus = new IdentityHashMap<GameOption, DropdownMenu<Object>>();
+		this.dropdownMenus = new IdentityHashMap<>();
 		for (OptionGroup group : groups) {
 			if (group.getOptions() == null)
 				continue;
@@ -1412,7 +1412,7 @@ public class OptionsOverlay extends AbstractComponent {
 					continue;
 
 				// build dropdown menu
-				DropdownMenu<Object> menu = new DropdownMenu<Object>(container, items, 0, 0) {
+				DropdownMenu<Object> menu = new DropdownMenu<>(container, items, 0, 0) {
 					@Override
 					public void itemSelected(int index, Object item) {
 						option.selectItem(index, OptionsOverlay.this.container);

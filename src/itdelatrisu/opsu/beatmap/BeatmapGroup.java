@@ -55,12 +55,7 @@ public enum BeatmapGroup {
 		@Override
 		public ArrayList<BeatmapSetNode> filter(ArrayList<BeatmapSetNode> list) {
 			// find top K elements
-			PriorityQueue<BeatmapSetNode> pq = new PriorityQueue<BeatmapSetNode>(K, new Comparator<BeatmapSetNode>() {
-				@Override
-				public int compare(BeatmapSetNode v, BeatmapSetNode w) {
-					return Long.compare(lastPlayed(v.getBeatmapSet()), lastPlayed(w.getBeatmapSet()));
-				}
-			});
+			PriorityQueue<BeatmapSetNode> pq = new PriorityQueue<>(K, (v, w) -> Long.compare(lastPlayed(v.getBeatmapSet()), lastPlayed(w.getBeatmapSet())));
 			for (BeatmapSetNode node : list) {
 				long timestamp = lastPlayed(node.getBeatmapSet());
 				if (timestamp == 0)
@@ -73,7 +68,7 @@ public enum BeatmapGroup {
 			}
 
 			// return as list
-			ArrayList<BeatmapSetNode> filteredList = new ArrayList<BeatmapSetNode>();
+			ArrayList<BeatmapSetNode> filteredList = new ArrayList<>();
 			for (BeatmapSetNode node : pq)
 				filteredList.add(node);
 			return filteredList;
@@ -85,7 +80,7 @@ public enum BeatmapGroup {
 		@Override
 		public ArrayList<BeatmapSetNode> filter(ArrayList<BeatmapSetNode> list) {
 			// find "favorite" beatmaps
-			ArrayList<BeatmapSetNode> filteredList = new ArrayList<BeatmapSetNode>();
+			ArrayList<BeatmapSetNode> filteredList = new ArrayList<>();
 			for (BeatmapSetNode node : list) {
 				if (node.getBeatmapSet().isFavorite())
 					filteredList.add(node);

@@ -46,15 +46,10 @@ public class SkinUnpacker {
 	 * @return an array containing the new (unpacked) directories
 	 */
 	public static File[] unpackAllFiles(File root, File dest) {
-		List<File> dirs = new ArrayList<File>();
+		List<File> dirs = new ArrayList<>();
 
 		// find all OSK files
-		files = root.listFiles(new FilenameFilter() {
-			@Override
-			public boolean accept(File dir, String name) {
-				return name.toLowerCase().endsWith(".osk");
-			}
-		});
+		files = root.listFiles((dir, name) -> name.toLowerCase().endsWith(".osk"));
 		if (files == null || files.length < 1) {
 			files = null;
 			return new File[0];

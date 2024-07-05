@@ -112,7 +112,7 @@ public class BeatmapSet implements Iterable<Beatmap> {
 	 */
 	@Override
 	public String toString() {
-		Beatmap beatmap = beatmaps.get(0);
+		Beatmap beatmap = beatmaps.getFirst();
 		return String.format("%s - %s", beatmap.getArtist(), beatmap.getTitle());
 	}
 
@@ -123,7 +123,7 @@ public class BeatmapSet implements Iterable<Beatmap> {
 	 */
 	public boolean matches(String query) {
 		// search: title, artist, creator, source, version, tags (first beatmap)
-		Beatmap beatmap = beatmaps.get(0);
+		Beatmap beatmap = beatmaps.getFirst();
 		if (beatmap.title.toLowerCase().contains(query) ||
 			beatmap.titleUnicode.toLowerCase().contains(query) ||
 			beatmap.artist.toLowerCase().contains(query) ||

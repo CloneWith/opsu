@@ -185,7 +185,7 @@ public class Options {
 			return workingDir;
 
 		String OS = System.getProperty("os.name").toLowerCase();
-		if (OS.indexOf("nix") >= 0 || OS.indexOf("nux") >= 0 || OS.indexOf("aix") > 0) {
+		if (OS.contains("nix") || OS.contains("nux") || OS.indexOf("aix") > 0) {
 			String rootPath = System.getenv(env);
 			if (rootPath == null) {
 				String home = System.getProperty("user.home");
@@ -321,7 +321,7 @@ public class Options {
 				if (itemList == null) {
 					int width = Display.getDesktopDisplayMode().getWidth();
 					int height = Display.getDesktopDisplayMode().getHeight();
-					List<Resolution> list = new ArrayList<Resolution>();
+					List<Resolution> list = new ArrayList<>();
 					for (Resolution res : Resolution.values()) {
 						// only show resolutions that fit on the screen
 						if (res == Resolution.RES_800_600 || (width >= res.getWidth() && height >= res.getHeight()))
@@ -1684,7 +1684,7 @@ public class Options {
 
 		// create option map
 		if (optionMap == null) {
-			optionMap = new HashMap<String, GameOption>();
+			optionMap = new HashMap<>();
 			for (GameOption option : GameOption.values())
 				optionMap.put(option.getDisplayName(), option);
 		}

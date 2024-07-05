@@ -91,7 +91,7 @@ public enum HitSound implements SoundController.SoundComponent {
 	 */
 	HitSound(String filename) {
 		this.filename = filename;
-		this.clips = new HashMap<SampleSet, MultiClip>();
+		this.clips = new HashMap<>();
 	}
 
 	/**

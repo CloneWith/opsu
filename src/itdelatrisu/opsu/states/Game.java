@@ -904,7 +904,7 @@ public class Game extends BasicGameState {
 
 				// load the first timingPoint
 				if (!beatmap.timingPoints.isEmpty()) {
-					TimingPoint timingPoint = beatmap.timingPoints.get(0);
+					TimingPoint timingPoint = beatmap.timingPoints.getFirst();
 					if (!timingPoint.isInherited()) {
 						setBeatLength(timingPoint, true);
 						timingPointIndex++;
@@ -1140,7 +1140,7 @@ public class Game extends BasicGameState {
 					failTrackTime = MusicController.getPosition(true);
 					MusicController.fadeOut(MUSIC_FADEOUT_TIME);
 					MusicController.pitchFadeOut(MUSIC_FADEOUT_TIME);
-					rotations = new IdentityHashMap<GameObject, Float>();
+					rotations = new IdentityHashMap<>();
 					SoundController.playSound(SoundEffect.FAIL);
 
 					// fade to pause menu
@@ -1157,12 +1157,7 @@ public class Game extends BasicGameState {
 			boolean keyPressed = keys != ReplayFrame.KEY_NONE;
 
 			// update passed objects
-			Iterator<Integer> iter = passedObjects.iterator();
-			while (iter.hasNext()) {
-				int index = iter.next();
-				if (gameObjects[index].update(delta, mouseX, mouseY, keyPressed, trackPosition))
-					iter.remove();
-			}
+			passedObjects.removeIf(index -> gameObjects[index].update(delta, mouseX, mouseY, keyPressed, trackPosition));
 
 			// update objects (loop over any skipped indexes)
 			while (objectIndex < gameObjects.length && trackPosition > beatmap.objects[objectIndex].getTime()) {
@@ -1539,7 +1534,7 @@ public class Game extends BasicGameState {
 
 			// load the first timingPoint for stacking
 			if (!beatmap.timingPoints.isEmpty()) {
-				TimingPoint timingPoint = beatmap.timingPoints.get(0);
+				TimingPoint timingPoint = beatmap.timingPoints.getFirst();
 				if (!timingPoint.isInherited()) {
 					setBeatLength(timingPoint, true);
 					timingPointIndex++;
@@ -1605,7 +1600,7 @@ public class Game extends BasicGameState {
 			timingPointIndex = 0;
 			beatLengthBase = beatLength = 1;
 			if (!beatmap.timingPoints.isEmpty()) {
-				TimingPoint timingPoint = beatmap.timingPoints.get(0);
+				TimingPoint timingPoint = beatmap.timingPoints.getFirst();
 				if (!timingPoint.isInherited()) {
 					setBeatLength(timingPoint, true);
 					timingPointIndex++;
@@ -1645,9 +1640,9 @@ public class Game extends BasicGameState {
 			else {
 				lastKeysPressed = ReplayFrame.KEY_NONE;
 				replaySkipTime = -1;
-				replayFrames = new LinkedList<ReplayFrame>();
+				replayFrames = new LinkedList<>();
 				replayFrames.add(new ReplayFrame(0, 0, input.getMouseX(), input.getMouseY(), 0));
-				lifeFrames = new LinkedList<LifeFrame>();
+				lifeFrames = new LinkedList<>();
 			}
 
 			leadInTime = beatmap.audioLeadIn + approachTime;
@@ -1730,7 +1725,7 @@ public class Game extends BasicGameState {
 		}
 
 		// get hit objects in reverse order, or else overlapping objects are unreadable
-		Stack<Integer> stack = new Stack<Integer>();
+		Stack<Integer> stack = new Stack<>();
 		int spinnerIndex = -1;  // draw spinner first (assume there can only be 1...)
 		for (int index : passedObjects) {
 			if (beatmap.objects[index].isSpinner()) {
@@ -1882,7 +1877,7 @@ public class Game extends BasicGameState {
 	public void resetGameData() {
 		data.clear();
 		objectIndex = 0;
-		passedObjects = new LinkedList<Integer>();
+		passedObjects = new LinkedList<>();
 		breakIndex = 0;
 		breakTime = 0;
 		breakSound = false;
@@ -2419,10 +2414,9 @@ public class Game extends BasicGameState {
 
 		// initialize merged slider structures
 		if (mergedSlider == null) {
-			List<Vec2f> curvePoints = new ArrayList<Vec2f>();
+			List<Vec2f> curvePoints = new ArrayList<>();
 			for (GameObject gameObject : gameObjects) {
-				if (gameObject instanceof Slider) {
-					Slider slider = (Slider) gameObject;
+				if (gameObject instanceof Slider slider) {
 					slider.baseSliderFrom = curvePoints.size();
 					curvePoints.addAll(Arrays.asList(slider.getCurve().getCurvePoints()));
 				}
@@ -2432,8 +2426,7 @@ public class Game extends BasicGameState {
 		} else {
 			int base = 0;
 			for (GameObject gameObject : gameObjects) {
-				if (gameObject instanceof Slider) {
-					Slider slider = (Slider) gameObject;
+				if (gameObject instanceof Slider slider) {
 					slider.baseSliderFrom = base;
 					base += slider.getCurve().getCurvePoints().length;
 				}

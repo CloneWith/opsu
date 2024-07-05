@@ -510,39 +510,41 @@ public class LegacyCurveRenderState {
 				program = GL20.glCreateProgram();
 				int vtxShdr = GL20.glCreateShader(GL20.GL_VERTEX_SHADER);
 				int frgShdr = GL20.glCreateShader(GL20.GL_FRAGMENT_SHADER);
-				GL20.glShaderSource(vtxShdr, "#version 110\n"
-						+ "\n"
-						+ "attribute vec4 in_position;\n"
-						+ "attribute vec2 in_tex_coord;\n"
-						+ "\n"
-						+ "varying vec2 tex_coord;\n"
-						+ "void main()\n"
-						+ "{\n"
-						+ "    gl_Position = in_position;\n"
-						+ "    tex_coord = in_tex_coord;\n"
-						+ "}");
+				GL20.glShaderSource(vtxShdr, """
+					#version 110
+
+					attribute vec4 in_position;
+					attribute vec2 in_tex_coord;
+
+					varying vec2 tex_coord;
+					void main()
+					{
+					    gl_Position = in_position;
+					    tex_coord = in_tex_coord;
+					}""");
 				GL20.glCompileShader(vtxShdr);
 				int res = GL20.glGetShaderi(vtxShdr, GL20.GL_COMPILE_STATUS);
 				if (res != GL11.GL_TRUE) {
 					String error = GL20.glGetShaderInfoLog(vtxShdr, 1024);
 					Log.error("Vertex Shader compilation failed.", new Exception(error));
 				}
-				GL20.glShaderSource(frgShdr, "#version 110\n"
-						+ "\n"
-						+ "uniform sampler1D tex;\n"
-						+ "uniform vec2 tex_size;\n"
-						+ "uniform vec3 col_tint;\n"
-						+ "uniform vec4 col_border;\n"
-						+ "\n"
-						+ "varying vec2 tex_coord;\n"
-						+ "\n"
-						+ "void main()\n"
-						+ "{\n"
-						+ "    vec4 in_color = texture1D(tex, tex_coord.x);\n"
-						+ "    float blend_factor = in_color.r-in_color.b;\n"
-						+ "    vec4 new_color = vec4(mix(in_color.xyz*col_border.xyz,col_tint,blend_factor),in_color.w);\n"
-						+ "    gl_FragColor = new_color;\n"
-						+ "}");
+				GL20.glShaderSource(frgShdr, """
+					#version 110
+
+					uniform sampler1D tex;
+					uniform vec2 tex_size;
+					uniform vec3 col_tint;
+					uniform vec4 col_border;
+
+					varying vec2 tex_coord;
+
+					void main()
+					{
+					    vec4 in_color = texture1D(tex, tex_coord.x);
+					    float blend_factor = in_color.r-in_color.b;
+					    vec4 new_color = vec4(mix(in_color.xyz*col_border.xyz,col_tint,blend_factor),in_color.w);
+					    gl_FragColor = new_color;
+					}""");
 				GL20.glCompileShader(frgShdr);
 				res = GL20.glGetShaderi(frgShdr, GL20.GL_COMPILE_STATUS);
 				if (res != GL11.GL_TRUE) {

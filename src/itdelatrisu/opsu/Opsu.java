@@ -103,12 +103,9 @@ public class Opsu extends StateBasedGame {
 		}
 
 		// set default exception handler
-		Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
-			@Override
-			public void uncaughtException(Thread t, Throwable e) {
-				ErrorHandler.error("** Uncaught Exception! **", e, true);
-				System.exit(1);
-			}
+		Thread.setDefaultUncaughtExceptionHandler((t, e) -> {
+			ErrorHandler.error("** Uncaught Exception! **", e, true);
+			System.exit(1);
 		});
 
 		// parse configuration file
@@ -128,9 +125,10 @@ public class Opsu extends StateBasedGame {
 				errorAndExit(
 					null,
 					String.format(
-						"%s could not be launched for one of these reasons:\n" +
-						"- An instance of %s is already running.\n" +
-						"- A database is locked for another reason (unlikely). ",
+						"""
+							%s could not be launched for one of these reasons:
+							- An instance of %s is already running.
+							- A database is locked for another reason (unlikely).\s""",
 						OpsuConstants.PROJECT_NAME,
 						OpsuConstants.PROJECT_NAME
 					),
@@ -172,16 +170,13 @@ public class Opsu extends StateBasedGame {
 		// check for updates
 		Updater.get().getCurrentVersion();  // load this for the main menu
 		if (!Options.isUpdaterDisabled()) {
-			new Thread() {
-				@Override
-				public void run() {
-					try {
-						Updater.get().checkForUpdates();
-					} catch (Exception e) {
-						Log.warn("Check for updates failed.", e);
-					}
+			new Thread(() -> {
+				try {
+					Updater.get().checkForUpdates();
+				} catch (Exception e) {
+					Log.warn("Check for updates failed.", e);
 				}
-			}.start();
+			}).start();
 		}
 
 		// disable jinput

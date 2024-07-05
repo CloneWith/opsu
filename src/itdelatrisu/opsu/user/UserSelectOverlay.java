@@ -58,7 +58,7 @@ public class UserSelectOverlay extends AbstractComponent {
 	private boolean active;
 
 	/** Users. */
-	private List<UserButton> userButtons = new ArrayList<UserButton>();
+	private List<UserButton> userButtons = new ArrayList<>();
 
 	/** The event listener. */
 	private final UserSelectOverlayListener listener;
@@ -445,13 +445,11 @@ public class UserSelectOverlay extends AbstractComponent {
 		}
 		if (state == State.CREATE_USER) {
 			newUserButton.hoverUpdate(delta, UserList.get().isValidUserName(newUser.getName()));
-			for (int i = 0; i < userIcons.length; i++)
-				userIcons[i].hoverUpdate(delta, mouseX, mouseY);
+			for (MenuButton userIcon : userIcons) userIcon.hoverUpdate(delta, mouseX, mouseY);
 		}
 		if (state == State.EDIT_USER) {
 			deleteUserButton.hoverUpdate(delta, deleteUserButton.contains(mouseX, mouseY));
-			for (int i = 0; i < userIcons.length; i++)
-				userIcons[i].hoverUpdate(delta, mouseX, mouseY);
+			for (MenuButton userIcon : userIcons) userIcon.hoverUpdate(delta, mouseX, mouseY);
 		}
 	}
 
@@ -752,8 +750,7 @@ public class UserSelectOverlay extends AbstractComponent {
 
 	/** Prepares the user icons. */
 	private void prepareUserIcons() {
-		for (int i = 0; i < userIcons.length; i++)
-			userIcons[i].resetHover();
+		for (MenuButton userIcon : userIcons) userIcon.resetHover();
 
 		scrolling.setPosition(0f);
 		scrolling.setAllowOverScroll(false);

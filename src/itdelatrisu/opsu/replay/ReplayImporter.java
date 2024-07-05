@@ -56,12 +56,7 @@ public class ReplayImporter {
 	 */
 	public static void importAllReplaysFromDir(File dir) {
 		// find all OSR files
-		files = dir.listFiles(new FilenameFilter() {
-			@Override
-			public boolean accept(File dir, String name) {
-				return name.toLowerCase().endsWith(".osr");
-			}
-		});
+		files = dir.listFiles((dir1, name) -> name.toLowerCase().endsWith(".osr"));
 		if (files == null || files.length < 1) {
 			files = null;
 			return;

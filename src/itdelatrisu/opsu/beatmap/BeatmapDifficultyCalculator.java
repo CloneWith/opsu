@@ -121,7 +121,7 @@ public class BeatmapDifficultyCalculator {
 		int timingPointIndex = 0;
 		float beatLengthBase = 1, beatLength = 1;
 		if (!beatmap.timingPoints.isEmpty()) {
-			TimingPoint timingPoint = beatmap.timingPoints.get(0);
+			TimingPoint timingPoint = beatmap.timingPoints.getFirst();
 			if (!timingPoint.isInherited()) {
 				beatLengthBase = beatLength = timingPoint.getBeatLength();
 				timingPointIndex++;
@@ -225,14 +225,12 @@ public class BeatmapDifficultyCalculator {
 	 */
 	private double calculateDifficulty(int type) {
 		// Find the highest strain value within each strain step
-		List<Double> highestStrains = new ArrayList<Double>();
+		List<Double> highestStrains = new ArrayList<>();
 		double intervalEndTime = STRAIN_STEP;
 		double maximumStrain = 0; // We need to keep track of the maximum strain in the current interval
 
 		tpHitObject previousHitObject = null;
-		for (int i = 0; i < tpHitObjects.length; i++) {
-			tpHitObject hitObject = tpHitObjects[i];
-
+		for (tpHitObject hitObject : tpHitObjects) {
 			// While we are beyond the current interval push the currently available maximum to our strain list
 			while (hitObject.baseHitObject.getTime() > intervalEndTime) {
 				highestStrains.add(maximumStrain);
@@ -260,7 +258,7 @@ public class BeatmapDifficultyCalculator {
 		// Build the weighted sum over the highest strains for each interval
 		double difficulty = 0;
 		double weight = 1;
-		Collections.sort(highestStrains, Collections.reverseOrder()); // Sort from highest to lowest strain.
+		highestStrains.sort(Collections.reverseOrder()); // Sort from highest to lowest strain.
 		for (double strain : highestStrains) {
 			difficulty += weight * strain;
 			weight *= DECAY_WEIGHT;
@@ -459,26 +457,24 @@ class tpHitObject {
 		if (baseHitObject.isSpinner()) {
 			// Do nothing for spinners
 		} else if (baseHitObject.isSlider()) {
-			switch (type) {
-			case BeatmapDifficultyCalculator.DIFFICULTY_SPEED:
-				// For speed strain we treat the whole slider as a single spacing entity,
-				// since "Speed" is about how hard it is to click buttons fast.
-				// The spacing weight exists to differentiate between being able to easily
-				// alternate or having to single.
-				addition = spacingWeight(previousHitObject.lazySliderLengthFirst +
+			addition = switch (type) {
+				case BeatmapDifficultyCalculator.DIFFICULTY_SPEED ->
+					// For speed strain we treat the whole slider as a single spacing entity,
+					// since "Speed" is about how hard it is to click buttons fast.
+					// The spacing weight exists to differentiate between being able to easily
+					// alternate or having to single.
+					spacingWeight(previousHitObject.lazySliderLengthFirst +
 						previousHitObject.lazySliderLengthSubsequent * (Math.max(previousHitObject.baseHitObject.getRepeatCount(), 1) - 1) +
 						distanceTo(previousHitObject), type) * SPACING_WEIGHT_SCALING[type];
-				break;
-
-			case BeatmapDifficultyCalculator.DIFFICULTY_AIM:
-				// For Aim strain we treat each slider segment and the jump after the end of
-				// the slider as separate jumps, since movement-wise there is no difference
-				// to multiple jumps.
-				addition = (spacingWeight(previousHitObject.lazySliderLengthFirst, type) +
+				case BeatmapDifficultyCalculator.DIFFICULTY_AIM ->
+					// For Aim strain we treat each slider segment and the jump after the end of
+					// the slider as separate jumps, since movement-wise there is no difference
+					// to multiple jumps.
+					(spacingWeight(previousHitObject.lazySliderLengthFirst, type) +
 						spacingWeight(previousHitObject.lazySliderLengthSubsequent, type) * (Math.max(previousHitObject.baseHitObject.getRepeatCount(), 1) - 1) +
 						spacingWeight(distanceTo(previousHitObject), type)) * SPACING_WEIGHT_SCALING[type];
-				break;
-			}
+				default -> addition;
+			};
 		} else if (baseHitObject.isCircle()) {
 			addition = spacingWeight(distanceTo(previousHitObject), type) * SPACING_WEIGHT_SCALING[type];
 		}

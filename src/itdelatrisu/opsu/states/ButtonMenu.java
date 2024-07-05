@@ -435,16 +435,16 @@ public class ButtonMenu extends BasicGameState {
 			}
 
 			// create title string list
-			actualTitle = new ArrayList<String>();
+			actualTitle = new ArrayList<>();
 			String[] title = getTitle(container, game);
 			int maxLineWidth = (int) (container.getWidth() * 0.96f);
-			for (int i = 0; i < title.length; i++) {
+			for (String s : title) {
 				// wrap text if too long
-				if (Fonts.LARGE.getWidth(title[i]) > maxLineWidth) {
-					List<String> list = Fonts.wrap(Fonts.LARGE, title[i], maxLineWidth, false);
+				if (Fonts.LARGE.getWidth(s) > maxLineWidth) {
+					List<String> list = Fonts.wrap(Fonts.LARGE, s, maxLineWidth, false);
 					actualTitle.addAll(list);
 				} else
-					actualTitle.add(title[i]);
+					actualTitle.add(s);
 			}
 		}
 

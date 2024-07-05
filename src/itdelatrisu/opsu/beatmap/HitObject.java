@@ -568,15 +568,18 @@ public class HitObject {
 			sb.append(repeat); sb.append(',');
 			sb.append(pixelLength); sb.append(',');
 			if (edgeHitSound != null) {
-				for (int i = 0; i < edgeHitSound.length; i++) {
-					sb.append(edgeHitSound[i]); sb.append('|');
+				for (short value : edgeHitSound) {
+					sb.append(value);
+					sb.append('|');
 				}
 				sb.setCharAt(sb.length() - 1, ',');
 			}
 			if (edgeAddition != null) {
-				for (int i = 0; i < edgeAddition.length; i++) {
-					sb.append(edgeAddition[i][0]); sb.append(':');
-					sb.append(edgeAddition[i][1]); sb.append('|');
+				for (byte[] bytes : edgeAddition) {
+					sb.append(bytes[0]);
+					sb.append(':');
+					sb.append(bytes[1]);
+					sb.append('|');
 				}
 				sb.setCharAt(sb.length() - 1, ',');
 			}
@@ -587,8 +590,9 @@ public class HitObject {
 
 		// addition
 		if (addition != null) {
-			for (int i = 0; i < addition.length; i++) {
-				sb.append(addition[i]); sb.append(':');
+			for (byte b : addition) {
+				sb.append(b);
+				sb.append(':');
 			}
 			sb.append(additionCustomSampleIndex); sb.append(':');
 			sb.append(additionHitSoundVolume); sb.append(':');

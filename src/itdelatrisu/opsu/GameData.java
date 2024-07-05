@@ -401,9 +401,9 @@ public class GameData {
 					hitResult.curve.discardGeometry();
 			}
 		}
-		hitResultList = new LinkedBlockingDeque<HitObjectResult>();
-		hitErrorList = new LinkedBlockingDeque<HitErrorInfo>();
-		hitErrors = new ArrayList<Integer>();
+		hitResultList = new LinkedBlockingDeque<>();
+		hitErrorList = new LinkedBlockingDeque<>();
+		hitErrors = new ArrayList<>();
 		performanceString = null;
 		fullObjectCount = 0;
 		combo = 0;
@@ -447,7 +447,7 @@ public class GameData {
 		}
 
 		// score symbol images
-		scoreSymbols = new HashMap<Character, Image>(14);
+		scoreSymbols = new HashMap<>(14);
 		scoreSymbols.put('0', GameImage.SCORE_0.getImage());
 		scoreSymbols.put('1', GameImage.SCORE_1.getImage());
 		scoreSymbols.put('2', GameImage.SCORE_2.getImage());
@@ -539,8 +539,8 @@ public class GameData {
 				digit.setAlpha(1f);
 			}
 		} else {
-			for (int i = 0; i < c.length; i++) {
-				Image digit = getScoreSymbolImage(c[i]);
+			for (char value : c) {
+				Image digit = getScoreSymbolImage(value);
 				if (scale != 1.0f)
 					digit = digit.getScaledCopy(scale);
 				digit.setAlpha(alpha);
@@ -575,8 +575,8 @@ public class GameData {
 				digit.setAlpha(1f);
 			}
 		} else {
-			for (int i = 0; i < c.length; i++) {
-				Image digit = getScoreSymbolImage(c[i]);
+			for (char value : c) {
+				Image digit = getScoreSymbolImage(value);
 				if (scale != 1.0f)
 					digit = digit.getScaledCopy(scale);
 				digit.setAlpha(alpha);
@@ -1349,13 +1349,8 @@ public class GameData {
 		// hit error bar
 		if (Options.isHitErrorBarEnabled()) {
 			int trackPosition = MusicController.getPosition(true);
-			Iterator<HitErrorInfo> iter = hitErrorList.iterator();
-			while (iter.hasNext()) {
-				HitErrorInfo info = iter.next();
-				if (Math.abs(info.timeDiff) >= hitResultOffset[GameData.HIT_50] ||
-				    info.time + HIT_ERROR_FADE_TIME <= trackPosition)
-					iter.remove();
-			}
+			hitErrorList.removeIf(info -> Math.abs(info.timeDiff) >= hitResultOffset[GameData.HIT_50] ||
+				info.time + HIT_ERROR_FADE_TIME <= trackPosition);
 		}
 	}
 

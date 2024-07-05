@@ -53,12 +53,7 @@ public class PulseAudioFixerListener implements LineListener {
 		if (event.getType().equals(Type.STOP)) {
 			// Stop must be called in a separate thread in order for the
 			// underflow callback to complete and not deadlock.
-			executor.execute(new Runnable() {
-				@Override
-				public void run() {
-					clip.stop();
-				}
-			});
+			executor.execute(clip::stop);
 		}
 	}
 }

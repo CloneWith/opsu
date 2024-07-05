@@ -576,22 +576,23 @@ public class CurveRenderState {
 					String error = GL20.glGetShaderInfoLog(vtxShdr, 1024);
 					Log.error("Vertex Shader compilation failed.", new Exception(error));
 				}
-				GL20.glShaderSource(frgShdr, "#version 110\n"
-						+ "\n"
-						+ "uniform sampler1D tex;\n"
-						+ "uniform vec2 tex_size;\n"
-						+ "uniform vec4 col_tint;\n"
-						+ "uniform vec4 col_border;\n"
-						+ "\n"
-						+ "varying vec2 tex_coord;\n"
-						+ "\n"
-						+ "void main()\n"
-						+ "{\n"
-						+ "    vec4 in_color = texture1D(tex, tex_coord.x);\n"
-						+ "    float blend_factor = in_color.r-in_color.b;\n"
-						+ "    vec4 new_color = vec4(mix(in_color.xyz*col_border.xyz,col_tint.xyz,blend_factor),in_color.w*col_tint.w);\n"
-						+ "    gl_FragColor = new_color;\n"
-						+ "}");
+				GL20.glShaderSource(frgShdr, """
+					#version 110
+
+					uniform sampler1D tex;
+					uniform vec2 tex_size;
+					uniform vec4 col_tint;
+					uniform vec4 col_border;
+
+					varying vec2 tex_coord;
+
+					void main()
+					{
+					    vec4 in_color = texture1D(tex, tex_coord.x);
+					    float blend_factor = in_color.r-in_color.b;
+					    vec4 new_color = vec4(mix(in_color.xyz*col_border.xyz,col_tint.xyz,blend_factor),in_color.w*col_tint.w);
+					    gl_FragColor = new_color;
+					}""");
 				GL20.glCompileShader(frgShdr);
 				res = GL20.glGetShaderi(frgShdr, GL20.GL_COMPILE_STATUS);
 				if (res != GL11.GL_TRUE) {

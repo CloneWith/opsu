@@ -58,8 +58,8 @@ public class FrameBufferCache {
 	 * Constructor.
 	 */
 	private FrameBufferCache() {
-		cache = new ArrayList<Rendertarget>();
-		cacheMap = new HashMap<HitObject, Rendertarget>();
+		cache = new ArrayList<>();
+		cacheMap = new HashMap<>();
 	}
 
 	/**
@@ -107,8 +107,8 @@ public class FrameBufferCache {
 	public Rendertarget insert(HitObject obj) {
 		// find first RTTFramebuffer that's not mapped to anything and return it
 		Rendertarget buffer;
-		for (int i = 0; i < cache.size(); ++i) {
-			buffer = cache.get(i);
+		for (Rendertarget rendertarget : cache) {
+			buffer = rendertarget;
 			if (!cacheMap.containsValue(buffer)) {
 				cacheMap.put(obj, buffer);
 				return buffer;

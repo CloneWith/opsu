@@ -157,8 +157,8 @@ public class DropdownMenu<E> extends AbstractComponent {
 	 */
 	private int getMaxItemWidth() {
 		int maxWidth = 0;
-		for (int i = 0; i < itemNames.length; i++) {
-			int w = fontSelected.getWidth(itemNames[i]);
+		for (String itemName : itemNames) {
+			int w = fontSelected.getWidth(itemName);
 			if (w > maxWidth)
 				maxWidth = w;
 		}

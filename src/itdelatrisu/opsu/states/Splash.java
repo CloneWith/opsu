@@ -126,24 +126,21 @@ public class Splash extends BasicGameState {
 			// resources already loaded (from application restart)
 			if (BeatmapSetList.get() != null) {
 				if (newSkin || watchServiceChange) {  // need to reload resources
-					thread = new Thread() {
-						@Override
-						public void run() {
-							// reload beatmaps if watch service newly enabled
-							if (watchServiceChange)
-								BeatmapParser.parseAllFiles(Options.getBeatmapDir());
+					thread = new Thread(() -> {
+						// reload beatmaps if watch service newly enabled
+						if (watchServiceChange)
+							BeatmapParser.parseAllFiles(Options.getBeatmapDir());
 
-							// reload sounds if skin changed
-							// TODO: only reload each sound if actually needed?
-							if (newSkin)
-								SoundController.init();
+						// reload sounds if skin changed
+						// TODO: only reload each sound if actually needed?
+						if (newSkin)
+							SoundController.init();
 
-							Utils.gc(true);
+						Utils.gc(true);
 
-							finished = true;
-							thread = null;
-						}
-					};
+						finished = true;
+						thread = null;
+					});
 					thread.start();
 				} else  // don't reload anything
 					finished = true;
@@ -151,33 +148,30 @@ public class Splash extends BasicGameState {
 
 			// load all resources in a new thread
 			else {
-				thread = new Thread() {
-					@Override
-					public void run() {
-						File beatmapDir = Options.getBeatmapDir();
-						File importDir = Options.getImportDir();
+				thread = new Thread(() -> {
+					File beatmapDir = Options.getBeatmapDir();
+					File importDir = Options.getImportDir();
 
-						// unpack all OSZ archives
-						OszUnpacker.unpackAllFiles(importDir, beatmapDir);
+					// unpack all OSZ archives
+					OszUnpacker.unpackAllFiles(importDir, beatmapDir);
 
-						// parse song directory
-						BeatmapParser.parseAllFiles(beatmapDir);
+					// parse song directory
+					BeatmapParser.parseAllFiles(beatmapDir);
 
-						// import skins
-						SkinUnpacker.unpackAllFiles(importDir, Options.getSkinRootDir());
+					// import skins
+					SkinUnpacker.unpackAllFiles(importDir, Options.getSkinRootDir());
 
-						// import replays
-						ReplayImporter.importAllReplaysFromDir(importDir);
+					// import replays
+					ReplayImporter.importAllReplaysFromDir(importDir);
 
-						// load sounds
-						SoundController.init();
+					// load sounds
+					SoundController.init();
 
-						Utils.gc(true);
+					Utils.gc(true);
 
-						finished = true;
-						thread = null;
-					}
-				};
+					finished = true;
+					thread = null;
+				});
 				thread.start();
 			}
 		}

@@ -56,7 +56,7 @@ public class ScoreDB {
 	 * @return a list of SQL queries
 	 */
 	private static List<String> getUpdateQueries(int version) {
-		List<String> list = new LinkedList<String>();
+		List<String> list = new LinkedList<>();
 		if (version < 20140311)
 			list.add("ALTER TABLE scores ADD COLUMN replay TEXT");
 		if (version < 20150401)
@@ -323,7 +323,7 @@ public class ScoreDB {
 		if (connection == null)
 			return null;
 
-		List<ScoreData> list = new ArrayList<ScoreData>();
+		List<ScoreData> list = new ArrayList<>();
 		try {
 			selectMapStmt.setInt(1, beatmap.beatmapID);
 			selectMapStmt.setString(2, beatmap.title);
@@ -357,7 +357,7 @@ public class ScoreDB {
 		if (connection == null)
 			return null;
 
-		Map<String, ScoreData[]> map = new HashMap<String, ScoreData[]>();
+		Map<String, ScoreData[]> map = new HashMap<>();
 		try {
 			selectMapSetStmt.setInt(1, beatmap.beatmapSetID);
 			selectMapSetStmt.setString(2, beatmap.title);
@@ -373,7 +373,7 @@ public class ScoreDB {
 					if (list != null)
 						map.put(version, getSortedArray(list));
 					version = s.version;
-					list = new ArrayList<ScoreData>();
+					list = new ArrayList<>();
 				}
 				list.add(s);
 			}
@@ -401,7 +401,7 @@ public class ScoreDB {
 	 * @return a list containing all users
 	 */
 	public static List<User> getUsers() {
-		List<User> users = new ArrayList<User>();
+		List<User> users = new ArrayList<>();
 
 		if (connection == null)
 			return users;

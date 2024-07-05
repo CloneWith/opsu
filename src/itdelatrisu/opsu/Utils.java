@@ -182,10 +182,12 @@ public class Utils {
 		// warn about software mode
 		if (((Container) container).isSoftwareMode()) {
 			UI.getNotificationManager().sendNotification(
-				"WARNING:\n" +
-				"Running in OpenGL software mode.\n" +
-				"You may experience severely degraded performance.\n\n" +
-				"This can usually be resolved by updating your graphics drivers.",
+				"""
+					WARNING:
+					Running in OpenGL software mode.
+					You may experience severely degraded performance.
+
+					This can usually be resolved by updating your graphics drivers.""",
 				Color.red
 			);
 		}
@@ -349,42 +351,36 @@ public class Utils {
 		GL11.glReadBuffer(GL11.GL_FRONT);
 		GL11.glPixelStorei(GL11.GL_PACK_ALIGNMENT, 1);
 		GL11.glReadPixels(0, 0, width, height, GL11.GL_RGB, GL11.GL_UNSIGNED_BYTE, buffer);
-		new Thread() {
-			@Override
-			public void run() {
-				try {
-					BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-					for (int x = 0; x < width; x++) {
-						for (int y = 0; y < height; y++) {
-							int i = (x + (width * y)) * bpp;
-							int r = buffer.get(i) & 0xFF;
-							int g = buffer.get(i + 1) & 0xFF;
-							int b = buffer.get(i + 2) & 0xFF;
-							image.setRGB(x, height - (y + 1), (0xFF << 24) | (r << 16) | (g << 8) | b);
+		new Thread(() -> {
+			try {
+				BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+				for (int x = 0; x < width; x++) {
+					for (int y = 0; y < height; y++) {
+						int i = (x + (width * y)) * bpp;
+						int r = buffer.get(i) & 0xFF;
+						int g = buffer.get(i + 1) & 0xFF;
+						int b = buffer.get(i + 2) & 0xFF;
+						image.setRGB(x, height - (y + 1), (0xFF << 24) | (r << 16) | (g << 8) | b);
+					}
+				}
+				ImageIO.write(image, Options.getScreenshotFormat(), file);
+				UI.getNotificationManager().sendNotification(
+					String.format("Saved screenshot to %s", file.getAbsolutePath()),
+					Colors.PURPLE,
+					() -> {
+						try {
+							Utils.openInFileManager(file);
+						} catch (IOException e) {
+							UI.getNotificationManager()
+										.sendBarNotification("Failed to open screenshot location.");
+							Log.warn("Failed to open screenshot location.", e);
 						}
 					}
-					ImageIO.write(image, Options.getScreenshotFormat(), file);
-					UI.getNotificationManager().sendNotification(
-						String.format("Saved screenshot to %s", file.getAbsolutePath()),
-						Colors.PURPLE,
-						new NotificationListener() {
-							@Override
-							public void click() {
-								try {
-									Utils.openInFileManager(file);
-								} catch (IOException e) {
-									UI.getNotificationManager()
-												.sendBarNotification("Failed to open screenshot location.");
-									Log.warn("Failed to open screenshot location.", e);
-								}
-							}
-						}
-					);
-				} catch (Exception e) {
-					ErrorHandler.error("Failed to take a screenshot.", e, true);
-				}
+				);
+			} catch (Exception e) {
+				ErrorHandler.error("Failed to take a screenshot.", e, true);
 			}
-		}.start();
+		}).start();
 	}
 
 	/**
@@ -712,8 +708,8 @@ public class Utils {
 			char[] sha = new char[40];
 			if (in.read(sha, 0, sha.length) < sha.length)
 				return null;
-			for (int i = 0; i < sha.length; i++) {
-				if (Character.digit(sha[i], 16) == -1)
+			for (char c : sha) {
+				if (Character.digit(c, 16) == -1)
 					return null;
 			}
 			return String.valueOf(sha);
@@ -780,12 +776,9 @@ public class Utils {
 	}
 
 	public static void ChangeNewSkin() {
-		NewSkinLoader = new Thread() {
-			@Override
-			public void run() {
-				return;
-			}
-		};
+		NewSkinLoader = new Thread(() -> {
+			return;
+		});
 		// Steps: Load, release & reload
 		NewSkinLoader.start();
 		GameImage.clearReferences();

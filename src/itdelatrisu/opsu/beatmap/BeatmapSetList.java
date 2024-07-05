@@ -89,9 +89,9 @@ public class BeatmapSetList {
 	 * Constructor.
 	 */
 	private BeatmapSetList() {
-		parsedNodes = new ArrayList<BeatmapSetNode>();
-		MSIDdb = new HashSet<Integer>();
-		beatmapHashDB = new HashMap<String, Beatmap>();
+		parsedNodes = new ArrayList<>();
+		MSIDdb = new HashSet<>();
+		beatmapHashDB = new HashMap<>();
 		reset();
 	}
 
@@ -123,7 +123,7 @@ public class BeatmapSetList {
 		mapCount += beatmaps.size();
 
 		// add beatmap set ID to set
-		int msid = beatmaps.get(0).beatmapSetID;
+		int msid = beatmaps.getFirst().beatmapSetID;
 		if (msid > 0)
 			MSIDdb.add(msid);
 
@@ -411,12 +411,12 @@ public class BeatmapSetList {
 			return;
 
 		// sort the list
-		Collections.sort(nodes, BeatmapSortOrder.current().getComparator());
+		nodes.sort(BeatmapSortOrder.current().getComparator());
 		expandedIndex = -1;
 		expandedStartNode = expandedEndNode = null;
 
 		// create links
-		BeatmapSetNode lastNode = nodes.get(0);
+		BeatmapSetNode lastNode = nodes.getFirst();
 		lastNode.index = 0;
 		lastNode.prev = null;
 		for (int i = 1, size = size(); i < size; i++) {
@@ -444,7 +444,7 @@ public class BeatmapSetList {
 		if (lastQuery != null && query.equals(lastQuery))
 			return false;
 		lastQuery = query;
-		LinkedList<String> terms = new LinkedList<String>(Arrays.asList(query.split("\\s+")));
+		LinkedList<String> terms = new LinkedList<>(Arrays.asList(query.split("\\s+")));
 
 		// if empty query, reset to original list
 		if (query.isEmpty() || terms.isEmpty()) {
@@ -453,9 +453,9 @@ public class BeatmapSetList {
 		}
 
 		// find and remove any conditional search terms
-		LinkedList<String> condType     = new LinkedList<String>();
-		LinkedList<String> condOperator = new LinkedList<String>();
-		LinkedList<Float>  condValue    = new LinkedList<Float>();
+		LinkedList<String> condType     = new LinkedList<>();
+		LinkedList<String> condOperator = new LinkedList<>();
+		LinkedList<Float>  condValue    = new LinkedList<>();
 
 		Iterator<String> termIter = terms.iterator();
 		while (termIter.hasNext()) {
@@ -470,7 +470,7 @@ public class BeatmapSetList {
 		}
 
 		// build an initial list from first search term
-		nodes = new ArrayList<BeatmapSetNode>();
+		nodes = new ArrayList<>();
 		if (terms.isEmpty()) {
 			// conditional term
 			String type = condType.remove();
@@ -497,12 +497,7 @@ public class BeatmapSetList {
 			String term = terms.remove();
 
 			// remove nodes from list if they don't match all terms
-			Iterator<BeatmapSetNode> nodeIter = nodes.iterator();
-			while (nodeIter.hasNext()) {
-				BeatmapSetNode node = nodeIter.next();
-				if (!node.getBeatmapSet().matches(term))
-					nodeIter.remove();
-			}
+			nodes.removeIf(node -> !node.getBeatmapSet().matches(term));
 		}
 
 		// iterate through remaining conditional terms
@@ -515,12 +510,7 @@ public class BeatmapSetList {
 			float value = condValue.remove();
 
 			// remove nodes from list if they don't match all terms
-			Iterator<BeatmapSetNode> nodeIter = nodes.iterator();
-			while (nodeIter.hasNext()) {
-				BeatmapSetNode node = nodeIter.next();
-				if (!node.getBeatmapSet().matches(type, operator, value))
-					nodeIter.remove();
-			}
+			nodes.removeIf(node -> !node.getBeatmapSet().matches(type, operator, value));
 		}
 
 		return true;

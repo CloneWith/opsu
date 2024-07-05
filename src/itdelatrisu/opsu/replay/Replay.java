@@ -179,7 +179,7 @@ public class Replay {
 	private void loadData(OsuReader reader) throws IOException {
 		// life data
 		String[] lifeData = reader.readString().split(",");
-		List<LifeFrame> lifeFrameList = new ArrayList<LifeFrame>(lifeData.length);
+		List<LifeFrame> lifeFrameList = new ArrayList<>(lifeData.length);
 		for (String frame : lifeData) {
 			String[] tokens = frame.split("\\|");
 			if (tokens.length < 2)
@@ -203,7 +203,7 @@ public class Replay {
 			LZMAInputStream lzma = new LZMAInputStream(reader.getInputStream());
 			String[] replayFrames = Utils.convertStreamToString(lzma).split(",");
 			lzma.close();
-			List<ReplayFrame> replayFrameList = new ArrayList<ReplayFrame>(replayFrames.length);
+			List<ReplayFrame> replayFrameList = new ArrayList<>(replayFrames.length);
 			int lastTime = 0;
 			for (String frame : replayFrames) {
 				if (frame.isEmpty())
@@ -280,90 +280,86 @@ public class Replay {
 
 		// write file in new thread
 		final File file = new File(dir, String.format("%s.osr", getReplayFilename()));
-		new Thread() {
-			@Override
-			public void run() {
-				try (OutputStream out = new BufferedOutputStream(new FileOutputStream(file))) {
-					OsuWriter writer = new OsuWriter(out);
+		new Thread(() -> {
+			try (OutputStream out = new BufferedOutputStream(new FileOutputStream(file))) {
+				OsuWriter writer = new OsuWriter(out);
 
-					// header
-					writer.write(mode);
-					writer.write(version);
-					writer.write(beatmapHash);
-					writer.write(playerName);
-					writer.write(replayHash);
-					writer.write(hit300);
-					writer.write(hit100);
-					writer.write(hit50);
-					writer.write(geki);
-					writer.write(katu);
-					writer.write(miss);
-					writer.write(score);
-					writer.write(combo);
-					writer.write(perfect);
-					writer.write(mods);
+				// header
+				writer.write(mode);
+				writer.write(version);
+				writer.write(beatmapHash);
+				writer.write(playerName);
+				writer.write(replayHash);
+				writer.write(hit300);
+				writer.write(hit100);
+				writer.write(hit50);
+				writer.write(geki);
+				writer.write(katu);
+				writer.write(miss);
+				writer.write(score);
+				writer.write(combo);
+				writer.write(perfect);
+				writer.write(mods);
 
-					// life data
-					StringBuilder sb = new StringBuilder();
-					if (lifeFrames != null && lifeFrames.length > 0) {
-						NumberFormat nf = new DecimalFormat("##.##");
-						int lastFrameTime = 0;
-						for (int i = 0; i < lifeFrames.length; i++) {
-							LifeFrame frame = lifeFrames[i];
-							if (i > 0 && frame.getTime() - lastFrameTime < LifeFrame.SAMPLE_INTERVAL)
-								continue;
+				// life data
+				StringBuilder sb = new StringBuilder();
+				if (lifeFrames != null && lifeFrames.length > 0) {
+					NumberFormat nf = new DecimalFormat("##.##");
+					int lastFrameTime = 0;
+					for (int i = 0; i < lifeFrames.length; i++) {
+						LifeFrame frame = lifeFrames[i];
+						if (i > 0 && frame.getTime() - lastFrameTime < LifeFrame.SAMPLE_INTERVAL)
+							continue;
 
-							sb.append(String.format("%d|%s,", frame.getTime(), nf.format(frame.getHealth())));
-							lastFrameTime = frame.getTime();
-						}
+						sb.append(String.format("%d|%s,", frame.getTime(), nf.format(frame.getHealth())));
+						lastFrameTime = frame.getTime();
 					}
-					writer.write(sb.toString());
-
-					// timestamp
-					writer.write(timestamp);
-
-					// LZMA-encoded replay data
-					if (frames != null && frames.length > 0) {
-						// build full frame string
-						NumberFormat nf = new DecimalFormat("###.#####");
-						sb = new StringBuilder();
-						for (int i = 0; i < frames.length; i++) {
-							ReplayFrame frame = frames[i];
-							sb.append(String.format("%d|%s|%s|%d,",
-									frame.getTimeDiff(), nf.format(frame.getX()),
-									nf.format(frame.getY()), frame.getKeys()));
-						}
-						sb.append(String.format("%s|0|0|%d", SEED_STRING, seed));
-
-						// get bytes from string
-						CharsetEncoder encoder = StandardCharsets.US_ASCII.newEncoder();
-						CharBuffer buffer = CharBuffer.wrap(sb);
-						byte[] bytes = encoder.encode(buffer).array();
-
-						// compress data
-						ByteArrayOutputStream bout = new ByteArrayOutputStream();
-						LZMAOutputStream lzma = new LZMAOutputStream(bout, new LZMA2Options(), bytes.length);
-						try {
-							lzma.write(bytes);
-						} catch (IOException e) {
-							ErrorHandler.error("LZMA encoding of the reply frames failed.", e, true);
-						}
-						lzma.close();
-						bout.close();
-
-						// write to file
-						byte[] compressed = bout.toByteArray();
-						writer.write(compressed.length);
-						writer.write(compressed);
-					} else
-						writer.write(0);
-
-					writer.close();
-				} catch (IOException e) {
-					ErrorHandler.error("Could not save replay data.", e, true);
 				}
+				writer.write(sb.toString());
+
+				// timestamp
+				writer.write(timestamp);
+
+				// LZMA-encoded replay data
+				if (frames != null && frames.length > 0) {
+					// build full frame string
+					NumberFormat nf = new DecimalFormat("###.#####");
+					sb = new StringBuilder();
+					for (ReplayFrame frame : frames) {
+						sb.append(String.format("%d|%s|%s|%d,",
+							frame.getTimeDiff(), nf.format(frame.getX()),
+							nf.format(frame.getY()), frame.getKeys()));
+					}
+					sb.append(String.format("%s|0|0|%d", SEED_STRING, seed));
+
+					// get bytes from string
+					CharsetEncoder encoder = StandardCharsets.US_ASCII.newEncoder();
+					CharBuffer buffer = CharBuffer.wrap(sb);
+					byte[] bytes = encoder.encode(buffer).array();
+
+					// compress data
+					ByteArrayOutputStream bout = new ByteArrayOutputStream();
+					LZMAOutputStream lzma = new LZMAOutputStream(bout, new LZMA2Options(), bytes.length);
+					try {
+						lzma.write(bytes);
+					} catch (IOException e) {
+						ErrorHandler.error("LZMA encoding of the reply frames failed.", e, true);
+					}
+					lzma.close();
+					bout.close();
+
+					// write to file
+					byte[] compressed = bout.toByteArray();
+					writer.write(compressed.length);
+					writer.write(compressed);
+				} else
+					writer.write(0);
+
+				writer.close();
+			} catch (IOException e) {
+				ErrorHandler.error("Could not save replay data.", e, true);
 			}
-		}.start();
+		}).start();
 	}
 
 	/**

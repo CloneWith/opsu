@@ -199,119 +199,116 @@ public class Download {
 		if (status != Status.WAITING)
 			return null;
 
-		Thread t = new Thread() {
-			@Override
-			public void run() {
-				// open connection
-				HttpURLConnection conn = null;
-				try {
-					if (disableSSLCertValidation)
-						Utils.setSSLCertValidation(false);
+		Thread t = new Thread(() -> {
+			// open connection
+			HttpURLConnection conn = null;
+			try {
+				if (disableSSLCertValidation)
+					Utils.setSSLCertValidation(false);
 
-					URL downloadURL = url;
-					int redirectCount = 0;
-					boolean isRedirect = false;
-					do {
-						isRedirect = false;
+				URL downloadURL = url;
+				int redirectCount = 0;
+				boolean isRedirect = false;
+				do {
+					isRedirect = false;
 
-						conn = (HttpURLConnection) downloadURL.openConnection();
-						conn.setConnectTimeout(CONNECTION_TIMEOUT);
-						conn.setReadTimeout(READ_TIMEOUT);
-						conn.setUseCaches(false);
+					conn = (HttpURLConnection) downloadURL.openConnection();
+					conn.setConnectTimeout(CONNECTION_TIMEOUT);
+					conn.setReadTimeout(READ_TIMEOUT);
+					conn.setUseCaches(false);
 
-						// allow HTTP <--> HTTPS redirects
-						// http://download.java.net/jdk7u2/docs/technotes/guides/deployment/deployment-guide/upgrade-guide/article-17.html
-						conn.setInstanceFollowRedirects(false);
-						conn.setRequestProperty("User-Agent", Options.USER_AGENT);
-						if (requestHeaders != null) {
-							for (Map.Entry<String, String> entry : requestHeaders.entrySet())
-								conn.setRequestProperty(entry.getKey(), entry.getValue());
-						}
-
-						// check for redirect
-						int status = conn.getResponseCode();
-						if (status == HttpURLConnection.HTTP_MOVED_TEMP || status == HttpURLConnection.HTTP_MOVED_PERM ||
-						    status == HttpURLConnection.HTTP_SEE_OTHER || status == HttpURLConnection.HTTP_USE_PROXY) {
-							URL base = conn.getURL();
-							String location = conn.getHeaderField("Location");
-							URL target = null;
-							if (location != null)
-								target = new URL(base, location);
-							conn.disconnect();
-
-							// check for problems
-							String error = null;
-							if (location == null)
-								error = String.format("Download for URL '%s' is attempting to redirect without a 'location' header.", base.toString());
-							else if (!target.getProtocol().equals("http") && !target.getProtocol().equals("https"))
-								error = String.format("Download for URL '%s' is attempting to redirect to a non-HTTP/HTTPS protocol '%s'.", base.toString(), target.getProtocol());
-							else if (redirectCount > MAX_REDIRECTS)
-								error = String.format("Download for URL '%s' is attempting too many redirects (over %d).", base.toString(), MAX_REDIRECTS);
-							if (error != null) {
-								ErrorHandler.notify(error, null);
-								throw new IOException();
-							}
-
-							// follow redirect
-							downloadURL = target;
-							redirectCount++;
-							isRedirect = true;
-						}
-					} while (isRedirect);
-
-					// store content length
-					contentLength = conn.getContentLength();
-				} catch (IOException e) {
-					status = Status.ERROR;
-					Log.warn("Failed to open connection.", e);
-					if (listener != null)
-						listener.error();
-					return;
-				} finally {
-					if (disableSSLCertValidation)
-						Utils.setSSLCertValidation(true);
-				}
-
-				// download file
-				try (
-					InputStream in = conn.getInputStream();
-					ReadableByteChannel readableByteChannel = Channels.newChannel(in);
-					FileOutputStream fileOutputStream = new FileOutputStream(localPath);
-				) {
-					rbc = new ReadableByteChannelWrapper(readableByteChannel);
-					fos = fileOutputStream;
-					status = Status.DOWNLOADING;
-					updateReadSoFar();
-					long bytesRead = fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
-					if (status == Status.DOWNLOADING) {  // not interrupted
-						// check if the entire file was received
-						if (bytesRead < contentLength) {
-							status = Status.ERROR;
-							Log.warn(String.format("Download '%s' failed: %d bytes expected, %d bytes received.", url.toString(), contentLength, bytesRead));
-							if (listener != null)
-								listener.error();
-							return;
-						}
-
-						// mark download as complete
-						status = Status.COMPLETE;
-						rbc.close();
-						fos.close();
-						if (rename != null) {
-							Path source = new File(localPath).toPath();
-							Files.move(source, source.resolveSibling(rename), StandardCopyOption.REPLACE_EXISTING);
-						}
-						if (listener != null)
-							listener.completed();
+					// allow HTTP <--> HTTPS redirects
+					// http://download.java.net/jdk7u2/docs/technotes/guides/deployment/deployment-guide/upgrade-guide/article-17.html
+					conn.setInstanceFollowRedirects(false);
+					conn.setRequestProperty("User-Agent", Options.USER_AGENT);
+					if (requestHeaders != null) {
+						for (Map.Entry<String, String> entry : requestHeaders.entrySet())
+							conn.setRequestProperty(entry.getKey(), entry.getValue());
 					}
-				} catch (Exception e) {
-					status = Status.ERROR;
-					Log.warn("Failed to start download.", e);
-					if (listener != null)
-						listener.error();
-				}
+
+					// check for redirect
+					int status = conn.getResponseCode();
+					if (status == HttpURLConnection.HTTP_MOVED_TEMP || status == HttpURLConnection.HTTP_MOVED_PERM ||
+						status == HttpURLConnection.HTTP_SEE_OTHER || status == HttpURLConnection.HTTP_USE_PROXY) {
+						URL base = conn.getURL();
+						String location = conn.getHeaderField("Location");
+						URL target = null;
+						if (location != null)
+							target = new URL(base, location);
+						conn.disconnect();
+
+						// check for problems
+						String error = null;
+						if (location == null)
+							error = String.format("Download for URL '%s' is attempting to redirect without a 'location' header.", base.toString());
+						else if (!target.getProtocol().equals("http") && !target.getProtocol().equals("https"))
+							error = String.format("Download for URL '%s' is attempting to redirect to a non-HTTP/HTTPS protocol '%s'.", base.toString(), target.getProtocol());
+						else if (redirectCount > MAX_REDIRECTS)
+							error = String.format("Download for URL '%s' is attempting too many redirects (over %d).", base.toString(), MAX_REDIRECTS);
+						if (error != null) {
+							ErrorHandler.notify(error, null);
+							throw new IOException();
+						}
+
+						// follow redirect
+						downloadURL = target;
+						redirectCount++;
+						isRedirect = true;
+					}
+				} while (isRedirect);
+
+				// store content length
+				contentLength = conn.getContentLength();
+			} catch (IOException e) {
+				status = Status.ERROR;
+				Log.warn("Failed to open connection.", e);
+				if (listener != null)
+					listener.error();
+				return;
+			} finally {
+				if (disableSSLCertValidation)
+					Utils.setSSLCertValidation(true);
 			}
-		};
+
+			// download file
+			try (
+				InputStream in = conn.getInputStream();
+				ReadableByteChannel readableByteChannel = Channels.newChannel(in);
+				FileOutputStream fileOutputStream = new FileOutputStream(localPath);
+			) {
+				rbc = new ReadableByteChannelWrapper(readableByteChannel);
+				fos = fileOutputStream;
+				status = Status.DOWNLOADING;
+				updateReadSoFar();
+				long bytesRead = fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
+				if (status == Status.DOWNLOADING) {  // not interrupted
+					// check if the entire file was received
+					if (bytesRead < contentLength) {
+						status = Status.ERROR;
+						Log.warn(String.format("Download '%s' failed: %d bytes expected, %d bytes received.", url.toString(), contentLength, bytesRead));
+						if (listener != null)
+							listener.error();
+						return;
+					}
+
+					// mark download as complete
+					status = Status.COMPLETE;
+					rbc.close();
+					fos.close();
+					if (rename != null) {
+						Path source = new File(localPath).toPath();
+						Files.move(source, source.resolveSibling(rename), StandardCopyOption.REPLACE_EXISTING);
+					}
+					if (listener != null)
+						listener.completed();
+				}
+			} catch (Exception e) {
+				status = Status.ERROR;
+				Log.warn("Failed to start download.", e);
+				if (listener != null)
+					listener.error();
+			}
+		});
 		t.start();
 		return t;
 	}

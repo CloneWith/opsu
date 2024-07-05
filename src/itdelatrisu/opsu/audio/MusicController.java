@@ -110,12 +110,7 @@ public class MusicController {
 			switch (BeatmapParser.getExtension(beatmap.audioFilename.getName())) {
 			case "ogg":
 			case "mp3":
-				trackLoader = new Thread() {
-					@Override
-					public void run() {
-						loadTrack(audioFile, (preview) ? beatmap.previewTime : 0, loop);
-					}
-				};
+				trackLoader = new Thread(() -> loadTrack(audioFile, (preview) ? beatmap.previewTime : 0, loop));
 				trackLoader.start();
 				break;
 			default:
@@ -146,8 +141,10 @@ public class MusicController {
 				player = null;
 				trackEnded = false;
 				UI.getNotificationManager().sendNotification(
-					"Looks like sound isn't working right now. Sorry!\n\n" +
-					"Restarting the game will probably fix this.",
+					"""
+						Looks like sound isn't working right now. Sorry!
+
+						Restarting the game will probably fix this.""",
 					Color.red
 				);
 				return;
@@ -265,7 +262,7 @@ public class MusicController {
 
 		// initialization
 		if (timingPointIndex == 0 && lastTimingPoint == null && !map.timingPoints.isEmpty()) {
-			TimingPoint timingPoint = map.timingPoints.get(0);
+			TimingPoint timingPoint = map.timingPoints.getFirst();
 			if (!timingPoint.isInherited())
 				lastTimingPoint = timingPoint;
 		}

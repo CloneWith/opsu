@@ -227,7 +227,7 @@ public class NotificationManager {
 	public NotificationManager(GameContainer container) {
 		this.container = container;
 		this.input = container.getInput();
-		this.notifications = Collections.synchronizedList(new ArrayList<BubbleNotification>());
+		this.notifications = Collections.synchronizedList(new ArrayList<>());
 		input.addMouseListener(new MouseListener() {
 			@Override
 			public void mousePressed(int button, int x, int y) {
@@ -361,7 +361,7 @@ public class NotificationManager {
 			x = container.getWidth() - paddingX - notif.getWidth();
 			y = bottomY - notif.getHeight();
 		} else {
-			BubbleNotification n = notifications.get(notifications.size() - 1);
+			BubbleNotification n = notifications.getLast();
 			x = n.getX();
 			y = n.getY() - paddingY - notif.getHeight();
 			if (y <= paddingY) {

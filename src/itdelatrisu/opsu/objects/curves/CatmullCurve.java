@@ -43,9 +43,9 @@ public class CatmullCurve extends EqualDistanceMultiCurve {
 	 */
 	public CatmullCurve(HitObject hitObject, boolean scaled) {
 		super(hitObject, scaled);
-		LinkedList<CurveType> catmulls = new LinkedList<CurveType>();
+		LinkedList<CurveType> catmulls = new LinkedList<>();
 		int ncontrolPoints = hitObject.getSliderX().length + 1;
-		LinkedList<Vec2f> points = new LinkedList<Vec2f>();  // temporary list of points to separate different curves
+		LinkedList<Vec2f> points = new LinkedList<>();  // temporary list of points to separate different curves
 
 		// repeat the first and last points as controls points
 		// only if the first/last two points are different

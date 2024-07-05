@@ -55,8 +55,8 @@ public class DownloadList {
 	 * Constructor.
 	 */
 	private DownloadList() {
-		nodes = new ArrayList<DownloadNode>();
-		map = new HashMap<Integer, DownloadNode>();
+		nodes = new ArrayList<>();
+		map = new HashMap<>();
 	}
 
 	/**

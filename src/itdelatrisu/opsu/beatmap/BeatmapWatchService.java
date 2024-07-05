@@ -138,7 +138,7 @@ public class BeatmapWatchService {
 	}
 
 	/** The list of listeners. */
-	private static final List<BeatmapWatchServiceListener> listeners = new ArrayList<BeatmapWatchServiceListener>();
+	private static final List<BeatmapWatchServiceListener> listeners = new ArrayList<>();
 
 	/**
 	 * Adds a listener.
@@ -175,7 +175,7 @@ public class BeatmapWatchService {
 	 */
 	private BeatmapWatchService() throws IOException {
 		this.watcher = FileSystems.getDefault().newWatchService();
-		this.keys = new ConcurrentHashMap<WatchKey, Path>();
+		this.keys = new ConcurrentHashMap<>();
 	}
 
 	/**
@@ -197,7 +197,7 @@ public class BeatmapWatchService {
 	 */
 	public void registerAll(final Path start) {
 		try {
-			Files.walkFileTree(start, new SimpleFileVisitor<Path>() {
+			Files.walkFileTree(start, new SimpleFileVisitor<>() {
 				@Override
 				public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
 					try {
@@ -226,10 +226,7 @@ public class BeatmapWatchService {
 			return;
 
 		this.service = Executors.newCachedThreadPool();
-		service.submit(new Runnable() {
-			@Override
-			public void run() { ws.processEvents(); }
-		});
+		service.submit(() -> ws.processEvents());
 	}
 
 	/**

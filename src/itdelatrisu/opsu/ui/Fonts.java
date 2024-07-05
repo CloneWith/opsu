@@ -43,7 +43,7 @@ public class Fonts {
 	public static UnicodeFont DEFAULT, BOLD, XLARGE, LARGE, MEDIUM, MEDIUMBOLD, SMALL, SMALLBOLD;
 
 	/** Set of all Unicode strings already loaded per font. */
-	private static HashMap<UnicodeFont, HashSet<String>> loadedGlyphs = new HashMap<UnicodeFont, HashSet<String>>();
+	private static HashMap<UnicodeFont, HashSet<String>> loadedGlyphs = new HashMap<>();
 
 	// This class should not be instantiated.
 	private Fonts() {}
@@ -108,7 +108,7 @@ public class Fonts {
 		// get set of added strings
 		HashSet<String> set = loadedGlyphs.get(font);
 		if (set == null) {
-			set = new HashSet<String>();
+			set = new HashSet<>();
 			loadedGlyphs.put(font, set);
 		} else if (set.contains(s))
 			return;  // string already in set
@@ -147,7 +147,7 @@ public class Fonts {
 	 * @author davedes (http://slick.ninjacave.com/forum/viewtopic.php?t=3778)
 	 */
 	public static List<String> wrap(org.newdawn.slick.Font font, String text, int width, boolean newlines) {
-		List<String> list = new ArrayList<String>();
+		List<String> list = new ArrayList<>();
 		String str = text;
 		String line = "";
 		int i = 0;

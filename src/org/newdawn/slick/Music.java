@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2013, Slick2D
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  * - Redistributions of source code must retain the above copyright notice,
@@ -12,7 +12,7 @@
  * - Neither the name of the Slick2D nor the names of its contributors may be
  *   used to endorse or promote products derived from this software without
  *   specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -39,7 +39,7 @@ import org.newdawn.slick.util.Log;
 
 /**
  * A piece of music loaded and playable within the game. Only one piece of music can
- * play at any given time and a channel is reserved so music will always play. 
+ * play at any given time and a channel is reserved so music will always play.
  *
  * @author kevin
  * @author Nathan Sweet {@literal <misc@n4te.com>}
@@ -48,15 +48,15 @@ import org.newdawn.slick.util.Log;
 public class Music {
 	/** The music currently being played or null if none */
 	private static Music currentMusic;
-	
+
 	/** The lock object for synchronized modification to Music*/
 	private static Object musicLock = new Object();
-	
+
 	/**
 	 * Poll the state of the current music. This causes streaming music
 	 * to stream and checks listeners. Note that if you're using a game container
 	 * this will be auto-magically called for you.
-	 * 
+	 *
 	 * @param delta The amount of time since last poll
 	 */
 	public static void poll(int delta) {
@@ -75,7 +75,7 @@ public class Music {
 			}
 		}
 	}
-	
+
 	/** The sound from FECK representing this music */
 	private Audio sound;
 	/** True if the music is playing */
@@ -95,7 +95,7 @@ public class Music {
 	/** True if music should be stopped after fading in/out */
 	private boolean stopAfterFade;
 	/** True if the music is being repositioned and it is therefore normal that it's not playing */
-	private boolean positioning; 
+	private boolean positioning;
 	/** The position that was requested */
 	private float requiredPosition = -1;
 
@@ -113,7 +113,7 @@ public class Music {
 
 	/**
 	 * Create and load a piece of music (either OGG or MOD/XM)
-	 * 
+	 *
 	 * @param ref The location of the music
 	 * @throws SlickException
 	 */
@@ -123,7 +123,7 @@ public class Music {
 
 	/**
 	 * Create and load a piece of music (either OGG or MOD/XM)
-	 * 
+	 *
 	 * @param ref The location of the music
 	 * @throws SlickException
 	 */
@@ -133,13 +133,13 @@ public class Music {
 
 	/**
 	 * Create and load a piece of music (either OGG or MOD/XM)
-	 * @param in The stream to read the music from 
-	 * @param ref  The symbolic name of this music 
+	 * @param in The stream to read the music from
+	 * @param ref  The symbolic name of this music
 	 * @throws SlickException Indicates a failure to read the music from the stream
 	 */
 	public Music(InputStream in, String ref) throws SlickException {
 		SoundStore.get().init();
-		
+
 		try {
 			if (ref.toLowerCase().endsWith(".ogg")) {
 				sound = SoundStore.get().getOgg(in);
@@ -157,10 +157,10 @@ public class Music {
 			throw new SlickException("Failed to load music: "+ref);
 		}
 	}
-	
+
 	/**
 	 * Create and load a piece of music (either OGG or MOD/XM)
-	 * 
+	 *
 	 * @param url The location of the music
 	 * @param streamingHint A hint to indicate whether streaming should be used if possible
 	 * @throws SlickException
@@ -168,7 +168,7 @@ public class Music {
 	public Music(URL url, boolean streamingHint) throws SlickException {
 		SoundStore.get().init();
 		String ref = url.getFile();
-		
+
 		try {
 			if (ref.toLowerCase().endsWith(".ogg") || ref.toLowerCase().endsWith(".mp3")) {
 				if (streamingHint) {
@@ -192,17 +192,17 @@ public class Music {
 			throw new SlickException("Failed to load sound: "+url);
 		}
 	}
-	
+
 	/**
 	 * Create and load a piece of music (either OGG or MOD/XM)
-	 * 
+	 *
 	 * @param ref The location of the music
 	 * @param streamingHint A hint to indicate whether streaming should be used if possible
 	 * @throws SlickException
 	 */
 	public Music(String ref, boolean streamingHint) throws SlickException {
 		SoundStore.get().init();
-		
+
 		try {
 			if (ref.toLowerCase().endsWith(".ogg") || ref.toLowerCase().endsWith(".mp3")) {
 				if (streamingHint) {
@@ -232,7 +232,7 @@ public class Music {
 
 	/**
 	 * Add a listener to this music
-	 * 
+	 *
 	 * @param listener The listener to add
 	 */
 	public void addListener(MusicListener listener) {
@@ -241,51 +241,51 @@ public class Music {
 
 	/**
 	 * Remove a listener from this music
-	 * 
+	 *
 	 * @param listener The listener to remove
 	 */
 	public void removeListener(MusicListener listener) {
 		listeners.remove(listener);
 	}
-	
+
 	/**
 	 * Fire notifications that this music ended
 	 */
 	private void fireMusicEnded() {
 		playing = false;
-		for (int i=0;i<listeners.size();i++) {
-			((MusicListener) listeners.get(i)).musicEnded(this);
+		for (Object listener : listeners) {
+			((MusicListener) listener).musicEnded(this);
 		}
 	}
 
 	/**
 	 * Fire notifications that this music was swapped out
-	 * 
+	 *
 	 * @param newMusic The new music that will be played
 	 */
 	private void fireMusicSwapped(Music newMusic) {
 		playing = false;
-		for (int i=0;i<listeners.size();i++) {
-			((MusicListener) listeners.get(i)).musicSwapped(this, newMusic);
+		for (Object listener : listeners) {
+			((MusicListener) listener).musicSwapped(this, newMusic);
 		}
 	}
 	/**
 	 * Loop the music
 	 */
 	public void loop() {
-		loop(1.0f, 1.0f); 
+		loop(1.0f, 1.0f);
 	}
-	
+
 	/**
 	 * Play the music
 	 */
 	public void play() {
-		play(1.0f, 1.0f); 
+		play(1.0f, 1.0f);
 	}
 
 	/**
 	 * Play the music at a given pitch and volume
-	 * 
+	 *
 	 * @param pitch The pitch to play the music at (1.0 = default)
 	 * @param volume The volume to play the music at (1.0 = default)
 	 */
@@ -295,14 +295,14 @@ public class Music {
 
 	/**
 	 * Loop the music at a given pitch and volume
-	 * 
+	 *
 	 * @param pitch The pitch to play the music at (1.0 = default)
 	 * @param volume The volume to play the music at (1.0 = default)
 	 */
 	public void loop(float pitch, float volume) {
 		startMusic(pitch, volume, true);
 	}
-	
+
 	/**
 	 * play or loop the music at a given pitch and volume
 	 * @param pitch The pitch to play the music at (1.0 = default)
@@ -315,7 +315,7 @@ public class Music {
 				currentMusic.stop();
 				currentMusic.fireMusicSwapped(this);
 			}
-			
+
 			if (volume < 0.0f)
 				volume = 0.0f;
 			if (volume > 1.0f)
@@ -333,7 +333,7 @@ public class Music {
 			}
 		}
 	}
-	
+
 	/**
 	 * Pause the music playback
 	 */
@@ -341,7 +341,7 @@ public class Music {
 		playing = false;
 		AudioImpl.pauseMusic();
 	}
-	
+
 	/**
 	 * Stop the music playing
 	 */
@@ -351,7 +351,7 @@ public class Music {
 			sound.stop();
 		}
 	}
-	
+
 	/**
 	 * Resume the music playback
 	 */
@@ -359,19 +359,19 @@ public class Music {
 		playing = true;
 		AudioImpl.restartMusic();
 	}
-	
+
 	/**
 	 * Check if the music is being played
-	 * 
+	 *
 	 * @return True if the music is being played
 	 */
 	public boolean playing() {
 		return (currentMusic == this) && (playing);
 	}
-	
+
 	/**
 	 * Set the volume of the music as a factor of the global volume setting
-	 * 
+	 *
 	 * @param volume The volume to play music at. 0 - 1, 1 is Max
 	 */
 	public void setVolume(float volume) {
@@ -381,7 +381,7 @@ public class Music {
 		} else if(volume < 0) {
 			volume = 0;
 		}
-		
+
 		this.volume = volume;
 		// This sound is being played as music
 		if (currentMusic == this) {
@@ -410,7 +410,7 @@ public class Music {
 
 	/**
 	 * Fade this music to the volume specified
-	 * 
+	 *
 	 * @param duration Fade time in milliseconds.
 	 * @param endVolume The target volume
 	 * @param stopAfterFade True if music should be stopped after fading in/out
@@ -437,16 +437,16 @@ public class Music {
 	}
 
 	/**
-	 * Update the current music applying any effects that need to updated per 
+	 * Update the current music applying any effects that need to updated per
 	 * tick.
-	 * 
+	 *
 	 * @param delta The amount of time in milliseconds thats passed since last update
 	 */
 	void update(int delta) {
 		if (!playing) {
 			return;
 		}
-       
+
 		if (pitchTime > 0) {
 			pitchTime -= delta;
 			if (pitchTime < 0) {
@@ -464,16 +464,16 @@ public class Music {
 					return;
 				}
 			}
-			
+
 			float offset = (fadeEndGain - fadeStartGain) * (1 - (fadeTime / (float)fadeDuration));
 			setVolume(fadeStartGain + offset);
 		}
 	}
 
 	/**
-	 * Seeks to a position in the music. For streaming music, seeking before the current position causes 
+	 * Seeks to a position in the music. For streaming music, seeking before the current position causes
 	 * the stream to be reloaded.
-	 * 
+	 *
 	 * @param position Position in seconds.
 	 * @return True if the seek was successful
 	 */
@@ -481,13 +481,13 @@ public class Music {
 		synchronized (musicLock) {
 			if (playing) {
 				requiredPosition = -1;
-				
+
 				positioning = true;
 				playing = false;
 				boolean result = sound.setPosition(position);
 				playing = true;
 				positioning = false;
-	
+
 				return result;
 			} else {
 				requiredPosition = position;
@@ -498,7 +498,7 @@ public class Music {
 
 	/**
 	 * The position into the sound thats being played
-	 * 
+	 *
 	 * @return The current position in seconds.
 	 */
 	public float getPosition () {
