@@ -97,6 +97,7 @@ public class OptionGroup {
 			GameOption.FORCE_SKIN_CURSOR,
 			GameOption.CURSOR_SIZE,
 			GameOption.WARNINGARROW_TINT_WHITE,
+			GameOption.BUILTIN_BACK_BUTTON,
 		}),
 		new OptionGroup("Input", GameImage.MENU_NAV_INPUT),
 		new OptionGroup("MOUSE", new GameOption[] {

@@ -510,7 +510,8 @@ public class Options {
 					val = i;
 			}
 		},
-		WARNINGARROW_TINT_WHITE ("Tint warning arrow white", "TintWarnArrowWhite", "Tine the warning arrow appeared before the end of a break period white instead of red.\nThis overrides the skin settings.", true),
+		WARNINGARROW_TINT_WHITE ("Tint warning arrow white", "TintWarnArrowWhite", "Tint the warning arrow appeared before the end of a break period white instead of red.\nThis overrides the skin settings.", true),
+		BUILTIN_BACK_BUTTON ("Always use builtin back button", "BuiltinBackButton", "Use the builtin back button style regardless of the skin.", false),
 		DYNAMIC_BACKGROUND ("Dynamic backgrounds", "DynamicBackground", "The current beatmap background will be used as the main menu background.", true),
 		LOAD_VERBOSE ("Detailed loading progress", "LoadVerbose", "Display more verbose loading progress in the splash screen.", false),
 		MASTER_VOLUME ("Master", "VolumeUniversal", "Global volume level.", 35, 0, 100) {
@@ -1134,6 +1135,12 @@ public class Options {
 	public static boolean isWarningArrowTintWhite() {
 		return GameOption.WARNINGARROW_TINT_WHITE.getBooleanValue();
 	}
+
+	/**
+	 * Returns whether to always use the builtin Back button style.
+	 * @return true if always
+	 */
+	public static boolean isBuiltinBackButton() { return GameOption.BUILTIN_BACK_BUTTON.getBooleanValue(); }
 
 	/**
 	 * Returns the cursor scale.

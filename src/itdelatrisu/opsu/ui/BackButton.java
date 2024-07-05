@@ -33,7 +33,7 @@ public class BackButton {
 	/** Skinned back button. */
 	private final MenuButton backButton;
 
-	/** Turn a color into its dark varient. */
+	/** Turn a color into its dark variant. */
 	private static final int darkColorDelta = -32;
 
 	/** Colors. */
@@ -94,8 +94,8 @@ public class BackButton {
 	 * @param container the game container
 	 */
 	public BackButton(GameContainer container) {
-		// not skinned: dynamic button
-		if (!GameImage.MENU_BACK.hasGameSkinImage()) {
+		// not skinned or builtin style on: dynamic button
+		if (!GameImage.MENU_BACK.hasGameSkinImage() || Options.isBuiltinBackButton()) {
 			backButton = null;
 			textWidth = Fonts.MEDIUM.getWidth(BUTTON_TEXT);
 			paddingY = Fonts.MEDIUM.getHeight(BUTTON_TEXT);
@@ -113,7 +113,7 @@ public class BackButton {
 			return;
 		}
 
-		// skinned: static image
+		// skinned: if not use builtin style, static image
 		if (GameImage.MENU_BACK.getImages() != null) {
 			Animation back = GameImage.MENU_BACK.getAnimation();
 			backButton = new MenuButton(back, back.getWidth() / 2f, container.getHeight() - (back.getHeight() / 2f));
