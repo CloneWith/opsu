@@ -388,6 +388,7 @@ public class Options {
 				String OriginalName = Options.getSkin().getName();
 				skinName = itemList[index];
 				if (!skinName.equals(OriginalName)) {
+					write();
 					Utils.ChangeNewSkin();
 					// TODO: If skin is changed then reload the skin and UI.
 				}
