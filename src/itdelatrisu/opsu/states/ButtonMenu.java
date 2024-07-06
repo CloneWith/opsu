@@ -53,7 +53,7 @@ public class ButtonMenu extends BasicGameState {
 	/** Menu states. */
 	public enum MenuState {
 		/** The exit confirmation screen. */
-		EXIT(new Button[] { Button.YES, Button.NO, Button.RESTART }) {
+		EXIT(new Button[] { Button.YES, Button.NO, Button.RESTART, Button.THROW }) {
 			@Override
 			public String[] getTitle(GameContainer container, StateBasedGame game) {
 				return new String[] {
@@ -469,6 +469,12 @@ public class ButtonMenu extends BasicGameState {
 			public void click(GameContainer container, StateBasedGame game) {
 				container.setForceExit(false);
 				container.exit();
+			}
+		},
+		THROW("Throw an error!", Color.blue) {
+			@Override
+			public void click(GameContainer container, StateBasedGame game) {
+				ErrorHandler.error("Congratulations! You've raised an error by yourself!", null, true);
 			}
 		},
 		CLEAR_SCORES("Clear local scores", Color.magenta) {

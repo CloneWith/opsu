@@ -20,6 +20,7 @@ package itdelatrisu.opsu.ui;
 
 import itdelatrisu.opsu.GameImage;
 import itdelatrisu.opsu.Opsu;
+import itdelatrisu.opsu.OpsuConstants;
 import itdelatrisu.opsu.Utils;
 import itdelatrisu.opsu.audio.SoundController;
 import itdelatrisu.opsu.beatmap.BeatmapParser;
@@ -292,8 +293,11 @@ public class UI {
 		} else if ((file = SoundController.getCurrentFileName()) != null) {
 			text = "Loading sounds...";
 			progress = SoundController.getLoadingProgress();
-		} else
-			return;
+		} else {
+			text = String.format("Welcome to %s", OpsuConstants.PROJECT_NAME);
+			progress = 100;
+		}
+
 
 		// draw loading info
 		float marginX = container.getWidth() * 0.02f, marginY = container.getHeight() * 0.02f;
