@@ -157,7 +157,7 @@ public class MainMenu extends BasicGameState {
 	private boolean showUserOverlay = false;
 
 	/** The user overlay show/hide animation progress. */
-	private final AnimatedValue userOverlayProgress = new AnimatedValue(750, 0f, 1f, AnimationEquation.OUT_CUBIC);
+	private final AnimatedValue userOverlayProgress = new AnimatedValue(500, 0f, 1f, AnimationEquation.OUT_CUBIC);
 
 	// game-related variables
 	private GameContainer container;
