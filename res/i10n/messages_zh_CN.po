@@ -1,0 +1,944 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: opsu!\n"
+"POT-Creation-Date: 2024-07-07 09:57+0800\n"
+"PO-Revision-Date: 2024-07-07 09:57+0800\n"
+"Last-Translator: CloneWith <clonewith@qq.com>\n"
+"Language-Team: CloneWith <clonewith@qq.com>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.4\n"
+"X-Poedit-Basepath: ../../src\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: t\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: itdelatrisu/opsu/ErrorHandler.java:45
+#: itdelatrisu/opsu/downloads/Download.java:64
+msgid "Error"
+msgstr ""
+
+#: itdelatrisu/opsu/ErrorHandler.java:48
+msgid "An error occurred. :("
+msgstr ""
+
+#: itdelatrisu/opsu/ErrorHandler.java:49
+msgid "Something bad happened. Please report this!"
+msgstr ""
+
+#: itdelatrisu/opsu/ErrorHandler.java:52
+msgid "Close"
+msgstr ""
+
+#: itdelatrisu/opsu/ErrorHandler.java:53
+msgid "View Error Log"
+msgstr ""
+
+#: itdelatrisu/opsu/ErrorHandler.java:54
+msgid "Send Report"
+msgstr ""
+
+#: itdelatrisu/opsu/GameData.java:974
+#, java-printf-format
+msgid "Beatmap by %s"
+msgstr ""
+
+#: itdelatrisu/opsu/GameData.java:975
+#, java-printf-format
+msgid " by %s"
+msgstr ""
+
+#: itdelatrisu/opsu/GameData.java:977
+#, java-printf-format
+msgid "Played%s on %s."
+msgstr ""
+
+#: itdelatrisu/opsu/GameData.java:1815
+#, java-printf-format
+msgid ""
+"Accuracy:\n"
+"Error: %.2fms - %.2fms avg\n"
+"Unstable Rate: %.2f"
+msgstr ""
+
+#: itdelatrisu/opsu/Opsu.java:118
+#, java-printf-format
+msgid ""
+"%s could not be launched for one of these reasons:\n"
+"- An instance of %s is already running.\n"
+"- A database is locked for another reason (unlikely).\\s"
+msgstr ""
+
+#: itdelatrisu/opsu/Opsu.java:128 itdelatrisu/opsu/Opsu.java:132
+msgid "The databases could not be initialized."
+msgstr ""
+
+#: itdelatrisu/opsu/Opsu.java:130
+msgid "Could not load sqlite-JDBC driver."
+msgstr ""
+
+#: itdelatrisu/opsu/Opsu.java:198
+msgid "An error occurred while creating the game container."
+msgstr ""
+
+#: itdelatrisu/opsu/Opsu.java:263
+msgid "JARs cannot be run from some paths containing the '!' character. "
+msgstr ""
+
+#: itdelatrisu/opsu/Opsu.java:264
+msgid ""
+"Please rename the file/directories and try again.\n"
+"\n"
+msgstr ""
+
+#: itdelatrisu/opsu/Opsu.java:265
+msgid "Path: "
+msgstr ""
+
+#: itdelatrisu/opsu/ScoreData.java:419
+#, java-printf-format
+msgid ""
+"Achieved on %s\n"
+"300:%d 100:%d 50:%d Miss:%d\n"
+"Accuracy: %.2f%%\n"
+"Mods: %s"
+msgstr ""
+
+#: itdelatrisu/opsu/Utils.java:174
+msgid ""
+"WARNING:\n"
+"Running in OpenGL software mode.\n"
+"You may experience severely degraded performance.\n"
+"\n"
+"This can usually be resolved by updating your graphics drivers."
+msgstr ""
+
+#: itdelatrisu/opsu/Utils.java:351
+#, java-printf-format
+msgid "Saved screenshot to %s"
+msgstr ""
+
+#: itdelatrisu/opsu/Utils.java:358
+msgid "Failed to open screenshot location."
+msgstr ""
+
+#: itdelatrisu/opsu/Utils.java:772
+msgid ""
+"Skin changed.\n"
+"Some elements might not be replaced properly, for this please restart the "
+"game."
+msgstr ""
+
+#: itdelatrisu/opsu/audio/MultiClip.java:238
+#, java-printf-format
+msgid "Could not close AudioInputStream for MultiClip %s."
+msgstr ""
+
+#: itdelatrisu/opsu/audio/MusicController.java:103
+#, java-printf-format
+msgid "Could not find track '%s'."
+msgstr ""
+
+#: itdelatrisu/opsu/audio/MusicController.java:144
+msgid ""
+"Looks like sound isn't working right now. Sorry!\n"
+"\n"
+"Restarting the game will probably fix this."
+msgstr ""
+
+#: itdelatrisu/opsu/audio/SoundController.java:267
+#, java-printf-format
+msgid "Failed to load %d audio file%s."
+msgstr ""
+
+#: itdelatrisu/opsu/audio/SoundController.java:270
+msgid ""
+"\n"
+"Click for details."
+msgstr ""
+
+#: itdelatrisu/opsu/audio/SoundController.java:419
+msgid "Failed to download track preview."
+msgstr ""
+
+#: itdelatrisu/opsu/beatmap/BeatmapGroup.java:38
+msgid "All Songs"
+msgstr ""
+
+#: itdelatrisu/opsu/beatmap/BeatmapGroup.java:41
+msgid "Last Played"
+msgstr ""
+
+#: itdelatrisu/opsu/beatmap/BeatmapGroup.java:41
+msgid "Your recently played beatmaps will appear in this list!"
+msgstr ""
+
+#: itdelatrisu/opsu/beatmap/OszUnpacker.java:82
+#, java-printf-format
+msgid "Imported %d new beatmap pack%s."
+msgstr ""
+
+#: itdelatrisu/opsu/downloads/Download.java:60
+msgid "Waiting"
+msgstr ""
+
+#: itdelatrisu/opsu/downloads/Download.java:61
+msgid "Downloading"
+msgstr ""
+
+#: itdelatrisu/opsu/downloads/Download.java:62
+msgid "Complete"
+msgstr ""
+
+#: itdelatrisu/opsu/downloads/Download.java:63
+msgid "Cancelled"
+msgstr ""
+
+#: itdelatrisu/opsu/downloads/DownloadList.java:37
+#, java-printf-format
+msgid ""
+"Beatmap downloads are in progress.\n"
+"Are you sure you want to quit %s?"
+msgstr ""
+
+#: itdelatrisu/opsu/downloads/DownloadNode.java:280
+#, java-printf-format
+msgid "Download complete: %s"
+msgstr ""
+
+#: itdelatrisu/opsu/downloads/DownloadNode.java:285
+msgid "Download failed due to a connection error."
+msgstr ""
+
+#: itdelatrisu/opsu/downloads/Updater.java:55
+#, java-printf-format
+msgid ""
+"A new update is being downloaded.\n"
+"Are you sure you want to quit %s?"
+msgstr ""
+
+#: itdelatrisu/opsu/downloads/Updater.java:67
+msgid "Checking for updates..."
+msgstr ""
+
+#: itdelatrisu/opsu/downloads/Updater.java:68
+msgid "Connection error."
+msgstr ""
+
+#: itdelatrisu/opsu/downloads/Updater.java:69
+msgid "Internal error."
+msgstr ""
+
+#: itdelatrisu/opsu/downloads/Updater.java:70
+msgid "Up to date!"
+msgstr ""
+
+#: itdelatrisu/opsu/downloads/Updater.java:71
+msgid ""
+"Update available!\n"
+"Click to download."
+msgstr ""
+
+#: itdelatrisu/opsu/downloads/Updater.java:72
+msgid "Downloading update..."
+msgstr ""
+
+#: itdelatrisu/opsu/downloads/Updater.java:77
+#, java-printf-format
+msgid ""
+"Downloading update...\n"
+"%.1f%% complete (%s/%s)"
+msgstr ""
+
+#: itdelatrisu/opsu/downloads/Updater.java:83
+msgid ""
+"Download complete.\n"
+"Click to restart."
+msgstr ""
+
+#: itdelatrisu/opsu/downloads/Updater.java:84
+msgid "Update queued."
+msgstr ""
+
+#: itdelatrisu/opsu/downloads/Updater.java:278
+msgid "Update has finished downloading."
+msgstr ""
+
+#: itdelatrisu/opsu/downloads/Updater.java:284
+msgid "Update failed due to a connection error."
+msgstr ""
+
+#: itdelatrisu/opsu/downloads/servers/HexideServer.java:106
+msgid "m_title"
+msgstr ""
+
+#: itdelatrisu/opsu/downloads/servers/HexideServer.java:107
+msgid "m_artist"
+msgstr ""
+
+#: itdelatrisu/opsu/downloads/servers/HexideServer.java:108
+msgid "m_creator"
+msgstr ""
+
+#: itdelatrisu/opsu/downloads/servers/HexideServer.java:110
+#: itdelatrisu/opsu/downloads/servers/SayobotServer.java:116
+msgid "title"
+msgstr ""
+
+#: itdelatrisu/opsu/downloads/servers/HexideServer.java:122
+msgid "date"
+msgstr ""
+
+#: itdelatrisu/opsu/downloads/servers/RippleServer.java:95
+msgid "LastUpdate"
+msgstr ""
+
+#: itdelatrisu/opsu/downloads/servers/RippleServer.java:96
+msgid "Title"
+msgstr ""
+
+#: itdelatrisu/opsu/downloads/servers/RippleServer.java:96
+msgid "Artist"
+msgstr ""
+
+#: itdelatrisu/opsu/downloads/servers/RippleServer.java:97
+msgid "Creator"
+msgstr ""
+
+#: itdelatrisu/opsu/downloads/servers/SayobotServer.java:116
+msgid "titleU"
+msgstr ""
+
+#: itdelatrisu/opsu/downloads/servers/SayobotServer.java:117
+msgid "artist"
+msgstr ""
+
+#: itdelatrisu/opsu/downloads/servers/SayobotServer.java:117
+msgid "artistU"
+msgstr ""
+
+#: itdelatrisu/opsu/downloads/servers/SayobotServer.java:118
+msgid "creator"
+msgstr ""
+
+#: itdelatrisu/opsu/options/OptionGroup.java:33
+msgid "General"
+msgstr ""
+
+#: itdelatrisu/opsu/options/OptionGroup.java:34
+msgid "LANGUAGE"
+msgstr ""
+
+#: itdelatrisu/opsu/options/OptionGroup.java:37
+msgid "UPDATES"
+msgstr ""
+
+#: itdelatrisu/opsu/options/OptionGroup.java:40
+msgid "Graphics"
+msgstr ""
+
+#: itdelatrisu/opsu/options/OptionGroup.java:41
+msgid "LAYOUT"
+msgstr ""
+
+#: itdelatrisu/opsu/options/OptionGroup.java:45
+msgid "RENDERER"
+msgstr ""
+
+#: itdelatrisu/opsu/options/OptionGroup.java:49
+msgid "DETAIL SETTINGS"
+msgstr ""
+
+#: itdelatrisu/opsu/options/OptionGroup.java:58
+msgid "EXPERIMENTAL SLIDERS"
+msgstr ""
+
+#: itdelatrisu/opsu/options/OptionGroup.java:64
+msgid "MAIN MENU"
+msgstr ""
+
+#: itdelatrisu/opsu/options/OptionGroup.java:69
+msgid "Gameplay"
+msgstr ""
+
+#: itdelatrisu/opsu/options/OptionGroup.java:76
+msgid "MODS"
+msgstr ""
+
+#: itdelatrisu/opsu/options/OptionGroup.java:81
+msgid "Audio"
+msgstr ""
+
+#: itdelatrisu/opsu/options/OptionGroup.java:82
+msgid "VOLUME"
+msgstr ""
+
+#: itdelatrisu/opsu/options/OptionGroup.java:91
+msgid "OFFSET ADJUSTMENT"
+msgstr ""
+
+#: itdelatrisu/opsu/options/OptionGroup.java:94
+msgid "Skin"
+msgstr ""
+
+#: itdelatrisu/opsu/options/OptionGroup.java:95
+msgid "SKIN"
+msgstr ""
+
+#: itdelatrisu/opsu/options/OptionGroup.java:104
+msgid "Input"
+msgstr ""
+
+#: itdelatrisu/opsu/options/OptionGroup.java:105
+msgid "MOUSE"
+msgstr ""
+
+#: itdelatrisu/opsu/options/OptionGroup.java:109
+msgid "KEYBOARD"
+msgstr ""
+
+#: itdelatrisu/opsu/options/OptionGroup.java:113
+msgid "Custom"
+msgstr ""
+
+#: itdelatrisu/opsu/options/OptionGroup.java:114
+msgid "DIFFICULTY"
+msgstr ""
+
+#: itdelatrisu/opsu/options/OptionGroup.java:121
+msgid "COLOR"
+msgstr ""
+
+#: itdelatrisu/opsu/options/OptionGroup.java:127
+msgid "SEEKING"
+msgstr ""
+
+#: itdelatrisu/opsu/options/OptionGroup.java:131
+msgid "MISCELLANEOUS"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:1029
+#, java-printf-format
+msgid "Frame limiter: %s"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:1412
+msgid "Mouse buttons are disabled."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:1412
+msgid "Mouse buttons are enabled."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:1732
+#, java-printf-format
+msgid "# %s configuration"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:1734
+msgid "# last updated on "
+msgstr ""
+
+#: itdelatrisu/opsu/options/OptionsOverlay.java:478
+msgid "Options"
+msgstr ""
+
+#: itdelatrisu/opsu/options/OptionsOverlay.java:479
+#, java-printf-format
+msgid "Change the way %s behaves"
+msgstr ""
+
+#: itdelatrisu/opsu/options/OptionsOverlay.java:520
+#: itdelatrisu/opsu/states/DownloadsMenu.java:237
+#: itdelatrisu/opsu/states/SongMenu.java:744
+msgid "Type to search!"
+msgstr ""
+
+#: itdelatrisu/opsu/options/OptionsOverlay.java:568
+msgid "Press the new left-click key."
+msgstr ""
+
+#: itdelatrisu/opsu/options/OptionsOverlay.java:568
+msgid "Press the new right-click key."
+msgstr ""
+
+#: itdelatrisu/opsu/options/OptionsOverlay.java:569
+msgid "Click anywhere or hit ESC to cancel."
+msgstr ""
+
+#: itdelatrisu/opsu/options/OptionsOverlay.java:866
+msgid "Click to restart the game."
+msgstr ""
+
+#: itdelatrisu/opsu/options/OptionsOverlay.java:1208
+#: itdelatrisu/opsu/options/OptionsOverlay.java:1414
+msgid "Restart to apply changes."
+msgstr ""
+
+#: itdelatrisu/opsu/replay/ReplayImporter.java:109
+#, java-printf-format
+msgid "Imported %d replay%s."
+msgstr ""
+
+#: itdelatrisu/opsu/skins/SkinUnpacker.java:76
+#, java-printf-format
+msgid "Imported %d new skin%s."
+msgstr ""
+
+#: itdelatrisu/opsu/states/ButtonMenu.java:56
+#: itdelatrisu/opsu/states/MainMenu.java:664
+msgid "The web page could not be opened."
+msgstr ""
+
+#: itdelatrisu/opsu/states/ButtonMenu.java:65
+#, java-printf-format
+msgid "Are you sure you want to exit %s?"
+msgstr ""
+
+#: itdelatrisu/opsu/states/ButtonMenu.java:80
+msgid "What do you want to do with this beatmap?"
+msgstr ""
+
+#: itdelatrisu/opsu/states/ButtonMenu.java:106
+#, java-printf-format
+msgid "Are you sure you wish to delete '%s' from disk?"
+msgstr ""
+
+#: itdelatrisu/opsu/states/ButtonMenu.java:131
+msgid "You have requested a full process of your beatmaps."
+msgstr ""
+
+#: itdelatrisu/opsu/states/ButtonMenu.java:132
+msgid "This could take a few minutes."
+msgstr ""
+
+#: itdelatrisu/opsu/states/ButtonMenu.java:133
+msgid "Are you sure you wish to continue?"
+msgstr ""
+
+#: itdelatrisu/opsu/states/ButtonMenu.java:146
+msgid "Score Management"
+msgstr ""
+
+#: itdelatrisu/opsu/states/ButtonMenu.java:159
+msgid ""
+"Mods provide different ways to enjoy gameplay. Some have an effect on the "
+"score you can achieve during ranked play. Others are just for fun."
+msgstr ""
+
+#: itdelatrisu/opsu/states/ButtonMenu.java:187
+#, java-printf-format
+msgid "Score Multiplier: %.2fx"
+msgstr ""
+
+#. TRANSLATORS: This is like "opsu! v1.0.0 by @itdelatrisu".
+#: itdelatrisu/opsu/states/ButtonMenu.java:257
+#, java-printf-format
+msgid "%s %s by %s"
+msgstr ""
+
+#: itdelatrisu/opsu/states/ButtonMenu.java:259
+#: itdelatrisu/opsu/states/MainMenu.java:632
+msgid "(unknown version)"
+msgstr ""
+
+#: itdelatrisu/opsu/states/ButtonMenu.java:261
+msgid "Click an option below to learn more!"
+msgstr ""
+
+#: itdelatrisu/opsu/states/ButtonMenu.java:632
+msgid ""
+"[Type your description here. Feel free to delete the info below if it's not "
+"relevant.]\n"
+"\n"
+msgstr ""
+
+#: itdelatrisu/opsu/states/ButtonMenu.java:649
+msgid "Debug info copied to clipboard."
+msgstr ""
+
+#: itdelatrisu/opsu/states/DownloadsMenu.java:234
+msgid "No results found or an internal error occurred. See log for details."
+msgstr ""
+
+#: itdelatrisu/opsu/states/DownloadsMenu.java:239
+msgid "No results found."
+msgstr ""
+
+#: itdelatrisu/opsu/states/DownloadsMenu.java:241
+#, java-printf-format
+msgid "%d result%s found!"
+msgstr ""
+
+#: itdelatrisu/opsu/states/DownloadsMenu.java:247
+msgid "Could not establish connection to server."
+msgstr ""
+
+#: itdelatrisu/opsu/states/DownloadsMenu.java:284
+msgid "No Standard beatmaps could be loaded."
+msgstr ""
+
+#: itdelatrisu/opsu/states/DownloadsMenu.java:314
+#: itdelatrisu/opsu/states/DownloadsMenu.java:387
+msgid "Loading data from server..."
+msgstr ""
+
+#: itdelatrisu/opsu/states/DownloadsMenu.java:366
+msgid "Clear"
+msgstr ""
+
+#: itdelatrisu/opsu/states/DownloadsMenu.java:367
+msgid "Import All"
+msgstr ""
+
+#: itdelatrisu/opsu/states/DownloadsMenu.java:368
+msgid "Reset"
+msgstr ""
+
+#: itdelatrisu/opsu/states/DownloadsMenu.java:443
+msgid "Download Beatmaps!"
+msgstr ""
+
+#: itdelatrisu/opsu/states/DownloadsMenu.java:484
+msgid "Page 1"
+msgstr ""
+
+#: itdelatrisu/opsu/states/DownloadsMenu.java:486
+#, java-printf-format
+msgid "Page %d"
+msgstr ""
+
+#: itdelatrisu/opsu/states/DownloadsMenu.java:500
+msgid "Downloads"
+msgstr ""
+
+#: itdelatrisu/opsu/states/DownloadsMenu.java:529
+msgid "Show Unranked"
+msgstr ""
+
+#: itdelatrisu/opsu/states/DownloadsMenu.java:529
+msgid "Hide Unranked"
+msgstr ""
+
+#: itdelatrisu/opsu/states/DownloadsMenu.java:615
+msgid "Reset the current search."
+msgstr ""
+
+#: itdelatrisu/opsu/states/DownloadsMenu.java:617
+msgid ""
+"Toggle the display of unranked maps.\n"
+"Some download servers may not support this option."
+msgstr ""
+
+#: itdelatrisu/opsu/states/DownloadsMenu.java:619
+msgid "Select a download server."
+msgstr ""
+
+#: itdelatrisu/opsu/states/DownloadsMenu.java:700
+msgid "Failed to load track preview. See log for details."
+msgstr ""
+
+#: itdelatrisu/opsu/states/DownloadsMenu.java:1008
+#, java-printf-format
+msgid ""
+"Save the beatmap in the Import folder and then click \"Import All\":\n"
+"%s"
+msgstr ""
+
+#: itdelatrisu/opsu/states/DownloadsMenu.java:1016
+#, java-printf-format
+msgid ""
+"Opened a web browser to download \"%s\".\n"
+"\n"
+"%s"
+msgstr ""
+
+#: itdelatrisu/opsu/states/DownloadsMenu.java:1024
+#, java-printf-format
+msgid "Click here to copy the download URL for \"%s\"."
+msgstr ""
+
+#: itdelatrisu/opsu/states/DownloadsMenu.java:1038
+msgid "The download could not be started."
+msgstr ""
+
+#: itdelatrisu/opsu/states/Game.java:589
+#, java-printf-format
+msgid "%d retries and counting..."
+msgstr ""
+
+#: itdelatrisu/opsu/states/Game.java:735
+msgid "Click on the pulsing cursor to continue play!"
+msgstr ""
+
+#: itdelatrisu/opsu/states/Game.java:806
+msgid "Click to resume gameplay."
+msgstr ""
+
+#: itdelatrisu/opsu/states/Game.java:1226
+msgid "Checkpoint saved."
+msgstr ""
+
+#: itdelatrisu/opsu/states/Game.java:1247
+msgid "Checkpoint loaded."
+msgstr ""
+
+#: itdelatrisu/opsu/states/Game.java:1628
+#, java-printf-format
+msgid "Using local beatmap offset (%dms)"
+msgstr ""
+
+#: itdelatrisu/opsu/states/Game.java:1633
+msgid "Playing with custom difficulty settings."
+msgstr ""
+
+#: itdelatrisu/opsu/states/Game.java:1968
+msgid ""
+"Failed to load beatmap video.\n"
+"See log for details."
+msgstr ""
+
+#: itdelatrisu/opsu/states/Game.java:2440
+#: itdelatrisu/opsu/states/GamePauseMenu.java:149
+msgid "Offset can only be changed while game is not paused."
+msgstr ""
+
+#: itdelatrisu/opsu/states/Game.java:2447
+#, java-printf-format
+msgid "Local beatmap offset set to %dms"
+msgstr ""
+
+#: itdelatrisu/opsu/states/GameRanking.java:196
+msgid "Replay file not found."
+msgstr ""
+
+#: itdelatrisu/opsu/states/GameRanking.java:281
+msgid ""
+"Failed to load replay data.\n"
+"See log for details."
+msgstr ""
+
+#: itdelatrisu/opsu/states/MainMenu.java:464
+#, java-printf-format
+msgid "You have %d beatmaps available!"
+msgstr ""
+
+#: itdelatrisu/opsu/states/MainMenu.java:469
+#, java-printf-format
+msgid "%s has been running for %s."
+msgstr ""
+
+#: itdelatrisu/opsu/states/MainMenu.java:476
+#, java-printf-format
+msgid "It is currently %s."
+msgstr ""
+
+#: itdelatrisu/opsu/states/MainMenu.java:618
+msgid "Click to seek to a specific point in the song."
+msgstr ""
+
+#: itdelatrisu/opsu/states/MainMenu.java:620
+#: itdelatrisu/opsu/states/MainMenu.java:769
+#: itdelatrisu/opsu/states/MainMenu.java:887
+msgid "Play"
+msgstr ""
+
+#: itdelatrisu/opsu/states/MainMenu.java:622
+#: itdelatrisu/opsu/states/MainMenu.java:752
+#: itdelatrisu/opsu/states/MainMenu.java:892
+msgid "Pause"
+msgstr ""
+
+#: itdelatrisu/opsu/states/MainMenu.java:622
+#: itdelatrisu/opsu/states/MainMenu.java:755
+msgid "Resume"
+msgstr ""
+
+#: itdelatrisu/opsu/states/MainMenu.java:624
+msgid "Next track"
+msgstr ""
+
+#: itdelatrisu/opsu/states/MainMenu.java:626
+msgid "Previous track"
+msgstr ""
+
+#: itdelatrisu/opsu/states/MainMenu.java:630
+#, java-printf-format
+msgid ""
+"running %s %s\n"
+"created by %s"
+msgstr ""
+
+#: itdelatrisu/opsu/states/MainMenu.java:653
+msgid "A new update is available!"
+msgstr ""
+
+#: itdelatrisu/opsu/states/MainMenu.java:656
+msgid " is now up to date!"
+msgstr ""
+
+#: itdelatrisu/opsu/states/MainMenu.java:659
+msgid ""
+"\n"
+"Click to see what changed!"
+msgstr ""
+
+#: itdelatrisu/opsu/states/MainMenu.java:760
+#: itdelatrisu/opsu/states/MainMenu.java:900
+msgid ">> Next"
+msgstr ""
+
+#: itdelatrisu/opsu/states/MainMenu.java:764
+#: itdelatrisu/opsu/states/MainMenu.java:879
+msgid "<< Prev"
+msgstr ""
+
+#: itdelatrisu/opsu/states/MainMenu.java:895
+msgid "Unpause"
+msgstr ""
+
+#: itdelatrisu/opsu/states/MainMenu.java:1018
+msgid "Download some beatmaps to get started!"
+msgstr ""
+
+#: itdelatrisu/opsu/states/SongMenu.java:462
+msgid ""
+"Changes in Songs folder detected.\n"
+"Hit F5 to refresh."
+msgstr ""
+
+#: itdelatrisu/opsu/states/SongMenu.java:742
+msgid "Search:"
+msgstr ""
+
+#: itdelatrisu/opsu/states/SongMenu.java:752
+msgid "Searching..."
+msgstr ""
+
+#: itdelatrisu/opsu/states/SongMenu.java:914
+msgid "Sort by..."
+msgstr ""
+
+#: itdelatrisu/opsu/states/SongMenu.java:1576
+#, java-printf-format
+msgid "%d match%s found!"
+msgstr ""
+
+#: itdelatrisu/opsu/states/SongMenu.java:1592
+msgid "No matches found. Hit ESC to reset."
+msgstr ""
+
+#: itdelatrisu/opsu/states/SongMenu.java:1974
+msgid "Unable to load the beatmap audio."
+msgstr ""
+
+#: itdelatrisu/opsu/ui/BackButton.java:50
+msgid "back"
+msgstr ""
+
+#: itdelatrisu/opsu/ui/UI.java:283
+msgid "Unpacking new beatmaps..."
+msgstr ""
+
+#: itdelatrisu/opsu/ui/UI.java:287
+msgid "Updating database..."
+msgstr ""
+
+#: itdelatrisu/opsu/ui/UI.java:287
+msgid "Loading beatmaps..."
+msgstr ""
+
+#: itdelatrisu/opsu/ui/UI.java:290
+msgid "Unpacking new skins..."
+msgstr ""
+
+#: itdelatrisu/opsu/ui/UI.java:293
+msgid "Importing replays..."
+msgstr ""
+
+#: itdelatrisu/opsu/ui/UI.java:296
+msgid "Loading sounds..."
+msgstr ""
+
+#: itdelatrisu/opsu/ui/UI.java:299
+#, java-printf-format
+msgid "Welcome to %s"
+msgstr ""
+
+#: itdelatrisu/opsu/ui/UI.java:477
+msgid "Warning"
+msgstr ""
+
+#: itdelatrisu/opsu/user/UserSelectOverlay.java:294
+msgid "User Select"
+msgstr ""
+
+#: itdelatrisu/opsu/user/UserSelectOverlay.java:325
+#: itdelatrisu/opsu/user/UserSelectOverlay.java:714
+msgid "Add User"
+msgstr ""
+
+#: itdelatrisu/opsu/user/UserSelectOverlay.java:334
+msgid "Click the profile below to create it."
+msgstr ""
+
+#: itdelatrisu/opsu/user/UserSelectOverlay.java:341
+msgid "Name"
+msgstr ""
+
+#: itdelatrisu/opsu/user/UserSelectOverlay.java:347
+msgid "Type a name..."
+msgstr ""
+
+#: itdelatrisu/opsu/user/UserSelectOverlay.java:361
+msgid "Icon"
+msgstr ""
+
+#: itdelatrisu/opsu/user/UserSelectOverlay.java:369
+msgid "Edit User"
+msgstr ""
+
+#: itdelatrisu/opsu/user/UserSelectOverlay.java:386
+msgid "Change Icon"
+msgstr ""
+
+#: itdelatrisu/opsu/user/UserSelectOverlay.java:544
+msgid "You can't delete the current user!"
+msgstr ""
+
+#: itdelatrisu/opsu/user/UserSelectOverlay.java:546
+msgid "Confirm User Deletion"
+msgstr ""
+
+#: itdelatrisu/opsu/user/UserSelectOverlay.java:553
+#, java-printf-format
+msgid "User '%s' was deleted."
+msgstr ""
+
+#: itdelatrisu/opsu/user/UserSelectOverlay.java:555
+msgid "The user could not be deleted."
+msgstr ""
+
+#: itdelatrisu/opsu/user/UserSelectOverlay.java:677
+msgid "Enter a name for the user."
+msgstr ""
+
+#: itdelatrisu/opsu/user/UserSelectOverlay.java:677
+msgid "You can't use that name."
+msgstr ""
+
+#: itdelatrisu/opsu/user/UserSelectOverlay.java:682
+msgid "Something wrong happened."
+msgstr ""
+
+#: itdelatrisu/opsu/user/UserSelectOverlay.java:686
+msgid ""
+"New user created.\n"
+"Enjoy the game! :)"
+msgstr ""
+
+#: itdelatrisu/opsu/user/UserSelectOverlay.java:740
+msgid "Delete User"
+msgstr ""

@@ -26,6 +26,12 @@
 				</excludes>
 			</resource>
 			<resource>
+				<directory>res/i10n</directory>
+				<includes>
+					<include>*.po</include>
+				</includes>
+			</resource>
+			<resource>
 				<filtering>true</filtering>
 				<directory>res</directory>
 				<includes>
@@ -248,6 +254,11 @@
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-slf4j-impl</artifactId>
 			<version>2.23.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm.icu</groupId>
+			<artifactId>icu4j</artifactId>
+			<version>75.1</version>
 		</dependency>
 	</dependencies>
 </project>

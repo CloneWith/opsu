@@ -32,5 +32,8 @@
 .gradle
 build/
 
+# Translation files
+*.mo
+
 Thumbs.db
 /target
