@@ -26,6 +26,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import static clonewith.opsu.I18N.t;
+
 /**
  * Unpacker for OSZ (ZIP) archives.
  */
@@ -77,7 +79,7 @@ public class OszUnpacker {
 		files = null;
 
 		if (!dirs.isEmpty()) {
-			String text = String.format("Imported %d new beatmap pack%s.", dirs.size(), dirs.size() == 1 ? "" : "s");
+			String text = String.format(t("Imported %d new beatmap pack%s."), dirs.size(), dirs.size() == 1 ? "" : "s");
 			UI.getNotificationManager().sendNotification(text);
 		}
 

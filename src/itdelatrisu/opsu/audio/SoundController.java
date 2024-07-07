@@ -38,6 +38,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
+import static clonewith.opsu.I18N.t;
+
 /**
  * Controller for all (non-music) sound components.
  * Note: Uses Java Sound because OpenAL lags too much for accurate hit sounds.
@@ -262,10 +264,10 @@ public class SoundController {
 
 		// show a notification if any files failed to load
 		if (failedCount > 0) {
-			String text = String.format("Failed to load %d audio file%s.", failedCount, failedCount == 1 ? "" : "s");
+			String text = String.format(t("Failed to load %d audio file%s."), failedCount, failedCount == 1 ? "" : "s");
 			NotificationListener listener = null;
 			if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.OPEN)) {
-				text += "\nClick for details.";
+				text += t("\nClick for details.");
 				listener = () -> {
 					try {
 						Desktop.getDesktop().open(Options.LOG_FILE);
@@ -414,7 +416,7 @@ public class SoundController {
 
 				@Override
 				public void error() {
-					UI.getNotificationManager().sendBarNotification("Failed to download track preview.");
+					UI.getNotificationManager().sendBarNotification(t("Failed to download track preview."));
 				}
 			});
 			try {

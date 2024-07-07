@@ -73,6 +73,8 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.jar.JarFile;
 
+import static clonewith.opsu.I18N.t;
+
 /**
  * Contains miscellaneous utilities.
  */
@@ -169,12 +171,12 @@ public class Utils {
 		// warn about software mode
 		if (((Container) container).isSoftwareMode()) {
 			UI.getNotificationManager().sendNotification(
-				"""
+				t("""
 					WARNING:
 					Running in OpenGL software mode.
 					You may experience severely degraded performance.
 
-					This can usually be resolved by updating your graphics drivers.""",
+					This can usually be resolved by updating your graphics drivers."""),
 				Color.red
 			);
 		}
@@ -346,14 +348,14 @@ public class Utils {
 				}
 				ImageIO.write(image, Options.getScreenshotFormat(), file);
 				UI.getNotificationManager().sendNotification(
-					String.format("Saved screenshot to %s", file.getAbsolutePath()),
+					String.format(t("Saved screenshot to %s"), file.getAbsolutePath()),
 					Colors.PURPLE,
 					() -> {
 						try {
 							Utils.openInFileManager(file);
 						} catch (IOException e) {
 							UI.getNotificationManager()
-										.sendBarNotification("Failed to open screenshot location.");
+										.sendBarNotification(t("Failed to open screenshot location."));
 							Log.warn("Failed to open screenshot location.", e);
 						}
 					}
@@ -767,6 +769,6 @@ public class Utils {
 		Options.loadSkin();
 		SoundController.init();
 		Utils.gc(true);
-		UI.getNotificationManager().sendNotification("Skin changed.\nSome elements might not be replaced properly, for this please restart the game.", Color.orange);
+		UI.getNotificationManager().sendNotification(t("Skin changed.\nSome elements might not be replaced properly, for this please restart the game."), Color.orange);
 	}
 }

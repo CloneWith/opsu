@@ -35,6 +35,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import static clonewith.opsu.I18N.t;
+
 /**
  * Class encapsulating and drawing all score data.
  */
@@ -414,7 +416,7 @@ public class ScoreData implements Comparable<ScoreData> {
 	public String getTooltipString() {
 		if (tooltip == null)
 			tooltip = String.format(
-					"Achieved on %s\n300:%d 100:%d 50:%d Miss:%d\nAccuracy: %.2f%%\nMods: %s",
+					t("Achieved on %s\n300:%d 100:%d 50:%d Miss:%d\nAccuracy: %.2f%%\nMods: %s"),
 					getTimeString(), hit300, hit100, hit50, miss, getScorePercent(), GameMod.getModString(mods));
 		return tooltip;
 	}

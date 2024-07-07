@@ -55,6 +55,8 @@ import java.util.jar.Manifest;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static clonewith.opsu.I18N.t;
+
 /**
  * Handles all user options.
  */
@@ -725,9 +727,9 @@ public class Options {
 		 * @param description the option description
 		 */
 		GameOption(String name, String displayName, String description) {
-			this.name = name;
+			this.name = t(name);
 			this.displayName = displayName;
-			this.description = description;
+			this.description = t(description);
 		}
 
 		/**
@@ -1024,7 +1026,7 @@ public class Options {
 		if (index == targetFPS.length - 1)
 			index = 0;  // Skip "Unlimited" option
 		GameOption.TARGET_FPS.selectItem(index, container);
-		UI.getNotificationManager().sendBarNotification(String.format("Frame limiter: %s", GameOption.TARGET_FPS.getValueString()));
+		UI.getNotificationManager().sendBarNotification(String.format(t("Frame limiter: %s"), GameOption.TARGET_FPS.getValueString()));
 	}
 
 	/**
@@ -1407,7 +1409,7 @@ public class Options {
 	public static void toggleMouseDisabled() {
 		GameOption.DISABLE_MOUSE_BUTTONS.toggle(null);
 		UI.getNotificationManager().sendBarNotification((GameOption.DISABLE_MOUSE_BUTTONS.getBooleanValue()) ?
-			"Mouse buttons are disabled." : "Mouse buttons are enabled.");
+			t("Mouse buttons are disabled.") : t("Mouse buttons are enabled."));
 	}
 
 	/**
@@ -1727,9 +1729,9 @@ public class Options {
 			// header
 			SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE, MMMM dd, yyyy");
 			String date = dateFormat.format(new Date());
-			writer.write(String.format("# %s configuration", OpsuConstants.PROJECT_NAME));
+			writer.write(String.format(t("# %s configuration"), OpsuConstants.PROJECT_NAME));
 			writer.newLine();
-			writer.write("# last updated on ");
+			writer.write(t("# last updated on "));
 			writer.write(date);
 			writer.newLine();
 			writer.newLine();

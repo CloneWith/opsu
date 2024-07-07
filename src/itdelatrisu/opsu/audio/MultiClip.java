@@ -26,6 +26,8 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+import static clonewith.opsu.I18N.t;
+
 /**
  * Extension of Clip that allows playing multiple copies of a Clip simultaneously.
  * <a href="http://stackoverflow.com/questions/1854616/">...</a>
@@ -233,7 +235,7 @@ public class MultiClip {
 			try {
 				audioIn.close();
 			} catch (IOException e) {
-				ErrorHandler.error(String.format("Could not close AudioInputStream for MultiClip %s.", name), e, true);
+				ErrorHandler.error(String.format(t("Could not close AudioInputStream for MultiClip %s."), name), e, true);
 			}
 		}
 	}

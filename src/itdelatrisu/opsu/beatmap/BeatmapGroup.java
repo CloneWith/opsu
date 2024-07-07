@@ -28,15 +28,17 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.PriorityQueue;
 
+import static clonewith.opsu.I18N.t;
+
 /**
  * Beatmap groups.
  */
 public enum BeatmapGroup {
 	/** All beatmaps (no filter). */
-	ALL (0, "All Songs", null),
+	ALL (0, t("All Songs"), null),
 
 	/** Most recently played beatmaps. */
-	RECENT (1, "Last Played", "Your recently played beatmaps will appear in this list!") {
+	RECENT (1, t("Last Played"), t("Your recently played beatmaps will appear in this list!")) {
 		/** Number of elements to show. */
 		private static final int K = 20;
 

@@ -51,6 +51,8 @@ import java.nio.file.StandardWatchEventKinds;
 import java.util.Map;
 import java.util.Stack;
 
+import static clonewith.opsu.I18N.t;
+
 /**
  * "Song Selection" state.
  * <p>
@@ -457,7 +459,7 @@ public class SongMenu extends BasicGameState {
 			if (!songFolderChanged && kind != StandardWatchEventKinds.ENTRY_MODIFY) {
 				songFolderChanged = true;
 				if (game_.getCurrentStateID() == Opsu.STATE_SONGMENU)
-					UI.getNotificationManager().sendNotification("Changes in Songs folder detected.\nHit F5 to refresh.");
+					UI.getNotificationManager().sendNotification(t("Changes in Songs folder detected.\nHit F5 to refresh."));
 			}
 		});
 
@@ -737,9 +739,9 @@ public class SongMenu extends BasicGameState {
 		g.setColor(Colors.BLACK_ALPHA);
 		g.fillRect(searchBaseX, headerY + (float) DIVIDER_LINE_WIDTH / 2, width - searchBaseX, searchRectHeight);
 		Colors.BLACK_ALPHA.a = oldAlpha;
-		Fonts.BOLD.drawString(searchTextX, searchY, "Search:", Colors.GREEN_SEARCH);
+		Fonts.BOLD.drawString(searchTextX, searchY, t("Search:"), Colors.GREEN_SEARCH);
 		if (searchEmpty)
-			Fonts.BOLD.drawString(searchX, searchY, "Type to search!", Color.white);
+			Fonts.BOLD.drawString(searchX, searchY, t("Type to search!"), Color.white);
 		else {
 			g.setColor(Color.white);
 			// TODO: why is this needed to correctly position the TextField?
@@ -747,7 +749,7 @@ public class SongMenu extends BasicGameState {
 			search.render(container, g);
 			search.setLocation(searchX, searchY);
 			Fonts.DEFAULT.drawString(searchTextX, searchY + Fonts.BOLD.getLineHeight(),
-					(searchResultString == null) ? "Searching..." : searchResultString, Color.white);
+					(searchResultString == null) ? t("Searching...") : searchResultString, Color.white);
 		}
 
 		// sorting options
@@ -909,7 +911,7 @@ public class SongMenu extends BasicGameState {
 
 		// tooltips
 		if (sortMenu.baseContains(mouseX, mouseY))
-			UI.updateTooltip(delta, "Sort by...", false);
+			UI.updateTooltip(delta, t("Sort by..."), false);
 		else if (focusScores != null && ScoreData.areaContains(mouseX, mouseY) && !showOptionsOverlay && !showUserOverlay) {
 			int startScore = (int) (startScorePos.getPosition() / ScoreData.getButtonOffset());
 			int offset = (int) (-startScorePos.getPosition() + startScore * ScoreData.getButtonOffset());
@@ -1571,7 +1573,7 @@ public class SongMenu extends BasicGameState {
 			int size = BeatmapSetList.get().size();
 			if (size > 0) {
 				BeatmapSetList.get().init();
-				String results = String.format("%d match%s found!", size, (size == 1) ? "" : "es");
+				String results = String.format(t("%d match%s found!"), size, (size == 1) ? "" : "es");
 				if (search.getText().isEmpty()) {  // cleared search
 					// use previous start/focus if possible
 					if (oldFocusNode != null) {
@@ -1587,7 +1589,7 @@ public class SongMenu extends BasicGameState {
 				oldFocusNode = null;
 				lastSearchResultString = results;
 			} else if (!search.getText().isEmpty())
-				searchResultString = lastSearchResultString = "No matches found. Hit ESC to reset.";
+				searchResultString = lastSearchResultString = t("No matches found. Hit ESC to reset.");
 		} else
 			searchResultString = lastSearchResultString;
 	}
@@ -1969,7 +1971,7 @@ public class SongMenu extends BasicGameState {
 
 		Beatmap beatmap = MusicController.getBeatmap();
 		if (focusNode == null || beatmap != focusNode.getSelectedBeatmap()) {
-			UI.getNotificationManager().sendBarNotification("Unable to load the beatmap audio.");
+			UI.getNotificationManager().sendBarNotification(t("Unable to load the beatmap audio."));
 			return;
 		}
 

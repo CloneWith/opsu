@@ -28,6 +28,8 @@ import org.newdawn.slick.Input;
 import java.util.Arrays;
 import java.util.Collections;
 
+import static clonewith.opsu.I18N.t;
+
 /**
  * Game mods.
  */
@@ -90,7 +92,7 @@ public enum GameMod {
 		 */
 		Category(int index, String name, Color color) {
 			this.index = index;
-			this.name = name;
+			this.name = t(name);
 			this.color = color;
 		}
 
@@ -320,7 +322,7 @@ public enum GameMod {
 		this.key = key;
 		this.multiplier = multiplier;
 		this.name = name;
-		this.description = description;
+		this.description = t(description);
 	}
 
 	/**

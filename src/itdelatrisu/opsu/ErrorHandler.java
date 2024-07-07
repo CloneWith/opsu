@@ -35,21 +35,28 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
+import static clonewith.opsu.I18N.t;
+
 /**
  * Error handler to log and display errors.
  */
 public class ErrorHandler {
 	/** Error popup title. */
-	private static final String title = "Error";
+	private static final String title = t("Error");
 
 	/** Error popup description text. */
-	private static final String desc = "An error occurred. :(",
-			descReport = "Something bad happened. Please report this!";
+	private static final String desc = t("An error occurred. :("),
+			descReport = t("Something bad happened. Please report this!");
+
+	/** Error popup buttons' strings. */
+	private static final String buttonClose = t("Close");
+	private static final String buttonViewLog = t("View Error Log");
+	private static final String buttonReport = t("Send Report");
 
 	/** Error popup button options. */
-	private static final String[] optionsLog = { "View Error Log", "Close" },
-			optionsReport = { "Send Report", "Close" },
-			optionsLogReport = { "Send Report", "View Error Log", "Close" };
+	private static final String[] optionsLog = { buttonViewLog, buttonClose },
+			optionsReport = { buttonReport, buttonClose },
+			optionsLogReport = { buttonReport, buttonViewLog, buttonClose };
 
 	/** Text area for Exception. */
 	private static final JTextArea textArea = new JTextArea(7, 30);
@@ -101,10 +108,10 @@ public class ErrorHandler {
 			Log.error(e);
 		else if (e == null) {
 			Log.error(des);
-			UI.getNotificationManager().sendBarNotification(des);
+			UI.getNotificationManager().sendBarNotification(t(des));
 		} else {
 			Log.error(des, e);
-			UI.getNotificationManager().sendBarNotification(des);
+			UI.getNotificationManager().sendBarNotification(t(des));
 		}
 	}
 
@@ -122,10 +129,10 @@ public class ErrorHandler {
 			Log.error(e);
 		else if (e == null) {
 			Log.error(des);
-			UI.getNotificationManager().sendNotification(des, Color.red);
+			UI.getNotificationManager().sendNotification(t(des), Color.red);
 		} else {
 			Log.error(des, e);
-			UI.getNotificationManager().sendNotification(des, Color.red);
+			UI.getNotificationManager().sendNotification(t(des), Color.red);
 		}
 	}
 
@@ -151,7 +158,7 @@ public class ErrorHandler {
 		// set the textArea to the error message
 		textArea.setText(null);
 		if (error != null) {
-			textArea.append(error);
+			textArea.append(t(error));
 			textArea.append("\n");
 		}
 		String trace = null;

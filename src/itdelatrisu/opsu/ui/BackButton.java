@@ -24,6 +24,8 @@ import itdelatrisu.opsu.options.Options;
 import itdelatrisu.opsu.ui.animations.AnimationEquation;
 import org.newdawn.slick.*;
 
+import static clonewith.opsu.I18N.t;
+
 /**
  * Back button.
  *
@@ -45,7 +47,7 @@ public class BackButton {
 	private static final int ANIMATION_TIME = 500;
 
 	/** Button text. */
-	private static final String BUTTON_TEXT = "back";
+	private static final String BUTTON_TEXT = t("back");
 
 	/** How much time passed for the animations. */
 	private int animationTime;

@@ -46,6 +46,8 @@ import java.lang.reflect.Field;
 import java.nio.IntBuffer;
 import java.util.Map;
 
+import static clonewith.opsu.I18N.t;
+
 /**
  * Controller for all music.
  */
@@ -98,7 +100,7 @@ public class MusicController {
 		if (lastBeatmap == null || !beatmap.audioFilename.equals(lastBeatmap.audioFilename)) {
 			final File audioFile = beatmap.audioFilename;
 			if (!audioFile.isFile() && !ResourceLoader.resourceExists(audioFile.getPath())) {
-				UI.getNotificationManager().sendBarNotification(String.format("Could not find track '%s'.", audioFile.getName()));
+				UI.getNotificationManager().sendBarNotification(String.format(t("Could not find track '%s'."), audioFile.getName()));
 				return;
 			}
 
@@ -139,10 +141,10 @@ public class MusicController {
 				player = null;
 				trackEnded = false;
 				UI.getNotificationManager().sendNotification(
-					"""
+					t("""
 						Looks like sound isn't working right now. Sorry!
 
-						Restarting the game will probably fix this.""",
+						Restarting the game will probably fix this."""),
 					Color.red
 				);
 				return;

@@ -25,6 +25,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import static clonewith.opsu.I18N.t;
+
 /**
  * Unpacker for OSK (ZIP) archives.
  */
@@ -71,7 +73,7 @@ public class SkinUnpacker {
 		files = null;
 
 		if (!dirs.isEmpty()) {
-			String text = String.format("Imported %d new skin%s.", dirs.size(), dirs.size() == 1 ? "" : "s");
+			String text = String.format(t("Imported %d new skin%s."), dirs.size(), dirs.size() == 1 ? "" : "s");
 			UI.getNotificationManager().sendNotification(text);
 		}
 

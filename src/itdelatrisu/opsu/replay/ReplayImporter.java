@@ -31,6 +31,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 
+import static clonewith.opsu.I18N.t;
+
 /**
  * Importer for replay files.
  */
@@ -104,7 +106,7 @@ public class ReplayImporter {
 		files = null;
 
 		if (importCount > 0) {
-			String text = String.format("Imported %d replay%s.", importCount, importCount == 1 ? "" : "s");
+			String text = String.format(t("Imported %d replay%s."), importCount, importCount == 1 ? "" : "s");
 			UI.getNotificationManager().sendNotification(text);
 		}
 	}

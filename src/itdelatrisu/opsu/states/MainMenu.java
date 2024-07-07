@@ -57,6 +57,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Stack;
 
+import static clonewith.opsu.I18N.t;
+
 /**
  * "Main Menu" state.
  * <p>
@@ -459,19 +461,19 @@ public class MainMenu extends BasicGameState {
 		Colors.WHITE_FADE.a = textAlpha;
 		float marginX = UserButton.getWidth() + 8, topMarginY = 4;
 		Fonts.MEDIUM.drawString(marginX, topMarginY,
-			String.format("You have %d beatmaps available!", BeatmapSetList.get().getMapCount()),
+			String.format(t("You have %d beatmaps available!"), BeatmapSetList.get().getMapCount()),
 			Colors.WHITE_FADE
 		);
 		float lineHeight = Fonts.MEDIUM.getLineHeight() * 0.925f;
 		Fonts.MEDIUM.drawString(marginX, topMarginY + lineHeight,
-			String.format("%s has been running for %s.",
+			String.format(t("%s has been running for %s."),
 				OpsuConstants.PROJECT_NAME,
 				Utils.getTimeString((int) (System.currentTimeMillis() - programStartTime) / 1000)),
 			Colors.WHITE_FADE
 		);
 		lineHeight += Fonts.MEDIUM.getLineHeight() * 0.925f;
 		Fonts.MEDIUM.drawString(marginX, topMarginY + lineHeight,
-			String.format("It is currently %s.",
+			String.format(t("It is currently %s."),
 				new SimpleDateFormat("h:mm a").format(new Date())),
 			Colors.WHITE_FADE
 		);
@@ -613,21 +615,21 @@ public class MainMenu extends BasicGameState {
 
 		// tooltips
 		if (musicPositionBarContains(mouseX, mouseY))
-			UI.updateTooltip(delta, "Click to seek to a specific point in the song.", false);
+			UI.updateTooltip(delta, t("Click to seek to a specific point in the song."), false);
 		else if (musicReplay.contains(mouseX, mouseY))
-			UI.updateTooltip(delta, "Play", false);
+			UI.updateTooltip(delta, t("Play"), false);
 		else if (musicPlay.contains(mouseX, mouseY))
-			UI.updateTooltip(delta, (MusicController.isPlaying()) ? "Pause" : "Resume", false);
+			UI.updateTooltip(delta, (MusicController.isPlaying()) ? t("Pause") : t("Resume"), false);
 		else if (musicNext.contains(mouseX, mouseY))
-			UI.updateTooltip(delta, "Next track", false);
+			UI.updateTooltip(delta, t("Next track"), false);
 		else if (musicPrevious.contains(mouseX, mouseY))
-			UI.updateTooltip(delta, "Previous track", false);
+			UI.updateTooltip(delta, t("Previous track"), false);
 		else if (repoButton != null && repoButton.contains(mouseX, mouseY)) {
 			String version = Updater.get().getCurrentVersion();
 			String tooltip = String.format(
-				"running %s %s\ncreated by %s",
+				t("running %s %s\ncreated by %s"),
 				OpsuConstants.PROJECT_NAME,
-				(version == null) ? "(unknown version)" : "v" + version,
+				(version == null) ? t("(unknown version)") : "v" + version,
 				OpsuConstants.PROJECT_AUTHOR
 			);
 			UI.updateTooltip(delta, tooltip, true);
@@ -648,18 +650,18 @@ public class MainMenu extends BasicGameState {
 		UI.enter();
 		if (!enterNotification) {
 			if (Updater.get().getStatus() == Updater.Status.UPDATE_AVAILABLE) {
-				UI.getNotificationManager().sendNotification("A new update is available!", Colors.GREEN);
+				UI.getNotificationManager().sendNotification(t("A new update is available!"), Colors.GREEN);
 				enterNotification = true;
 			} else if (Updater.get().justUpdated()) {
-				String updateMessage = OpsuConstants.PROJECT_NAME + " is now up to date!";
+				String updateMessage = OpsuConstants.PROJECT_NAME + t(" is now up to date!");
 				final String version = Updater.get().getCurrentVersion();
 				if (version != null && Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
-					updateMessage += "\nClick to see what changed!";
+					updateMessage += t("\nClick to see what changed!");
 					UI.getNotificationManager().sendNotification(updateMessage, Colors.GREEN, () -> {
 						try {
 							Desktop.getDesktop().browse(OpsuConstants.getChangelogURI(version));
 						} catch (IOException e) {
-							UI.getNotificationManager().sendBarNotification("The web page could not be opened.");
+							UI.getNotificationManager().sendBarNotification(t("The web page could not be opened."));
 						}
 					});
 				} else
@@ -747,24 +749,24 @@ public class MainMenu extends BasicGameState {
 		if (musicPlay.contains(x, y)) {
 			if (MusicController.isPlaying()) {
 				MusicController.pause();
-				UI.getNotificationManager().sendBarNotification("Pause");
+				UI.getNotificationManager().sendBarNotification(t("Pause"));
 			} else if (!MusicController.isTrackLoading()) {
 				MusicController.resume();
-				UI.getNotificationManager().sendBarNotification("Resume");
+				UI.getNotificationManager().sendBarNotification(t("Resume"));
 			}
 			return;
 		} else if (musicNext.contains(x, y)) {
 			nextTrack(true);
-			UI.getNotificationManager().sendBarNotification(">> Next");
+			UI.getNotificationManager().sendBarNotification(t(">> Next"));
 			return;
 		} else if (musicPrevious.contains(x, y)) {
 			previousTrack();
-			UI.getNotificationManager().sendBarNotification("<< Prev");
+			UI.getNotificationManager().sendBarNotification(t("<< Prev"));
 			return;
 		} else if (musicReplay.contains(x, y)) {
 			MusicController.playAt(0, false);
 			musicInfoProgress.setTime(0);
-			UI.getNotificationManager().sendBarNotification("Play");
+			UI.getNotificationManager().sendBarNotification(t("Play"));
 		}
 
 		// downloads button actions
@@ -874,7 +876,7 @@ public class MainMenu extends BasicGameState {
 			break;
 		case Input.KEY_Z:
 			previousTrack();
-			UI.getNotificationManager().sendBarNotification("<< Prev");
+			UI.getNotificationManager().sendBarNotification(t("<< Prev"));
 			break;
 		case Input.KEY_X:
 			if (MusicController.isPlaying()) {
@@ -882,20 +884,20 @@ public class MainMenu extends BasicGameState {
 				MusicController.setPosition(0);
 			} else if (!MusicController.isTrackLoading())
 				MusicController.resume();
-			UI.getNotificationManager().sendBarNotification("Play");
+			UI.getNotificationManager().sendBarNotification(t("Play"));
 			break;
 		case Input.KEY_C:
 			if (MusicController.isPlaying()) {
 				MusicController.pause();
-				UI.getNotificationManager().sendBarNotification("Pause");
+				UI.getNotificationManager().sendBarNotification(t("Pause"));
 			} else if (!MusicController.isTrackLoading()) {
 				MusicController.resume();
-				UI.getNotificationManager().sendBarNotification("Unpause");
+				UI.getNotificationManager().sendBarNotification(t("Unpause"));
 			}
 			break;
 		case Input.KEY_V:
 			nextTrack(true);
-			UI.getNotificationManager().sendBarNotification(">> Next");
+			UI.getNotificationManager().sendBarNotification(t(">> Next"));
 			break;
 		case Input.KEY_R:
 			nextTrack(true);
@@ -1013,7 +1015,7 @@ public class MainMenu extends BasicGameState {
 	private void enterSongMenu() {
 		int state = Opsu.STATE_SONGMENU;
 		if (BeatmapSetList.get().getMapSetCount() == 0) {
-			((DownloadsMenu) game.getState(Opsu.STATE_DOWNLOADSMENU)).notifyOnLoad("Download some beatmaps to get started!");
+			((DownloadsMenu) game.getState(Opsu.STATE_DOWNLOADSMENU)).notifyOnLoad(t("Download some beatmaps to get started!"));
 			state = Opsu.STATE_DOWNLOADSMENU;
 		}
 		game.enterState(state, new EasedFadeOutTransition(), new FadeInTransition());

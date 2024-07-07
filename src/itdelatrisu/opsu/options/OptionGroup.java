@@ -22,29 +22,31 @@ import itdelatrisu.opsu.GameImage;
 import itdelatrisu.opsu.options.Options.GameOption;
 import org.newdawn.slick.Image;
 
+import static clonewith.opsu.I18N.t;
+
 /**
  * Option category and related options.
  */
 public class OptionGroup {
 	/** All option groups. */
 	public static final OptionGroup[] ALL_OPTIONS = new OptionGroup[] {
-		new OptionGroup("General", GameImage.MENU_NAV_GENERAL),
-		new OptionGroup("LANGUAGE", new GameOption[] {
+		new OptionGroup(t("General"), GameImage.MENU_NAV_GENERAL),
+		new OptionGroup(t("LANGUAGE"), new GameOption[] {
 			GameOption.SHOW_UNICODE,
 		}),
-		new OptionGroup("UPDATES", new GameOption[] {
+		new OptionGroup(t("UPDATES"), new GameOption[] {
 			GameOption.DISABLE_UPDATER,
 		}),
-		new OptionGroup("Graphics", GameImage.MENU_NAV_GRAPHICS),
-		new OptionGroup("LAYOUT", new GameOption[] {
+		new OptionGroup(t("Graphics"), GameImage.MENU_NAV_GRAPHICS),
+		new OptionGroup(t("LAYOUT"), new GameOption[] {
 			GameOption.SCREEN_RESOLUTION,
 			GameOption.FULLSCREEN,
 		}),
-		new OptionGroup("RENDERER", new GameOption[] {
+		new OptionGroup(t("RENDERER"), new GameOption[] {
 			GameOption.TARGET_FPS,
 			GameOption.SHOW_FPS,
 		}),
-		new OptionGroup("DETAIL SETTINGS", new GameOption[] {
+		new OptionGroup(t("DETAIL SETTINGS"), new GameOption[] {
 			GameOption.SNAKING_SLIDERS,
 			GameOption.ENABLE_VIDEOS,
 			GameOption.SHOW_COMBO_BURSTS,
@@ -53,31 +55,31 @@ public class OptionGroup {
 			GameOption.SHOW_FOLLOW_POINTS,
 			GameOption.SCREENSHOT_FORMAT,
 		}),
-		new OptionGroup("EXPERIMENTAL SLIDERS", new GameOption[] {
+		new OptionGroup(t("EXPERIMENTAL SLIDERS"), new GameOption[] {
 			GameOption.EXPERIMENTAL_SLIDERS,
 			GameOption.EXPERIMENTAL_SLIDERS_MERGE,
 			GameOption.EXPERIMENTAL_SLIDERS_SHRINK,
 			GameOption.EXPERIMENTAL_SLIDERS_CAPS,
 		}),
-		new OptionGroup("MAIN MENU", new GameOption[] {
+		new OptionGroup(t("MAIN MENU"), new GameOption[] {
 			GameOption.DYNAMIC_BACKGROUND,
 			GameOption.PARALLAX,
 			GameOption.ENABLE_THEME_SONG,
 		}),
-		new OptionGroup("Gameplay", GameImage.MENU_NAV_GAMEPLAY),
+		new OptionGroup(t("Gameplay"), GameImage.MENU_NAV_GAMEPLAY),
 		new OptionGroup("GENERAL", new GameOption[] {
 			GameOption.BACKGROUND_DIM,
 			GameOption.FORCE_DEFAULT_PLAYFIELD,
 			GameOption.SHOW_HIT_ERROR_BAR,
 			GameOption.ALWAYS_SHOW_KEY_OVERLAY,
 		}),
-		new OptionGroup("MODS", new GameOption[] {
+		new OptionGroup(t("MODS"), new GameOption[] {
 			GameOption.KEEP_AUTO,
 			GameOption.PAUSE_IN_REPLAY,
 			GameOption.REAL_AUTO,
 		}),
-		new OptionGroup("Audio", GameImage.MENU_NAV_AUDIO),
-		new OptionGroup("VOLUME", new GameOption[] {
+		new OptionGroup(t("Audio"), GameImage.MENU_NAV_AUDIO),
+		new OptionGroup(t("VOLUME"), new GameOption[] {
 			GameOption.MASTER_VOLUME,
 			GameOption.MUSIC_VOLUME,
 			GameOption.EFFECT_VOLUME,
@@ -86,11 +88,11 @@ public class OptionGroup {
 			GameOption.DISABLE_SOUNDS,
 			GameOption.HEARTBEAT,
 		}),
-		new OptionGroup("OFFSET ADJUSTMENT", new GameOption[] {
+		new OptionGroup(t("OFFSET ADJUSTMENT"), new GameOption[] {
 			GameOption.MUSIC_OFFSET,
 		}),
-		new OptionGroup("Skin", GameImage.MENU_NAV_SKIN),
-		new OptionGroup("SKIN", new GameOption[]{
+		new OptionGroup(t("Skin"), GameImage.MENU_NAV_SKIN),
+		new OptionGroup(t("SKIN"), new GameOption[]{
 			GameOption.SKIN,
 			GameOption.LOAD_HD_IMAGES,
 			GameOption.IGNORE_BEATMAP_SKINS,
@@ -99,34 +101,34 @@ public class OptionGroup {
 			GameOption.WARNINGARROW_TINT_WHITE,
 			GameOption.BUILTIN_BACK_BUTTON,
 		}),
-		new OptionGroup("Input", GameImage.MENU_NAV_INPUT),
-		new OptionGroup("MOUSE", new GameOption[] {
+		new OptionGroup(t("Input"), GameImage.MENU_NAV_INPUT),
+		new OptionGroup(t("MOUSE"), new GameOption[] {
 			GameOption.DISABLE_MOUSE_WHEEL,
 			GameOption.DISABLE_MOUSE_BUTTONS,
 		}),
-		new OptionGroup("KEYBOARD", new GameOption[] {
+		new OptionGroup(t("KEYBOARD"), new GameOption[] {
 			GameOption.KEY_LEFT,
 			GameOption.KEY_RIGHT,
 		}),
-		new OptionGroup("Custom", GameImage.MENU_NAV_CUSTOM),
-		new OptionGroup("DIFFICULTY", new GameOption[] {
+		new OptionGroup(t("Custom"), GameImage.MENU_NAV_CUSTOM),
+		new OptionGroup(t("DIFFICULTY"), new GameOption[] {
 			GameOption.FIXED_CS,
 			GameOption.FIXED_HP,
 			GameOption.FIXED_AR,
 			GameOption.FIXED_OD,
 			GameOption.FIXED_SPEED,
 		}),
-		new OptionGroup("COLOR", new GameOption[] {
+		new OptionGroup(t("COLOR"), new GameOption[] {
 			GameOption.UICOLOR_CUSTOM,
 			GameOption.UICOLOR_R,
 			GameOption.UICOLOR_G,
 			GameOption.UICOLOR_B,
 		}),
-		new OptionGroup("SEEKING", new GameOption[] {
+		new OptionGroup(t("SEEKING"), new GameOption[] {
 			GameOption.CHECKPOINT,
 			GameOption.REPLAY_SEEKING,
 		}),
-		new OptionGroup("MISCELLANEOUS", new GameOption[] {
+		new OptionGroup(t("MISCELLANEOUS"), new GameOption[] {
 			GameOption.ENABLE_WATCH_SERVICE,
 			GameOption.LOAD_VERBOSE,
 		}),

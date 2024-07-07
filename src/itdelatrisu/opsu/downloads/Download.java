@@ -37,6 +37,8 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.Map;
 
+import static clonewith.opsu.I18N.t;
+
 /**
  * File download.
  */
@@ -55,11 +57,11 @@ public class Download {
 
 	/** Download statuses. */
 	public enum Status {
-		WAITING ("Waiting"),
-		DOWNLOADING ("Downloading"),
-		COMPLETE ("Complete"),
-		CANCELLED ("Cancelled"),
-		ERROR ("Error");
+		WAITING (t("Waiting")),
+		DOWNLOADING (t("Downloading")),
+		COMPLETE (t("Complete")),
+		CANCELLED (t("Cancelled")),
+		ERROR (t("Error"));
 
 		/** The status name. */
 		private final String name;

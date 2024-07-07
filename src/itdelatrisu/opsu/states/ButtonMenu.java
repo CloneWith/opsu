@@ -44,12 +44,17 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
+import static clonewith.opsu.I18N.t;
+
 /**
  * Generic button menu state.
  * <p>
  * Displays a header and a set of defined options to the player.
  */
 public class ButtonMenu extends BasicGameState {
+
+	private static final String unableLoadWeb = t("The web page could not be opened.");
+
 	/** Menu states. */
 	public enum MenuState {
 		/** The exit confirmation screen. */
@@ -57,7 +62,7 @@ public class ButtonMenu extends BasicGameState {
 			@Override
 			public String[] getTitle(GameContainer container, StateBasedGame game) {
 				return new String[] {
-						String.format("Are you sure you want to exit %s?", OpsuConstants.PROJECT_NAME)
+						String.format(t("Are you sure you want to exit %s?"), OpsuConstants.PROJECT_NAME)
 				};
 			}
 
@@ -72,7 +77,7 @@ public class ButtonMenu extends BasicGameState {
 			public String[] getTitle(GameContainer container, StateBasedGame game) {
 				BeatmapSetNode node = ((ButtonMenu) game.getState(Opsu.STATE_BUTTONMENU)).getNode();
 				String beatmapString = (node != null) ? BeatmapSetList.get().getBaseNode(node.index).toString() : "";
-				return new String[] { beatmapString, "What do you want to do with this beatmap?" };
+				return new String[] { beatmapString, t("What do you want to do with this beatmap?") };
 			}
 
 			@Override
@@ -98,7 +103,7 @@ public class ButtonMenu extends BasicGameState {
 			public String[] getTitle(GameContainer container, StateBasedGame game) {
 				BeatmapSetNode node = ((ButtonMenu) game.getState(Opsu.STATE_BUTTONMENU)).getNode();
 				String beatmapString = (node != null) ? node.toString() : "";
-				return new String[] { String.format("Are you sure you wish to delete '%s' from disk?", beatmapString) };
+				return new String[] { String.format(t("Are you sure you wish to delete '%s' from disk?"), beatmapString) };
 			}
 
 			@Override
@@ -123,9 +128,9 @@ public class ButtonMenu extends BasicGameState {
 			@Override
 			public String[] getTitle(GameContainer container, StateBasedGame game) {
 				return new String[] {
-						"You have requested a full process of your beatmaps.",
-						"This could take a few minutes.",
-						"Are you sure you wish to continue?"
+						t("You have requested a full process of your beatmaps."),
+						t("This could take a few minutes."),
+						t("Are you sure you wish to continue?")
 				};
 			}
 
@@ -138,7 +143,7 @@ public class ButtonMenu extends BasicGameState {
 		SCORE(new Button[] { Button.DELETE_SCORE, Button.CLOSE }) {
 			@Override
 			public String[] getTitle(GameContainer container, StateBasedGame game) {
-				return new String[] { "Score Management" };
+				return new String[] { t("Score Management") };
 			}
 
 			@Override
@@ -151,7 +156,7 @@ public class ButtonMenu extends BasicGameState {
 			@Override
 			public String[] getTitle(GameContainer container, StateBasedGame game) {
 				return new String[] {
-						"Mods provide different ways to enjoy gameplay. Some have an effect on the score you can achieve during ranked play. Others are just for fun."
+						t("Mods provide different ways to enjoy gameplay. Some have an effect on the score you can achieve during ranked play. Others are just for fun.")
 				};
 			}
 
@@ -179,7 +184,7 @@ public class ButtonMenu extends BasicGameState {
 
 				// score multiplier (TODO: fade in color changes)
 				float mult = GameMod.getScoreMultiplier();
-				String multString = String.format("Score Multiplier: %.2fx", mult);
+				String multString = String.format(t("Score Multiplier: %.2fx"), mult);
 				Color multColor = (mult == 1f) ? Color.white : (mult > 1f) ? Color.green : Color.red;
 				float multY = Fonts.LARGE.getLineHeight() * 2 + height * 0.06f;
 				Fonts.LARGE.drawString(
@@ -248,11 +253,12 @@ public class ButtonMenu extends BasicGameState {
 				String version = Updater.get().getCurrentVersion();
 				return new String[] {
 						String.format(
-								"%s %s by %s",
+							// TRANSLATORS: This is like "opsu! v1.0.0 by @itdelatrisu".
+								t("%s %s by %s"),
 								OpsuConstants.PROJECT_NAME,
-								(version == null) ? "(unknown version)" : "v" + version,
+								(version == null) ? t("(unknown version)") : "v" + version,
 								OpsuConstants.PROJECT_AUTHOR),
-						"Click an option below to learn more!"
+						t("Click an option below to learn more!")
 				};
 			}
 
@@ -602,7 +608,7 @@ public class ButtonMenu extends BasicGameState {
 				try {
 					Desktop.getDesktop().browse(OpsuConstants.WEBSITE_URI);
 				} catch (Exception e) {
-					UI.getNotificationManager().sendNotification("The web page could not be opened.", Color.red);
+					UI.getNotificationManager().sendNotification(unableLoadWeb, Color.red);
 				}
 				game.enterState(Opsu.STATE_MAINMENU, new EmptyTransition(), new FadeInTransition());
 			}
@@ -614,7 +620,7 @@ public class ButtonMenu extends BasicGameState {
 				try {
 					Desktop.getDesktop().browse(OpsuConstants.REPOSITORY_URI);
 				} catch (Exception e) {
-					UI.getNotificationManager().sendNotification("The web page could not be opened.", Color.red);
+					UI.getNotificationManager().sendNotification(unableLoadWeb, Color.red);
 				}
 				game.enterState(Opsu.STATE_MAINMENU, new EmptyTransition(), new FadeInTransition());
 			}
@@ -623,14 +629,14 @@ public class ButtonMenu extends BasicGameState {
 			@Override
 			public void click(GameContainer container, StateBasedGame game) {
 				SoundController.playSound(SoundEffect.MENUHIT);
-				String sb = "[Type your description here. Feel free to delete the info below if it's not relevant.]\n\n" +
+				String sb = t("[Type your description here. Feel free to delete the info below if it's not relevant.]\n\n") +
 					"---\n" +
 					ErrorHandler.getEnvironmentInfoForIssue();
 				URI uri = ErrorHandler.getIssueURI("", sb);
 				try {
 					Desktop.getDesktop().browse(uri);
 				} catch (Exception e) {
-					UI.getNotificationManager().sendNotification("The web page could not be opened.", Color.red);
+					UI.getNotificationManager().sendNotification(unableLoadWeb, Color.red);
 				}
 				game.enterState(Opsu.STATE_MAINMENU, new EmptyTransition(), new FadeInTransition());
 			}
@@ -640,7 +646,7 @@ public class ButtonMenu extends BasicGameState {
 			public void click(GameContainer container, StateBasedGame game) {
 				SoundController.playSound(SoundEffect.MENUHIT);
 				Utils.copyToClipboard(ErrorHandler.getEnvironmentInfoForIssue());
-				UI.getNotificationManager().sendNotification("Debug info copied to clipboard.");
+				UI.getNotificationManager().sendNotification(t("Debug info copied to clipboard."));
 				game.enterState(Opsu.STATE_MAINMENU, new EmptyTransition(), new FadeInTransition());
 			}
 		},
@@ -651,7 +657,7 @@ public class ButtonMenu extends BasicGameState {
 				try {
 					Desktop.getDesktop().browse(OpsuConstants.CREDITS_URI);
 				} catch (Exception e) {
-					UI.getNotificationManager().sendNotification("The web page could not be opened.", Color.red);
+					UI.getNotificationManager().sendNotification(unableLoadWeb, Color.red);
 				}
 				game.enterState(Opsu.STATE_MAINMENU, new EmptyTransition(), new FadeInTransition());
 			}
@@ -676,7 +682,7 @@ public class ButtonMenu extends BasicGameState {
 		 * @param color the button color
 		 */
 		Button(String text, Color color) {
-			this.text = text;
+			this.text = t(text);
 			this.color = color;
 		}
 

@@ -35,6 +35,8 @@ import org.newdawn.slick.Image;
 
 import java.io.File;
 
+import static clonewith.opsu.I18N.t;
+
 /**
  * Node containing song data and a Download object.
  */
@@ -275,12 +277,12 @@ public class DownloadNode {
 		download.setListener(new DownloadListener() {
 			@Override
 			public void completed() {
-				UI.getNotificationManager().sendNotification(String.format("Download complete: %s", getTitle()), Colors.GREEN);
+				UI.getNotificationManager().sendNotification(String.format(t("Download complete: %s"), getTitle()), Colors.GREEN);
 			}
 
 			@Override
 			public void error() {
-				UI.getNotificationManager().sendNotification("Download failed due to a connection error.", Color.red);
+				UI.getNotificationManager().sendNotification(t("Download failed due to a connection error."), Color.red);
 			}
 		});
 		download.setRequestHeaders(server.getDownloadRequestHeaders());

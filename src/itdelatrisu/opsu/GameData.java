@@ -45,6 +45,8 @@ import java.io.File;
 import java.util.*;
 import java.util.concurrent.LinkedBlockingDeque;
 
+import static clonewith.opsu.I18N.t;
+
 /**
  * Holds game data and renders all related elements.
  */
@@ -969,10 +971,10 @@ public class GameData {
 		Fonts.LARGE.drawString(marginX, marginY,
 			String.format("%s - %s [%s]", beatmap.getArtist(), beatmap.getTitle(), beatmap.version), Color.white);
 		Fonts.MEDIUM.drawString(marginX, marginY + Fonts.LARGE.getLineHeight() - 3,
-			String.format("Beatmap by %s", beatmap.creator), Color.white);
-		String player = (scoreData.playerName == null) ? "" : String.format(" by %s", scoreData.playerName);
+			String.format(t("Beatmap by %s"), beatmap.creator), Color.white);
+		String player = (scoreData.playerName == null) ? "" : String.format(t(" by %s"), scoreData.playerName);
 		Fonts.MEDIUM.drawString(marginX, marginY + Fonts.LARGE.getLineHeight() + Fonts.MEDIUM.getLineHeight() - 5,
-			String.format("Played%s on %s.", player, scoreData.getTimeString()), Color.white);
+			String.format(t("Played%s on %s."), player, scoreData.getTimeString()), Color.white);
 
 		// mod icons
 		if (scoreData.mods != 0) {
@@ -1810,7 +1812,7 @@ public class GameData {
 		float hitErrorLate = (lateCount > 0) ? (float) lateSum / lateCount : 0f;
 		float unstableRate = (!errors.isEmpty()) ? (float) (Utils.standardDeviation(errors) * 10) : 0f;
 		return String.format(
-			"Accuracy:\nError: %.2fms - %.2fms avg\nUnstable Rate: %.2f",
+			t("Accuracy:\nError: %.2fms - %.2fms avg\nUnstable Rate: %.2f"),
 			hitErrorEarly, hitErrorLate, unstableRate
 		);
 	}
