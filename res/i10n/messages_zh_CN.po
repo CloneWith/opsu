@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: opsu!\n"
-"POT-Creation-Date: 2024-07-07 09:57+0800\n"
-"PO-Revision-Date: 2024-07-08 13:37+0800\n"
+"POT-Creation-Date: 2024-07-08 19:02+0800\n"
+"PO-Revision-Date: 2024-07-08 19:05+0800\n"
 "Last-Translator: CloneWith <clonewith@qq.com>\n"
 "Language-Team: CloneWith <clonewith@qq.com>\n"
 "Language: zh_CN\n"
@@ -66,40 +66,99 @@ msgstr ""
 "误差：平均 %.2fms - %.2fms\n"
 "不稳定率：%.2f"
 
-#: itdelatrisu/opsu/Opsu.java:118
-#, java-printf-format
+#: itdelatrisu/opsu/GameMod.java:39
 msgid ""
-"%s could not be launched for one of these reasons:\n"
-"- An instance of %s is already running.\n"
-"- A database is locked for another reason (unlikely).\\s"
+"Reduces overall difficulty - larger circles, more forgiving HP drain, less "
+"accuracy required."
 msgstr ""
-"由于如下原因，无法启动 %s：\n"
-"- %s 已有正在运行的实例。\n"
-"- 由于其他原因，数据库被锁定（可能性不大）。\\s"
 
-#: itdelatrisu/opsu/Opsu.java:128 itdelatrisu/opsu/Opsu.java:132
-msgid "The databases could not be initialized."
-msgstr "无法初始化数据库。"
+#: itdelatrisu/opsu/GameMod.java:41
+msgid "You can't fail. No matter what."
+msgstr ""
 
-#: itdelatrisu/opsu/Opsu.java:130
-msgid "Could not load sqlite-JDBC driver."
-msgstr "无法加载 SQLite-JDBC 驱动。"
+#: itdelatrisu/opsu/GameMod.java:43
+msgid "Less zoom."
+msgstr ""
 
-#: itdelatrisu/opsu/Opsu.java:198
+#: itdelatrisu/opsu/GameMod.java:45
+msgid "Everything just got a bit harder..."
+msgstr ""
+
+#: itdelatrisu/opsu/GameMod.java:47
+msgid "Miss a note and fail."
+msgstr ""
+
+#: itdelatrisu/opsu/GameMod.java:48
+msgid "SS or quit."
+msgstr ""
+
+#: itdelatrisu/opsu/GameMod.java:50
+msgid "Zoooooooooom."
+msgstr ""
+
+#: itdelatrisu/opsu/GameMod.java:51
+msgid "uguuuuuuuu"
+msgstr ""
+
+#: itdelatrisu/opsu/GameMod.java:53
+msgid ""
+"Play with no approach circles and fading notes for a slight score advantage."
+msgstr ""
+
+#: itdelatrisu/opsu/GameMod.java:55
+msgid "Restricted view area."
+msgstr ""
+
+#: itdelatrisu/opsu/GameMod.java:57
+msgid ""
+"You don't need to click.\n"
+"Give your clicking/tapping finger a break from the heat of things.\n"
+"**UNRANKED**"
+msgstr ""
+
+#: itdelatrisu/opsu/GameMod.java:61
+msgid "Timing practice!"
+msgstr ""
+
+#: itdelatrisu/opsu/GameMod.java:63
+msgid "Spinners will be automatically completed."
+msgstr ""
+
+#: itdelatrisu/opsu/GameMod.java:65
+msgid "Watch a perfect automated play through the song."
+msgstr ""
+
+#: itdelatrisu/opsu/GameMod.java:66
+msgid "Watch the video without being distubed by objects."
+msgstr ""
+
+#: itdelatrisu/opsu/GameMod.java:71
+msgid "Difficulty Reduction"
+msgstr ""
+
+#: itdelatrisu/opsu/GameMod.java:72
+msgid "Difficulty Increase"
+msgstr ""
+
+#: itdelatrisu/opsu/GameMod.java:73
+msgid "Special"
+msgstr ""
+
+#: itdelatrisu/opsu/Opsu.java:201
 msgid "An error occurred while creating the game container."
 msgstr ""
 
-#: itdelatrisu/opsu/Opsu.java:263
+#: itdelatrisu/opsu/Opsu.java:267
 msgid "JARs cannot be run from some paths containing the '!' character. "
 msgstr ""
 
-#: itdelatrisu/opsu/Opsu.java:264
+#: itdelatrisu/opsu/Opsu.java:268
 msgid ""
 "Please rename the file/directories and try again.\n"
 "\n"
 msgstr ""
 
-#: itdelatrisu/opsu/Opsu.java:265
+#: itdelatrisu/opsu/Opsu.java:269
 msgid "Path: "
 msgstr ""
 
@@ -112,7 +171,7 @@ msgid ""
 "Mods: %s"
 msgstr ""
 
-#: itdelatrisu/opsu/Utils.java:174
+#: itdelatrisu/opsu/Utils.java:176
 msgid ""
 "WARNING:\n"
 "Running in OpenGL software mode.\n"
@@ -121,16 +180,16 @@ msgid ""
 "This can usually be resolved by updating your graphics drivers."
 msgstr ""
 
-#: itdelatrisu/opsu/Utils.java:351
+#: itdelatrisu/opsu/Utils.java:353
 #, java-printf-format
 msgid "Saved screenshot to %s"
 msgstr ""
 
-#: itdelatrisu/opsu/Utils.java:358
+#: itdelatrisu/opsu/Utils.java:360
 msgid "Failed to open screenshot location."
 msgstr ""
 
-#: itdelatrisu/opsu/Utils.java:772
+#: itdelatrisu/opsu/Utils.java:774
 msgid ""
 "Skin changed.\n"
 "Some elements might not be replaced properly, for this please restart the "
@@ -337,113 +396,627 @@ msgstr ""
 msgid "LANGUAGE"
 msgstr ""
 
-#: itdelatrisu/opsu/options/OptionGroup.java:37
+#: itdelatrisu/opsu/options/OptionGroup.java:38
 msgid "UPDATES"
 msgstr ""
 
-#: itdelatrisu/opsu/options/OptionGroup.java:40
+#: itdelatrisu/opsu/options/OptionGroup.java:41
 msgid "Graphics"
 msgstr ""
 
-#: itdelatrisu/opsu/options/OptionGroup.java:41
+#: itdelatrisu/opsu/options/OptionGroup.java:42
 msgid "LAYOUT"
 msgstr ""
 
-#: itdelatrisu/opsu/options/OptionGroup.java:45
+#: itdelatrisu/opsu/options/OptionGroup.java:46
 msgid "RENDERER"
 msgstr ""
 
-#: itdelatrisu/opsu/options/OptionGroup.java:49
+#: itdelatrisu/opsu/options/OptionGroup.java:50
 msgid "DETAIL SETTINGS"
 msgstr ""
 
-#: itdelatrisu/opsu/options/OptionGroup.java:58
+#: itdelatrisu/opsu/options/OptionGroup.java:59
 msgid "EXPERIMENTAL SLIDERS"
 msgstr ""
 
-#: itdelatrisu/opsu/options/OptionGroup.java:64
+#: itdelatrisu/opsu/options/OptionGroup.java:65
 msgid "MAIN MENU"
 msgstr ""
 
-#: itdelatrisu/opsu/options/OptionGroup.java:69
+#: itdelatrisu/opsu/options/OptionGroup.java:70
 msgid "Gameplay"
 msgstr ""
 
-#: itdelatrisu/opsu/options/OptionGroup.java:76
+#: itdelatrisu/opsu/options/OptionGroup.java:77
 msgid "MODS"
 msgstr ""
 
-#: itdelatrisu/opsu/options/OptionGroup.java:81
+#: itdelatrisu/opsu/options/OptionGroup.java:82
 msgid "Audio"
 msgstr ""
 
-#: itdelatrisu/opsu/options/OptionGroup.java:82
+#: itdelatrisu/opsu/options/OptionGroup.java:83
 msgid "VOLUME"
 msgstr ""
 
-#: itdelatrisu/opsu/options/OptionGroup.java:91
+#: itdelatrisu/opsu/options/OptionGroup.java:92
 msgid "OFFSET ADJUSTMENT"
 msgstr ""
 
-#: itdelatrisu/opsu/options/OptionGroup.java:94
+#: itdelatrisu/opsu/options/OptionGroup.java:95
 msgid "Skin"
 msgstr ""
 
-#: itdelatrisu/opsu/options/OptionGroup.java:95
+#: itdelatrisu/opsu/options/OptionGroup.java:96
 msgid "SKIN"
 msgstr ""
 
-#: itdelatrisu/opsu/options/OptionGroup.java:104
+#: itdelatrisu/opsu/options/OptionGroup.java:105
 msgid "Input"
 msgstr ""
 
-#: itdelatrisu/opsu/options/OptionGroup.java:105
+#: itdelatrisu/opsu/options/OptionGroup.java:106
 msgid "MOUSE"
 msgstr ""
 
-#: itdelatrisu/opsu/options/OptionGroup.java:109
+#: itdelatrisu/opsu/options/OptionGroup.java:110
 msgid "KEYBOARD"
 msgstr ""
 
-#: itdelatrisu/opsu/options/OptionGroup.java:113
+#: itdelatrisu/opsu/options/OptionGroup.java:114
 msgid "Custom"
 msgstr ""
 
-#: itdelatrisu/opsu/options/OptionGroup.java:114
+#: itdelatrisu/opsu/options/OptionGroup.java:115
 msgid "DIFFICULTY"
 msgstr ""
 
-#: itdelatrisu/opsu/options/OptionGroup.java:121
+#: itdelatrisu/opsu/options/OptionGroup.java:122
 msgid "COLOR"
 msgstr ""
 
-#: itdelatrisu/opsu/options/OptionGroup.java:127
+#: itdelatrisu/opsu/options/OptionGroup.java:128
 msgid "SEEKING"
 msgstr ""
 
-#: itdelatrisu/opsu/options/OptionGroup.java:131
+#: itdelatrisu/opsu/options/OptionGroup.java:132
 msgid "MISCELLANEOUS"
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:1029
+#: itdelatrisu/opsu/options/Options.java:69
+msgid "Disabled"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:334
+msgid "Resolution"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:381
+msgid "Fullscreen mode"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:381
+msgid "Switches to dedicated fullscreen mode."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:392
+#, java-printf-format
+msgid "Fullscreen mode is not available at resolution %s"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:451
+msgid "Frame limiter"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:451
+msgid "Higher values may cause high CPU usage."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:453
+msgid "Unlimited"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:502
+msgid "Language"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:502
+msgid "The interface language."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:539
+msgid "Show FPS counter"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:540
+msgid "Show a subtle FPS counter in the bottom right corner of the screen."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:547
+msgid "Prefer metadata in original language"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:548
+msgid ""
+"Where available, song titles will be shown in their native language (and "
+"character-set)."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:564
+msgid "Screenshot format"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:564
+msgid "Press F12 to take a screenshot."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:599
+msgid "Cursor size"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:599
+msgid "Change the cursor scale."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:617
+msgid "Tint warning arrow white"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:618
+msgid ""
+"Tint the warning arrow appeared before the end of a break period white "
+"instead of red.\n"
+"This overrides the skin settings."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:620
+msgid "Always use builtin back button"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:621
+msgid "Use the builtin back button style regardless of the skin."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:622
+msgid "Dynamic backgrounds"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:623
+msgid ""
+"The current beatmap background will be used as the main menu background."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:624
+msgid "Detailed loading progress"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:625
+msgid "Display more verbose loading progress in the splash screen."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:626
+msgid "Master"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:626
+msgid "Global volume level."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:633
+msgid "Music"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:633
+msgid "Music volume."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:640
+msgid "Effects"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:640
+msgid "Menu and game sound effects volume."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:641
+msgid "Hit sounds"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:641
+msgid "Hit sounds volume."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:642
+msgid "Universal offset"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:642
+msgid "Adjust this value if hit objects are out of sync."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:649
+msgid "Disable sound effects in gameplay"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:650
+msgid "Mute all sound effects during gameplay only."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:651
+msgid "Disable all sound effects"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:652
+msgid ""
+"May resolve Linux sound driver issues.\n"
+"Requires a restart."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:658
+msgid "Heartbeat sound (unstable)"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:659
+msgid ""
+"Play heartbeat sounds when the cursor hovers on the logo. May sounds off "
+"beat."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:660
+msgid "Left game key"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:660
+#: itdelatrisu/opsu/options/Options.java:676
+msgid "Select this option to input a key."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:676
+msgid "Right game key"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:692
+msgid "Disable mouse wheel in play mode"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:693
+msgid ""
+"Disable the functionality to  adjust the volume and pause the game with the "
+"mouse wheel during gameplay."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:695
+msgid "Disable mouse buttons in play mode"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:696
+msgid ""
+"Disable all mouse buttons.\n"
+"Specifically for people who use their keyboard to click."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:697
+msgid "Background dim"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:697
+msgid "Percentage to dim the background image during gameplay."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:699
+msgid "Force default playfield"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:700
+msgid "Overrides the song background with the default playfield background."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:701
+msgid "Background video"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:702
+msgid ""
+"Enables background video playback.\n"
+"If you get a large amount of lag on beatmaps with video, try disabling this "
+"feature."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:704
+msgid "Ignore all beatmap skins"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:705
+msgid ""
+"Defaults game settings to never use skin element overrides provided by "
+"beatmaps."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:706
+msgid "Always use skin cursor"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:707
+msgid ""
+"The selected skin's cursor will override any beatmap-specific cursor "
+"modifications."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:708
+msgid "Keep the Auto mod on"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:708
+msgid "Keep the Auto mod on after gameplay."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:709
+msgid "Enable pause screen in Auto play and replays"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:710
+msgid ""
+"Allow players to press Esc to show the pause screen during replays and "
+"gameplay with the Auto mod on."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:712
+msgid "Snaking sliders"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:712
+msgid "Sliders gradually snake out from their starting point."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:714
+msgid "Use experimental sliders"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:715
+msgid "Render sliders using the experimental slider style."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:716
+msgid "Draw slider caps"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:717
+msgid ""
+"Draw caps (end circles) on sliders.\n"
+"Only applies to experimental sliders."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:718
+msgid "Shrinking sliders"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:719
+msgid ""
+"Sliders shrink toward their ending point when the ball passes.\n"
+"Only applies to experimental sliders."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:721
+msgid "Merging sliders"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:722
+msgid ""
+"For overlapping sliders, don't draw the edges and combine the slider tracks "
+"where they cross.\n"
+"Only applies to experimental sliders."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:724
+msgid "Hit lighting"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:725
+msgid "Adds a subtle glow behind hit explosions which lights the playfield."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:726
+msgid "Combo bursts"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:727
+msgid ""
+"A character image bursts from the side of the screen at combo milestones."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:728
+msgid "Perfect hits"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:728
+msgid "Shows perfect hit result bursts (300s, slider ticks)."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:729
+msgid "Follow points"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:729
+msgid "Shows follow points between hit objects."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:730
+msgid "Hit error bar"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:730
+msgid "Shows precisely how accurate you were with each hit."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:732
+msgid "Always show key overlay"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:733
+msgid "Show the key overlay when playing instead of only on replays."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:734
+msgid "Load HD images"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:735
+#, java-printf-format
+msgid ""
+"Loads HD (%s) images when available.\n"
+"Increases memory usage and loading times."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:738
+msgid "Fixed CS"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:738
+msgid "Determines the size of circles and sliders."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:756
+msgid "Fixed HP"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:756
+msgid "Determines the rate at which health decreases."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:774
+msgid "Fixed AR"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:774
+msgid "Determines how long hit circles stay on the screen."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:792
+msgid "Fixed OD"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:792
+msgid "Determines the time window for hit results."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:810
+msgid "Fixed speed"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:810
+msgid "Determines the speed of the music."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:828
+msgid "Customize interface color"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:828
+msgid "Use your own color for the interface of opsu!"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:830
+msgid "Interface color Red"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:830
+msgid "Red color value."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:836
+msgid "Interface color Green"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:836
+msgid "Green color value."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:842
+msgid "Interface color Blue"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:842
+msgid "Blue color value."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:848
+msgid "Real Auto player"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:848
+msgid "Auto also fails!"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:849
+msgid "Track checkpoint"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:850
+msgid "Press Ctrl+L while playing to load a checkpoint, and Ctrl+S to set one."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:859
+msgid "Parallax"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:859
+msgid "Add a parallax effect based on the current cursor position."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:860
+msgid "Theme song"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:862
+msgid ""
+" will play themed music throughout the game, instead of using random "
+"beatmaps."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:864
+msgid "Replay seeking"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:865
+msgid "Enable a seeking bar on the left side of the screen during replays."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:866
+msgid "Disable automatic updates"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:867
+msgid "Disable checking for updates when the game starts."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:868
+msgid "Watch service"
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:869
+msgid "Watch the beatmap directory for changes. Requires a restart."
+msgstr ""
+
+#: itdelatrisu/opsu/options/Options.java:1291
 #, java-printf-format
 msgid "Frame limiter: %s"
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:1412
+#: itdelatrisu/opsu/options/Options.java:1827
 msgid "Mouse buttons are disabled."
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:1412
+#: itdelatrisu/opsu/options/Options.java:1828
 msgid "Mouse buttons are enabled."
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:1732
+#: itdelatrisu/opsu/options/Options.java:2181
 #, java-printf-format
 msgid "# %s configuration"
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:1734
+#: itdelatrisu/opsu/options/Options.java:2183
 msgid "# last updated on "
 msgstr ""
 
@@ -948,3 +1521,19 @@ msgstr ""
 #: itdelatrisu/opsu/user/UserSelectOverlay.java:740
 msgid "Delete User"
 msgstr ""
+
+#, java-printf-format
+#~ msgid ""
+#~ "%s could not be launched for one of these reasons:\n"
+#~ "- An instance of %s is already running.\n"
+#~ "- A database is locked for another reason (unlikely).\\s"
+#~ msgstr ""
+#~ "由于如下原因，无法启动 %s：\n"
+#~ "- %s 已有正在运行的实例。\n"
+#~ "- 由于其他原因，数据库被锁定（可能性不大）。\\s"
+
+#~ msgid "The databases could not be initialized."
+#~ msgstr "无法初始化数据库。"
+
+#~ msgid "Could not load sqlite-JDBC driver."
+#~ msgstr "无法加载 SQLite-JDBC 驱动。"
