@@ -40,6 +40,17 @@ import java.util.List;
 public class Fonts {
 	public static UnicodeFont DEFAULT, BOLD, XLARGE, LARGE, MEDIUM, MEDIUMBOLD, SMALL, SMALLBOLD;
 
+	public static UnicodeFont fonts[] = {
+		Fonts.DEFAULT,
+		Fonts.BOLD,
+		Fonts.XLARGE,
+		Fonts.LARGE,
+		Fonts.MEDIUM,
+		Fonts.MEDIUMBOLD,
+		Fonts.SMALL,
+		Fonts.SMALLBOLD
+	};
+
 	/** Set of all Unicode strings already loaded per font. */
 	private static final HashMap<UnicodeFont, HashSet<String>> loadedGlyphs = new HashMap<>();
 

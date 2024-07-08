@@ -19,38 +19,29 @@
 package clonewith.opsu;
 
 import java.io.File;
-import java.net.URL;
-import java.net.URLClassLoader;
 import java.util.Locale;
-import java.util.ResourceBundle;
+import java.util.Map;
 
-import com.ibm.icu.util.ULocale;
-import com.ibm.icu.util.UResourceBundle;
+import org.newdawn.slick.util.Log;
 
 public class I18N {
-	private static ResourceBundle tlBundle;
 	private static boolean isInited = false;
+	private static Map<String, String> tlMap = null;
 
 	public static void init() {
 		if (isInited) {
 			return;
 		}
 
-		try {
-			// FIXME
-			File i10nDir = new File("res/i10n/");
-			if (!i10nDir.exists() || !i10nDir.isDirectory()) {
-				throw new RuntimeException("i10n directory not found.");
-			}
-			URL[] urls = { i10nDir.toURI().toURL() };
-			URLClassLoader loader = new URLClassLoader(urls);
-			tlBundle = UResourceBundle.getBundleInstance("messages", new ULocale(Locale.getDefault().toString()),
-					loader);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		// Get the system default locale.
+		Locale defLocale = Locale.getDefault();
 
-		isInited = true;
+		File poFile = PoReader.getPo(defLocale);
+		if (poFile == null) {
+			Log.warn(String.format("Translation for %s not found. Falling back to default.", defLocale.toString()));
+			return;
+		}
+		tlMap = PoReader.getTranslationMap(poFile);
 	}
 
 	/**
@@ -60,14 +51,11 @@ public class I18N {
 	 * @return A translated string
 	 */
 	public static String t(String src) {
-		if (!isInited) {
-			init();
-		}
-
 		try {
-			return tlBundle.getString(src);
+			String target = tlMap.get(src);
+			return target != null ? target : src;
 		} catch (Exception e) {
-			// String not found in .po file, return the source string
+			System.err.println(e.getMessage());
 			return src;
 		}
 	}
@@ -79,5 +67,9 @@ public class I18N {
 	 */
 	public static boolean getInitStatus() {
 		return isInited;
+	}
+
+	public static String getFontmap() {
+		return tlMap.toString();
 	}
 }

@@ -46,10 +46,16 @@ import java.io.File;
  * Loads game resources and enters "Main Menu" state.
  */
 public class Splash extends BasicGameState {
-	/** Minimum time, in milliseconds, to display the splash screen (and fade in the logo). */
+	/**
+	 * Minimum time, in milliseconds, to display the splash screen (and fade in the
+	 * logo).
+	 */
 	private static final int MIN_SPLASH_TIME = 350;
 
-	/** Minimum elapsed time, in milliseconds, before displaying progress information (if non-verbose). */
+	/**
+	 * Minimum elapsed time, in milliseconds, before displaying progress information
+	 * (if non-verbose).
+	 */
 	private static final int PROGRESS_START_TIME = 1000;
 
 	/** Whether loading has completed. */
@@ -108,7 +114,8 @@ public class Splash extends BasicGameState {
 	public void render(GameContainer container, StateBasedGame game, Graphics g)
 			throws SlickException {
 		g.setBackground(Color.black);
-		GameImage.MENU_LOGO.getImage().drawCentered((float) container.getWidth() / 2, (float) container.getHeight() / 2);
+		GameImage.MENU_LOGO.getImage().drawCentered((float) container.getWidth() / 2,
+				(float) container.getHeight() / 2);
 		UI.drawLoadingProgress(g, Options.isLoadVerbose() ? 1f : progressAlpha.getValue());
 	}
 
@@ -120,7 +127,7 @@ public class Splash extends BasicGameState {
 
 			// resources already loaded (from application restart)
 			if (BeatmapSetList.get() != null) {
-				if (newSkin || watchServiceChange) {  // need to reload resources
+				if (newSkin || watchServiceChange) { // need to reload resources
 					thread = new Thread(() -> {
 						// reload beatmaps if watch service newly enabled
 						if (watchServiceChange)
@@ -137,7 +144,7 @@ public class Splash extends BasicGameState {
 						thread = null;
 					});
 					thread.start();
-				} else  // don't reload anything
+				} else // don't reload anything
 					finished = true;
 			}
 
@@ -188,7 +195,8 @@ public class Splash extends BasicGameState {
 				if (Options.isThemeSongEnabled())
 					MusicController.playThemeSong();
 				else
-					((SongMenu) game.getState(Opsu.STATE_SONGMENU)).setFocus(BeatmapSetList.get().getRandomNode(), -1, true, true);
+					((SongMenu) game.getState(Opsu.STATE_SONGMENU)).setFocus(BeatmapSetList.get().getRandomNode(), -1,
+							true, true);
 			}
 
 			// play the theme song
@@ -200,7 +208,9 @@ public class Splash extends BasicGameState {
 	}
 
 	@Override
-	public int getID() { return state; }
+	public int getID() {
+		return state;
+	}
 
 	@Override
 	public void keyPressed(int key, char c) {

@@ -24,6 +24,7 @@ import itdelatrisu.opsu.downloads.DownloadList;
 import itdelatrisu.opsu.downloads.Updater;
 import itdelatrisu.opsu.options.Options;
 import itdelatrisu.opsu.states.*;
+import itdelatrisu.opsu.ui.Fonts;
 import itdelatrisu.opsu.ui.UI;
 import itdelatrisu.opsu.video.FFmpeg;
 import org.newdawn.slick.GameContainer;
@@ -38,6 +39,8 @@ import org.newdawn.slick.util.Log;
 import org.newdawn.slick.util.ResourceLoader;
 import org.sqlite.SQLiteErrorCode;
 import org.sqlite.SQLiteException;
+
+import clonewith.opsu.I18N;
 
 import java.io.*;
 
@@ -98,6 +101,9 @@ public class Opsu extends StateBasedGame {
 			System.exit(1);
 		});
 
+		// initialize translations
+		I18N.init();
+
 		// parse configuration file
 		try {
 			Options.parseOptions();
@@ -152,6 +158,8 @@ public class Opsu extends StateBasedGame {
 
 		// set the resource paths
 		ResourceLoader.addResourceLocation(new FileSystemLocation(new File("./res/")));
+
+
 
 		// check if just updated
 		if (args.length >= 2)

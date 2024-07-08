@@ -727,9 +727,9 @@ public class Options {
 		 * @param description the option description
 		 */
 		GameOption(String name, String displayName, String description) {
-			this.name = t(name);
+			this.name = name;
 			this.displayName = displayName;
-			this.description = t(description);
+			this.description = description;
 		}
 
 		/**
