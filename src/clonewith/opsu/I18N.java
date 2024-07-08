@@ -37,7 +37,7 @@ public class I18N {
 			return;
 		}
 
-		Locale defLocale = Options.isNativeLangUsed() ? Locale.getDefault() : Options.getLanguage();
+		Locale defLocale = Options.getLanguage();
 
 		if (defLocale == Locale.ENGLISH) return;
 

@@ -108,6 +108,9 @@ public class Opsu extends StateBasedGame {
 			Log.error(e);
 		}
 
+		// initialize translations
+		I18N.init();
+
 		// initialize databases
 		try {
 			DBController.init();

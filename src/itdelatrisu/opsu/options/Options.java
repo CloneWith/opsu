@@ -533,12 +533,6 @@ public class Options {
 				return lang;
 			}
 		},
-		NATIVE_LANGUAGE("Use native language", "UseNativeLang", "Use system language settings.", false) {
-			@Override
-			public boolean isRestartRequired() {
-				return true;
-			}
-		},
 		SHOW_FPS("Show FPS counter", "FpsCounter",
 				"Show a subtle FPS counter in the bottom right corner of the screen.", true) {
 			@Override
@@ -1758,10 +1752,6 @@ public class Options {
 	 */
 	public static boolean isWatchServiceEnabled() {
 		return GameOption.ENABLE_WATCH_SERVICE.getBooleanValue();
-	}
-
-	public static boolean isNativeLangUsed() {
-		return GameOption.NATIVE_LANGUAGE.getBooleanValue();
 	}
 
 	/**
