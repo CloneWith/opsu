@@ -38,6 +38,8 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 
+import clonewith.opsu.I18N;
+
 import java.io.File;
 
 /**
@@ -105,6 +107,9 @@ public class Splash extends BasicGameState {
 
 		// load Utils class first (needed in other 'init' methods)
 		Utils.init(container, game);
+
+		// initialize translations
+		I18N.init();
 
 		// fade in logo
 		GameImage.MENU_LOGO.getImage().setAlpha(0f);

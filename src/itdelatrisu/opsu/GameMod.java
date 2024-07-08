@@ -36,41 +36,41 @@ import static clonewith.opsu.I18N.t;
 public enum GameMod {
 	// TODO: Process PF, NC and TP approxmiately
 	EASY          (Category.EASY, 0, GameImage.MOD_EASY, "EZ", 2, Input.KEY_Q, 0.5f,
-	              "Easy", "Reduces overall difficulty - larger circles, more forgiving HP drain, less accuracy required."),
+	              "Easy", t("Reduces overall difficulty - larger circles, more forgiving HP drain, less accuracy required.")),
 	NO_FAIL       (Category.EASY, 1, GameImage.MOD_NO_FAIL, "NF", 1, Input.KEY_W, 0.5f,
-	              "NoFail", "You can't fail.  No matter what."),
+	              "NoFail", t("You can't fail. No matter what.")),
 	HALF_TIME     (Category.EASY, 2, GameImage.MOD_HALF_TIME, "HT", 256, Input.KEY_E, 0.3f,
-	              "HalfTime", "Less zoom."),
+	              "HalfTime", t("Less zoom.")),
 	HARD_ROCK     (Category.HARD, 0, GameImage.MOD_HARD_ROCK, "HR", 16, Input.KEY_A, 1.06f,
-	              "HardRock", "Everything just got a bit harder..."),
+	              "HardRock", t("Everything just got a bit harder...")),
 	SUDDEN_DEATH  (Category.HARD, 1, GameImage.MOD_SUDDEN_DEATH, "SD", 32, Input.KEY_S, 1f,
-	              "SuddenDeath", "Miss a note and fail."),
-	PERFECT       (Category.HARD, 2, GameImage.MOD_PERFECT, "PF", 64, Input.KEY_P, 1f, "Perfect", "SS or quit."),
+	              "SuddenDeath", t("Miss a note and fail.")),
+	PERFECT       (Category.HARD, 2, GameImage.MOD_PERFECT, "PF", 64, Input.KEY_P, 1f, "Perfect", t("SS or quit.")),
 	DOUBLE_TIME   (Category.HARD, 3, GameImage.MOD_DOUBLE_TIME, "DT", 64, Input.KEY_D, 1.12f,
-	              "DoubleTime", "Zoooooooooom."),
-	NIGHTCORE     (Category.HARD, 4, GameImage.MOD_NIGHTCORE, "NT", 64, Input.KEY_N, 1.12f, "Nightcore", "uguuuuuuuu"),
+	              "DoubleTime", t("Zoooooooooom.")),
+	NIGHTCORE     (Category.HARD, 4, GameImage.MOD_NIGHTCORE, "NT", 64, Input.KEY_N, 1.12f, "Nightcore", t("uguuuuuuuu")),
 	HIDDEN        (Category.HARD, 5, GameImage.MOD_HIDDEN, "HD", 8, Input.KEY_F, 1.06f,
-	              "Hidden", "Play with no approach circles and fading notes for a slight score advantage."),
+	              "Hidden", t("Play with no approach circles and fading notes for a slight score advantage.")),
 	FLASHLIGHT    (Category.HARD, 6, GameImage.MOD_FLASHLIGHT, "FL", 1024, Input.KEY_G, 1.12f,
-	              "Flashlight", "Restricted view area."),
+	              "Flashlight", t("Restricted view area.")),
 	RELAX         (Category.SPECIAL, 0, GameImage.MOD_RELAX, "RL", 128, Input.KEY_Z, 0f,
-	              "Relax", "You don't need to click.\nGive your clicking/tapping finger a break from the heat of things.\n**UNRANKED**"),
+	              "Relax", t("You don't need to click.\nGive your clicking/tapping finger a break from the heat of things.\n**UNRANKED**")),
 	AUTOPILOT     (Category.SPECIAL, 1, GameImage.MOD_AUTOPILOT, "AP", 8192, Input.KEY_X, 0f,
 	              "Relax2", "Automatic cursor movement - just follow the rhythm.\n**UNRANKED**"),
 	Target	      (Category.SPECIAL, 2, GameImage.MOD_TARGET, "AP", 8388608, Input.KEY_T, 1f,
-	              "Target", "Timing practice!"),
+	              "Target", t("Timing practice!")),
 	SPUN_OUT      (Category.SPECIAL, 3, GameImage.MOD_SPUN_OUT, "SO", 4096, Input.KEY_C, 0.9f,
-	              "SpunOut", "Spinners will be automatically completed."),
+	              "SpunOut", t("Spinners will be automatically completed.")),
 	AUTO          (Category.SPECIAL, 4, GameImage.MOD_AUTO, "", 2048, Input.KEY_V, 1f,
-	              "Autoplay", "Watch a perfect automated play through the song."),
-	CINEMA          (Category.SPECIAL, 5, GameImage.MOD_CINEMA, "", 4194304, Input.KEY_M, 1f, "Autoplay", "Watch the video without being distubed by objects.");
+	              "Autoplay", t("Watch a perfect automated play through the song.")),
+	CINEMA          (Category.SPECIAL, 5, GameImage.MOD_CINEMA, "", 4194304, Input.KEY_M, 1f, "Autoplay", t("Watch the video without being distubed by objects."));
 
 
 	/** Mod categories. */
 	public enum Category {
-		EASY    (0, "Difficulty Reduction", Color.green),
-		HARD    (1, "Difficulty Increase", Color.red),
-		SPECIAL (2, "Special", Color.white);
+		EASY    (0, t("Difficulty Reduction"), Color.green),
+		HARD    (1, t("Difficulty Increase"), Color.orange),
+		SPECIAL (2, t("Special"), Color.white);
 
 		/** Drawing index. */
 		private final int index;
@@ -92,7 +92,7 @@ public enum GameMod {
 		 */
 		Category(int index, String name, Color color) {
 			this.index = index;
-			this.name = t(name);
+			this.name = name;
 			this.color = color;
 		}
 
@@ -322,7 +322,7 @@ public enum GameMod {
 		this.key = key;
 		this.multiplier = multiplier;
 		this.name = name;
-		this.description = t(description);
+		this.description = description;
 	}
 
 	/**

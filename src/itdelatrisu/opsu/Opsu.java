@@ -109,7 +109,7 @@ public class Opsu extends StateBasedGame {
 		}
 
 		// initialize translations
-		I18N.init();
+		I18N.init(false);
 
 		// initialize databases
 		try {

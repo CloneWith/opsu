@@ -108,10 +108,10 @@ public class ErrorHandler {
 			Log.error(e);
 		else if (e == null) {
 			Log.error(des);
-			UI.getNotificationManager().sendBarNotification(t(des));
+			UI.getNotificationManager().sendBarNotification(des);
 		} else {
 			Log.error(des, e);
-			UI.getNotificationManager().sendBarNotification(t(des));
+			UI.getNotificationManager().sendBarNotification(des);
 		}
 	}
 
@@ -129,10 +129,10 @@ public class ErrorHandler {
 			Log.error(e);
 		else if (e == null) {
 			Log.error(des);
-			UI.getNotificationManager().sendNotification(t(des), Color.red);
+			UI.getNotificationManager().sendNotification(des, Color.red);
 		} else {
 			Log.error(des, e);
-			UI.getNotificationManager().sendNotification(t(des), Color.red);
+			UI.getNotificationManager().sendNotification(des, Color.red);
 		}
 	}
 
@@ -158,7 +158,7 @@ public class ErrorHandler {
 		// set the textArea to the error message
 		textArea.setText(null);
 		if (error != null) {
-			textArea.append(t(error));
+			textArea.append(error);
 			textArea.append("\n");
 		}
 		String trace = null;

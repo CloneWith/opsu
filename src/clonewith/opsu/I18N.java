@@ -24,7 +24,6 @@ import java.util.Map;
 
 import org.newdawn.slick.util.Log;
 
-import itdelatrisu.opsu.ErrorHandler;
 import itdelatrisu.opsu.options.Options;
 
 public class I18N {
@@ -32,14 +31,25 @@ public class I18N {
 	private static boolean isInited = false;
 	private static Map<String, String> tlMap = null;
 
-	public static void init() {
+	public static void init() { init(true); }
+
+	public static void init(boolean status) {
+		String defString = null;
 		if (isInited) {
 			return;
 		}
 
-		Locale defLocale = Options.getLanguage();
+		// !status -> Initial -> Use system default temporarily
+		defString = (!status) ? Locale.getDefault().toString() : Options.getLanguage();
 
-		if (defLocale == Locale.ENGLISH) return;
+		if (defString == "English" || defString.contains("en")) {
+			isInited = true;
+			return;
+		}
+		if (defString == "LANGUAGE" || defString == null) return;
+
+		// TODO: Another way to build Locales
+		Locale defLocale = new Locale(defString);
 
 		File poFile = PoReader.getPo(defLocale);
 		if (poFile == null) {
@@ -47,7 +57,7 @@ public class I18N {
 			return;
 		}
 		tlMap = PoReader.getTranslationMap(poFile);
-		isInited = true;
+		if (defString != "LANGUAGE") isInited = true;
 	}
 
 	/**
@@ -56,13 +66,15 @@ public class I18N {
 	 * @param src source string
 	 * @return A translated string
 	 */
-	public static String t(String src) {
-		if (!isInited) return src;
+	public static String t(String src) { return t(src, true);}
+
+	public static String t(String src, boolean status) {
+		// if (src == "LANGUAGE" && !isInited) init(false);
+		if (!status) return src;
 		try {
 			String target = tlMap.get(src);
 			return target != null ? target : src;
 		} catch (Exception e) {
-			ErrorHandler.error("Failed to read translations.", e, true);
 			return src;
 		}
 	}
