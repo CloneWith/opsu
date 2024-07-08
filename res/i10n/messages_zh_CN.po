@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: opsu\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-08 19:27+0800\n"
-"PO-Revision-Date: 2024-07-08 11:30\n"
+"PO-Revision-Date: 2024-07-08 17:19\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -243,7 +243,7 @@ msgstr "%s 的谱面"
 #: ../../src/itdelatrisu/opsu/GameData.java:975
 #, java-printf-format
 msgid " by %s"
-msgstr "作者 %s"
+msgstr " 由 %s"
 
 #: ../../src/itdelatrisu/opsu/GameData.java:977
 #, java-printf-format
@@ -1183,16 +1183,16 @@ msgstr ""
 #: ../../src/itdelatrisu/opsu/states/Game.java:589
 #, java-printf-format
 msgid "%d retries and counting..."
-msgstr ""
+msgstr "已经重试 %d 次了..."
 
 #. draw overlay text
 #: ../../src/itdelatrisu/opsu/states/Game.java:735
 msgid "Click on the pulsing cursor to continue play!"
-msgstr ""
+msgstr "点击跳动的光标继续玩！"
 
 #: ../../src/itdelatrisu/opsu/states/Game.java:806
 msgid "Click to resume gameplay."
-msgstr ""
+msgstr "点击继续游戏。"
 
 #: ../../src/itdelatrisu/opsu/states/Game.java:1226
 msgid "Checkpoint saved."
@@ -1301,164 +1301,166 @@ msgstr ""
 #: ../../src/itdelatrisu/opsu/states/MainMenu.java:760
 #: ../../src/itdelatrisu/opsu/states/MainMenu.java:900
 msgid ">> Next"
-msgstr ""
+msgstr ">> 下一曲"
 
 #: ../../src/itdelatrisu/opsu/states/MainMenu.java:764
 #: ../../src/itdelatrisu/opsu/states/MainMenu.java:879
 msgid "<< Prev"
-msgstr ""
+msgstr "<< 上一曲"
 
 #: ../../src/itdelatrisu/opsu/states/MainMenu.java:895
 msgid "Unpause"
-msgstr ""
+msgstr "继续"
 
 #: ../../src/itdelatrisu/opsu/states/MainMenu.java:1018
 msgid "Download some beatmaps to get started!"
-msgstr ""
+msgstr "从下载一些谱面开始吧！"
 
 #: ../../src/itdelatrisu/opsu/states/SongMenu.java:462
 msgid "Changes in Songs folder detected.\n"
 "Hit F5 to refresh."
-msgstr ""
+msgstr "检测到 Songs 文件夹更改。\n"
+"按下 F5 刷新。"
 
 #: ../../src/itdelatrisu/opsu/states/SongMenu.java:742
 msgid "Search:"
-msgstr ""
+msgstr "搜索："
 
 #: ../../src/itdelatrisu/opsu/states/SongMenu.java:752
 msgid "Searching..."
-msgstr ""
+msgstr "搜索中..."
 
 #: ../../src/itdelatrisu/opsu/states/SongMenu.java:914
 msgid "Sort by..."
-msgstr ""
+msgstr "排序..."
 
 #: ../../src/itdelatrisu/opsu/states/SongMenu.java:1576
 #, java-printf-format
 msgid "%d match%s found!"
-msgstr ""
+msgstr "已找到 %d 结果%s！"
 
 #: ../../src/itdelatrisu/opsu/states/SongMenu.java:1592
 msgid "No matches found. Hit ESC to reset."
-msgstr ""
+msgstr "找不到结果。按 ESC 重置。"
 
 #: ../../src/itdelatrisu/opsu/states/SongMenu.java:1974
 msgid "Unable to load the beatmap audio."
-msgstr ""
+msgstr "无法载入谱面音频。"
 
 #. * Button text.
 #: ../../src/itdelatrisu/opsu/ui/BackButton.java:50
 msgid "back"
-msgstr ""
+msgstr "返回"
 
 #: ../../src/itdelatrisu/opsu/ui/UI.java:283
 msgid "Unpacking new beatmaps..."
-msgstr ""
+msgstr "解压新谱面中..."
 
 #: ../../src/itdelatrisu/opsu/ui/UI.java:287
 msgid "Updating database..."
-msgstr ""
+msgstr "更新数据库中..."
 
 #: ../../src/itdelatrisu/opsu/ui/UI.java:287
 msgid "Loading beatmaps..."
-msgstr ""
+msgstr "加载谱面中..."
 
 #: ../../src/itdelatrisu/opsu/ui/UI.java:290
 msgid "Unpacking new skins..."
-msgstr ""
+msgstr "解压新皮肤中..."
 
 #: ../../src/itdelatrisu/opsu/ui/UI.java:293
 msgid "Importing replays..."
-msgstr ""
+msgstr "导入回放中..."
 
 #: ../../src/itdelatrisu/opsu/ui/UI.java:296
 msgid "Loading sounds..."
-msgstr ""
+msgstr "加载声音中..."
 
 #: ../../src/itdelatrisu/opsu/ui/UI.java:299
 #, java-printf-format
 msgid "Welcome to %s"
-msgstr ""
+msgstr "欢迎来到 %s"
 
 #: ../../src/itdelatrisu/opsu/ui/UI.java:477
 msgid "Warning"
-msgstr ""
+msgstr "警告"
 
 #. title
 #: ../../src/itdelatrisu/opsu/user/UserSelectOverlay.java:294
 msgid "User Select"
-msgstr ""
+msgstr "选择用户"
 
 #. title
 #: ../../src/itdelatrisu/opsu/user/UserSelectOverlay.java:325
 #: ../../src/itdelatrisu/opsu/user/UserSelectOverlay.java:714
 msgid "Add User"
-msgstr ""
+msgstr "添加用户"
 
 #: ../../src/itdelatrisu/opsu/user/UserSelectOverlay.java:334
 msgid "Click the profile below to create it."
-msgstr ""
+msgstr "点击下方区域创建用户。"
 
 #. user name
 #: ../../src/itdelatrisu/opsu/user/UserSelectOverlay.java:341
 msgid "Name"
-msgstr ""
+msgstr "名称"
 
 #: ../../src/itdelatrisu/opsu/user/UserSelectOverlay.java:347
 msgid "Type a name..."
-msgstr ""
+msgstr "输一个名字..."
 
 #. user icons
 #: ../../src/itdelatrisu/opsu/user/UserSelectOverlay.java:361
 msgid "Icon"
-msgstr ""
+msgstr "图标"
 
 #. title
 #: ../../src/itdelatrisu/opsu/user/UserSelectOverlay.java:369
 msgid "Edit User"
-msgstr ""
+msgstr "编辑用户"
 
 #: ../../src/itdelatrisu/opsu/user/UserSelectOverlay.java:386
 msgid "Change Icon"
-msgstr ""
+msgstr "更改图标"
 
 #: ../../src/itdelatrisu/opsu/user/UserSelectOverlay.java:544
 msgid "You can't delete the current user!"
-msgstr ""
+msgstr "不能删除当前用户！"
 
 #: ../../src/itdelatrisu/opsu/user/UserSelectOverlay.java:546
 msgid "Confirm User Deletion"
-msgstr ""
+msgstr "确定删除用户"
 
 #: ../../src/itdelatrisu/opsu/user/UserSelectOverlay.java:553
 #, java-printf-format
 msgid "User '%s' was deleted."
-msgstr ""
+msgstr "已删除用户“%s”。"
 
 #: ../../src/itdelatrisu/opsu/user/UserSelectOverlay.java:555
 msgid "The user could not be deleted."
-msgstr ""
+msgstr "无法删除此用户。"
 
 #: ../../src/itdelatrisu/opsu/user/UserSelectOverlay.java:677
 msgid "Enter a name for the user."
-msgstr ""
+msgstr "输入用户的名字。"
 
 #: ../../src/itdelatrisu/opsu/user/UserSelectOverlay.java:677
 msgid "You can't use that name."
-msgstr ""
+msgstr "无法使用此名字。"
 
 #: ../../src/itdelatrisu/opsu/user/UserSelectOverlay.java:682
 msgid "Something wrong happened."
-msgstr ""
+msgstr "出现了问题。"
 
 #: ../../src/itdelatrisu/opsu/user/UserSelectOverlay.java:686
 msgid "New user created.\n"
 "Enjoy the game! :)"
-msgstr ""
+msgstr "已创建新用户。\n"
+"享受游戏吧！:)"
 
 #: ../../src/itdelatrisu/opsu/user/UserSelectOverlay.java:740
 msgid "Delete User"
-msgstr ""
+msgstr "删除用户"
 
 #: ../../src/itdelatrisu/opsu/Utils.java:176
 msgid "WARNING:\n"
