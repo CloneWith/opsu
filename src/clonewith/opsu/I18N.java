@@ -24,7 +24,11 @@ import java.util.Map;
 
 import org.newdawn.slick.util.Log;
 
+import itdelatrisu.opsu.ErrorHandler;
+import itdelatrisu.opsu.options.Options;
+
 public class I18N {
+	private static File baseDir = new File("res/i10n");
 	private static boolean isInited = false;
 	private static Map<String, String> tlMap = null;
 
@@ -33,8 +37,9 @@ public class I18N {
 			return;
 		}
 
-		// Get the system default locale.
-		Locale defLocale = Locale.getDefault();
+		Locale defLocale = Options.isNativeLangUsed() ? Locale.getDefault() : Options.getLanguage();
+
+		if (defLocale == Locale.ENGLISH) return;
 
 		File poFile = PoReader.getPo(defLocale);
 		if (poFile == null) {
@@ -42,6 +47,7 @@ public class I18N {
 			return;
 		}
 		tlMap = PoReader.getTranslationMap(poFile);
+		isInited = true;
 	}
 
 	/**
@@ -51,11 +57,12 @@ public class I18N {
 	 * @return A translated string
 	 */
 	public static String t(String src) {
+		if (!isInited) return src;
 		try {
 			String target = tlMap.get(src);
 			return target != null ? target : src;
 		} catch (Exception e) {
-			System.err.println(e.getMessage());
+			ErrorHandler.error("Failed to read translations.", e, true);
 			return src;
 		}
 	}
@@ -71,5 +78,9 @@ public class I18N {
 
 	public static String getFontmap() {
 		return tlMap.toString();
+	}
+
+	public static File getBaseDir() {
+		return baseDir;
 	}
 }

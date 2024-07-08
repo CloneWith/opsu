@@ -53,18 +53,18 @@ import static clonewith.opsu.I18N.t;
  */
 public class Opsu extends StateBasedGame {
 	/** Game states. */
-	public static final int
-		STATE_SPLASH        = 0,
-		STATE_MAINMENU      = 1,
-		STATE_BUTTONMENU    = 2,
-		STATE_SONGMENU      = 3,
-		STATE_GAME          = 4,
-		STATE_GAMEPAUSEMENU = 5,
-		STATE_GAMERANKING   = 6,
-		STATE_DOWNLOADSMENU = 7;
+	public static final int STATE_SPLASH = 0,
+			STATE_MAINMENU = 1,
+			STATE_BUTTONMENU = 2,
+			STATE_SONGMENU = 3,
+			STATE_GAME = 4,
+			STATE_GAMEPAUSEMENU = 5,
+			STATE_GAMERANKING = 6,
+			STATE_DOWNLOADSMENU = 7;
 
 	/**
 	 * Constructor.
+	 *
 	 * @param name the program name
 	 */
 	public Opsu(String name) {
@@ -101,9 +101,6 @@ public class Opsu extends StateBasedGame {
 			System.exit(1);
 		});
 
-		// initialize translations
-		I18N.init();
-
 		// parse configuration file
 		try {
 			Options.parseOptions();
@@ -119,30 +116,27 @@ public class Opsu extends StateBasedGame {
 			if (e.getErrorCode() == SQLiteErrorCode.SQLITE_BUSY.code) {
 				Log.error(e);
 				errorAndExit(
-					null,
-					String.format(
-						t("""
-							%s could not be launched for one of these reasons:
-							- An instance of %s is already running.
-							- A database is locked for another reason (unlikely).\s"""),
-						OpsuConstants.PROJECT_NAME,
-						OpsuConstants.PROJECT_NAME
-					),
-					false
-				);
+						null,
+						String.format(
+								"""
+										%s could not be launched for one of these reasons:
+										- An instance of %s is already running.
+										- A database is locked for another reason (unlikely).\s""",
+								OpsuConstants.PROJECT_NAME,
+								OpsuConstants.PROJECT_NAME),
+						false);
 			} else
-				errorAndExit(e, t("The databases could not be initialized."), true);
+				errorAndExit(e, "The databases could not be initialized.", true);
 		} catch (ClassNotFoundException e) {
-			errorAndExit(e, t("Could not load sqlite-JDBC driver."), true);
+			errorAndExit(e, "Could not load sqlite-JDBC driver.", true);
 		} catch (Exception e) {
-			errorAndExit(e, t("The databases could not be initialized."), true);
+			errorAndExit(e, "The databases could not be initialized.", true);
 		}
 
 		// load natives
 		File nativeDir;
-		if (!Utils.isJarRunning() && (
-		    (nativeDir = new File("./target/natives/")).isDirectory() ||
-		    (nativeDir = new File("./build/natives/")).isDirectory()))
+		if (!Utils.isJarRunning() && ((nativeDir = new File("./target/natives/")).isDirectory() ||
+				(nativeDir = new File("./build/natives/")).isDirectory()))
 			;
 		else {
 			nativeDir = Options.NATIVE_DIR;
@@ -159,14 +153,12 @@ public class Opsu extends StateBasedGame {
 		// set the resource paths
 		ResourceLoader.addResourceLocation(new FileSystemLocation(new File("./res/")));
 
-
-
 		// check if just updated
 		if (args.length >= 2)
 			Updater.get().setUpdateInfo(args[0], args[1]);
 
 		// check for updates
-		Updater.get().getCurrentVersion();  // load this for the main menu
+		Updater.get().getCurrentVersion(); // load this for the main menu
 		if (!Options.isUpdaterDisabled()) {
 			new Thread(() -> {
 				try {
@@ -239,10 +231,10 @@ public class Opsu extends StateBasedGame {
 
 		// show confirmation dialog if any downloads are active
 		if (DownloadList.get().hasActiveDownloads() &&
-			UI.showExitConfirmation(DownloadList.EXIT_CONFIRMATION))
+				UI.showExitConfirmation(DownloadList.EXIT_CONFIRMATION))
 			return false;
 		return Updater.get().getStatus() != Updater.Status.UPDATE_DOWNLOADING ||
-			!UI.showExitConfirmation(Updater.EXIT_CONFIRMATION);
+				!UI.showExitConfirmation(Updater.EXIT_CONFIRMATION);
 	}
 
 	/**
@@ -258,22 +250,22 @@ public class Opsu extends StateBasedGame {
 
 	/**
 	 * Throws an error and exits the application with the given message.
-	 * @param e the exception that caused the crash
+	 *
+	 * @param e       the exception that caused the crash
 	 * @param message the message to display
-	 * @param report whether to ask to report the error
+	 * @param report  whether to ask to report the error
 	 */
 	private static void errorAndExit(Throwable e, String message, boolean report) {
 		// JARs will not run properly inside directories containing '!'
 		// http://bugs.java.com/view_bug.do?bug_id=4523159
 		if (Utils.isJarRunning() && Utils.getRunningDirectory() != null &&
-			Utils.getRunningDirectory().getAbsolutePath().indexOf('!') != -1)
+				Utils.getRunningDirectory().getAbsolutePath().indexOf('!') != -1)
 			ErrorHandler.error(
-				t("JARs cannot be run from some paths containing the '!' character. ") +
-				t("Please rename the file/directories and try again.\n\n") +
-				t("Path: ") + Utils.getRunningDirectory().getAbsolutePath(),
-				null,
-				false
-			);
+					t("JARs cannot be run from some paths containing the '!' character. ") +
+							t("Please rename the file/directories and try again.\n\n") +
+							t("Path: ") + Utils.getRunningDirectory().getAbsolutePath(),
+					null,
+					false);
 		else
 			ErrorHandler.error(message, e, report);
 		System.exit(1);

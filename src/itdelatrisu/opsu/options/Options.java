@@ -21,6 +21,8 @@ package itdelatrisu.opsu.options;
 import com.sun.jna.platform.win32.Advapi32Util;
 import com.sun.jna.platform.win32.Win32Exception;
 import com.sun.jna.platform.win32.WinReg;
+
+import clonewith.opsu.I18N;
 import itdelatrisu.opsu.*;
 import itdelatrisu.opsu.audio.MusicController;
 import itdelatrisu.opsu.beatmap.Beatmap;
@@ -110,8 +112,7 @@ public class Options {
 	public static final String VERSION_FILE = "version";
 
 	/** The user agent to use in HTTP requests. */
-	public static final String USER_AGENT =
-		"Mozilla/5.0 (Windows NT 10.0; Win64; x64) Firefox/129.0 AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 Edg/126.0.0.0";
+	public static final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Firefox/129.0 AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 Edg/126.0.0.0";
 
 	/** The beatmap directory. */
 	private static File beatmapDir;
@@ -139,6 +140,7 @@ public class Options {
 
 	/**
 	 * Returns whether the XDG flag in the manifest (if any) is set to "true".
+	 *
 	 * @return true if XDG directories are enabled, false otherwise
 	 */
 	private static boolean checkXDGFlag() {
@@ -160,13 +162,14 @@ public class Options {
 	/**
 	 * Returns the directory based on the XDG base directory specification for
 	 * Unix-like operating systems, only if the "XDG" flag is enabled.
-	 * @param env the environment variable to check (XDG_*_*)
+	 *
+	 * @param env      the environment variable to check (XDG_*_*)
 	 * @param fallback the fallback directory relative to ~home
 	 * @return the XDG base directory, or the working directory if unavailable
 	 */
 	private static File getXDGBaseDir(String env, String fallback) {
-		File workingDir = Utils.isJarRunning() ?
-			Utils.getRunningDirectory().getParentFile() : Utils.getWorkingDirectory();
+		File workingDir = Utils.isJarRunning() ? Utils.getRunningDirectory().getParentFile()
+				: Utils.getWorkingDirectory();
 
 		if (!USE_XDG)
 			return workingDir;
@@ -182,7 +185,8 @@ public class Options {
 			}
 			File dir = new File(rootPath, "opsu");
 			if (!dir.isDirectory() && !dir.mkdir())
-				ErrorHandler.error(String.format("Failed to create configuration folder at '%s/opsu'.", rootPath), null, false);
+				ErrorHandler.error(String.format("Failed to create configuration folder at '%s/opsu'.", rootPath), null,
+						false);
 			return dir;
 		} else
 			return workingDir;
@@ -191,6 +195,7 @@ public class Options {
 	/**
 	 * Returns the osu! installation directory.
 	 * This function only works on Windows, based on registry.
+	 *
 	 * @return the directory, or null if not found
 	 */
 	private static File getOsuInstallationDirectory() {
@@ -207,7 +212,7 @@ public class Options {
 		try {
 			value = Advapi32Util.registryGetStringValue(rootKey, regKey, regValue);
 		} catch (Win32Exception e) {
-			return null;  // key/value not found
+			return null; // key/value not found
 		}
 		Pattern pattern = Pattern.compile(regPathPattern);
 		Matcher m = pattern.matcher(value);
@@ -220,51 +225,78 @@ public class Options {
 	/** Game options. */
 	public enum GameOption {
 		// internal options (not displayed in-game)
-		BEATMAP_DIRECTORY ("BeatmapDirectory") {
+		BEATMAP_DIRECTORY("BeatmapDirectory") {
 			@Override
-			public String write() { return getBeatmapDir().getAbsolutePath(); }
+			public String write() {
+				return getBeatmapDir().getAbsolutePath();
+			}
 
 			@Override
-			public void read(String s) { beatmapDir = new File(s); }
+			public void read(String s) {
+				beatmapDir = new File(s);
+			}
 		},
-		IMPORT_DIRECTORY ("ImportDirectory") {
+		IMPORT_DIRECTORY("ImportDirectory") {
 			@Override
-			public String write() { return getImportDir().getAbsolutePath(); }
+			public String write() {
+				return getImportDir().getAbsolutePath();
+			}
 
 			@Override
-			public void read(String s) { importDir = new File(s); }
+			public void read(String s) {
+				importDir = new File(s);
+			}
 		},
-		SCREENSHOT_DIRECTORY ("ScreenshotDirectory") {
+		SCREENSHOT_DIRECTORY("ScreenshotDirectory") {
 			@Override
-			public String write() { return getScreenshotDir().getAbsolutePath(); }
+			public String write() {
+				return getScreenshotDir().getAbsolutePath();
+			}
 
 			@Override
-			public void read(String s) { screenshotDir = new File(s); }
+			public void read(String s) {
+				screenshotDir = new File(s);
+			}
 		},
-		REPLAY_DIRECTORY ("ReplayDirectory") {
+		REPLAY_DIRECTORY("ReplayDirectory") {
 			@Override
-			public String write() { return getReplayDir().getAbsolutePath(); }
+			public String write() {
+				return getReplayDir().getAbsolutePath();
+			}
 
 			@Override
-			public void read(String s) { replayDir = new File(s); }
+			public void read(String s) {
+				replayDir = new File(s);
+			}
 		},
-		SKIN_DIRECTORY ("SkinDirectory") {
+		SKIN_DIRECTORY("SkinDirectory") {
 			@Override
-			public String write() { return getSkinRootDir().getAbsolutePath(); }
+			public String write() {
+				return getSkinRootDir().getAbsolutePath();
+			}
 
 			@Override
-			public void read(String s) { skinRootDir = new File(s); }
+			public void read(String s) {
+				skinRootDir = new File(s);
+			}
 		},
-		FFMPEG_PATH ("FFmpegPath") {
+		FFMPEG_PATH("FFmpegPath") {
 			@Override
-			public String write() { return (FFmpegPath == null) ? "" : FFmpegPath.getAbsolutePath(); }
+			public String write() {
+				return (FFmpegPath == null) ? "" : FFmpegPath.getAbsolutePath();
+			}
 
 			@Override
-			public void read(String s) { if (!s.isEmpty()) FFmpegPath = new File(s); }
+			public void read(String s) {
+				if (!s.isEmpty())
+					FFmpegPath = new File(s);
+			}
 		},
-		THEME_SONG ("ThemeSong") {
+		THEME_SONG("ThemeSong") {
 			@Override
-			public String write() { return themeString; }
+			public String write() {
+				return themeString;
+			}
 
 			@Override
 			public void read(String s) {
@@ -273,14 +305,17 @@ public class Options {
 				Beatmap beatmap = getThemeBeatmap();
 				if (beatmap == null) {
 					Log.warn(String.format("The theme song \"%s\" data is invaild.", s));
-				} else if (!beatmap.audioFilename.isFile() && !ResourceLoader.resourceExists(beatmap.audioFilename.getName())) {
+				} else if (!beatmap.audioFilename.isFile()
+						&& !ResourceLoader.resourceExists(beatmap.audioFilename.getName())) {
 					Log.warn(String.format("Cannot find theme song [%s].", beatmap.audioFilename.getAbsolutePath()));
 				}
 			}
 		},
-		THEME_SONG_TIMINGPOINT ("ThemeSongTiming") {
+		THEME_SONG_TIMINGPOINT("ThemeSongTiming") {
 			@Override
-			public String write() { return themeTimingPoint; }
+			public String write() {
+				return themeTimingPoint;
+			}
 
 			@Override
 			public void read(String s) {
@@ -294,14 +329,18 @@ public class Options {
 		},
 
 		// in-game options
-		SCREEN_RESOLUTION ("Resolution", "ScreenResolution", "") {
+		SCREEN_RESOLUTION("Resolution", "ScreenResolution", "") {
 			private Resolution[] itemList = null;
 
 			@Override
-			public boolean isRestartRequired() { return true; }
+			public boolean isRestartRequired() {
+				return true;
+			}
 
 			@Override
-			public String getValueString() { return resolution.toString(); }
+			public String getValueString() {
+				return resolution.toString();
+			}
 
 			@Override
 			public Object[] getItemList() {
@@ -333,25 +372,29 @@ public class Options {
 				try {
 					Resolution res = Resolution.valueOf(String.format("RES_%s", s.replace('x', '_')));
 					resolution = res;
-				} catch (IllegalArgumentException e) {}
+				} catch (IllegalArgumentException e) {
+				}
 			}
 		},
-		FULLSCREEN ("Fullscreen mode", "Fullscreen", "Switches to dedicated fullscreen mode.", false) {
+		FULLSCREEN("Fullscreen mode", "Fullscreen", "Switches to dedicated fullscreen mode.", false) {
 			@Override
-			public boolean isRestartRequired() { return true; }
+			public boolean isRestartRequired() {
+				return true;
+			}
 
 			@Override
 			public void toggle(GameContainer container) {
 				// check if fullscreen mode is possible with this resolution
 				if (!getBooleanValue() && !resolution.hasFullscreenDisplayMode()) {
-					UI.getNotificationManager().sendBarNotification(String.format("Fullscreen mode is not available at resolution %s", resolution.toString()));
+					UI.getNotificationManager().sendBarNotification(
+							String.format("Fullscreen mode is not available at resolution %s", resolution.toString()));
 					return;
 				}
 
 				super.toggle(container);
 			}
 		},
-		SKIN ("Skin", "Skin", "") {
+		SKIN("Skin", "Skin", "") {
 			private String[] itemList = null;
 			private String[] DirList = null;
 
@@ -364,7 +407,7 @@ public class Options {
 				DirList = new String[dirs.length + 1];
 				itemList[0] = Skin.DEFAULT_SKIN_NAME;
 				DirList[0] = null;
-				for (int i = 0; i < dirs.length; i++){
+				for (int i = 0; i < dirs.length; i++) {
 					Skin r = SkinLoader.loadSkin(dirs[i]);
 					// itemList[i + 1] = r.getName() + "(" + r.getAuthor() + ")";
 					itemList[i + 1] = r.getName();
@@ -373,7 +416,9 @@ public class Options {
 			}
 
 			@Override
-			public String getValueString() { return skinName; }
+			public String getValueString() {
+				return skinName;
+			}
 
 			@Override
 			public Object[] getItemList() {
@@ -397,16 +442,17 @@ public class Options {
 			}
 
 			@Override
-			public void read(String s) { skinName = s; }
+			public void read(String s) {
+				skinName = s;
+			}
 		},
-		TARGET_FPS ("Frame limiter", "FrameSync", "Higher values may cause high CPU usage.") {
+		TARGET_FPS("Frame limiter", "FrameSync", "Higher values may cause high CPU usage.") {
 			private String[] itemList = null;
 
 			@Override
 			public String getValueString() {
 				int fps = getTargetFPS();
-				return (fps == -1) ? "Unlimited" :
-					String.format((fps == 60) ? "%dfps (vsync)" : "%dfps", fps);
+				return (fps == -1) ? "Unlimited" : String.format((fps == 60) ? "%dfps (vsync)" : "%dfps", fps);
 			}
 
 			@Override
@@ -415,8 +461,8 @@ public class Options {
 					itemList = new String[targetFPS.length];
 					for (int i = 0; i < targetFPS.length; i++) {
 						int fps = targetFPS[i];
-						itemList[i] = (fps == -1) ? "Unlimited" :
-							String.format((fps == 60) ? "%dfps (vsync)" : "%dfps", fps);
+						itemList[i] = (fps == -1) ? "Unlimited"
+								: String.format((fps == 60) ? "%dfps (vsync)" : "%dfps", fps);
 					}
 				}
 				return itemList;
@@ -435,7 +481,9 @@ public class Options {
 			}
 
 			@Override
-			public String write() { return Integer.toString(targetFPS[targetFPSindex]); }
+			public String write() {
+				return Integer.toString(targetFPS[targetFPSindex]);
+			}
 
 			@Override
 			public void read(String s) {
@@ -448,19 +496,65 @@ public class Options {
 				}
 			}
 		},
-		SHOW_FPS ("Show FPS counter", "FpsCounter", "Show a subtle FPS counter in the bottom right corner of the screen.", true) {
+		LANGUAGE("Language", "UILang", "The interface language.") {
+			private String[] itemList = null;
+			// TODO: Display human-friendly items
+			@Override
+			public boolean isRestartRequired() {
+				return true;
+			}
+
+			@Override
+			public Object[] getItemList() {
+				File[] langList = I18N.getBaseDir().listFiles();
+				itemList = new String[langList.length + 1];
+				// The first item is always English
+				itemList[0] = "English";
+				// Add entries based on contents in res/i10n
+				for (int i = 1; i < itemList.length; i++) {
+					int postfixLoc = langList[i - 1].getName().indexOf('.');
+					itemList[i] = langList[i - 1].getName().substring(9, postfixLoc);
+				}
+				return itemList;
+			}
+
+			@Override
+			public String getValueString() {
+				return lang;
+			}
+
+			@Override
+			public void selectItem(int index, GameContainer container) {
+				lang = itemList[index].toString();
+			}
+
+			@Override
+			public String write() {
+				return lang;
+			}
+		},
+		NATIVE_LANGUAGE("Use native language", "UseNativeLang", "Use system language settings.", false) {
+			@Override
+			public boolean isRestartRequired() {
+				return true;
+			}
+		},
+		SHOW_FPS("Show FPS counter", "FpsCounter",
+				"Show a subtle FPS counter in the bottom right corner of the screen.", true) {
 			@Override
 			public void toggle(GameContainer container) {
 				super.toggle(container);
 				UI.resetFPSDisplay();
 			}
 		},
-		SHOW_UNICODE ("Prefer metadata in original language", "ShowUnicode", "Where available, song titles will be shown in their native language (and character-set).", false) {
+		SHOW_UNICODE("Prefer metadata in original language", "ShowUnicode",
+				"Where available, song titles will be shown in their native language (and character-set).", false) {
 			@Override
 			public void toggle(GameContainer container) {
 				super.toggle(container);
 				if (bool) {
 					try {
+						Fonts.XLARGE.loadGlyphs();
 						Fonts.LARGE.loadGlyphs();
 						Fonts.MEDIUM.loadGlyphs();
 						Fonts.DEFAULT.loadGlyphs();
@@ -470,11 +564,13 @@ public class Options {
 				}
 			}
 		},
-		SCREENSHOT_FORMAT ("Screenshot format", "ScreenshotFormat", "Press F12 to take a screenshot.") {
+		SCREENSHOT_FORMAT("Screenshot format", "ScreenshotFormat", "Press F12 to take a screenshot.") {
 			private String[] itemList = null;
 
 			@Override
-			public String getValueString() { return screenshotFormat[screenshotFormatIndex].toUpperCase(); }
+			public String getValueString() {
+				return screenshotFormat[screenshotFormatIndex].toUpperCase();
+			}
 
 			@Override
 			public Object[] getItemList() {
@@ -487,10 +583,14 @@ public class Options {
 			}
 
 			@Override
-			public void selectItem(int index, GameContainer container) { screenshotFormatIndex = index; }
+			public void selectItem(int index, GameContainer container) {
+				screenshotFormatIndex = index;
+			}
 
 			@Override
-			public String write() { return Integer.toString(screenshotFormatIndex); }
+			public String write() {
+				return Integer.toString(screenshotFormatIndex);
+			}
 
 			@Override
 			public void read(String s) {
@@ -499,190 +599,281 @@ public class Options {
 					screenshotFormatIndex = i;
 			}
 		},
-		CURSOR_SIZE ("Cursor size", "CursorSize", "Change the cursor scale.", 100, 50, 200) {
-			@Override
-			public String getValueString() { return String.format("%.2fx", val / 100f); }
-
-			@Override
-			public String write() { return String.format(Locale.US, "%.2f", val / 100f); }
-
-			@Override
-			public void read(String s) {
-				int i = (int) (Float.parseFloat(s) * 100f);
-				if (i >= getMinValue() && i <= getMaxValue())
-					val = i;
-			}
-		},
-		WARNINGARROW_TINT_WHITE ("Tint warning arrow white", "TintWarnArrowWhite", "Tint the warning arrow appeared before the end of a break period white instead of red.\nThis overrides the skin settings.", true),
-		BUILTIN_BACK_BUTTON ("Always use builtin back button", "BuiltinBackButton", "Use the builtin back button style regardless of the skin.", false),
-		DYNAMIC_BACKGROUND ("Dynamic backgrounds", "DynamicBackground", "The current beatmap background will be used as the main menu background.", true),
-		LOAD_VERBOSE ("Detailed loading progress", "LoadVerbose", "Display more verbose loading progress in the splash screen.", false),
-		MASTER_VOLUME ("Master", "VolumeUniversal", "Global volume level.", 35, 0, 100) {
-			@Override
-			public void setValue(int value) {
-				super.setValue(value);
-				SoundStore.get().setMusicVolume(getMasterVolume() * getMusicVolume());
-			}
-		},
-		MUSIC_VOLUME ("Music", "VolumeMusic", "Music volume.", 80, 0, 100) {
-			@Override
-			public void setValue(int value) {
-				super.setValue(value);
-				SoundStore.get().setMusicVolume(getMasterVolume() * getMusicVolume());
-			}
-		},
-		EFFECT_VOLUME ("Effects", "VolumeEffect", "Menu and game sound effects volume.", 70, 0, 100),
-		HITSOUND_VOLUME ("Hit sounds", "VolumeHitSound", "Hit sounds volume.", 30, 0, 100),
-		MUSIC_OFFSET ("Universal offset", "Offset", "Adjust this value if hit objects are out of sync.", -75, -500, 500) {
-			@Override
-			public String getValueString() { return String.format("%dms", val); }
-		},
-		DISABLE_GAMEPLAY_SOUNDS ("Disable sound effects in gameplay", "DisableGameplaySound", "Mute all sound effects during gameplay only.", false),
-		DISABLE_SOUNDS ("Disable all sound effects", "DisableSound", "May resolve Linux sound driver issues.\nRequires a restart.", false) {
-			@Override
-			public boolean isRestartRequired() { return true; }
-		},
-		HEARTBEAT ("Heartbeat sound (unstable)", "Heartbeat", "Play heartbeat sounds when the cursor hovers on the logo. May sounds off beat.", false),
-		KEY_LEFT ("Left game key", "keyOsuLeft", "Select this option to input a key.") {
-			@Override
-			public String getValueString() { return Keyboard.getKeyName(getGameKeyLeft()); }
-
-			@Override
-			public String write() { return Keyboard.getKeyName(getGameKeyLeft()); }
-
-			@Override
-			public void read(String s) { setGameKeyLeft(Keyboard.getKeyIndex(s)); }
-		},
-		KEY_RIGHT ("Right game key", "keyOsuRight", "Select this option to input a key.") {
-			@Override
-			public String getValueString() { return Keyboard.getKeyName(getGameKeyRight()); }
-
-			@Override
-			public String write() { return Keyboard.getKeyName(getGameKeyRight()); }
-
-			@Override
-			public void read(String s) { setGameKeyRight(Keyboard.getKeyIndex(s)); }
-		},
-		DISABLE_MOUSE_WHEEL ("Disable mouse wheel in play mode", "MouseDisableWheel", "Disable the functionality to  adjust the volume and pause the game with the mouse wheel during gameplay.", false),
-		DISABLE_MOUSE_BUTTONS ("Disable mouse buttons in play mode", "MouseDisableButtons", "Disable all mouse buttons.\nSpecifically for people who use their keyboard to click.", false),
-		BACKGROUND_DIM ("Background dim", "DimLevel", "Percentage to dim the background image during gameplay.", 50, 0, 100),
-		FORCE_DEFAULT_PLAYFIELD ("Force default playfield", "ForceDefaultPlayfield", "Overrides the song background with the default playfield background.", false),
-		ENABLE_VIDEOS ("Background video", "Video", "Enables background video playback.\nIf you get a large amount of lag on beatmaps with video, try disabling this feature.", true),
-		IGNORE_BEATMAP_SKINS ("Ignore all beatmap skins", "IgnoreBeatmapSkins", "Defaults game settings to never use skin element overrides provided by beatmaps.", false),
-		FORCE_SKIN_CURSOR ("Always use skin cursor", "UseSkinCursor", "The selected skin's cursor will override any beatmap-specific cursor modifications.", false),
-		KEEP_AUTO ("Keep the Auto mod on", "KeepAuto", "Keep the Auto mod on after gameplay.", false),
-		PAUSE_IN_REPLAY ("Enable pause screen in Auto play and replays", "PauseAutoReplay", "Allow players to press Esc to show the pause screen during replays and gameplay with the Auto mod on.", false),
-		SNAKING_SLIDERS ("Snaking sliders", "SnakingSliders", "Sliders gradually snake out from their starting point.", true),
-		EXPERIMENTAL_SLIDERS ("Use experimental sliders", "ExperimentalSliders", "Render sliders using the experimental slider style.", false),
-		EXPERIMENTAL_SLIDERS_CAPS ("Draw slider caps", "ExperimentalSliderCaps", "Draw caps (end circles) on sliders.\nOnly applies to experimental sliders.", false),
-		EXPERIMENTAL_SLIDERS_SHRINK ("Shrinking sliders", "ExperimentalSliderShrink", "Sliders shrink toward their ending point when the ball passes.\nOnly applies to experimental sliders.", true),
-		EXPERIMENTAL_SLIDERS_MERGE ("Merging sliders", "ExperimentalSliderMerge", "For overlapping sliders, don't draw the edges and combine the slider tracks where they cross.\nOnly applies to experimental sliders.", true),
-		SHOW_HIT_LIGHTING ("Hit lighting", "HitLighting", "Adds a subtle glow behind hit explosions which lights the playfield.", true),
-		SHOW_COMBO_BURSTS ("Combo bursts", "ComboBurst", "A character image bursts from the side of the screen at combo milestones.", true),
-		SHOW_PERFECT_HIT ("Perfect hits", "PerfectHit", "Shows perfect hit result bursts (300s, slider ticks).", true),
-		SHOW_FOLLOW_POINTS ("Follow points", "FollowPoints", "Shows follow points between hit objects.", true),
-		SHOW_HIT_ERROR_BAR ("Hit error bar", "ScoreMeter", "Shows precisely how accurate you were with each hit.", false),
-		ALWAYS_SHOW_KEY_OVERLAY ("Always show key overlay", "KeyOverlay", "Show the key overlay when playing instead of only on replays.", false),
-		LOAD_HD_IMAGES ("Load HD images", "LoadHDImages", String.format("Loads HD (%s) images when available.\nIncreases memory usage and loading times.", GameImage.HD_SUFFIX), true),
-		FIXED_CS ("Fixed CS", "FixedCS", "Determines the size of circles and sliders.", 0, 0, 100) {
-			@Override
-			public String getValueString() { return (val == 0) ? "Disabled" : String.format("%.1f", val / 10f); }
-
-			@Override
-			public String write() { return String.format(Locale.US, "%.1f", val / 10f); }
-
-			@Override
-			public void read(String s) {
-				int i = (int) (Float.parseFloat(s) * 10f);
-				if (i >= getMinValue() && i <= getMaxValue())
-					val = i;
-			}
-		},
-		FIXED_HP ("Fixed HP", "FixedHP", "Determines the rate at which health decreases.", 0, 0, 100) {
-			@Override
-			public String getValueString() { return (val == 0) ? "Disabled" : String.format("%.1f", val / 10f); }
-
-			@Override
-			public String write() { return String.format(Locale.US, "%.1f", val / 10f); }
-
-			@Override
-			public void read(String s) {
-				int i = (int) (Float.parseFloat(s) * 10f);
-				if (i >= getMinValue() && i <= getMaxValue())
-					val = i;
-			}
-		},
-		FIXED_AR ("Fixed AR", "FixedAR", "Determines how long hit circles stay on the screen.", 0, 0, 100) {
-			@Override
-			public String getValueString() { return (val == 0) ? "Disabled" : String.format("%.1f", val / 10f); }
-
-			@Override
-			public String write() { return String.format(Locale.US, "%.1f", val / 10f); }
-
-			@Override
-			public void read(String s) {
-				int i = (int) (Float.parseFloat(s) * 10f);
-				if (i >= getMinValue() && i <= getMaxValue())
-					val = i;
-			}
-		},
-		FIXED_OD ("Fixed OD", "FixedOD", "Determines the time window for hit results.", 0, 0, 100) {
-			@Override
-			public String getValueString() { return (val == 0) ? "Disabled" : String.format("%.1f", val / 10f); }
-
-			@Override
-			public String write() { return String.format(Locale.US, "%.1f", val / 10f); }
-
-			@Override
-			public void read(String s) {
-				int i = (int) (Float.parseFloat(s) * 10f);
-				if (i >= getMinValue() && i <= getMaxValue())
-					val = i;
-			}
-		},
-		FIXED_SPEED ("Fixed speed", "FixedSpeed", "Determines the speed of the music.", 0, 0, 300) {
-			@Override
-			public String getValueString() { return (val == 0) ? "Disabled" : String.format("%.2fx", val / 100f); }
-
-			@Override
-			public String write() { return String.format(Locale.US, "%.2f", val / 100f); }
-
-			@Override
-			public void read(String s) {
-				int i = (int) (Float.parseFloat(s) * 100f);
-				if (i >= getMinValue() && i <= getMaxValue())
-					val = i;
-			}
-		},
-		UICOLOR_CUSTOM ("Customize interface color", "CustomUIColor", "Use your own color for the interface of opsu!", false),
-		UICOLOR_R ("Interface color Red", "CustomColorR", "Red color value.", 235, 0, 255) {
-			@Override
-			public String getValueString() { return String.format("%d", val); }
-		},
-		UICOLOR_G ("Interface color Green", "CustomColorG", "Green color value.", 117, 0, 255) {
-			@Override
-			public String getValueString() { return String.format("%d", val); }
-		},
-		UICOLOR_B ("Interface color Blue", "CustomColorB", "Blue color value.", 139, 0, 255) {
-			@Override
-			public String getValueString() { return String.format("%d", val); }
-		},
-		REAL_AUTO ("Real Auto player", "RealAuto", "Auto also fails!", true),
-		CHECKPOINT ("Track checkpoint", "Checkpoint", "Press Ctrl+L while playing to load a checkpoint, and Ctrl+S to set one.", 0, 0, 1800) {
+		CURSOR_SIZE("Cursor size", "CursorSize", "Change the cursor scale.", 100, 50, 200) {
 			@Override
 			public String getValueString() {
-				return (val == 0) ? "Disabled" : String.format("%02d:%02d",
-						TimeUnit.SECONDS.toMinutes(val),
-						val - TimeUnit.MINUTES.toSeconds(TimeUnit.SECONDS.toMinutes(val)));
+				return String.format("%.2fx", val / 100f);
+			}
+
+			@Override
+			public String write() {
+				return String.format(Locale.US, "%.2f", val / 100f);
+			}
+
+			@Override
+			public void read(String s) {
+				int i = (int) (Float.parseFloat(s) * 100f);
+				if (i >= getMinValue() && i <= getMaxValue())
+					val = i;
 			}
 		},
-		PARALLAX ("Parallax", "MenuParallax", "Add a parallax effect based on the current cursor position.", true),
-		ENABLE_THEME_SONG ("Theme song", "MenuMusic", OpsuConstants.PROJECT_NAME + " will play themed music throughout the game, instead of using random beatmaps.", true),
-		REPLAY_SEEKING ("Replay seeking", "ReplaySeeking", "Enable a seeking bar on the left side of the screen during replays.", false),
-		DISABLE_UPDATER ("Disable automatic updates", "DisableUpdater", "Disable checking for updates when the game starts.", false),
-		ENABLE_WATCH_SERVICE ("Watch service", "WatchService", "Watch the beatmap directory for changes. Requires a restart.", false) {
+		WARNINGARROW_TINT_WHITE("Tint warning arrow white", "TintWarnArrowWhite",
+				"Tint the warning arrow appeared before the end of a break period white instead of red.\nThis overrides the skin settings.",
+				true),
+		BUILTIN_BACK_BUTTON("Always use builtin back button", "BuiltinBackButton",
+				"Use the builtin back button style regardless of the skin.", false),
+		DYNAMIC_BACKGROUND("Dynamic backgrounds", "DynamicBackground",
+				"The current beatmap background will be used as the main menu background.", true),
+		LOAD_VERBOSE("Detailed loading progress", "LoadVerbose",
+				"Display more verbose loading progress in the splash screen.", false),
+		MASTER_VOLUME("Master", "VolumeUniversal", "Global volume level.", 35, 0, 100) {
 			@Override
-			public boolean isRestartRequired() { return true; }
+			public void setValue(int value) {
+				super.setValue(value);
+				SoundStore.get().setMusicVolume(getMasterVolume() * getMusicVolume());
+			}
+		},
+		MUSIC_VOLUME("Music", "VolumeMusic", "Music volume.", 80, 0, 100) {
+			@Override
+			public void setValue(int value) {
+				super.setValue(value);
+				SoundStore.get().setMusicVolume(getMasterVolume() * getMusicVolume());
+			}
+		},
+		EFFECT_VOLUME("Effects", "VolumeEffect", "Menu and game sound effects volume.", 70, 0, 100),
+		HITSOUND_VOLUME("Hit sounds", "VolumeHitSound", "Hit sounds volume.", 30, 0, 100),
+		MUSIC_OFFSET("Universal offset", "Offset", "Adjust this value if hit objects are out of sync.", -75, -500,
+				500) {
+			@Override
+			public String getValueString() {
+				return String.format("%dms", val);
+			}
+		},
+		DISABLE_GAMEPLAY_SOUNDS("Disable sound effects in gameplay", "DisableGameplaySound",
+				"Mute all sound effects during gameplay only.", false),
+		DISABLE_SOUNDS("Disable all sound effects", "DisableSound",
+				"May resolve Linux sound driver issues.\nRequires a restart.", false) {
+			@Override
+			public boolean isRestartRequired() {
+				return true;
+			}
+		},
+		HEARTBEAT("Heartbeat sound (unstable)", "Heartbeat",
+				"Play heartbeat sounds when the cursor hovers on the logo. May sounds off beat.", false),
+		KEY_LEFT("Left game key", "keyOsuLeft", "Select this option to input a key.") {
+			@Override
+			public String getValueString() {
+				return Keyboard.getKeyName(getGameKeyLeft());
+			}
+
+			@Override
+			public String write() {
+				return Keyboard.getKeyName(getGameKeyLeft());
+			}
+
+			@Override
+			public void read(String s) {
+				setGameKeyLeft(Keyboard.getKeyIndex(s));
+			}
+		},
+		KEY_RIGHT("Right game key", "keyOsuRight", "Select this option to input a key.") {
+			@Override
+			public String getValueString() {
+				return Keyboard.getKeyName(getGameKeyRight());
+			}
+
+			@Override
+			public String write() {
+				return Keyboard.getKeyName(getGameKeyRight());
+			}
+
+			@Override
+			public void read(String s) {
+				setGameKeyRight(Keyboard.getKeyIndex(s));
+			}
+		},
+		DISABLE_MOUSE_WHEEL("Disable mouse wheel in play mode", "MouseDisableWheel",
+				"Disable the functionality to  adjust the volume and pause the game with the mouse wheel during gameplay.",
+				false),
+		DISABLE_MOUSE_BUTTONS("Disable mouse buttons in play mode", "MouseDisableButtons",
+				"Disable all mouse buttons.\nSpecifically for people who use their keyboard to click.", false),
+		BACKGROUND_DIM("Background dim", "DimLevel", "Percentage to dim the background image during gameplay.", 50, 0,
+				100),
+		FORCE_DEFAULT_PLAYFIELD("Force default playfield", "ForceDefaultPlayfield",
+				"Overrides the song background with the default playfield background.", false),
+		ENABLE_VIDEOS("Background video", "Video",
+				"Enables background video playback.\nIf you get a large amount of lag on beatmaps with video, try disabling this feature.",
+				true),
+		IGNORE_BEATMAP_SKINS("Ignore all beatmap skins", "IgnoreBeatmapSkins",
+				"Defaults game settings to never use skin element overrides provided by beatmaps.", false),
+		FORCE_SKIN_CURSOR("Always use skin cursor", "UseSkinCursor",
+				"The selected skin's cursor will override any beatmap-specific cursor modifications.", false),
+		KEEP_AUTO("Keep the Auto mod on", "KeepAuto", "Keep the Auto mod on after gameplay.", false),
+		PAUSE_IN_REPLAY("Enable pause screen in Auto play and replays", "PauseAutoReplay",
+				"Allow players to press Esc to show the pause screen during replays and gameplay with the Auto mod on.",
+				false),
+		SNAKING_SLIDERS("Snaking sliders", "SnakingSliders", "Sliders gradually snake out from their starting point.",
+				true),
+		EXPERIMENTAL_SLIDERS("Use experimental sliders", "ExperimentalSliders",
+				"Render sliders using the experimental slider style.", false),
+		EXPERIMENTAL_SLIDERS_CAPS("Draw slider caps", "ExperimentalSliderCaps",
+				"Draw caps (end circles) on sliders.\nOnly applies to experimental sliders.", false),
+		EXPERIMENTAL_SLIDERS_SHRINK("Shrinking sliders", "ExperimentalSliderShrink",
+				"Sliders shrink toward their ending point when the ball passes.\nOnly applies to experimental sliders.",
+				true),
+		EXPERIMENTAL_SLIDERS_MERGE("Merging sliders", "ExperimentalSliderMerge",
+				"For overlapping sliders, don't draw the edges and combine the slider tracks where they cross.\nOnly applies to experimental sliders.",
+				true),
+		SHOW_HIT_LIGHTING("Hit lighting", "HitLighting",
+				"Adds a subtle glow behind hit explosions which lights the playfield.", true),
+		SHOW_COMBO_BURSTS("Combo bursts", "ComboBurst",
+				"A character image bursts from the side of the screen at combo milestones.", true),
+		SHOW_PERFECT_HIT("Perfect hits", "PerfectHit", "Shows perfect hit result bursts (300s, slider ticks).", true),
+		SHOW_FOLLOW_POINTS("Follow points", "FollowPoints", "Shows follow points between hit objects.", true),
+		SHOW_HIT_ERROR_BAR("Hit error bar", "ScoreMeter", "Shows precisely how accurate you were with each hit.",
+				false),
+		ALWAYS_SHOW_KEY_OVERLAY("Always show key overlay", "KeyOverlay",
+				"Show the key overlay when playing instead of only on replays.", false),
+		LOAD_HD_IMAGES("Load HD images", "LoadHDImages",
+				String.format("Loads HD (%s) images when available.\nIncreases memory usage and loading times.",
+						GameImage.HD_SUFFIX),
+				true),
+		FIXED_CS("Fixed CS", "FixedCS", "Determines the size of circles and sliders.", 0, 0, 100) {
+			@Override
+			public String getValueString() {
+				return (val == 0) ? "Disabled" : String.format("%.1f", val / 10f);
+			}
+
+			@Override
+			public String write() {
+				return String.format(Locale.US, "%.1f", val / 10f);
+			}
+
+			@Override
+			public void read(String s) {
+				int i = (int) (Float.parseFloat(s) * 10f);
+				if (i >= getMinValue() && i <= getMaxValue())
+					val = i;
+			}
+		},
+		FIXED_HP("Fixed HP", "FixedHP", "Determines the rate at which health decreases.", 0, 0, 100) {
+			@Override
+			public String getValueString() {
+				return (val == 0) ? "Disabled" : String.format("%.1f", val / 10f);
+			}
+
+			@Override
+			public String write() {
+				return String.format(Locale.US, "%.1f", val / 10f);
+			}
+
+			@Override
+			public void read(String s) {
+				int i = (int) (Float.parseFloat(s) * 10f);
+				if (i >= getMinValue() && i <= getMaxValue())
+					val = i;
+			}
+		},
+		FIXED_AR("Fixed AR", "FixedAR", "Determines how long hit circles stay on the screen.", 0, 0, 100) {
+			@Override
+			public String getValueString() {
+				return (val == 0) ? "Disabled" : String.format("%.1f", val / 10f);
+			}
+
+			@Override
+			public String write() {
+				return String.format(Locale.US, "%.1f", val / 10f);
+			}
+
+			@Override
+			public void read(String s) {
+				int i = (int) (Float.parseFloat(s) * 10f);
+				if (i >= getMinValue() && i <= getMaxValue())
+					val = i;
+			}
+		},
+		FIXED_OD("Fixed OD", "FixedOD", "Determines the time window for hit results.", 0, 0, 100) {
+			@Override
+			public String getValueString() {
+				return (val == 0) ? "Disabled" : String.format("%.1f", val / 10f);
+			}
+
+			@Override
+			public String write() {
+				return String.format(Locale.US, "%.1f", val / 10f);
+			}
+
+			@Override
+			public void read(String s) {
+				int i = (int) (Float.parseFloat(s) * 10f);
+				if (i >= getMinValue() && i <= getMaxValue())
+					val = i;
+			}
+		},
+		FIXED_SPEED("Fixed speed", "FixedSpeed", "Determines the speed of the music.", 0, 0, 300) {
+			@Override
+			public String getValueString() {
+				return (val == 0) ? "Disabled" : String.format("%.2fx", val / 100f);
+			}
+
+			@Override
+			public String write() {
+				return String.format(Locale.US, "%.2f", val / 100f);
+			}
+
+			@Override
+			public void read(String s) {
+				int i = (int) (Float.parseFloat(s) * 100f);
+				if (i >= getMinValue() && i <= getMaxValue())
+					val = i;
+			}
+		},
+		UICOLOR_CUSTOM("Customize interface color", "CustomUIColor", "Use your own color for the interface of opsu!",
+				false),
+		UICOLOR_R("Interface color Red", "CustomColorR", "Red color value.", 235, 0, 255) {
+			@Override
+			public String getValueString() {
+				return String.format("%d", val);
+			}
+		},
+		UICOLOR_G("Interface color Green", "CustomColorG", "Green color value.", 117, 0, 255) {
+			@Override
+			public String getValueString() {
+				return String.format("%d", val);
+			}
+		},
+		UICOLOR_B("Interface color Blue", "CustomColorB", "Blue color value.", 139, 0, 255) {
+			@Override
+			public String getValueString() {
+				return String.format("%d", val);
+			}
+		},
+		REAL_AUTO("Real Auto player", "RealAuto", "Auto also fails!", true),
+		CHECKPOINT("Track checkpoint", "Checkpoint",
+				"Press Ctrl+L while playing to load a checkpoint, and Ctrl+S to set one.", 0, 0, 1800) {
+			@Override
+			public String getValueString() {
+				return (val == 0) ? "Disabled"
+						: String.format("%02d:%02d",
+								TimeUnit.SECONDS.toMinutes(val),
+								val - TimeUnit.MINUTES.toSeconds(TimeUnit.SECONDS.toMinutes(val)));
+			}
+		},
+		PARALLAX("Parallax", "MenuParallax", "Add a parallax effect based on the current cursor position.", true),
+		ENABLE_THEME_SONG("Theme song", "MenuMusic",
+				OpsuConstants.PROJECT_NAME
+						+ " will play themed music throughout the game, instead of using random beatmaps.",
+				true),
+		REPLAY_SEEKING("Replay seeking", "ReplaySeeking",
+				"Enable a seeking bar on the left side of the screen during replays.", false),
+		DISABLE_UPDATER("Disable automatic updates", "DisableUpdater",
+				"Disable checking for updates when the game starts.", false),
+		ENABLE_WATCH_SERVICE("Watch service", "WatchService",
+				"Watch the beatmap directory for changes. Requires a restart.", false) {
+			@Override
+			public boolean isRestartRequired() {
+				return true;
+			}
 		};
 
 		/** Option name. */
@@ -704,16 +895,22 @@ public class Options {
 		private int max, min;
 
 		/** Option types. */
-		public enum OptionType { BOOLEAN, NUMERIC, SELECT }
+		public enum OptionType {
+			BOOLEAN, NUMERIC, SELECT
+		}
 
 		/** Option type. */
 		private OptionType type = OptionType.SELECT;
 
-		/** Whether this group should be visible (used for filtering in the options menu). */
+		/**
+		 * Whether this group should be visible (used for filtering in the options
+		 * menu).
+		 */
 		private boolean visible = true;
 
 		/**
 		 * Constructor for internal options (not displayed in-game).
+		 *
 		 * @param displayName the option name, as displayed in the configuration file
 		 */
 		GameOption(String displayName) {
@@ -722,7 +919,8 @@ public class Options {
 
 		/**
 		 * Constructor for other option types.
-		 * @param name the option name
+		 *
+		 * @param name        the option name
 		 * @param displayName the option name, as displayed in the configuration file
 		 * @param description the option description
 		 */
@@ -734,10 +932,11 @@ public class Options {
 
 		/**
 		 * Constructor for boolean options.
-		 * @param name the option name
+		 *
+		 * @param name        the option name
 		 * @param displayName the option name, as displayed in the configuration file
 		 * @param description the option description
-		 * @param value the default boolean value
+		 * @param value       the default boolean value
 		 */
 		GameOption(String name, String displayName, String description, boolean value) {
 			this(name, displayName, description);
@@ -747,10 +946,11 @@ public class Options {
 
 		/**
 		 * Constructor for numeric options.
-		 * @param name the option name
+		 *
+		 * @param name        the option name
 		 * @param displayName the option name, as displayed in the configuration file
 		 * @param description the option description
-		 * @param value the default integer value
+		 * @param value       the default integer value
 		 */
 		GameOption(String name, String displayName, String description, int value, int min, int max) {
 			this(name, displayName, description);
@@ -762,88 +962,129 @@ public class Options {
 
 		/**
 		 * Returns the option name.
+		 *
 		 * @return the name string
 		 */
-		public String getName() { return name; }
+		public String getName() {
+			return name;
+		}
 
 		/**
 		 * Returns the option name, as displayed in the configuration file.
+		 *
 		 * @return the display name string
 		 */
-		public String getDisplayName() { return displayName; }
+		public String getDisplayName() {
+			return displayName;
+		}
 
 		/**
 		 * Returns the option description.
+		 *
 		 * @return the description string
 		 */
-		public String getDescription() { return description; }
+		public String getDescription() {
+			return description;
+		}
 
 		/**
 		 * Returns the option type.
+		 *
 		 * @return the type
 		 */
-		public OptionType getType() { return type; }
+		public OptionType getType() {
+			return type;
+		}
 
 		/**
 		 * Returns whether a restart is required for the option to take effect.
+		 *
 		 * @return true if a restart is required, false otherwise
 		 */
-		public boolean isRestartRequired() { return false; }
+		public boolean isRestartRequired() {
+			return false;
+		}
 
 		/**
 		 * Returns the boolean value for the option, if applicable.
+		 *
 		 * @return the boolean value
 		 */
-		public boolean getBooleanValue() { return bool; }
+		public boolean getBooleanValue() {
+			return bool;
+		}
 
 		/**
 		 * Returns the integer value for the option, if applicable.
+		 *
 		 * @return the integer value
 		 */
-		public int getIntegerValue() { return val; }
+		public int getIntegerValue() {
+			return val;
+		}
 
 		/**
 		 * Returns the minimum integer value for this option, if applicable.
+		 *
 		 * @return the minimum integer value
 		 */
-		public int getMinValue() { return min; }
+		public int getMinValue() {
+			return min;
+		}
 
 		/**
 		 * Returns the maximum integer value for this option, if applicable.
+		 *
 		 * @return the maximum integer value
 		 */
-		public int getMaxValue() { return max; }
+		public int getMaxValue() {
+			return max;
+		}
 
 		/**
 		 * Returns an array of values to choose from, if applicable.
+		 *
 		 * @return the array of values, or {@code null} if not applicable
 		 */
-		public Object[] getItemList() { return null; }
+		public Object[] getItemList() {
+			return null;
+		}
 
 		/**
 		 * Sets the boolean value for the option.
+		 *
 		 * @param value the new boolean value
 		 */
-		public void setValue(boolean value) { this.bool = value; }
+		public void setValue(boolean value) {
+			this.bool = value;
+		}
 
 		/**
 		 * Sets the integer value for the option.
+		 *
 		 * @param value the new integer value
 		 */
-		public void setValue(int value) { this.val = Utils.clamp(value, min, max); }
+		public void setValue(int value) {
+			this.val = Utils.clamp(value, min, max);
+		}
 
 		/**
 		 * Toggles the boolean value for the option, if applicable.
+		 *
 		 * @param container the game container
 		 */
-		public void toggle(GameContainer container) { bool = !bool; }
+		public void toggle(GameContainer container) {
+			bool = !bool;
+		}
 
 		/**
 		 * Selects an item with the given list index, if applicable.
-		 * @param index the selected item index (in {@link #getItemList()})
+		 *
+		 * @param index     the selected item index (in {@link #getItemList()})
 		 * @param container the game container
 		 */
-		public void selectItem(int index, GameContainer container) {}
+		public void selectItem(int index, GameContainer container) {
+		}
 
 		/**
 		 * Returns the value of the option as a string (via override).
@@ -851,6 +1092,7 @@ public class Options {
 		 * By default, this returns "{@code val}%" for numeric options,
 		 * "Yes" or "No" based on the {@code bool} field for boolean options,
 		 * and an empty string otherwise.
+		 *
 		 * @return the value string
 		 */
 		public String getValueString() {
@@ -868,6 +1110,7 @@ public class Options {
 		 * By default, this returns "{@code val}" for numeric options,
 		 * "true" or "false" based on the {@code bool} field for boolean options,
 		 * and {@link #getValueString()} otherwise.
+		 *
 		 * @return the string to write
 		 */
 		public String write() {
@@ -885,6 +1128,7 @@ public class Options {
 		 * By default, this sets {@code val} for numeric options only if the
 		 * value is between the min and max bounds, sets {@code bool} for
 		 * boolean options, and does nothing otherwise.
+		 *
 		 * @param s the value string read from the configuration file
 		 */
 		public void read(String s) {
@@ -898,25 +1142,32 @@ public class Options {
 
 		/**
 		 * Checks whether the option matches a given search query.
+		 *
 		 * @param query the search term
 		 * @return true if the option name or description matches the query
 		 */
 		public boolean matches(String query) {
 			return !query.isEmpty() &&
-			       (name.toLowerCase().contains(query) || description.toLowerCase().contains(query));
+					(name.toLowerCase().contains(query) || description.toLowerCase().contains(query));
 		}
 
 		/**
 		 * Sets whether this option should be visible.
+		 *
 		 * @param visible {@code true} if visible
 		 */
-		public void setVisible(boolean visible) { this.visible = visible; }
+		public void setVisible(boolean visible) {
+			this.visible = visible;
+		}
 
 		/**
 		 * Returns whether this option should be visible.
+		 *
 		 * @return true if visible
 		 */
-		public boolean isVisible() { return visible; }
+		public boolean isVisible() {
+			return visible;
+		}
 	}
 
 	/** Map of option display names to GameOptions. */
@@ -924,23 +1175,23 @@ public class Options {
 
 	/** Screen resolutions. */
 	private enum Resolution {
-		RES_800_600 (800, 600),
-		RES_1024_600 (1024, 600),
-		RES_1024_768 (1024, 768),
-		RES_1280_720 (1280, 720),
-		RES_1280_800 (1280, 800),
-		RES_1280_960 (1280, 960),
-		RES_1280_1024 (1280, 1024),
-		RES_1366_768 (1366, 768),
-		RES_1440_900 (1440, 900),
-		RES_1600_900 (1600, 900),
-		RES_1600_1200 (1600, 1200),
-		RES_1680_1050 (1680, 1050),
-		RES_1920_1080 (1920, 1080),
-		RES_1920_1200 (1920, 1200),
-		RES_2560_1440 (2560, 1440),
-		RES_2560_1600 (2560, 1600),
-		RES_3840_2160 (3840, 2160);
+		RES_800_600(800, 600),
+		RES_1024_600(1024, 600),
+		RES_1024_768(1024, 768),
+		RES_1280_720(1280, 720),
+		RES_1280_800(1280, 800),
+		RES_1280_960(1280, 960),
+		RES_1280_1024(1280, 1024),
+		RES_1366_768(1366, 768),
+		RES_1440_900(1440, 900),
+		RES_1600_900(1600, 900),
+		RES_1600_1200(1600, 1200),
+		RES_1680_1050(1680, 1050),
+		RES_1920_1080(1920, 1080),
+		RES_1920_1200(1920, 1200),
+		RES_2560_1440(2560, 1440),
+		RES_2560_1600(2560, 1600),
+		RES_3840_2160(3840, 2160);
 
 		/** Screen dimensions. */
 		private final int width;
@@ -948,7 +1199,8 @@ public class Options {
 
 		/**
 		 * Constructor.
-		 * @param width the screen width
+		 *
+		 * @param width  the screen width
 		 * @param height the screen height
 		 */
 		Resolution(int width, int height) {
@@ -957,10 +1209,14 @@ public class Options {
 		}
 
 		/** Returns the screen width. */
-		public int getWidth() { return width; }
+		public int getWidth() {
+			return width;
+		}
 
 		/** Returns the screen height. */
-		public int getHeight() { return height; }
+		public int getHeight() {
+			return height;
+		}
 
 		/** Returns whether this resolution is possible to use in fullscreen mode. */
 		public boolean hasFullscreenDisplayMode() {
@@ -976,7 +1232,9 @@ public class Options {
 		}
 
 		@Override
-		public String toString() { return String.format("%sx%s", width, height); }
+		public String toString() {
+			return String.format("%sx%s", width, height);
+		}
 	}
 
 	/** Current screen resolution. */
@@ -989,6 +1247,8 @@ public class Options {
 	private static Skin skin;
 
 	// private static File skinDir = skin.getDirectory();
+
+	private static String lang = "English";
 
 	/** Frame limiters. */
 	private static final int[] targetFPS = { 60, 120, 240, -1 /* Unlimited */ };
@@ -1003,42 +1263,51 @@ public class Options {
 	private static int screenshotFormatIndex = 0;
 
 	/** Left and right game keys. */
-	private static int
-		keyLeft  = Keyboard.KEY_NONE,
-		keyRight = Keyboard.KEY_NONE;
+	private static int keyLeft = Keyboard.KEY_NONE,
+			keyRight = Keyboard.KEY_NONE;
 
 	// This class should not be instantiated.
-	private Options() {}
+	private Options() {
+	}
 
 	/**
 	 * Returns the target frame rate.
+	 *
 	 * @return the target FPS
 	 */
-	public static int getTargetFPS() { return targetFPS[targetFPSindex]; }
+	public static int getTargetFPS() {
+		return targetFPS[targetFPSindex];
+	}
 
 	/**
 	 * Sets the target frame rate to the next available option, and sends a
 	 * bar notification about the action.
+	 *
 	 * @param container the game container
 	 */
 	public static void setNextFPS(GameContainer container) {
 		int index = (targetFPSindex + 1) % targetFPS.length;
 		if (index == targetFPS.length - 1)
-			index = 0;  // Skip "Unlimited" option
+			index = 0; // Skip "Unlimited" option
 		GameOption.TARGET_FPS.selectItem(index, container);
-		UI.getNotificationManager().sendBarNotification(String.format(t("Frame limiter: %s"), GameOption.TARGET_FPS.getValueString()));
+		UI.getNotificationManager()
+				.sendBarNotification(String.format(t("Frame limiter: %s"), GameOption.TARGET_FPS.getValueString()));
 	}
 
 	/**
 	 * Returns the master volume level.
+	 *
 	 * @return the volume [0, 1]
 	 */
-	public static float getMasterVolume() { return GameOption.MASTER_VOLUME.getIntegerValue() / 100f; }
+	public static float getMasterVolume() {
+		return GameOption.MASTER_VOLUME.getIntegerValue() / 100f;
+	}
 
 	/**
 	 * Sets the master volume level (if within valid range).
+	 *
 	 * @param container the game container
-	 * @param volume the volume [0, 1]
+	 * @param volume    the volume [0, 1]
 	 */
 	public static void setMasterVolume(GameContainer container, float volume) {
 		if (volume >= 0f && volume <= 1f) {
@@ -1049,33 +1318,48 @@ public class Options {
 
 	/**
 	 * Returns the default music volume.
+	 *
 	 * @return the volume [0, 1]
 	 */
-	public static float getMusicVolume() { return GameOption.MUSIC_VOLUME.getIntegerValue() / 100f; }
+	public static float getMusicVolume() {
+		return GameOption.MUSIC_VOLUME.getIntegerValue() / 100f;
+	}
 
 	/**
 	 * Returns the default sound effect volume.
+	 *
 	 * @return the sound volume [0, 1]
 	 */
-	public static float getEffectVolume() { return GameOption.EFFECT_VOLUME.getIntegerValue() / 100f; }
+	public static float getEffectVolume() {
+		return GameOption.EFFECT_VOLUME.getIntegerValue() / 100f;
+	}
 
 	/**
 	 * Returns the default hit sound volume.
+	 *
 	 * @return the hit sound volume [0, 1]
 	 */
-	public static float getHitSoundVolume() { return GameOption.HITSOUND_VOLUME.getIntegerValue() / 100f; }
+	public static float getHitSoundVolume() {
+		return GameOption.HITSOUND_VOLUME.getIntegerValue() / 100f;
+	}
 
 	/**
 	 * Returns the music offset time.
+	 *
 	 * @return the offset (in milliseconds)
 	 */
-	public static int getMusicOffset() { return GameOption.MUSIC_OFFSET.getIntegerValue(); }
+	public static int getMusicOffset() {
+		return GameOption.MUSIC_OFFSET.getIntegerValue();
+	}
 
 	/**
 	 * Returns the screenshot file format.
+	 *
 	 * @return the file extension ("png", "jpg", "bmp")
 	 */
-	public static String getScreenshotFormat() { return screenshotFormat[screenshotFormatIndex]; }
+	public static String getScreenshotFormat() {
+		return screenshotFormat[screenshotFormatIndex];
+	}
 
 	/**
 	 * Sets the container size and makes the window borderless if the container
@@ -1083,6 +1367,7 @@ public class Options {
 	 * <p>
 	 * If the configured resolution is larger than the screen size, the smallest
 	 * available resolution will be used.
+	 *
 	 * @param app the game container
 	 */
 	public static void setDisplayMode(Container app) {
@@ -1113,35 +1398,50 @@ public class Options {
 
 	/**
 	 * Returns whether fullscreen mode is enabled.
+	 *
 	 * @return true if enabled
 	 */
-	public static boolean isFullscreen() { return GameOption.FULLSCREEN.getBooleanValue(); }
+	public static boolean isFullscreen() {
+		return GameOption.FULLSCREEN.getBooleanValue();
+	}
 
 	/**
 	 * Returns whether the FPS counter display is enabled.
+	 *
 	 * @return true if enabled
 	 */
-	public static boolean isFPSCounterEnabled() { return GameOption.SHOW_FPS.getBooleanValue(); }
+	public static boolean isFPSCounterEnabled() {
+		return GameOption.SHOW_FPS.getBooleanValue();
+	}
 
 	/**
 	 * Toggles the FPS counter display.
 	 */
-	public static void toggleFPSCounter() { GameOption.SHOW_FPS.toggle(null); }
+	public static void toggleFPSCounter() {
+		GameOption.SHOW_FPS.toggle(null);
+	}
 
 	/**
 	 * Returns whether hit lighting effects are enabled.
+	 *
 	 * @return true if enabled
 	 */
-	public static boolean isHitLightingEnabled() { return GameOption.SHOW_HIT_LIGHTING.getBooleanValue(); }
+	public static boolean isHitLightingEnabled() {
+		return GameOption.SHOW_HIT_LIGHTING.getBooleanValue();
+	}
 
 	/**
 	 * Returns whether combo burst effects are enabled.
+	 *
 	 * @return true if enabled
 	 */
-	public static boolean isComboBurstEnabled() { return GameOption.SHOW_COMBO_BURSTS.getBooleanValue(); }
+	public static boolean isComboBurstEnabled() {
+		return GameOption.SHOW_COMBO_BURSTS.getBooleanValue();
+	}
 
 	/**
 	 * Returns whether warningarrow is tinted white
+	 *
 	 * @return true if enabled
 	 */
 	public static boolean isWarningArrowTintWhite() {
@@ -1150,165 +1450,247 @@ public class Options {
 
 	/**
 	 * Returns whether to always use the builtin Back button style.
+	 *
 	 * @return true if always
 	 */
-	public static boolean isBuiltinBackButton() { return GameOption.BUILTIN_BACK_BUTTON.getBooleanValue(); }
+	public static boolean isBuiltinBackButton() {
+		return GameOption.BUILTIN_BACK_BUTTON.getBooleanValue();
+	}
 
 	/**
 	 * Returns the cursor scale.
+	 *
 	 * @return the scale [0.5, 2]
 	 */
-	public static float getCursorScale() { return GameOption.CURSOR_SIZE.getIntegerValue() / 100f; }
+	public static float getCursorScale() {
+		return GameOption.CURSOR_SIZE.getIntegerValue() / 100f;
+	}
 
 	/**
-	 * Returns whether the main menu background should be the current beatmap background image.
+	 * Returns whether the main menu background should be the current beatmap
+	 * background image.
+	 *
 	 * @return true if enabled
 	 */
-	public static boolean isDynamicBackgroundEnabled() { return GameOption.DYNAMIC_BACKGROUND.getBooleanValue(); }
+	public static boolean isDynamicBackgroundEnabled() {
+		return GameOption.DYNAMIC_BACKGROUND.getBooleanValue();
+	}
 
 	/**
 	 * Returns whether to show perfect hit result bursts.
+	 *
 	 * @return true if enabled
 	 */
-	public static boolean isPerfectHitBurstEnabled() { return GameOption.SHOW_PERFECT_HIT.getBooleanValue(); }
+	public static boolean isPerfectHitBurstEnabled() {
+		return GameOption.SHOW_PERFECT_HIT.getBooleanValue();
+	}
 
 	/**
 	 * Returns whether to show follow points.
+	 *
 	 * @return true if enabled
 	 */
-	public static boolean isFollowPointEnabled() { return GameOption.SHOW_FOLLOW_POINTS.getBooleanValue(); }
+	public static boolean isFollowPointEnabled() {
+		return GameOption.SHOW_FOLLOW_POINTS.getBooleanValue();
+	}
 
 	/**
 	 * Returns the background dim level.
+	 *
 	 * @return the alpha level [0, 1]
 	 */
-	public static float getBackgroundDim() { return (100 - GameOption.BACKGROUND_DIM.getIntegerValue()) / 100f; }
+	public static float getBackgroundDim() {
+		return (100 - GameOption.BACKGROUND_DIM.getIntegerValue()) / 100f;
+	}
 
 	/**
-	 * Returns whether to override the beatmap background with the default playfield background.
+	 * Returns whether to override the beatmap background with the default playfield
+	 * background.
+	 *
 	 * @return true if forced
 	 */
-	public static boolean isDefaultPlayfieldForced() { return GameOption.FORCE_DEFAULT_PLAYFIELD.getBooleanValue(); }
+	public static boolean isDefaultPlayfieldForced() {
+		return GameOption.FORCE_DEFAULT_PLAYFIELD.getBooleanValue();
+	}
 
 	/**
 	 * Returns whether to keep the Auto mod on after gameplay.
+	 *
 	 * @return true if always on
 	 */
-	public static boolean isAutoModAlwaysOn() { return GameOption.KEEP_AUTO.getBooleanValue(); }
+	public static boolean isAutoModAlwaysOn() {
+		return GameOption.KEEP_AUTO.getBooleanValue();
+	}
 
 	/**
 	 * Returns whether to show the pause screen with Auto mod on or during replay.
+	 *
 	 * @return true if always on
 	 */
-	public static boolean isPauseAlwaysEnabled() { return GameOption.PAUSE_IN_REPLAY.getBooleanValue(); }
+	public static boolean isPauseAlwaysEnabled() {
+		return GameOption.PAUSE_IN_REPLAY.getBooleanValue();
+	}
 
 	/**
 	 * Returns whether beatmap videos are enabled.
+	 *
 	 * @return true if enabled
 	 */
-	public static boolean isBeatmapVideoEnabled() { return GameOption.ENABLE_VIDEOS.getBooleanValue(); }
+	public static boolean isBeatmapVideoEnabled() {
+		return GameOption.ENABLE_VIDEOS.getBooleanValue();
+	}
 
 	/**
 	 * Returns whether beatmap skins are ignored.
+	 *
 	 * @return true if ignored
 	 */
-	public static boolean isBeatmapSkinIgnored() { return GameOption.IGNORE_BEATMAP_SKINS.getBooleanValue(); }
+	public static boolean isBeatmapSkinIgnored() {
+		return GameOption.IGNORE_BEATMAP_SKINS.getBooleanValue();
+	}
 
 	/**
-	 * Returns whether to override the beatmap cursor with the current skin's cursor.
+	 * Returns whether to override the beatmap cursor with the current skin's
+	 * cursor.
+	 *
 	 * @return true if forced
 	 */
-	public static boolean isSkinCursorForced() { return GameOption.FORCE_SKIN_CURSOR.getBooleanValue(); }
+	public static boolean isSkinCursorForced() {
+		return GameOption.FORCE_SKIN_CURSOR.getBooleanValue();
+	}
 
 	/**
 	 * Returns whether sliders should snake in or just appear fully at once.
+	 *
 	 * @return true if sliders should snake in
 	 */
-	public static boolean isSliderSnaking() { return GameOption.SNAKING_SLIDERS.getBooleanValue(); }
+	public static boolean isSliderSnaking() {
+		return GameOption.SNAKING_SLIDERS.getBooleanValue();
+	}
 
 	/**
 	 * Returns whether to use the experimental slider style.
+	 *
 	 * @return true if enabled
 	 */
-	public static boolean isExperimentalSliderStyle() { return GameOption.EXPERIMENTAL_SLIDERS.getBooleanValue(); }
+	public static boolean isExperimentalSliderStyle() {
+		return GameOption.EXPERIMENTAL_SLIDERS.getBooleanValue();
+	}
 
 	/**
 	 * Returns whether slider caps (end circles) should be drawn.
 	 * Only applies to experimental sliders.
+	 *
 	 * @return true if slider caps should be drawn
 	 */
-	public static boolean isExperimentalSliderCapsDrawn() { return GameOption.EXPERIMENTAL_SLIDERS_CAPS.getBooleanValue(); }
+	public static boolean isExperimentalSliderCapsDrawn() {
+		return GameOption.EXPERIMENTAL_SLIDERS_CAPS.getBooleanValue();
+	}
 
 	/**
 	 * Returns whether sliders should shrink toward their ending point.
 	 * Only applies to experimental sliders.
+	 *
 	 * @return true if sliders should shrink
 	 */
-	public static boolean isExperimentalSliderShrinking() { return GameOption.EXPERIMENTAL_SLIDERS_SHRINK.getBooleanValue(); }
+	public static boolean isExperimentalSliderShrinking() {
+		return GameOption.EXPERIMENTAL_SLIDERS_SHRINK.getBooleanValue();
+	}
 
 	/**
 	 * Returns whether to merge overlapping sliders together when drawing.
 	 * Only applies to experimental sliders.
+	 *
 	 * @return true if sliders should be merged
 	 */
-	public static boolean isExperimentalSliderMerging() { return GameOption.EXPERIMENTAL_SLIDERS_MERGE.getBooleanValue(); }
+	public static boolean isExperimentalSliderMerging() {
+		return GameOption.EXPERIMENTAL_SLIDERS_MERGE.getBooleanValue();
+	}
 
 	/**
 	 * Returns the fixed circle size override, if any.
+	 *
 	 * @return the CS value (0, 10], 0f if disabled
 	 */
-	public static float getFixedCS() { return GameOption.FIXED_CS.getIntegerValue() / 10f; }
+	public static float getFixedCS() {
+		return GameOption.FIXED_CS.getIntegerValue() / 10f;
+	}
 
 	/**
 	 * Returns the fixed HP drain rate override, if any.
+	 *
 	 * @return the HP value (0, 10], 0f if disabled
 	 */
-	public static float getFixedHP() { return GameOption.FIXED_HP.getIntegerValue() / 10f; }
+	public static float getFixedHP() {
+		return GameOption.FIXED_HP.getIntegerValue() / 10f;
+	}
 
 	/**
 	 * Returns the fixed approach rate override, if any.
+	 *
 	 * @return the AR value (0, 10], 0f if disabled
 	 */
-	public static float getFixedAR() { return GameOption.FIXED_AR.getIntegerValue() / 10f; }
+	public static float getFixedAR() {
+		return GameOption.FIXED_AR.getIntegerValue() / 10f;
+	}
 
 	/**
 	 * Returns the fixed overall difficulty override, if any.
+	 *
 	 * @return the OD value (0, 10], 0f if disabled
 	 */
-	public static float getFixedOD() { return GameOption.FIXED_OD.getIntegerValue() / 10f; }
+	public static float getFixedOD() {
+		return GameOption.FIXED_OD.getIntegerValue() / 10f;
+	}
 
 	/**
 	 * Returns the fixed speed override, if any.
+	 *
 	 * @return the speed value (0, 3], 0f if disabled
 	 */
-	public static float getFixedSpeed() { return GameOption.FIXED_SPEED.getIntegerValue() / 100f; }
+	public static float getFixedSpeed() {
+		return GameOption.FIXED_SPEED.getIntegerValue() / 100f;
+	}
 
 	/**
 	 * Returns whether to render loading text in the splash screen.
+	 *
 	 * @return true if enabled
 	 */
-	public static boolean isLoadVerbose() { return GameOption.LOAD_VERBOSE.getBooleanValue(); }
+	public static boolean isLoadVerbose() {
+		return GameOption.LOAD_VERBOSE.getBooleanValue();
+	}
 
 	/**
 	 * Returns the track checkpoint time.
+	 *
 	 * @return the checkpoint time (in ms)
 	 */
-	public static int getCheckpoint() { return GameOption.CHECKPOINT.getIntegerValue() * 1000; }
+	public static int getCheckpoint() {
+		return GameOption.CHECKPOINT.getIntegerValue() * 1000;
+	}
 
 	/**
 	 * Returns whether sound effects are disabled during gameplay.
+	 *
 	 * @return true if disabled
 	 */
-	public static boolean isGameplaySoundDisabled() { return GameOption.DISABLE_GAMEPLAY_SOUNDS.getBooleanValue(); }
+	public static boolean isGameplaySoundDisabled() {
+		return GameOption.DISABLE_GAMEPLAY_SOUNDS.getBooleanValue();
+	}
 
 	/**
 	 * Returns whether all sound effects are disabled.
+	 *
 	 * @return true if disabled
 	 */
-	public static boolean isSoundDisabled() { return GameOption.DISABLE_SOUNDS.getBooleanValue(); }
+	public static boolean isSoundDisabled() {
+		return GameOption.DISABLE_SOUNDS.getBooleanValue();
+	}
 
 	/**
 	 * Returns whether heartbeat sounds will be played.
+	 *
 	 * @return true if enabled
 	 */
 	public static boolean isHeartbeatEnabled() {
@@ -1317,6 +1699,7 @@ public class Options {
 
 	/**
 	 * Returns whether Auto is set to be real.
+	 *
 	 * @return real Auto player
 	 */
 	public static boolean isAutoReal() {
@@ -1325,42 +1708,65 @@ public class Options {
 
 	/**
 	 * Returns whether to use non-English metadata where available.
+	 *
 	 * @return true if Unicode preferred
 	 */
-	public static boolean useUnicodeMetadata() { return GameOption.SHOW_UNICODE.getBooleanValue(); }
+	public static boolean useUnicodeMetadata() {
+		return GameOption.SHOW_UNICODE.getBooleanValue();
+	}
 
 	/**
 	 * Returns whether parallax is enabled.
+	 *
 	 * @return true if enabled
 	 */
-	public static boolean isParallaxEnabled() { return GameOption.PARALLAX.getBooleanValue(); }
+	public static boolean isParallaxEnabled() {
+		return GameOption.PARALLAX.getBooleanValue();
+	}
 
 	/**
 	 * Returns whether to play the theme song.
+	 *
 	 * @return true if enabled
 	 */
-	public static boolean isThemeSongEnabled() { return GameOption.ENABLE_THEME_SONG.getBooleanValue(); }
+	public static boolean isThemeSongEnabled() {
+		return GameOption.ENABLE_THEME_SONG.getBooleanValue();
+	}
 
 	/**
 	 * Returns whether replay seeking is enabled.
+	 *
 	 * @return true if enabled
 	 */
-	public static boolean isReplaySeekingEnabled() { return GameOption.REPLAY_SEEKING.getBooleanValue(); }
+	public static boolean isReplaySeekingEnabled() {
+		return GameOption.REPLAY_SEEKING.getBooleanValue();
+	}
 
 	/**
 	 * Returns whether automatic checking for updates is disabled.
+	 *
 	 * @return true if disabled
 	 */
-	public static boolean isUpdaterDisabled() { return GameOption.DISABLE_UPDATER.getBooleanValue(); }
+	public static boolean isUpdaterDisabled() {
+		return GameOption.DISABLE_UPDATER.getBooleanValue();
+	}
 
 	/**
 	 * Returns whether the beatmap watch service is enabled.
+	 *
 	 * @return true if enabled
 	 */
-	public static boolean isWatchServiceEnabled() { return GameOption.ENABLE_WATCH_SERVICE.getBooleanValue(); }
+	public static boolean isWatchServiceEnabled() {
+		return GameOption.ENABLE_WATCH_SERVICE.getBooleanValue();
+	}
+
+	public static boolean isNativeLangUsed() {
+		return GameOption.NATIVE_LANGUAGE.getBooleanValue();
+	}
 
 	/**
 	 * Sets the track checkpoint time, if within bounds.
+	 *
 	 * @param time the track position (in ms)
 	 * @return true if within bounds
 	 */
@@ -1374,33 +1780,49 @@ public class Options {
 
 	/**
 	 * Returns whether to show the hit error bar.
+	 *
 	 * @return true if enabled
 	 */
-	public static boolean isHitErrorBarEnabled() { return GameOption.SHOW_HIT_ERROR_BAR.getBooleanValue(); }
+	public static boolean isHitErrorBarEnabled() {
+		return GameOption.SHOW_HIT_ERROR_BAR.getBooleanValue();
+	}
 
 	/**
 	 * Returns whether to show the key overlay on non-replay game sessions.
+	 *
 	 * @return true if enabled
 	 */
-	public static boolean alwaysShowKeyOverlay() { return GameOption.ALWAYS_SHOW_KEY_OVERLAY.getBooleanValue(); }
+	public static boolean alwaysShowKeyOverlay() {
+		return GameOption.ALWAYS_SHOW_KEY_OVERLAY.getBooleanValue();
+	}
 
 	/**
 	 * Returns whether to load HD (@2x) images.
-	 * @return true if HD images are enabled, false if only SD images should be loaded
+	 *
+	 * @return true if HD images are enabled, false if only SD images should be
+	 *         loaded
 	 */
-	public static boolean loadHDImages() { return GameOption.LOAD_HD_IMAGES.getBooleanValue(); }
+	public static boolean loadHDImages() {
+		return GameOption.LOAD_HD_IMAGES.getBooleanValue();
+	}
 
 	/**
 	 * Returns whether the mouse wheel is disabled during gameplay.
+	 *
 	 * @return true if disabled
 	 */
-	public static boolean isMouseWheelDisabled() { return GameOption.DISABLE_MOUSE_WHEEL.getBooleanValue(); }
+	public static boolean isMouseWheelDisabled() {
+		return GameOption.DISABLE_MOUSE_WHEEL.getBooleanValue();
+	}
 
 	/**
 	 * Returns whether the mouse buttons are disabled during gameplay.
+	 *
 	 * @return true if disabled
 	 */
-	public static boolean isMouseDisabled() { return GameOption.DISABLE_MOUSE_BUTTONS.getBooleanValue(); }
+	public static boolean isMouseDisabled() {
+		return GameOption.DISABLE_MOUSE_BUTTONS.getBooleanValue();
+	}
 
 	/**
 	 * Toggles the mouse button enabled/disabled state during gameplay and
@@ -1408,12 +1830,14 @@ public class Options {
 	 */
 	public static void toggleMouseDisabled() {
 		GameOption.DISABLE_MOUSE_BUTTONS.toggle(null);
-		UI.getNotificationManager().sendBarNotification((GameOption.DISABLE_MOUSE_BUTTONS.getBooleanValue()) ?
-			t("Mouse buttons are disabled.") : t("Mouse buttons are enabled."));
+		UI.getNotificationManager().sendBarNotification(
+				(GameOption.DISABLE_MOUSE_BUTTONS.getBooleanValue()) ? t("Mouse buttons are disabled.")
+						: t("Mouse buttons are enabled."));
 	}
 
 	/**
 	 * Returns whether to use custom colors for UI.
+	 *
 	 * @return whether to use custom colors
 	 */
 	public static boolean isColorCustom() {
@@ -1422,11 +1846,13 @@ public class Options {
 
 	/**
 	 * Returns the accent color.
+	 *
 	 * @return Color, combined by RGB
-	*/
+	 */
 	public static Color getAccentColor() {
 		if (Options.isColorCustom()) {
-			return new Color(GameOption.UICOLOR_R.getIntegerValue(), GameOption.UICOLOR_G.getIntegerValue(), GameOption.UICOLOR_B.getIntegerValue());
+			return new Color(GameOption.UICOLOR_R.getIntegerValue(), GameOption.UICOLOR_G.getIntegerValue(),
+					GameOption.UICOLOR_B.getIntegerValue());
 		} else {
 			return new Color(Colors.PINK_OPTION);
 		}
@@ -1434,6 +1860,7 @@ public class Options {
 
 	/**
 	 * Returns the left game key.
+	 *
 	 * @return the left key code
 	 */
 	public static int getGameKeyLeft() {
@@ -1444,6 +1871,7 @@ public class Options {
 
 	/**
 	 * Returns the right game key.
+	 *
 	 * @return the right key code
 	 */
 	public static int getGameKeyRight() {
@@ -1456,6 +1884,7 @@ public class Options {
 	 * Sets the left game key.
 	 * This will not be set to the same key as the right game key, nor to any
 	 * reserved keys (see {@link #isValidGameKey(int)}).
+	 *
 	 * @param key the keyboard key
 	 * @return {@code true} if the key was set, {@code false} if it was rejected
 	 */
@@ -1470,6 +1899,7 @@ public class Options {
 	 * Sets the right game key.
 	 * This will not be set to the same key as the left game key, nor to any
 	 * reserved keys (see {@link #isValidGameKey(int)}).
+	 *
 	 * @param key the keyboard key
 	 * @return {@code true} if the key was set, {@code false} if it was rejected
 	 */
@@ -1482,19 +1912,21 @@ public class Options {
 
 	/**
 	 * Checks if the given key is a valid game key.
+	 *
 	 * @param key the keyboard key
 	 * @return {@code true} if valid, {@code false} otherwise
 	 */
 	private static boolean isValidGameKey(int key) {
 		return (key != Keyboard.KEY_ESCAPE && key != Keyboard.KEY_SPACE &&
-		        key != Keyboard.KEY_UP && key != Keyboard.KEY_DOWN &&
-		        key != Keyboard.KEY_F7 && key != Keyboard.KEY_F10 && key != Keyboard.KEY_F12);
+				key != Keyboard.KEY_UP && key != Keyboard.KEY_DOWN &&
+				key != Keyboard.KEY_F7 && key != Keyboard.KEY_F10 && key != Keyboard.KEY_F12);
 	}
 
 	/**
 	 * Returns the beatmap directory.
 	 * If invalid, this will attempt to search for the directory,
 	 * and if nothing found, will create one.
+	 *
 	 * @return the beatmap directory
 	 */
 	public static File getBeatmapDir() {
@@ -1512,13 +1944,16 @@ public class Options {
 		// use default directory
 		beatmapDir = BEATMAP_DIR;
 		if (!beatmapDir.isDirectory() && !beatmapDir.mkdir())
-			ErrorHandler.error(String.format("Failed to create beatmap directory at '%s'.", beatmapDir.getAbsolutePath()), null, false);
+			ErrorHandler.error(
+					String.format("Failed to create beatmap directory at '%s'.", beatmapDir.getAbsolutePath()), null,
+					false);
 		return beatmapDir;
 	}
 
 	/**
 	 * Returns the import directory (for beatmaps, skins, and replays).
 	 * If invalid, this will create and return an "Import" directory.
+	 *
 	 * @return the import directory
 	 */
 	public static File getImportDir() {
@@ -1527,13 +1962,15 @@ public class Options {
 
 		importDir = new File(DATA_DIR, "Import/");
 		if (!importDir.isDirectory() && !importDir.mkdir())
-			ErrorHandler.error(String.format("Failed to create import directory at '%s'.", importDir.getAbsolutePath()), null, false);
+			ErrorHandler.error(String.format("Failed to create import directory at '%s'.", importDir.getAbsolutePath()),
+					null, false);
 		return importDir;
 	}
 
 	/**
 	 * Returns the screenshot directory.
 	 * If invalid, this will return a "Screenshot" directory.
+	 *
 	 * @return the screenshot directory
 	 */
 	public static File getScreenshotDir() {
@@ -1547,6 +1984,7 @@ public class Options {
 	/**
 	 * Returns the replay directory.
 	 * If invalid, this will return a "Replay" directory.
+	 *
 	 * @return the replay directory
 	 */
 	public static File getReplayDir() {
@@ -1560,6 +1998,7 @@ public class Options {
 	/**
 	 * Returns the current skin directory.
 	 * If invalid, this will create a "Skins" folder in the root directory.
+	 *
 	 * @return the skin directory
 	 */
 	public static File getSkinRootDir() {
@@ -1577,7 +2016,9 @@ public class Options {
 		// use default directory
 		skinRootDir = SKIN_ROOT_DIR;
 		if (!skinRootDir.isDirectory() && !skinRootDir.mkdir())
-			ErrorHandler.error(String.format("Failed to create skins directory at '%s'.", skinRootDir.getAbsolutePath()), null, false);
+			ErrorHandler.error(
+					String.format("Failed to create skins directory at '%s'.", skinRootDir.getAbsolutePath()), null,
+					false);
 		return skinRootDir;
 	}
 
@@ -1587,7 +2028,7 @@ public class Options {
 	 */
 	public static void loadSkin() {
 		File skinDir = getSkinDir();
-		if (skinDir == null)  // invalid skin name
+		if (skinDir == null) // invalid skin name
 			skinName = Skin.DEFAULT_SKIN_NAME;
 
 		// set skin and modify resource locations
@@ -1598,7 +2039,8 @@ public class Options {
 			// load the skin
 			skin = SkinLoader.loadSkin(skinDir);
 			// String info = skin.getName() + " (" + skin.getAuthor() + ")";
-			// ErrorHandler.error(String.format("You are using the skin '%s'.", info), null, false);
+			// ErrorHandler.error(String.format("You are using the skin '%s'.", info), null,
+			// false);
 			// Show the real name and author in skin.ini
 			ResourceLoader.addResourceLocation(new FileSystemLocation(skinDir));
 		}
@@ -1609,9 +2051,12 @@ public class Options {
 
 	/**
 	 * Returns the current skin.
+	 *
 	 * @return the skin, or null if no skin is loaded (see {@link #loadSkin()})
 	 */
-	public static Skin getSkin() { return skin; }
+	public static Skin getSkin() {
+		return skin;
+	}
 
 	/**
 	 * Returns the current skin directory.
@@ -1620,6 +2065,7 @@ public class Options {
 	 * if {@link #loadSkin()} has not been called after a directory change.
 	 * Use {@link Skin#getDirectory()} to get the directory of the currently
 	 * loaded skin.
+	 *
 	 * @return the skin directory, or null for the default skin
 	 */
 	public static File getSkinDir() {
@@ -1633,10 +2079,12 @@ public class Options {
 
 	/**
 	 * Returns the custom FFmpeg shared library location.
+	 *
 	 * @return the file, or {@code null} if the default location should be used
 	 */
-	public static File getFFmpegLocation() { return FFmpegPath; }
-
+	public static File getFFmpegLocation() {
+		return FFmpegPath;
+	}
 
 	public static File getThemeSong() {
 		File audio = new File(BEATMAP_DIR, "theme.mp3");
@@ -1647,7 +2095,9 @@ public class Options {
 
 	/**
 	 * Returns a dummy Beatmap containing the theme song.
-	 * @return the theme song beatmap, or {@code null} if the theme string is malformed
+	 *
+	 * @return the theme song beatmap, or {@code null} if the theme string is
+	 *         malformed
 	 */
 	public static Beatmap getThemeBeatmap() {
 		String[] tokens = themeString.split(",");
@@ -1656,8 +2106,10 @@ public class Options {
 
 		Beatmap beatmap = new Beatmap(null);
 		File cusau = getThemeSong();
-		if (cusau != null) beatmap.audioFilename = cusau;
-		else beatmap.audioFilename = new File(tokens[0]);
+		if (cusau != null)
+			beatmap.audioFilename = cusau;
+		else
+			beatmap.audioFilename = new File(tokens[0]);
 		beatmap.title = tokens[1];
 		beatmap.artist = tokens[2];
 		try {
@@ -1673,6 +2125,13 @@ public class Options {
 		}
 
 		return beatmap;
+	}
+
+	public static Locale getLanguage() {
+		if (GameOption.LANGUAGE.toString() == "English") {
+			return Locale.ENGLISH;
+		}
+		return new Locale.Builder().setLanguage(GameOption.LANGUAGE.toString()).build();
 	}
 
 	/**
@@ -1744,7 +2203,8 @@ public class Options {
 				writer.newLine();
 			}
 		} catch (IOException e) {
-			ErrorHandler.error(String.format("Failed to write to file '%s'.", OPTIONS_FILE.getAbsolutePath()), e, false);
+			ErrorHandler.error(String.format("Failed to write to file '%s'.", OPTIONS_FILE.getAbsolutePath()), e,
+					false);
 		}
 	}
 }

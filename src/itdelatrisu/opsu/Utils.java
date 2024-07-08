@@ -19,6 +19,8 @@
 package itdelatrisu.opsu;
 
 import com.sun.jna.platform.FileUtils;
+
+import clonewith.opsu.I18N;
 import itdelatrisu.opsu.audio.SoundController;
 import itdelatrisu.opsu.audio.SoundEffect;
 import itdelatrisu.opsu.beatmap.HitObject;
@@ -140,6 +142,9 @@ public class Utils {
 
 		// load skin
 		Options.loadSkin();
+
+		// initialize translations
+		I18N.init();
 
 		// initialize game images
 		for (GameImage img : GameImage.values()) {

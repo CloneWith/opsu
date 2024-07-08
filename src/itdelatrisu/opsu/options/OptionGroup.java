@@ -32,6 +32,8 @@ public class OptionGroup {
 	public static final OptionGroup[] ALL_OPTIONS = new OptionGroup[] {
 		new OptionGroup(t("General"), GameImage.MENU_NAV_GENERAL),
 		new OptionGroup(t("LANGUAGE"), new GameOption[] {
+			GameOption.LANGUAGE,
+			GameOption.NATIVE_LANGUAGE,
 			GameOption.SHOW_UNICODE,
 		}),
 		new OptionGroup(t("UPDATES"), new GameOption[] {
