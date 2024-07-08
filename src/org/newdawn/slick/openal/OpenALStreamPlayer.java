@@ -480,7 +480,7 @@ public class OpenALStreamPlayer {
 			try {
 				audio.close();
 			} catch (IOException e) {
-				e.printStackTrace();
+				Log.error(e);
 			}
 		}
 	}

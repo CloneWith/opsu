@@ -40,7 +40,7 @@ import java.util.List;
 public class Fonts {
 	public static UnicodeFont DEFAULT, BOLD, XLARGE, LARGE, MEDIUM, MEDIUMBOLD, SMALL, SMALLBOLD;
 
-	public static UnicodeFont fonts[] = {
+	public static UnicodeFont[] fonts = {
 		Fonts.DEFAULT,
 		Fonts.BOLD,
 		Fonts.XLARGE,

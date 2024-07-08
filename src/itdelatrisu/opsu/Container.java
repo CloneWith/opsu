@@ -20,18 +20,13 @@ package itdelatrisu.opsu;
 
 import itdelatrisu.opsu.audio.MusicController;
 import itdelatrisu.opsu.audio.SoundController;
-import itdelatrisu.opsu.beatmap.Beatmap;
-import itdelatrisu.opsu.beatmap.BeatmapGroup;
-import itdelatrisu.opsu.beatmap.BeatmapSetList;
-import itdelatrisu.opsu.beatmap.BeatmapSortOrder;
-import itdelatrisu.opsu.beatmap.BeatmapWatchService;
+import itdelatrisu.opsu.beatmap.*;
 import itdelatrisu.opsu.downloads.DownloadList;
 import itdelatrisu.opsu.downloads.Updater;
 import itdelatrisu.opsu.options.Options;
 import itdelatrisu.opsu.render.CurveRenderState;
 import itdelatrisu.opsu.render.LegacyCurveRenderState;
 import itdelatrisu.opsu.ui.UI;
-
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.Game;
@@ -128,7 +123,7 @@ public class Container extends AppGameContainer {
 
 	@Override
 	protected void gameLoop() throws SlickException {
-		int delta = getDelta();
+		final int delta = getDelta();
 		if (!Display.isVisible() && updateOnlyOnVisible) {
 			try { Thread.sleep(100); } catch (Exception e) {}
 		} else {
