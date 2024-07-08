@@ -143,9 +143,6 @@ public class Utils {
 		// load skin
 		Options.loadSkin();
 
-		// initialize translations
-		I18N.init();
-
 		// initialize game images
 		for (GameImage img : GameImage.values()) {
 			if (img.isPreload())

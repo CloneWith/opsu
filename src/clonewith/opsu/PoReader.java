@@ -63,7 +63,7 @@ public class PoReader {
         } catch (IOException e) {
             e.printStackTrace();
         }
-		System.err.println(translations);
+		// System.err.println(translations);
         return translations;
     }
 }
