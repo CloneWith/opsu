@@ -41,11 +41,11 @@ public class I18N {
 		// !status -> Initial -> Use system default temporarily
 		defString = (!status) ? Locale.getDefault().toString() : Options.getLanguage();
 
-		if (defString == "English" || defString.contains("en")) {
+		if (defString.equals("English") || defString.contains("en")) {
 			isInited = true;
 			return;
 		}
-		if (defString == "LANGUAGE" || defString == null) return;
+		if (defString.equals("LANGUAGE") || defString == null) return;
 
 		// TODO: Another way to build Locales
 		final Locale defLocale = new Locale(defString);
@@ -57,7 +57,7 @@ public class I18N {
 		}
 		try {
 			tlMap = PoReader.getTranslationMap(poFile);
-			if (defString != "LANGUAGE") isInited = true;
+			if (!defString.equals("LANGUAGE")) isInited = true;
 		} catch (Exception e) {
 			Log.error("Failed to generate translation map.", e);
 		}

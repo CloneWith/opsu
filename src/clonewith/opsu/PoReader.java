@@ -40,31 +40,30 @@ public class PoReader {
         final Map<String, String> translations = new HashMap<>();
         try (BufferedReader br = new BufferedReader(new FileReader(src))) {
             String line;
-            String original = null;
-            String translation = null;
+            StringBuilder original = null;
+            StringBuilder translation = null;
 
             while ((line = br.readLine()) != null) {
 				if (line.startsWith("\"")) {
 					if (original != null && translation == null) {
-						original += line.substring(1, line.length() - 1);
+						original.append(line, 1, line.length() - 1);
 					} else if (translation != null) {
-						translation += line.substring(1, line.length() - 1);
+						translation.append(line, 1, line.length() - 1);
 					}
 				} else if (line.startsWith("msgstr \"")) {
-					translation = line.substring(8, line.length() - 1);
+					translation = new StringBuilder(line.substring(8, line.length() - 1));
 				} else if (line.startsWith("msgid \"")) {
-					if (translation != null) {
-						translations.put(original, translation);
-						original = null;
+					if (original != null && translation != null) {
+						translations.put(original.toString(), translation.toString());
 						translation = null;
 					}
-					original = line.substring(7, line.length() - 1);
+					original = new StringBuilder(line.substring(7, line.length() - 1));
 				}
             }
         } catch (IOException e) {
 			Log.error(e);
         }
-		System.err.println(translations);
+		// System.err.println(translations);
         return translations;
     }
 }

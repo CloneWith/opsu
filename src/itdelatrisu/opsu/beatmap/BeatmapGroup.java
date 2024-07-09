@@ -68,8 +68,7 @@ public enum BeatmapGroup {
 			}
 
 			// return as list
-			ArrayList<BeatmapSetNode> filteredList = new ArrayList<>(pq);
-			return filteredList;
+			return new ArrayList<>(pq);
 		}
 	},
 

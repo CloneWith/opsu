@@ -422,8 +422,7 @@ public class MainMenu extends BasicGameState {
 		g.fillRect(musicBarX, musicBarY, musicBarWidth, musicBarHeight);
 		if (!MusicController.isTrackLoading() && beatmap != null) {
 			float oldWhiteAlpha = Colors.WHITE_FADE.a;
-			float musicPosAlpha = inMusicPosBar ? 0.8f : 0.65f;
-			Colors.WHITE_FADE.a = musicPosAlpha;
+			Colors.WHITE_FADE.a = inMusicPosBar ? 0.8f : 0.65f;
 			g.setColor(Colors.WHITE_FADE);
 			float musicBarPosition = Math.min((float) MusicController.getPosition(false) / MusicController.getDuration(), 1f);
 			g.fillRect(musicBarX, musicBarY, musicBarWidth * musicBarPosition, musicBarHeight);

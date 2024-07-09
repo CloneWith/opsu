@@ -256,15 +256,14 @@ public class ScoreData implements Comparable<ScoreData> {
 		float midY = y + buttonHeight / 2f;
 		float marginY = Fonts.DEFAULT.getLineHeight() * 0.01f;
 		Color c = Colors.WHITE_FADE;
-		float alpha = t;
 		float oldAlpha = c.a;
-		c.a = alpha;
+		c.a = t;
 
 		// rectangle outline
 		g.setLineWidth(1f);
 		Color rectColor = (focus) ? Colors.BLACK_BG_HOVER : Colors.BLACK_BG_NORMAL;
 		float oldRectAlpha = rectColor.a;
-		rectColor.a *= AnimationEquation.IN_QUAD.calc(alpha);
+		rectColor.a *= AnimationEquation.IN_QUAD.calc(t);
 		g.setColor(rectColor);
 		g.fillRect(x + 1, y + 1, buttonWidth - 1, buttonHeight - 1);
 		rectColor.a *= 1.25f;
@@ -283,7 +282,7 @@ public class ScoreData implements Comparable<ScoreData> {
 		// grade image
 		float gradeX = rankX + Fonts.LARGE.getWidth("###");
 		Image img = getGrade().getMenuImage();
-		img.setAlpha(alpha);
+		img.setAlpha(t);
 		img.draw(gradeX, midY - img.getHeight() / 2f);
 		img.setAlpha(1f);
 

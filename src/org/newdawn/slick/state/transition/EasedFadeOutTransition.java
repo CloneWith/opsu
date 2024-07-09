@@ -99,8 +99,7 @@ public class EasedFadeOutTransition implements Transition {
 	@Override
 	public void update(StateBasedGame game, GameContainer container, int delta) {
 		t += delta * (1.0f / fadeTime);
-		float alpha = t > 1f ? 1f : eq.calc(t);
-		color.a = alpha;
+		color.a = t > 1f ? 1f : eq.calc(t);
 	}
 
 	@Override

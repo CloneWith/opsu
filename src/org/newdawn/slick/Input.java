@@ -48,7 +48,7 @@ import java.util.Iterator;
  *
  * @author kevin
  */
-@SuppressWarnings({"rawtypes", "unchecked", "unused", "SequencedCollectionMethodCanBeUsed"})
+@SuppressWarnings({"rawtypes", "unchecked", "unused", "SequencedCollectionMethodCanBeUsed", "SlowAbstractSetRemoveAll"})
 public class Input {
 	/** The controller index to pass to check all controllers */
 	public static final int ANY_CONTROLLER = -1;

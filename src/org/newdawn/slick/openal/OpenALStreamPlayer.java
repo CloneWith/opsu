@@ -404,8 +404,7 @@ public class OpenALStreamPlayer {
 	 */
 	public float getALPosition() {
 		float playedTime = ((float) playedPos / (float) sampleSize) / sampleRate;
-		float timePosition = playedTime + AL10.alGetSourcef(source, AL11.AL_SEC_OFFSET);
-		return timePosition;
+		return playedTime + AL10.alGetSourcef(source, AL11.AL_SEC_OFFSET);
 	}
 
 	/**

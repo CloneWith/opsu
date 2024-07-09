@@ -410,7 +410,7 @@ public class Utils {
 	 * @param dest the destination directory
 	 */
 	public static void unzip(File file, File dest) {
-		try (ZipFile zipFile = new ZipFile(file);) {
+		try (ZipFile zipFile = new ZipFile(file)) {
 			zipFile.extractAll(dest.getAbsolutePath());
 		} catch (ZipException e) {
 			ErrorHandler.error(String.format("Failed to unzip file %s to dest %s.",

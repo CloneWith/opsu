@@ -97,8 +97,8 @@ public class Vec2f {
 	 * @return itself (for chaining)
 	 */
 	public Vec2f nor() {
-		float nx = -y, ny = x;
-		x = nx;
+		float ny = x;
+		x = -y;
 		y = ny;
 		return this;
 	}

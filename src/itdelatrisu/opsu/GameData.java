@@ -834,9 +834,8 @@ public class GameData {
 					float t = Math.min((float) (time - startTime) / animationTime, 1f);
 					float tp = AnimationEquation.OUT_CUBIC.calc(t);
 					float scale = 2f - tp;
-					float alpha = tp;
 					Image img = hitResults[rankDrawOrder[i]].getScaledCopy(rankResultScale * scale);
-					img.setAlpha(alpha);
+					img.setAlpha(tp);
 					img.drawCentered(
 						(resultHitInitialX + offsetX) * uiScale, (resultHitInitialY + offsetY) * uiScale
 					);
@@ -844,10 +843,9 @@ public class GameData {
 				if (time >= startTime + offsetTime) {
 					float t = Math.min((float) (time - startTime) / animationTime, 1f);
 					float tp = AnimationEquation.OUT_CUBIC.calc(t);
-					float alpha = tp;
 					offsetX += -64f * (1f - tp);
 					drawSymbolString(String.format("%dx", rankResultOrder[i]),
-						(resultInitialX + offsetX) * uiScale, (resultInitialY + offsetY) * uiScale, symbolTextScale, alpha, false
+						(resultInitialX + offsetX) * uiScale, (resultInitialY + offsetY) * uiScale, symbolTextScale, tp, false
 					);
 				}
 			}
@@ -858,39 +856,33 @@ public class GameData {
 		float textY = 480;
 		float numbersY = textY + 48;
 		if (time >= comboStart) {
-			float t = Math.min((float) (time - comboStart) / animationTime, 1f);
-			float alpha = t;
 			Image img = GameImage.RANKING_MAXCOMBO.getImage();
-			img.setAlpha(alpha);
+			img.setAlpha(Math.min((float) (time - comboStart) / animationTime, 1f));
 			img.draw(8 * uiScale, textY * uiScale);
 			img.setAlpha(1f);
 		}
 		if (time >= comboStart + offsetTime) {
 			float t = Math.min((float) (time - (comboStart + offsetTime)) / animationTime, 1f);
 			float tp = AnimationEquation.OUT_CUBIC.calc(t);
-			float alpha = tp;
 			float offsetX = -15f * (1f - tp);
 			drawSymbolString(
 				String.format("%dx", comboMax),
-				(24 + offsetX) * uiScale, numbersY * uiScale, symbolTextScale, alpha, false
+				(24 + offsetX) * uiScale, numbersY * uiScale, symbolTextScale, tp, false
 			);
 		}
 		if (time >= comboStart + animationTime) {
-			float t = Math.min((float) (time - (comboStart + animationTime)) / animationTime, 1f);
-			float alpha = t;
 			Image img = GameImage.RANKING_ACCURACY.getImage();
-			img.setAlpha(alpha);
+			img.setAlpha(Math.min((float) (time - (comboStart + animationTime)) / animationTime, 1f));
 			img.draw(accuracyX * uiScale, textY * uiScale);
 			img.setAlpha(1f);
 		}
 		if (time >= comboStart + animationTime + offsetTime) {
 			float t = Math.min((float) (time - (comboStart + animationTime + offsetTime)) / animationTime, 1f);
 			float tp = AnimationEquation.OUT_CUBIC.calc(t);
-			float alpha = tp;
 			float offsetX = -62f * (1f - tp);
 			drawSymbolString(
 				String.format("%02.2f%%", getScorePercent()),
-				(accuracyX + 20 + offsetX) * uiScale, numbersY * uiScale, symbolTextScale, alpha, false
+				(accuracyX + 20 + offsetX) * uiScale, numbersY * uiScale, symbolTextScale, tp, false
 			);
 		}
 
@@ -937,10 +929,9 @@ public class GameData {
 			float t = Math.min((float) (time - perfectStart) / animationTime, 1f);
 			float tp = AnimationEquation.OUT_CUBIC.calc(t);
 			float scale = 1.1f - 0.1f * tp;
-			float alpha = tp;
 			if (comboMax == fullObjectCount) {
 				Image img = GameImage.RANKING_PERFECT.getImage().getScaledCopy(scale);
-				img.setAlpha(alpha);
+				img.setAlpha(tp);
 				img.drawCentered(graphX, graphY);
 			}
 		}
@@ -950,14 +941,13 @@ public class GameData {
 			float t = Math.min((float) (time - gradeStart) / gradeAnimationTime, 1f);
 			float tp = AnimationEquation.IN_CUBIC.calc(t);
 			float scale = 1.5f - 0.5f * tp;
-			float alpha = tp;
 			Grade grade = getGrade();
 			if (grade != Grade.NULL) {
 				Image img = grade.getLargeImage();
 				float x = width - 8 * uiScale - img.getWidth() / 2f;
 				float y = 100 * uiScale + img.getHeight() / 2f;
 				img = img.getScaledCopy(scale);
-				img.setAlpha(alpha);
+				img.setAlpha(tp);
 				img.drawCentered(x, y);
 			}
 		}
@@ -988,9 +978,8 @@ public class GameData {
 						float t = Math.min((float) (time - animationTime * modCount) / animationTime, 1f);
 						float tp = AnimationEquation.OUT_CUBIC.calc(t);
 						float scale = 2f - tp;
-						float alpha = tp;
 						Image img = mod.getImage().getScaledCopy(scale);
-						img.setAlpha(alpha);
+						img.setAlpha(tp);
 						img.drawCentered(
 							modX - (modCount * (modWidth / 2f)) + modWidth / 2f,
 							height / 2f + modHeight / 2f
@@ -1312,21 +1301,20 @@ public class GameData {
 			// We use a base X value to avoid division by zero.
 			int BurstWidth = comboBurstImages[comboBurstIndex].getWidth();
 			int baseX = width / 40;
-			int leftX = baseX;
 			int rightX = width - BurstWidth - baseX;
 			double XDelta = delta / 2f;
-			if (comboBurstX < leftX) {
+			if (comboBurstX < baseX) {
 				// Appearing from left, from comboBurstX to leftX
-				comboBurstX += (float) (XDelta * GameImage.getUIscale() * (leftX - comboBurstX) / BurstWidth);
-				if (comboBurstX > leftX)
-					comboBurstX = leftX;
+				comboBurstX += (float) (XDelta * GameImage.getUIscale() * (baseX - comboBurstX) / BurstWidth);
+				if (comboBurstX > baseX)
+					comboBurstX = baseX;
 			} else if (comboBurstX > rightX) {
 				// Appearing from right
 				comboBurstX -= (float) (XDelta * GameImage.getUIscale() * (comboBurstX - rightX) / BurstWidth);
 				if (comboBurstX < rightX)
 					comboBurstX = rightX;
 			}
-			float leftPortion = (leftX - comboBurstX) / BurstWidth;
+			float leftPortion = (baseX - comboBurstX) / BurstWidth;
 			float rightPortion = (comboBurstX - rightX) / BurstWidth;
 			if (comboBurstAlpha > 0f && (leftPortion <= 0.45f && leftPortion >= 0f) || (rightPortion <= 0.45f && rightPortion >= 0f)) {
 				// alpha = 1 / x, 0f -> insivible

@@ -136,8 +136,7 @@ public class NotificationManager {
 				alpha = t;
 				offset = (int) ((1f - t) * (width / 2f));
 			} else if (NOTIFICATION_TIME - time < NOTIFICATION_ANIMATION_TIME) {
-				float t = (float) (NOTIFICATION_TIME - time) / NOTIFICATION_ANIMATION_TIME;
-				alpha = t;
+				alpha = (float) (NOTIFICATION_TIME - time) / NOTIFICATION_ANIMATION_TIME;
 			}
 
 			float oldBlackAlpha = Colors.BLACK_ALPHA.a;

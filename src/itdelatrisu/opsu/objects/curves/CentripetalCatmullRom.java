@@ -74,9 +74,7 @@ public class CentripetalCatmullRom extends CurveType {
 		Vec2f B2 = A2.cpy().scale((time[3] - t) / (time[3] - time[1]))
 			  .add(A3.cpy().scale((t - time[1]) / (time[3] - time[1])));
 
-		Vec2f C = B1.cpy().scale((time[2] - t) / (time[2] - time[1]))
+		return B1.cpy().scale((time[2] - t) / (time[2] - time[1]))
 			 .add(B2.cpy().scale((t - time[1]) / (time[2] - time[1])));
-
-		return C;
 	}
 }

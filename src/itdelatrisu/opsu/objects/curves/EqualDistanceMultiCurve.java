@@ -123,7 +123,7 @@ public abstract class EqualDistanceMultiCurve extends Curve {
 			cnt = ncurve - 1;
 		do c2 = curve[cnt--];
 		while (cnt >= 0 && c2.cpy().sub(c1).len() < 1);
-			this.endAngle = (float) (Math.atan2(c2.y - c1.y, c2.x - c1.x) * 180 / Math.PI);
+		this.endAngle = (float) (Math.atan2(c2.y - c1.y, c2.x - c1.x) * 180 / Math.PI);
 //		}
 	}
 

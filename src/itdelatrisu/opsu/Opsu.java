@@ -24,7 +24,6 @@ import itdelatrisu.opsu.downloads.DownloadList;
 import itdelatrisu.opsu.downloads.Updater;
 import itdelatrisu.opsu.options.Options;
 import itdelatrisu.opsu.states.*;
-import itdelatrisu.opsu.ui.Fonts;
 import itdelatrisu.opsu.ui.UI;
 import itdelatrisu.opsu.video.FFmpeg;
 import org.newdawn.slick.GameContainer;
