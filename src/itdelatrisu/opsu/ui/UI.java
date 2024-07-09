@@ -275,7 +275,7 @@ public class UI {
 	 * @param alpha the text alpha level
 	 */
 	public static void drawLoadingProgress(Graphics g, float alpha) {
-		String text, file;
+		String text, file = "...";
 		int progress;
 
 		// determine current action
@@ -296,6 +296,7 @@ public class UI {
 			text = t("Loading sounds...");
 			progress = SoundController.getLoadingProgress();
 		} else {
+			file = "...";
 			text = String.format(t("Welcome to %s"), OpsuConstants.PROJECT_NAME);
 			progress = 100;
 		}
