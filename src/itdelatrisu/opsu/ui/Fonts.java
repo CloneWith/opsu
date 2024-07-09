@@ -101,6 +101,7 @@ public class Fonts {
 	private static void loadFont(UnicodeFont font, Effect effect, UnicodeFont backup) throws SlickException {
 		font.addBackupFont(backup);
 		font.addAsciiGlyphs();
+		font.addLocaleGlyphs();
 		font.getEffects().add(effect);
 		font.loadGlyphs();
 	}
