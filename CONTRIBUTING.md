@@ -18,6 +18,12 @@ If you are unsure about this problem, you can post in our [discussion page][disc
 
 [discussions]: https://github.com/clonewith/discussions
 
+## Translating
+
+You can use Crowdin to translation opsu! into your language!
+
+For existing language entries, please direct to [the project page on Crowdin](https://crowdin.com/project/opsu) to start translating them. And if your language doesn't appear on the list, feel free to create an issue!
+
 ## Making a Change
 
 1. [Fork the repository][fork] and set up your build environment, as described in the [README][buildenv].

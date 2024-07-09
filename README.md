@@ -1,5 +1,8 @@
 # [opsu!](https://github.com/clonewith/opsu)
 
+[![Crowdin](https://badges.crowdin.net/opsu/localized.svg)](https://crowdin.com/project/opsu)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/73922f9e67384da89c01fda3b32dd552)](https://app.codacy.com/gh/CloneWith/opsu/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+
 **opsu!** is an unofficial open-source client for the rhythm game [osu!](https://osu.ppy.sh/), written in Java using [Slick2D](http://slick.ninjacave.com/) and [LWJGL](http://lwjgl.org/) (wrappers around OpenGL and OpenAL).
 
 opsu! runs on Windows and Linux.
