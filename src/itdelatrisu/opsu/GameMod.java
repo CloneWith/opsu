@@ -56,7 +56,7 @@ public enum GameMod {
 	RELAX         (Category.SPECIAL, 0, GameImage.MOD_RELAX, "RL", 128, Input.KEY_Z, 0f,
 	              "Relax", t("You don't need to click.\nGive your clicking/tapping finger a break from the heat of things.\n**UNRANKED**")),
 	AUTOPILOT     (Category.SPECIAL, 1, GameImage.MOD_AUTOPILOT, "AP", 8192, Input.KEY_X, 0f,
-	              "Relax2", "Automatic cursor movement - just follow the rhythm.\n**UNRANKED**"),
+	              "Relax2", t("Automatic cursor movement - just follow the rhythm.\n**UNRANKED**")),
 	Target	      (Category.SPECIAL, 2, GameImage.MOD_TARGET, "AP", 8388608, Input.KEY_T, 1f,
 	              "Target", t("Timing practice!")),
 	SPUN_OUT      (Category.SPECIAL, 3, GameImage.MOD_SPUN_OUT, "SO", 4096, Input.KEY_C, 0.9f,
