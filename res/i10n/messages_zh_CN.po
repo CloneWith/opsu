@@ -1,255 +1,70 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: opsu!\n"
-"POT-Creation-Date: 2024-07-08 19:02+0800\n"
-"PO-Revision-Date: 2024-07-08 19:05+0800\n"
-"Last-Translator: CloneWith <clonewith@qq.com>\n"
-"Language-Team: CloneWith <clonewith@qq.com>\n"
-"Language: zh_CN\n"
+"Project-Id-Version: opsu\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-07-09 10:15+0800\n"
+"PO-Revision-Date: 2024-07-09 03:26\n"
+"Last-Translator: \n"
+"Language-Team: Chinese Simplified\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: ;t\n"
+"X-Poedit-Basepath: ../../src\n"
+"X-Poedit-SearchPath-0: .\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Crowdin-Project: opsu\n"
 "X-Crowdin-Project-ID: 692661\n"
 "X-Crowdin-Language: zh-CN\n"
 "X-Crowdin-File: /main/res/i10n/messages.pot\n"
 "X-Crowdin-File-ID: 8\n"
+"Language: zh_CN\n"
 
-#: ../../src/itdelatrisu/opsu/audio/MultiClip.java:238
-#, java-printf-format
-msgid "Could not close AudioInputStream for MultiClip %s."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/audio/MusicController.java:103
-#, java-printf-format
-msgid "Could not find track '%s'."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/audio/MusicController.java:144
-msgid "Looks like sound isn't working right now. Sorry!\n\n"
-"Restarting the game will probably fix this."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/audio/SoundController.java:267
-#, java-printf-format
-msgid "Failed to load %d audio file%s."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/audio/SoundController.java:270
-msgid "\n"
-"Click for details."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/audio/SoundController.java:419
-msgid "Failed to download track preview."
-msgstr ""
-
-#. * All beatmaps (no filter).
-#: ../../src/itdelatrisu/opsu/beatmap/BeatmapGroup.java:38
-msgid "All Songs"
-msgstr ""
-
-#. * Most recently played beatmaps.
-#: ../../src/itdelatrisu/opsu/beatmap/BeatmapGroup.java:41
-msgid "Last Played"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/beatmap/BeatmapGroup.java:41
-msgid "Your recently played beatmaps will appear in this list!"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/beatmap/OszUnpacker.java:82
-#, java-printf-format
-msgid "Imported %d new beatmap pack%s."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/downloads/Download.java:60
-msgid "Waiting"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/downloads/Download.java:61
-msgid "Downloading"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/downloads/Download.java:62
-msgid "Complete"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/downloads/Download.java:63
-msgid "Cancelled"
-msgstr ""
-
-#. * Error popup title.
-#: ../../src/itdelatrisu/opsu/downloads/Download.java:64
-#: ../../src/itdelatrisu/opsu/ErrorHandler.java:45
+#: itdelatrisu/opsu/ErrorHandler.java:45
+#: itdelatrisu/opsu/downloads/Download.java:64
 msgid "Error"
 msgstr "错误"
 
-#: ../../src/itdelatrisu/opsu/downloads/DownloadList.java:37
-#, java-printf-format
-msgid "Beatmap downloads are in progress.\n"
-"Are you sure you want to quit %s?"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/downloads/DownloadNode.java:280
-#, java-printf-format
-msgid "Download complete: %s"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/downloads/DownloadNode.java:285
-msgid "Download failed due to a connection error."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/downloads/servers/HexideServer.java:106
-msgid "m_title"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/downloads/servers/HexideServer.java:107
-msgid "m_artist"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/downloads/servers/HexideServer.java:108
-msgid "m_creator"
-msgstr ""
-
-#. "versions" is sometimes missing (?)
-#. "date"
-#: ../../src/itdelatrisu/opsu/downloads/servers/HexideServer.java:110
-#: ../../src/itdelatrisu/opsu/downloads/servers/SayobotServer.java:116
-msgid "title"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/downloads/servers/HexideServer.java:122
-msgid "date"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/downloads/servers/RippleServer.java:95
-msgid "LastUpdate"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/downloads/servers/RippleServer.java:96
-msgid "Title"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/downloads/servers/RippleServer.java:96
-msgid "Artist"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/downloads/servers/RippleServer.java:97
-msgid "Creator"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/downloads/servers/SayobotServer.java:116
-msgid "titleU"
-msgstr ""
-
-#. "titleUnicode"
-#: ../../src/itdelatrisu/opsu/downloads/servers/SayobotServer.java:117
-msgid "artist"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/downloads/servers/SayobotServer.java:117
-msgid "artistU"
-msgstr ""
-
-#. "artistUnicode"
-#: ../../src/itdelatrisu/opsu/downloads/servers/SayobotServer.java:118
-msgid "creator"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/downloads/Updater.java:55
-#, java-printf-format
-msgid "A new update is being downloaded.\n"
-"Are you sure you want to quit %s?"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/downloads/Updater.java:67
-msgid "Checking for updates..."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/downloads/Updater.java:68
-msgid "Connection error."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/downloads/Updater.java:69
-msgid "Internal error."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/downloads/Updater.java:70
-msgid "Up to date!"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/downloads/Updater.java:71
-msgid "Update available!\n"
-"Click to download."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/downloads/Updater.java:72
-msgid "Downloading update..."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/downloads/Updater.java:77
-#, java-printf-format
-msgid "Downloading update...\n"
-"%.1f%% complete (%s/%s)"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/downloads/Updater.java:83
-msgid "Download complete.\n"
-"Click to restart."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/downloads/Updater.java:84
-msgid "Update queued."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/downloads/Updater.java:278
-msgid "Update has finished downloading."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/downloads/Updater.java:284
-msgid "Update failed due to a connection error."
-msgstr ""
-
-#. * Error popup description text.
-#: ../../src/itdelatrisu/opsu/ErrorHandler.java:48
+#: itdelatrisu/opsu/ErrorHandler.java:48
 msgid "An error occurred. :("
 msgstr "出错了。:("
 
-#: ../../src/itdelatrisu/opsu/ErrorHandler.java:49
+#: itdelatrisu/opsu/ErrorHandler.java:49
 msgid "Something bad happened. Please report this!"
 msgstr "不好的事情发生了。请报告！"
 
-#. * Error popup buttons' strings.
-#: ../../src/itdelatrisu/opsu/ErrorHandler.java:52
+#: itdelatrisu/opsu/ErrorHandler.java:52
+#: itdelatrisu/opsu/states/ButtonMenu.java:588
+#: itdelatrisu/opsu/states/ButtonMenu.java:665
 msgid "Close"
 msgstr "关闭"
 
-#: ../../src/itdelatrisu/opsu/ErrorHandler.java:53
+#: itdelatrisu/opsu/ErrorHandler.java:53
 msgid "View Error Log"
 msgstr "查看错误日志"
 
-#: ../../src/itdelatrisu/opsu/ErrorHandler.java:54
+#: itdelatrisu/opsu/ErrorHandler.java:54
 msgid "Send Report"
 msgstr "发送报告"
 
-#: ../../src/itdelatrisu/opsu/GameData.java:974
+#: itdelatrisu/opsu/GameData.java:974
 #, java-printf-format
 msgid "Beatmap by %s"
 msgstr "%s 的谱面"
 
-#: ../../src/itdelatrisu/opsu/GameData.java:975
+#: itdelatrisu/opsu/GameData.java:975
 #, java-printf-format
 msgid " by %s"
-msgstr " 由 %s"
+msgstr " 作者 %s"
 
-#: ../../src/itdelatrisu/opsu/GameData.java:977
+#: itdelatrisu/opsu/GameData.java:977
 #, java-printf-format
 msgid "Played%s on %s."
 msgstr "%s 于 %s 游玩。"
 
-#: ../../src/itdelatrisu/opsu/GameData.java:1815
+#: itdelatrisu/opsu/GameData.java:1815
 #, java-printf-format
 msgid "Accuracy:\n"
 "Error: %.2fms - %.2fms avg\n"
@@ -259,9 +74,7 @@ msgstr "准确率：\n"
 "不稳定率：%.2f"
 
 #: itdelatrisu/opsu/GameMod.java:39
-msgid ""
-"Reduces overall difficulty - larger circles, more forgiving HP drain, less "
-"accuracy required."
+msgid "Reduces overall difficulty - larger circles, more forgiving HP drain, less accuracy required."
 msgstr ""
 
 #: itdelatrisu/opsu/GameMod.java:41
@@ -293,8 +106,7 @@ msgid "uguuuuuuuu"
 msgstr ""
 
 #: itdelatrisu/opsu/GameMod.java:53
-msgid ""
-"Play with no approach circles and fading notes for a slight score advantage."
+msgid "Play with no approach circles and fading notes for a slight score advantage."
 msgstr ""
 
 #: itdelatrisu/opsu/GameMod.java:55
@@ -302,8 +114,7 @@ msgid "Restricted view area."
 msgstr ""
 
 #: itdelatrisu/opsu/GameMod.java:57
-msgid ""
-"You don't need to click.\n"
+msgid "You don't need to click.\n"
 "Give your clicking/tapping finger a break from the heat of things.\n"
 "**UNRANKED**"
 msgstr ""
@@ -334,2053 +145,1387 @@ msgstr ""
 
 #: itdelatrisu/opsu/GameMod.java:73
 msgid "Special"
-msgstr ""
+msgstr "特殊"
 
 #: itdelatrisu/opsu/Opsu.java:201
 msgid "An error occurred while creating the game container."
-msgstr ""
+msgstr "创建游戏容器时出现错误。"
 
 #: itdelatrisu/opsu/Opsu.java:267
 msgid "JARs cannot be run from some paths containing the '!' character. "
-msgstr ""
+msgstr "JAR 文件无法在含有“!”字符的目录运行。 "
 
 #: itdelatrisu/opsu/Opsu.java:268
-msgid ""
-"Please rename the file/directories and try again.\n"
-"\n"
-msgstr ""
+msgid "Please rename the file/directories and try again.\n\n"
+msgstr "请重命名文件/文件夹后再试。\n\n"
 
 #: itdelatrisu/opsu/Opsu.java:269
 msgid "Path: "
-msgstr ""
+msgstr "路径："
 
-#: ../../src/itdelatrisu/opsu/options/OptionGroup.java:33
-msgid "General"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/OptionGroup.java:34
-msgid "LANGUAGE"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/OptionGroup.java:38
-msgid "UPDATES"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/OptionGroup.java:41
-msgid "Graphics"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/OptionGroup.java:42
-msgid "LAYOUT"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/OptionGroup.java:46
-msgid "RENDERER"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/OptionGroup.java:50
-msgid "DETAIL SETTINGS"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/OptionGroup.java:59
-msgid "EXPERIMENTAL SLIDERS"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/OptionGroup.java:65
-msgid "MAIN MENU"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/OptionGroup.java:70
-msgid "Gameplay"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/OptionGroup.java:77
-msgid "MODS"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/OptionGroup.java:82
-msgid "Audio"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/OptionGroup.java:83
-msgid "VOLUME"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/OptionGroup.java:92
-msgid "OFFSET ADJUSTMENT"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/OptionGroup.java:95
-msgid "Skin"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/OptionGroup.java:96
-msgid "SKIN"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/OptionGroup.java:105
-msgid "Input"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/OptionGroup.java:106
-msgid "MOUSE"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/OptionGroup.java:110
-msgid "KEYBOARD"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/OptionGroup.java:114
-msgid "Custom"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/OptionGroup.java:115
-msgid "DIFFICULTY"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/OptionGroup.java:122
-msgid "COLOR"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/OptionGroup.java:128
-msgid "SEEKING"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/OptionGroup.java:132
-msgid "MISCELLANEOUS"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:69
-msgid "Disabled"
-msgstr ""
-
-#. in-game options
-#: ../../src/itdelatrisu/opsu/options/Options.java:334
-msgid "Resolution"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:381
-msgid "Fullscreen mode"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:381
-msgid "Switches to dedicated fullscreen mode."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:392
-#, java-printf-format
-msgid "Fullscreen mode is not available at resolution %s"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:451
-msgid "Frame limiter"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:451
-msgid "Higher values may cause high CPU usage."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:453
-msgid "Unlimited"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:502
-msgid "Language"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:502
-msgid "The interface language."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:539
-msgid "Show FPS counter"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:540
-msgid "Show a subtle FPS counter in the bottom right corner of the screen."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:547
-msgid "Prefer metadata in original language"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:548
-msgid "Where available, song titles will be shown in their native language (and character-set)."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:564
-msgid "Screenshot format"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:564
-msgid "Press F12 to take a screenshot."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:599
-msgid "Cursor size"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:599
-msgid "Change the cursor scale."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:617
-msgid "Tint warning arrow white"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:618
-msgid "Tint the warning arrow appeared before the end of a break period white instead of red.\n"
-"This overrides the skin settings."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:620
-msgid "Always use builtin back button"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:621
-msgid "Use the builtin back button style regardless of the skin."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:622
-msgid "Dynamic backgrounds"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:623
-msgid "The current beatmap background will be used as the main menu background."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:624
-msgid "Detailed loading progress"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:625
-msgid "Display more verbose loading progress in the splash screen."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:626
-msgid "Master"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:626
-msgid "Global volume level."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:633
-msgid "Music"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:633
-msgid "Music volume."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:640
-msgid "Effects"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:640
-msgid "Menu and game sound effects volume."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:641
-msgid "Hit sounds"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:641
-msgid "Hit sounds volume."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:642
-msgid "Universal offset"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:642
-msgid "Adjust this value if hit objects are out of sync."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:649
-msgid "Disable sound effects in gameplay"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:650
-msgid "Mute all sound effects during gameplay only."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:651
-msgid "Disable all sound effects"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:652
-msgid "May resolve Linux sound driver issues.\n"
-"Requires a restart."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:658
-msgid "Heartbeat sound (unstable)"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:659
-msgid "Play heartbeat sounds when the cursor hovers on the logo. May sounds off beat."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:660
-msgid "Left game key"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:660
-#: ../../src/itdelatrisu/opsu/options/Options.java:676
-msgid "Select this option to input a key."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:676
-msgid "Right game key"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:692
-msgid "Disable mouse wheel in play mode"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:693
-msgid "Disable the functionality to  adjust the volume and pause the game with the mouse wheel during gameplay."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:695
-msgid "Disable mouse buttons in play mode"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:696
-msgid "Disable all mouse buttons.\n"
-"Specifically for people who use their keyboard to click."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:697
-msgid "Background dim"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:697
-msgid "Percentage to dim the background image during gameplay."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:699
-msgid "Force default playfield"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:700
-msgid "Overrides the song background with the default playfield background."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:701
-msgid "Background video"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:702
-msgid "Enables background video playback.\n"
-"If you get a large amount of lag on beatmaps with video, try disabling this feature."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:704
-msgid "Ignore all beatmap skins"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:705
-msgid "Defaults game settings to never use skin element overrides provided by beatmaps."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:706
-msgid "Always use skin cursor"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:707
-msgid "The selected skin's cursor will override any beatmap-specific cursor modifications."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:708
-msgid "Keep the Auto mod on"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:708
-msgid "Keep the Auto mod on after gameplay."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:709
-msgid "Enable pause screen in Auto play and replays"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:710
-msgid "Allow players to press Esc to show the pause screen during replays and gameplay with the Auto mod on."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:712
-msgid "Snaking sliders"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:712
-msgid "Sliders gradually snake out from their starting point."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:714
-msgid "Use experimental sliders"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:715
-msgid "Render sliders using the experimental slider style."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:716
-msgid "Draw slider caps"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:717
-msgid "Draw caps (end circles) on sliders.\n"
-"Only applies to experimental sliders."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:718
-msgid "Shrinking sliders"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:719
-msgid "Sliders shrink toward their ending point when the ball passes.\n"
-"Only applies to experimental sliders."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:721
-msgid "Merging sliders"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:722
-msgid "For overlapping sliders, don't draw the edges and combine the slider tracks where they cross.\n"
-"Only applies to experimental sliders."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:724
-msgid "Hit lighting"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:725
-msgid "Adds a subtle glow behind hit explosions which lights the playfield."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:726
-msgid "Combo bursts"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:727
-msgid "A character image bursts from the side of the screen at combo milestones."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:728
-msgid "Perfect hits"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:728
-msgid "Shows perfect hit result bursts (300s, slider ticks)."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:729
-msgid "Follow points"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:729
-msgid "Shows follow points between hit objects."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:730
-msgid "Hit error bar"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:730
-msgid "Shows precisely how accurate you were with each hit."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:732
-msgid "Always show key overlay"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:733
-msgid "Show the key overlay when playing instead of only on replays."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:734
-msgid "Load HD images"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:735
-#, java-printf-format
-msgid "Loads HD (%s) images when available.\n"
-"Increases memory usage and loading times."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:738
-msgid "Fixed CS"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:738
-msgid "Determines the size of circles and sliders."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:756
-msgid "Fixed HP"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:756
-msgid "Determines the rate at which health decreases."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:774
-msgid "Fixed AR"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:774
-msgid "Determines how long hit circles stay on the screen."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:792
-msgid "Fixed OD"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:792
-msgid "Determines the time window for hit results."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:810
-msgid "Fixed speed"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:810
-msgid "Determines the speed of the music."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:828
-msgid "Customize interface color"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:828
-msgid "Use your own color for the interface of opsu!"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:830
-msgid "Interface color Red"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:830
-msgid "Red color value."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:836
-msgid "Interface color Green"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:836
-msgid "Green color value."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:842
-msgid "Interface color Blue"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:842
-msgid "Blue color value."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:848
-msgid "Real Auto player"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:848
-msgid "Auto also fails!"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:849
-msgid "Track checkpoint"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:850
-msgid "Press Ctrl+L while playing to load a checkpoint, and Ctrl+S to set one."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:859
-msgid "Parallax"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:859
-msgid "Add a parallax effect based on the current cursor position."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:860
-msgid "Theme song"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:862
-msgid " will play themed music throughout the game, instead of using random beatmaps."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:864
-msgid "Replay seeking"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:865
-msgid "Enable a seeking bar on the left side of the screen during replays."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:866
-msgid "Disable automatic updates"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:867
-msgid "Disable checking for updates when the game starts."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:868
-msgid "Watch service"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:869
-msgid "Watch the beatmap directory for changes. Requires a restart."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:1291
-#, java-printf-format
-msgid "Frame limiter: %s"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:1827
-msgid "Mouse buttons are disabled."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:1828
-msgid "Mouse buttons are enabled."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:2181
-#, java-printf-format
-msgid "# %s configuration"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/Options.java:2183
-msgid "# last updated on "
-msgstr ""
-
-#. title
-#: ../../src/itdelatrisu/opsu/options/OptionsOverlay.java:478
-msgid "Options"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/OptionsOverlay.java:479
-#, java-printf-format
-msgid "Change the way %s behaves"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/OptionsOverlay.java:520
-#: ../../src/itdelatrisu/opsu/states/DownloadsMenu.java:237
-#: ../../src/itdelatrisu/opsu/states/SongMenu.java:744
-msgid "Type to search!"
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/OptionsOverlay.java:568
-msgid "Press the new left-click key."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/OptionsOverlay.java:568
-msgid "Press the new right-click key."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/OptionsOverlay.java:569
-msgid "Click anywhere or hit ESC to cancel."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/OptionsOverlay.java:866
-msgid "Click to restart the game."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/options/OptionsOverlay.java:1208
-#: ../../src/itdelatrisu/opsu/options/OptionsOverlay.java:1414
-msgid "Restart to apply changes."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/replay/ReplayImporter.java:109
-#, java-printf-format
-msgid "Imported %d replay%s."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/ScoreData.java:419
+#: itdelatrisu/opsu/ScoreData.java:419
 #, java-printf-format
 msgid "Achieved on %s\n"
 "300:%d 100:%d 50:%d Miss:%d\n"
 "Accuracy: %.2f%%\n"
 "Mods: %s"
-msgstr ""
+msgstr "于 %s 获取\n"
+"300:%d 100:%d 50:%d Miss:%d\n"
+"准确率：%.2f%%\n"
+"模组：%s"
 
 #: itdelatrisu/opsu/Utils.java:176
-msgid ""
-"WARNING:\n"
+msgid "WARNING:\n"
 "Running in OpenGL software mode.\n"
-"You may experience severely degraded performance.\n"
-"\n"
+"You may experience severely degraded performance.\n\n"
 "This can usually be resolved by updating your graphics drivers."
-msgstr ""
+msgstr "警告：\n"
+"正以 OpenGL 软件模式运行。\n"
+"性能可能会大幅下降。\n\n"
+"升级图形驱动通常会解决此问题。"
 
 #: itdelatrisu/opsu/Utils.java:353
 #, java-printf-format
 msgid "Saved screenshot to %s"
-msgstr ""
+msgstr "已保存截图至 %s"
 
 #: itdelatrisu/opsu/Utils.java:360
 msgid "Failed to open screenshot location."
-msgstr ""
+msgstr "无法打开截图位置。"
 
 #: itdelatrisu/opsu/Utils.java:774
-msgid ""
-"Skin changed.\n"
-"Some elements might not be replaced properly, for this please restart the "
-"game."
-msgstr ""
+msgid "Skin changed.\n"
+"Some elements might not be replaced properly, for this please restart the game."
+msgstr "已更改皮肤。\n"
+"部分元素可能未被正确替换，请重启游戏以完全应用更改。"
 
 #: itdelatrisu/opsu/audio/MultiClip.java:238
 #, java-printf-format
 msgid "Could not close AudioInputStream for MultiClip %s."
-msgstr ""
+msgstr "无法为 MultiClip %s 关闭 AudioInputStream。"
 
 #: itdelatrisu/opsu/audio/MusicController.java:103
 #, java-printf-format
 msgid "Could not find track '%s'."
-msgstr ""
+msgstr "找不到歌曲“%s”。"
 
 #: itdelatrisu/opsu/audio/MusicController.java:144
-msgid ""
-"Looks like sound isn't working right now. Sorry!\n"
-"\n"
+msgid "Looks like sound isn't working right now. Sorry!\n\n"
 "Restarting the game will probably fix this."
-msgstr ""
+msgstr "声音功能目前似乎未运作。抱歉！\n\n"
+"重启游戏可能会修复此问题。"
 
 #: itdelatrisu/opsu/audio/SoundController.java:267
 #, java-printf-format
 msgid "Failed to load %d audio file%s."
-msgstr ""
+msgstr "无法加载 %d 个音频文件%s。"
 
 #: itdelatrisu/opsu/audio/SoundController.java:270
-msgid ""
-"\n"
+msgid "\n"
 "Click for details."
-msgstr ""
+msgstr "\n"
+"点击查看详情。"
 
 #: itdelatrisu/opsu/audio/SoundController.java:419
 msgid "Failed to download track preview."
-msgstr ""
+msgstr "歌曲预览下载失败。"
 
 #: itdelatrisu/opsu/beatmap/BeatmapGroup.java:38
 msgid "All Songs"
-msgstr ""
+msgstr "所有谱面"
 
 #: itdelatrisu/opsu/beatmap/BeatmapGroup.java:41
 msgid "Last Played"
-msgstr ""
+msgstr "最近游玩"
 
 #: itdelatrisu/opsu/beatmap/BeatmapGroup.java:41
 msgid "Your recently played beatmaps will appear in this list!"
-msgstr ""
+msgstr "这里会显示你最近游玩的谱面！"
 
 #: itdelatrisu/opsu/beatmap/OszUnpacker.java:82
 #, java-printf-format
 msgid "Imported %d new beatmap pack%s."
-msgstr ""
+msgstr "已导入 %d 个新曲包%s。"
 
 #: itdelatrisu/opsu/downloads/Download.java:60
 msgid "Waiting"
-msgstr ""
+msgstr "等待中"
 
 #: itdelatrisu/opsu/downloads/Download.java:61
 msgid "Downloading"
-msgstr ""
+msgstr "下载中"
 
 #: itdelatrisu/opsu/downloads/Download.java:62
 msgid "Complete"
-msgstr ""
+msgstr "已完成"
 
 #: itdelatrisu/opsu/downloads/Download.java:63
 msgid "Cancelled"
-msgstr ""
+msgstr "已取消"
 
 #: itdelatrisu/opsu/downloads/DownloadList.java:37
 #, java-printf-format
-msgid ""
-"Beatmap downloads are in progress.\n"
+msgid "Beatmap downloads are in progress.\n"
 "Are you sure you want to quit %s?"
-msgstr ""
+msgstr "正在下载谱面。\n"
+"确定要退出 %s 吗？"
 
 #: itdelatrisu/opsu/downloads/DownloadNode.java:280
 #, java-printf-format
 msgid "Download complete: %s"
-msgstr ""
+msgstr "下载完成：%s"
 
 #: itdelatrisu/opsu/downloads/DownloadNode.java:285
 msgid "Download failed due to a connection error."
-msgstr ""
+msgstr "由于连接问题，下载失败。"
 
 #: itdelatrisu/opsu/downloads/Updater.java:55
 #, java-printf-format
-msgid ""
-"A new update is being downloaded.\n"
+msgid "A new update is being downloaded.\n"
 "Are you sure you want to quit %s?"
-msgstr ""
+msgstr "正在下载新版更新。\n"
+"确定要退出 %s 吗？"
 
 #: itdelatrisu/opsu/downloads/Updater.java:67
 msgid "Checking for updates..."
-msgstr ""
+msgstr "正在检查更新..."
 
 #: itdelatrisu/opsu/downloads/Updater.java:68
 msgid "Connection error."
-msgstr ""
+msgstr "连接错误。"
 
 #: itdelatrisu/opsu/downloads/Updater.java:69
 msgid "Internal error."
-msgstr ""
+msgstr "内部错误。"
 
 #: itdelatrisu/opsu/downloads/Updater.java:70
 msgid "Up to date!"
-msgstr ""
+msgstr "已是最新！"
 
 #: itdelatrisu/opsu/downloads/Updater.java:71
-msgid ""
-"Update available!\n"
+msgid "Update available!\n"
 "Click to download."
-msgstr ""
+msgstr "更新可用！\n"
+"点击下载。"
 
 #: itdelatrisu/opsu/downloads/Updater.java:72
 msgid "Downloading update..."
-msgstr ""
+msgstr "下载更新中..."
 
 #: itdelatrisu/opsu/downloads/Updater.java:77
 #, java-printf-format
-msgid ""
-"Downloading update...\n"
+msgid "Downloading update...\n"
 "%.1f%% complete (%s/%s)"
-msgstr ""
+msgstr "下载更新中...\n"
+"已完成 %.1f%%(%s/%s)"
 
 #: itdelatrisu/opsu/downloads/Updater.java:83
-msgid ""
-"Download complete.\n"
+msgid "Download complete.\n"
 "Click to restart."
-msgstr ""
+msgstr "下载完成。\n"
+"点击重启。"
 
 #: itdelatrisu/opsu/downloads/Updater.java:84
 msgid "Update queued."
-msgstr ""
+msgstr "更新已排队。"
 
 #: itdelatrisu/opsu/downloads/Updater.java:278
 msgid "Update has finished downloading."
-msgstr ""
+msgstr "更新下载完成。"
 
 #: itdelatrisu/opsu/downloads/Updater.java:284
 msgid "Update failed due to a connection error."
-msgstr ""
-
-#: itdelatrisu/opsu/downloads/servers/HexideServer.java:106
-msgid "m_title"
-msgstr ""
-
-#: itdelatrisu/opsu/downloads/servers/HexideServer.java:107
-msgid "m_artist"
-msgstr ""
-
-#: itdelatrisu/opsu/downloads/servers/HexideServer.java:108
-msgid "m_creator"
-msgstr ""
-
-#: itdelatrisu/opsu/downloads/servers/HexideServer.java:110
-#: itdelatrisu/opsu/downloads/servers/SayobotServer.java:116
-msgid "title"
-msgstr ""
-
-#: itdelatrisu/opsu/downloads/servers/HexideServer.java:122
-msgid "date"
-msgstr ""
-
-#: itdelatrisu/opsu/downloads/servers/RippleServer.java:95
-msgid "LastUpdate"
-msgstr ""
-
-#: itdelatrisu/opsu/downloads/servers/RippleServer.java:96
-msgid "Title"
-msgstr ""
-
-#: itdelatrisu/opsu/downloads/servers/RippleServer.java:96
-msgid "Artist"
-msgstr ""
-
-#: itdelatrisu/opsu/downloads/servers/RippleServer.java:97
-msgid "Creator"
-msgstr ""
-
-#: itdelatrisu/opsu/downloads/servers/SayobotServer.java:116
-msgid "titleU"
-msgstr ""
-
-#: itdelatrisu/opsu/downloads/servers/SayobotServer.java:117
-msgid "artist"
-msgstr ""
-
-#: itdelatrisu/opsu/downloads/servers/SayobotServer.java:117
-msgid "artistU"
-msgstr ""
-
-#: itdelatrisu/opsu/downloads/servers/SayobotServer.java:118
-msgid "creator"
-msgstr ""
+msgstr "由于连接问题，更新失败。"
 
 #: itdelatrisu/opsu/options/OptionGroup.java:33
 msgid "General"
-msgstr ""
+msgstr "通用"
 
 #: itdelatrisu/opsu/options/OptionGroup.java:34
 msgid "LANGUAGE"
-msgstr ""
+msgstr "语言"
 
 #: itdelatrisu/opsu/options/OptionGroup.java:38
 msgid "UPDATES"
-msgstr ""
+msgstr "更新"
 
 #: itdelatrisu/opsu/options/OptionGroup.java:41
 msgid "Graphics"
-msgstr ""
+msgstr "图形"
 
 #: itdelatrisu/opsu/options/OptionGroup.java:42
 msgid "LAYOUT"
-msgstr ""
+msgstr "布局"
 
 #: itdelatrisu/opsu/options/OptionGroup.java:46
 msgid "RENDERER"
-msgstr ""
+msgstr "渲染器"
 
 #: itdelatrisu/opsu/options/OptionGroup.java:50
 msgid "DETAIL SETTINGS"
-msgstr ""
+msgstr "细节设置"
 
 #: itdelatrisu/opsu/options/OptionGroup.java:59
 msgid "EXPERIMENTAL SLIDERS"
-msgstr ""
+msgstr "实验性滑条"
 
 #: itdelatrisu/opsu/options/OptionGroup.java:65
 msgid "MAIN MENU"
-msgstr ""
+msgstr "主菜单"
 
 #: itdelatrisu/opsu/options/OptionGroup.java:70
 msgid "Gameplay"
-msgstr ""
+msgstr "游玩"
 
 #: itdelatrisu/opsu/options/OptionGroup.java:77
 msgid "MODS"
-msgstr ""
+msgstr "模组"
 
 #: itdelatrisu/opsu/options/OptionGroup.java:82
 msgid "Audio"
-msgstr ""
+msgstr "音频"
 
 #: itdelatrisu/opsu/options/OptionGroup.java:83
 msgid "VOLUME"
-msgstr ""
+msgstr "音量"
 
 #: itdelatrisu/opsu/options/OptionGroup.java:92
 msgid "OFFSET ADJUSTMENT"
-msgstr ""
+msgstr "偏移量调节"
 
 #: itdelatrisu/opsu/options/OptionGroup.java:95
 msgid "Skin"
-msgstr ""
+msgstr "皮肤"
 
 #: itdelatrisu/opsu/options/OptionGroup.java:96
 msgid "SKIN"
-msgstr ""
+msgstr "皮肤"
 
 #: itdelatrisu/opsu/options/OptionGroup.java:105
 msgid "Input"
-msgstr ""
+msgstr "输入"
 
 #: itdelatrisu/opsu/options/OptionGroup.java:106
 msgid "MOUSE"
-msgstr ""
+msgstr "鼠标"
 
 #: itdelatrisu/opsu/options/OptionGroup.java:110
 msgid "KEYBOARD"
-msgstr ""
+msgstr "键盘"
 
 #: itdelatrisu/opsu/options/OptionGroup.java:114
 msgid "Custom"
-msgstr ""
+msgstr "自定义"
 
 #: itdelatrisu/opsu/options/OptionGroup.java:115
 msgid "DIFFICULTY"
-msgstr ""
+msgstr "难度"
 
 #: itdelatrisu/opsu/options/OptionGroup.java:122
 msgid "COLOR"
-msgstr ""
+msgstr "颜色"
 
 #: itdelatrisu/opsu/options/OptionGroup.java:128
 msgid "SEEKING"
-msgstr ""
+msgstr "定位"
 
 #: itdelatrisu/opsu/options/OptionGroup.java:132
 msgid "MISCELLANEOUS"
-msgstr ""
+msgstr "杂项"
 
-#: itdelatrisu/opsu/options/Options.java:69
+#: itdelatrisu/opsu/options/Options.java:68
 msgid "Disabled"
-msgstr ""
+msgstr "已禁用"
 
-#: itdelatrisu/opsu/options/Options.java:334
+#: itdelatrisu/opsu/options/Options.java:333
 msgid "Resolution"
-msgstr ""
+msgstr "分辨率"
 
-#: itdelatrisu/opsu/options/Options.java:381
+#: itdelatrisu/opsu/options/Options.java:380
 msgid "Fullscreen mode"
-msgstr ""
+msgstr "全屏模式"
 
-#: itdelatrisu/opsu/options/Options.java:381
+#: itdelatrisu/opsu/options/Options.java:380
 msgid "Switches to dedicated fullscreen mode."
-msgstr ""
+msgstr "切换到全屏模式。"
 
-#: itdelatrisu/opsu/options/Options.java:392
+#: itdelatrisu/opsu/options/Options.java:391
 #, java-printf-format
 msgid "Fullscreen mode is not available at resolution %s"
-msgstr ""
+msgstr "分辨率 %s 目前不支持全屏"
 
-#: itdelatrisu/opsu/options/Options.java:451
+#: itdelatrisu/opsu/options/Options.java:445
 msgid "Frame limiter"
-msgstr ""
+msgstr "帧数限制"
 
-#: itdelatrisu/opsu/options/Options.java:451
+#: itdelatrisu/opsu/options/Options.java:445
 msgid "Higher values may cause high CPU usage."
-msgstr ""
+msgstr "较高上限可能导致 CPU 占用变高。"
 
-#: itdelatrisu/opsu/options/Options.java:453
+#: itdelatrisu/opsu/options/Options.java:447
 msgid "Unlimited"
-msgstr ""
+msgstr "无限制"
 
-#: itdelatrisu/opsu/options/Options.java:502
+#: itdelatrisu/opsu/options/Options.java:496
 msgid "Language"
-msgstr ""
+msgstr "语言"
 
-#: itdelatrisu/opsu/options/Options.java:502
+#: itdelatrisu/opsu/options/Options.java:496
 msgid "The interface language."
-msgstr ""
+msgstr "界面使用的语言。"
 
-#: itdelatrisu/opsu/options/Options.java:539
+#: itdelatrisu/opsu/options/Options.java:534
 msgid "Show FPS counter"
-msgstr ""
+msgstr "显示 FPS 计数器"
 
-#: itdelatrisu/opsu/options/Options.java:540
+#: itdelatrisu/opsu/options/Options.java:535
 msgid "Show a subtle FPS counter in the bottom right corner of the screen."
-msgstr ""
+msgstr "在屏幕右下角显示一个小 FPS 计数器。"
 
-#: itdelatrisu/opsu/options/Options.java:547
+#: itdelatrisu/opsu/options/Options.java:542
 msgid "Prefer metadata in original language"
-msgstr ""
+msgstr "优先以原语言显示元数据"
 
-#: itdelatrisu/opsu/options/Options.java:548
-msgid ""
-"Where available, song titles will be shown in their native language (and "
-"character-set)."
-msgstr ""
+#: itdelatrisu/opsu/options/Options.java:543
+msgid "Where available, song titles will be shown in their native language (and character-set)."
+msgstr "当可用时，将以原语言（及字符集）显示歌曲信息。"
 
-#: itdelatrisu/opsu/options/Options.java:564
+#: itdelatrisu/opsu/options/Options.java:559
 msgid "Screenshot format"
-msgstr ""
+msgstr "截图格式"
 
-#: itdelatrisu/opsu/options/Options.java:564
+#: itdelatrisu/opsu/options/Options.java:559
 msgid "Press F12 to take a screenshot."
-msgstr ""
+msgstr "按 F12 进行截图。"
 
-#: itdelatrisu/opsu/options/Options.java:599
+#: itdelatrisu/opsu/options/Options.java:594
 msgid "Cursor size"
-msgstr ""
+msgstr "光标大小"
 
-#: itdelatrisu/opsu/options/Options.java:599
+#: itdelatrisu/opsu/options/Options.java:594
 msgid "Change the cursor scale."
-msgstr ""
+msgstr "更改光标大小。"
+
+#: itdelatrisu/opsu/options/Options.java:612
+msgid "Tint warning arrow white"
+msgstr "白色警告箭头"
+
+#: itdelatrisu/opsu/options/Options.java:613
+msgid "Tint the warning arrow appeared before the end of a break period white instead of red.\n"
+"This overrides the skin settings."
+msgstr "将休息时段结束前的警告箭头着上白色而非红色。\n"
+"这将覆盖皮肤设置。"
+
+#: itdelatrisu/opsu/options/Options.java:615
+msgid "Always use builtin back button"
+msgstr "总是使用内置返回按钮"
+
+#: itdelatrisu/opsu/options/Options.java:616
+msgid "Use the builtin back button style regardless of the skin."
+msgstr "总是使用内置的返回按钮样式，无论皮肤设置如何。"
 
 #: itdelatrisu/opsu/options/Options.java:617
-msgid "Tint warning arrow white"
-msgstr ""
+msgid "Dynamic backgrounds"
+msgstr "动态背景"
 
 #: itdelatrisu/opsu/options/Options.java:618
-msgid ""
-"Tint the warning arrow appeared before the end of a break period white "
-"instead of red.\n"
-"This overrides the skin settings."
-msgstr ""
+msgid "The current beatmap background will be used as the main menu background."
+msgstr "将当前谱面背景用作主菜单背景。"
+
+#: itdelatrisu/opsu/options/Options.java:619
+msgid "Detailed loading progress"
+msgstr "详细加载进程"
 
 #: itdelatrisu/opsu/options/Options.java:620
-msgid "Always use builtin back button"
-msgstr ""
+msgid "Display more verbose loading progress in the splash screen."
+msgstr "在启动界面中显示更详细的加载信息。"
 
 #: itdelatrisu/opsu/options/Options.java:621
-msgid "Use the builtin back button style regardless of the skin."
-msgstr ""
-
-#: itdelatrisu/opsu/options/Options.java:622
-msgid "Dynamic backgrounds"
-msgstr ""
-
-#: itdelatrisu/opsu/options/Options.java:623
-msgid ""
-"The current beatmap background will be used as the main menu background."
-msgstr ""
-
-#: itdelatrisu/opsu/options/Options.java:624
-msgid "Detailed loading progress"
-msgstr ""
-
-#: itdelatrisu/opsu/options/Options.java:625
-msgid "Display more verbose loading progress in the splash screen."
-msgstr ""
-
-#: itdelatrisu/opsu/options/Options.java:626
 msgid "Master"
-msgstr ""
+msgstr "主音量"
 
-#: itdelatrisu/opsu/options/Options.java:626
+#: itdelatrisu/opsu/options/Options.java:621
 msgid "Global volume level."
-msgstr ""
+msgstr "全局音量大小。"
 
-#: itdelatrisu/opsu/options/Options.java:633
+#: itdelatrisu/opsu/options/Options.java:628
 msgid "Music"
-msgstr ""
+msgstr "音乐"
 
-#: itdelatrisu/opsu/options/Options.java:633
+#: itdelatrisu/opsu/options/Options.java:628
 msgid "Music volume."
-msgstr ""
+msgstr "音乐音量。"
 
-#: itdelatrisu/opsu/options/Options.java:640
+#: itdelatrisu/opsu/options/Options.java:635
 msgid "Effects"
-msgstr ""
+msgstr "音效"
 
-#: itdelatrisu/opsu/options/Options.java:640
+#: itdelatrisu/opsu/options/Options.java:635
 msgid "Menu and game sound effects volume."
-msgstr ""
+msgstr "菜单与游戏音效音量。"
 
-#: itdelatrisu/opsu/options/Options.java:641
+#: itdelatrisu/opsu/options/Options.java:636
 msgid "Hit sounds"
-msgstr ""
+msgstr "打击音效"
 
-#: itdelatrisu/opsu/options/Options.java:641
+#: itdelatrisu/opsu/options/Options.java:636
 msgid "Hit sounds volume."
-msgstr ""
+msgstr "打击音效音量。"
 
-#: itdelatrisu/opsu/options/Options.java:642
+#: itdelatrisu/opsu/options/Options.java:637
 msgid "Universal offset"
-msgstr ""
+msgstr "全局偏移量"
 
-#: itdelatrisu/opsu/options/Options.java:642
+#: itdelatrisu/opsu/options/Options.java:637
 msgid "Adjust this value if hit objects are out of sync."
-msgstr ""
+msgstr "当物件不合拍时，请调整此数值。"
 
-#: itdelatrisu/opsu/options/Options.java:649
+#: itdelatrisu/opsu/options/Options.java:644
 msgid "Disable sound effects in gameplay"
-msgstr ""
+msgstr "游戏内禁用音效"
 
-#: itdelatrisu/opsu/options/Options.java:650
+#: itdelatrisu/opsu/options/Options.java:645
 msgid "Mute all sound effects during gameplay only."
-msgstr ""
+msgstr "仅在游玩时禁用所有音效。"
 
-#: itdelatrisu/opsu/options/Options.java:651
+#: itdelatrisu/opsu/options/Options.java:646
 msgid "Disable all sound effects"
-msgstr ""
+msgstr "禁用所有音效"
 
-#: itdelatrisu/opsu/options/Options.java:652
-msgid ""
-"May resolve Linux sound driver issues.\n"
+#: itdelatrisu/opsu/options/Options.java:647
+msgid "May resolve Linux sound driver issues.\n"
 "Requires a restart."
-msgstr ""
+msgstr "可能会解决 Linux 声音驱动问题。\n"
+"需要重启。"
 
-#: itdelatrisu/opsu/options/Options.java:658
+#: itdelatrisu/opsu/options/Options.java:653
 msgid "Heartbeat sound (unstable)"
-msgstr ""
+msgstr "心跳声（不稳定）"
 
-#: itdelatrisu/opsu/options/Options.java:659
-msgid ""
-"Play heartbeat sounds when the cursor hovers on the logo. May sounds off "
-"beat."
-msgstr ""
+#: itdelatrisu/opsu/options/Options.java:654
+msgid "Play heartbeat sounds when the cursor hovers on the logo. May sounds off beat."
+msgstr "光标悬停于标志上时播放心跳声。可能不合拍。"
 
-#: itdelatrisu/opsu/options/Options.java:660
+#: itdelatrisu/opsu/options/Options.java:655
 msgid "Left game key"
-msgstr ""
+msgstr "游戏左键"
 
-#: itdelatrisu/opsu/options/Options.java:660
-#: itdelatrisu/opsu/options/Options.java:676
+#: itdelatrisu/opsu/options/Options.java:655
+#: itdelatrisu/opsu/options/Options.java:671
 msgid "Select this option to input a key."
-msgstr ""
+msgstr "选择此选项以输入新按键。"
 
-#: itdelatrisu/opsu/options/Options.java:676
+#: itdelatrisu/opsu/options/Options.java:671
 msgid "Right game key"
-msgstr ""
+msgstr "游戏右键"
+
+#: itdelatrisu/opsu/options/Options.java:687
+msgid "Disable mouse wheel in play mode"
+msgstr "游玩时禁用鼠标滚轮"
+
+#: itdelatrisu/opsu/options/Options.java:688
+msgid "Disable the functionality to  adjust the volume and pause the game with the mouse wheel during gameplay."
+msgstr "游玩时禁用鼠标滚轮音量调节与暂停的功能。"
+
+#: itdelatrisu/opsu/options/Options.java:690
+msgid "Disable mouse buttons in play mode"
+msgstr "游玩时禁用鼠标按键"
+
+#: itdelatrisu/opsu/options/Options.java:691
+msgid "Disable all mouse buttons.\n"
+"Specifically for people who use their keyboard to click."
+msgstr "禁用所有鼠标按键。\n"
+"专为使用键盘点击的玩家设计。"
 
 #: itdelatrisu/opsu/options/Options.java:692
-msgid "Disable mouse wheel in play mode"
-msgstr ""
+msgid "Background dim"
+msgstr "背景暗化"
 
-#: itdelatrisu/opsu/options/Options.java:693
-msgid ""
-"Disable the functionality to  adjust the volume and pause the game with the "
-"mouse wheel during gameplay."
-msgstr ""
+#: itdelatrisu/opsu/options/Options.java:692
+msgid "Percentage to dim the background image during gameplay."
+msgstr "游戏时暗化背景的百分比。"
+
+#: itdelatrisu/opsu/options/Options.java:694
+msgid "Force default playfield"
+msgstr "强制使用默认背景"
 
 #: itdelatrisu/opsu/options/Options.java:695
-msgid "Disable mouse buttons in play mode"
-msgstr ""
+msgid "Overrides the song background with the default playfield background."
+msgstr "总使用默认游玩区域背景。"
 
 #: itdelatrisu/opsu/options/Options.java:696
-msgid ""
-"Disable all mouse buttons.\n"
-"Specifically for people who use their keyboard to click."
-msgstr ""
+msgid "Background video"
+msgstr "背景视频"
 
 #: itdelatrisu/opsu/options/Options.java:697
-msgid "Background dim"
-msgstr ""
-
-#: itdelatrisu/opsu/options/Options.java:697
-msgid "Percentage to dim the background image during gameplay."
-msgstr ""
+msgid "Enables background video playback.\n"
+"If you get a large amount of lag on beatmaps with video, try disabling this feature."
+msgstr "启用背景视频。\n"
+"如果过于卡顿，请尝试禁用此功能。"
 
 #: itdelatrisu/opsu/options/Options.java:699
-msgid "Force default playfield"
-msgstr ""
-
-#: itdelatrisu/opsu/options/Options.java:700
-msgid "Overrides the song background with the default playfield background."
-msgstr ""
-
-#: itdelatrisu/opsu/options/Options.java:701
-msgid "Background video"
-msgstr ""
-
-#: itdelatrisu/opsu/options/Options.java:702
-msgid ""
-"Enables background video playback.\n"
-"If you get a large amount of lag on beatmaps with video, try disabling this "
-"feature."
-msgstr ""
-
-#: itdelatrisu/opsu/options/Options.java:704
 msgid "Ignore all beatmap skins"
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:705
-msgid ""
-"Defaults game settings to never use skin element overrides provided by "
-"beatmaps."
+#: itdelatrisu/opsu/options/Options.java:700
+msgid "Defaults game settings to never use skin element overrides provided by beatmaps."
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:706
+#: itdelatrisu/opsu/options/Options.java:701
 msgid "Always use skin cursor"
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:707
-msgid ""
-"The selected skin's cursor will override any beatmap-specific cursor "
-"modifications."
+#: itdelatrisu/opsu/options/Options.java:702
+msgid "The selected skin's cursor will override any beatmap-specific cursor modifications."
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:708
+#: itdelatrisu/opsu/options/Options.java:703
 msgid "Keep the Auto mod on"
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:708
+#: itdelatrisu/opsu/options/Options.java:703
 msgid "Keep the Auto mod on after gameplay."
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:709
+#: itdelatrisu/opsu/options/Options.java:704
 msgid "Enable pause screen in Auto play and replays"
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:710
-msgid ""
-"Allow players to press Esc to show the pause screen during replays and "
-"gameplay with the Auto mod on."
+#: itdelatrisu/opsu/options/Options.java:705
+msgid "Allow players to press Esc to show the pause screen during replays and gameplay with the Auto mod on."
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:712
+#: itdelatrisu/opsu/options/Options.java:707
 msgid "Snaking sliders"
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:712
+#: itdelatrisu/opsu/options/Options.java:707
 msgid "Sliders gradually snake out from their starting point."
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:714
+#: itdelatrisu/opsu/options/Options.java:709
 msgid "Use experimental sliders"
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:715
+#: itdelatrisu/opsu/options/Options.java:710
 msgid "Render sliders using the experimental slider style."
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:716
+#: itdelatrisu/opsu/options/Options.java:711
 msgid "Draw slider caps"
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:717
-msgid ""
-"Draw caps (end circles) on sliders.\n"
+#: itdelatrisu/opsu/options/Options.java:712
+msgid "Draw caps (end circles) on sliders.\n"
 "Only applies to experimental sliders."
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:718
+#: itdelatrisu/opsu/options/Options.java:713
 msgid "Shrinking sliders"
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:719
-msgid ""
-"Sliders shrink toward their ending point when the ball passes.\n"
+#: itdelatrisu/opsu/options/Options.java:714
+msgid "Sliders shrink toward their ending point when the ball passes.\n"
 "Only applies to experimental sliders."
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:721
+#: itdelatrisu/opsu/options/Options.java:716
 msgid "Merging sliders"
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:722
-msgid ""
-"For overlapping sliders, don't draw the edges and combine the slider tracks "
-"where they cross.\n"
+#: itdelatrisu/opsu/options/Options.java:717
+msgid "For overlapping sliders, don't draw the edges and combine the slider tracks where they cross.\n"
 "Only applies to experimental sliders."
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:724
+#: itdelatrisu/opsu/options/Options.java:719
 msgid "Hit lighting"
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:725
+#: itdelatrisu/opsu/options/Options.java:720
 msgid "Adds a subtle glow behind hit explosions which lights the playfield."
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:726
+#: itdelatrisu/opsu/options/Options.java:721
 msgid "Combo bursts"
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:727
-msgid ""
-"A character image bursts from the side of the screen at combo milestones."
+#: itdelatrisu/opsu/options/Options.java:722
+msgid "A character image bursts from the side of the screen at combo milestones."
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:728
+#: itdelatrisu/opsu/options/Options.java:723
 msgid "Perfect hits"
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:728
+#: itdelatrisu/opsu/options/Options.java:723
 msgid "Shows perfect hit result bursts (300s, slider ticks)."
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:729
+#: itdelatrisu/opsu/options/Options.java:724
 msgid "Follow points"
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:729
+#: itdelatrisu/opsu/options/Options.java:724
 msgid "Shows follow points between hit objects."
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:730
+#: itdelatrisu/opsu/options/Options.java:725
 msgid "Hit error bar"
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:730
+#: itdelatrisu/opsu/options/Options.java:725
 msgid "Shows precisely how accurate you were with each hit."
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:732
+#: itdelatrisu/opsu/options/Options.java:727
 msgid "Always show key overlay"
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:733
+#: itdelatrisu/opsu/options/Options.java:728
 msgid "Show the key overlay when playing instead of only on replays."
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:734
+#: itdelatrisu/opsu/options/Options.java:729
 msgid "Load HD images"
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:735
+#: itdelatrisu/opsu/options/Options.java:730
 #, java-printf-format
-msgid ""
-"Loads HD (%s) images when available.\n"
+msgid "Loads HD (%s) images when available.\n"
 "Increases memory usage and loading times."
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:738
+#: itdelatrisu/opsu/options/Options.java:733
 msgid "Fixed CS"
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:738
+#: itdelatrisu/opsu/options/Options.java:733
 msgid "Determines the size of circles and sliders."
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:756
+#: itdelatrisu/opsu/options/Options.java:751
 msgid "Fixed HP"
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:756
+#: itdelatrisu/opsu/options/Options.java:751
 msgid "Determines the rate at which health decreases."
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:774
+#: itdelatrisu/opsu/options/Options.java:769
 msgid "Fixed AR"
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:774
+#: itdelatrisu/opsu/options/Options.java:769
 msgid "Determines how long hit circles stay on the screen."
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:792
+#: itdelatrisu/opsu/options/Options.java:787
 msgid "Fixed OD"
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:792
+#: itdelatrisu/opsu/options/Options.java:787
 msgid "Determines the time window for hit results."
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:810
+#: itdelatrisu/opsu/options/Options.java:805
 msgid "Fixed speed"
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:810
+#: itdelatrisu/opsu/options/Options.java:805
 msgid "Determines the speed of the music."
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:828
+#: itdelatrisu/opsu/options/Options.java:823
 msgid "Customize interface color"
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:828
+#: itdelatrisu/opsu/options/Options.java:823
 msgid "Use your own color for the interface of opsu!"
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:830
+#: itdelatrisu/opsu/options/Options.java:825
 msgid "Interface color Red"
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:830
+#: itdelatrisu/opsu/options/Options.java:825
 msgid "Red color value."
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:836
+#: itdelatrisu/opsu/options/Options.java:831
 msgid "Interface color Green"
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:836
+#: itdelatrisu/opsu/options/Options.java:831
 msgid "Green color value."
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:842
+#: itdelatrisu/opsu/options/Options.java:837
 msgid "Interface color Blue"
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:842
+#: itdelatrisu/opsu/options/Options.java:837
 msgid "Blue color value."
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:848
+#: itdelatrisu/opsu/options/Options.java:843
 msgid "Real Auto player"
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:848
+#: itdelatrisu/opsu/options/Options.java:843
 msgid "Auto also fails!"
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:849
+#: itdelatrisu/opsu/options/Options.java:844
 msgid "Track checkpoint"
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:850
+#: itdelatrisu/opsu/options/Options.java:845
 msgid "Press Ctrl+L while playing to load a checkpoint, and Ctrl+S to set one."
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:859
+#: itdelatrisu/opsu/options/Options.java:854
 msgid "Parallax"
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:859
+#: itdelatrisu/opsu/options/Options.java:854
 msgid "Add a parallax effect based on the current cursor position."
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:860
+#: itdelatrisu/opsu/options/Options.java:855
 msgid "Theme song"
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:862
-msgid ""
-" will play themed music throughout the game, instead of using random "
-"beatmaps."
+#: itdelatrisu/opsu/options/Options.java:857
+msgid " will play themed music throughout the game, instead of using random beatmaps."
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:864
+#: itdelatrisu/opsu/options/Options.java:859
 msgid "Replay seeking"
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:865
+#: itdelatrisu/opsu/options/Options.java:860
 msgid "Enable a seeking bar on the left side of the screen during replays."
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:866
+#: itdelatrisu/opsu/options/Options.java:861
 msgid "Disable automatic updates"
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:867
+#: itdelatrisu/opsu/options/Options.java:862
 msgid "Disable checking for updates when the game starts."
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:868
+#: itdelatrisu/opsu/options/Options.java:863
 msgid "Watch service"
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:869
+#: itdelatrisu/opsu/options/Options.java:864
 msgid "Watch the beatmap directory for changes. Requires a restart."
 msgstr ""
 
-#: itdelatrisu/opsu/options/Options.java:1291
+#: itdelatrisu/opsu/options/Options.java:1286
 #, java-printf-format
 msgid "Frame limiter: %s"
-msgstr ""
+msgstr "帧数限制：%s"
 
-#: itdelatrisu/opsu/options/Options.java:1827
+#: itdelatrisu/opsu/options/Options.java:1822
 msgid "Mouse buttons are disabled."
-msgstr ""
+msgstr "已禁用鼠标按键。"
 
-#: itdelatrisu/opsu/options/Options.java:1828
+#: itdelatrisu/opsu/options/Options.java:1823
 msgid "Mouse buttons are enabled."
-msgstr ""
+msgstr "已启用鼠标按键。"
 
-#: itdelatrisu/opsu/options/Options.java:2181
+#: itdelatrisu/opsu/options/Options.java:2176
 #, java-printf-format
 msgid "# %s configuration"
-msgstr ""
+msgstr "# %s 配置文件"
 
-#: itdelatrisu/opsu/options/Options.java:2183
+#: itdelatrisu/opsu/options/Options.java:2178
 msgid "# last updated on "
-msgstr ""
+msgstr "# 上次更新于"
 
 #: itdelatrisu/opsu/options/OptionsOverlay.java:478
 msgid "Options"
-msgstr ""
+msgstr "设置"
 
 #: itdelatrisu/opsu/options/OptionsOverlay.java:479
 #, java-printf-format
 msgid "Change the way %s behaves"
-msgstr ""
+msgstr "更改 %s 的行为"
 
 #: itdelatrisu/opsu/options/OptionsOverlay.java:520
 #: itdelatrisu/opsu/states/DownloadsMenu.java:237
 #: itdelatrisu/opsu/states/SongMenu.java:744
 msgid "Type to search!"
-msgstr ""
+msgstr "输入以搜索！"
 
 #: itdelatrisu/opsu/options/OptionsOverlay.java:568
 msgid "Press the new left-click key."
-msgstr ""
+msgstr "请按下新的左键。"
 
 #: itdelatrisu/opsu/options/OptionsOverlay.java:568
 msgid "Press the new right-click key."
-msgstr ""
+msgstr "请按下新的右键。"
 
 #: itdelatrisu/opsu/options/OptionsOverlay.java:569
 msgid "Click anywhere or hit ESC to cancel."
-msgstr ""
+msgstr "任意点击或按下 ESC 以取消。"
 
 #: itdelatrisu/opsu/options/OptionsOverlay.java:866
 msgid "Click to restart the game."
-msgstr ""
+msgstr "点击重启游戏。"
 
 #: itdelatrisu/opsu/options/OptionsOverlay.java:1208
 #: itdelatrisu/opsu/options/OptionsOverlay.java:1414
 msgid "Restart to apply changes."
-msgstr ""
+msgstr "重启以应用更改。"
 
 #: itdelatrisu/opsu/replay/ReplayImporter.java:109
 #, java-printf-format
 msgid "Imported %d replay%s."
-msgstr ""
+msgstr "已导入 %d 个回放%s。"
 
 #: itdelatrisu/opsu/skins/SkinUnpacker.java:76
 #, java-printf-format
 msgid "Imported %d new skin%s."
-msgstr ""
+msgstr "已导入 %d 个新皮肤%s。"
 
-#: ../../src/itdelatrisu/opsu/states/ButtonMenu.java:56
-#: ../../src/itdelatrisu/opsu/states/MainMenu.java:664
+#: itdelatrisu/opsu/states/ButtonMenu.java:56
+#: itdelatrisu/opsu/states/MainMenu.java:664
 msgid "The web page could not be opened."
-msgstr ""
+msgstr "无法打开网页。"
 
-#: ../../src/itdelatrisu/opsu/states/ButtonMenu.java:65
+#: itdelatrisu/opsu/states/ButtonMenu.java:65
 #, java-printf-format
 msgid "Are you sure you want to exit %s?"
-msgstr ""
+msgstr "确定要退出 %s 吗？"
 
-#: ../../src/itdelatrisu/opsu/states/ButtonMenu.java:80
+#: itdelatrisu/opsu/states/ButtonMenu.java:80
 msgid "What do you want to do with this beatmap?"
-msgstr ""
+msgstr "要对此谱面做什么？"
 
-#: ../../src/itdelatrisu/opsu/states/ButtonMenu.java:106
+#: itdelatrisu/opsu/states/ButtonMenu.java:106
 #, java-printf-format
 msgid "Are you sure you wish to delete '%s' from disk?"
-msgstr ""
+msgstr "确定要从磁盘删除“%s”吗？"
 
-#: ../../src/itdelatrisu/opsu/states/ButtonMenu.java:131
+#: itdelatrisu/opsu/states/ButtonMenu.java:131
 msgid "You have requested a full process of your beatmaps."
-msgstr ""
+msgstr "你已请求重新处理全部谱面。"
 
-#: ../../src/itdelatrisu/opsu/states/ButtonMenu.java:132
+#: itdelatrisu/opsu/states/ButtonMenu.java:132
 msgid "This could take a few minutes."
-msgstr ""
+msgstr "这可能需要几分钟。"
 
-#: ../../src/itdelatrisu/opsu/states/ButtonMenu.java:133
+#: itdelatrisu/opsu/states/ButtonMenu.java:133
 msgid "Are you sure you wish to continue?"
-msgstr ""
+msgstr "你确定要继续吗？"
 
-#: ../../src/itdelatrisu/opsu/states/ButtonMenu.java:146
+#: itdelatrisu/opsu/states/ButtonMenu.java:146
 msgid "Score Management"
-msgstr ""
+msgstr "分数管理"
 
-#: ../../src/itdelatrisu/opsu/states/ButtonMenu.java:159
+#: itdelatrisu/opsu/states/ButtonMenu.java:159
 msgid "Mods provide different ways to enjoy gameplay. Some have an effect on the score you can achieve during ranked play. Others are just for fun."
-msgstr ""
+msgstr "模组提供享受游戏的不同方式。一些模组会影响你能获得的分数。其他的只是为了好玩。"
 
-#: ../../src/itdelatrisu/opsu/states/ButtonMenu.java:187
+#: itdelatrisu/opsu/states/ButtonMenu.java:187
 #, java-printf-format
 msgid "Score Multiplier: %.2fx"
-msgstr ""
+msgstr "得分系数：%.2fx"
 
 #. TRANSLATORS: This is like "opsu! v1.0.0 by @itdelatrisu".
-#: ../../src/itdelatrisu/opsu/states/ButtonMenu.java:257
+#: itdelatrisu/opsu/states/ButtonMenu.java:257
 #, java-printf-format
 msgid "%s %s by %s"
-msgstr ""
+msgstr "%s %s 开发者 %s"
 
-#: ../../src/itdelatrisu/opsu/states/ButtonMenu.java:259
-#: ../../src/itdelatrisu/opsu/states/MainMenu.java:632
+#: itdelatrisu/opsu/states/ButtonMenu.java:259
+#: itdelatrisu/opsu/states/MainMenu.java:632
 msgid "(unknown version)"
-msgstr ""
+msgstr "（未知版本）"
 
-#: ../../src/itdelatrisu/opsu/states/ButtonMenu.java:261
+#: itdelatrisu/opsu/states/ButtonMenu.java:261
 msgid "Click an option below to learn more!"
+msgstr "点击下方选项了解详情！"
+
+#: itdelatrisu/opsu/states/ButtonMenu.java:460
+msgid "Yes"
 msgstr ""
 
-#: ../../src/itdelatrisu/opsu/states/ButtonMenu.java:632
+#: itdelatrisu/opsu/states/ButtonMenu.java:466
+msgid "No"
+msgstr ""
+
+#: itdelatrisu/opsu/states/ButtonMenu.java:473
+msgid "Restart the game"
+msgstr ""
+
+#: itdelatrisu/opsu/states/ButtonMenu.java:480
+msgid "Throw an error!"
+msgstr ""
+
+#: itdelatrisu/opsu/states/ButtonMenu.java:483
+msgid "Congratulations! You've raised an error by yourself!"
+msgstr ""
+
+#: itdelatrisu/opsu/states/ButtonMenu.java:486
+msgid "Clear local scores"
+msgstr ""
+
+#: itdelatrisu/opsu/states/ButtonMenu.java:495
+msgid "Add to Favorites"
+msgstr ""
+
+#: itdelatrisu/opsu/states/ButtonMenu.java:504
+msgid "Remove from Favorites"
+msgstr ""
+
+#: itdelatrisu/opsu/states/ButtonMenu.java:514
+msgid "Delete..."
+msgstr ""
+
+#: itdelatrisu/opsu/states/ButtonMenu.java:526
+#: itdelatrisu/opsu/states/ButtonMenu.java:573
+msgid "Cancel"
+msgstr ""
+
+#: itdelatrisu/opsu/states/ButtonMenu.java:533
+msgid "Yes, delete this beatmap!"
+msgstr ""
+
+#: itdelatrisu/opsu/states/ButtonMenu.java:543
+msgid "Yes, delete all difficulties!"
+msgstr ""
+
+#: itdelatrisu/opsu/states/ButtonMenu.java:549
+msgid "Yes, but only this difficulty"
+msgstr ""
+
+#: itdelatrisu/opsu/states/ButtonMenu.java:559
+msgid "Nooooo! I didn't mean to!"
+msgstr ""
+
+#: itdelatrisu/opsu/states/ButtonMenu.java:565
+msgid "Let's do it!"
+msgstr ""
+
+#: itdelatrisu/opsu/states/ButtonMenu.java:579
+msgid "Delete score"
+msgstr ""
+
+#: itdelatrisu/opsu/states/ButtonMenu.java:594
+msgid "Reset All Mods"
+msgstr ""
+
+#: itdelatrisu/opsu/states/ButtonMenu.java:604
+msgid "Visit Website"
+msgstr ""
+
+#: itdelatrisu/opsu/states/ButtonMenu.java:616
+msgid "Browse Source Code"
+msgstr ""
+
+#: itdelatrisu/opsu/states/ButtonMenu.java:628
+msgid "Report an Issue"
+msgstr ""
+
+#: itdelatrisu/opsu/states/ButtonMenu.java:632
 msgid "[Type your description here. Feel free to delete the info below if it's not relevant.]\n\n"
+msgstr "[在这里输入描述。尽可以删除下方无关的信息。]\n\n"
+
+#: itdelatrisu/opsu/states/ButtonMenu.java:644
+msgid "Copy Debug Info"
 msgstr ""
 
-#: ../../src/itdelatrisu/opsu/states/ButtonMenu.java:649
+#: itdelatrisu/opsu/states/ButtonMenu.java:649
 msgid "Debug info copied to clipboard."
+msgstr "调试信息已复制到剪贴板。"
+
+#: itdelatrisu/opsu/states/ButtonMenu.java:653
+msgid "View Credits"
 msgstr ""
 
-#: ../../src/itdelatrisu/opsu/states/DownloadsMenu.java:234
+#: itdelatrisu/opsu/states/DownloadsMenu.java:234
 msgid "No results found or an internal error occurred. See log for details."
-msgstr ""
+msgstr "未找到结果，或发生了内部错误。查看日志获取详情。"
 
-#: ../../src/itdelatrisu/opsu/states/DownloadsMenu.java:239
+#: itdelatrisu/opsu/states/DownloadsMenu.java:239
 msgid "No results found."
-msgstr ""
+msgstr "未找到结果。"
 
-#: ../../src/itdelatrisu/opsu/states/DownloadsMenu.java:241
+#: itdelatrisu/opsu/states/DownloadsMenu.java:241
 #, java-printf-format
 msgid "%d result%s found!"
-msgstr ""
+msgstr "找到 %d 结果%s！"
 
-#: ../../src/itdelatrisu/opsu/states/DownloadsMenu.java:247
+#: itdelatrisu/opsu/states/DownloadsMenu.java:247
 msgid "Could not establish connection to server."
-msgstr ""
+msgstr "无法与服务器建立连接。"
 
-#: ../../src/itdelatrisu/opsu/states/DownloadsMenu.java:284
+#: itdelatrisu/opsu/states/DownloadsMenu.java:284
 msgid "No Standard beatmaps could be loaded."
-msgstr ""
+msgstr "无标准模式谱面。"
 
-#: ../../src/itdelatrisu/opsu/states/DownloadsMenu.java:314
-#: ../../src/itdelatrisu/opsu/states/DownloadsMenu.java:387
+#: itdelatrisu/opsu/states/DownloadsMenu.java:314
+#: itdelatrisu/opsu/states/DownloadsMenu.java:387
 msgid "Loading data from server..."
-msgstr ""
+msgstr "从服务器加载数据..."
 
-#: ../../src/itdelatrisu/opsu/states/DownloadsMenu.java:366
+#: itdelatrisu/opsu/states/DownloadsMenu.java:366
 msgid "Clear"
-msgstr ""
+msgstr "清空"
 
-#: ../../src/itdelatrisu/opsu/states/DownloadsMenu.java:367
+#: itdelatrisu/opsu/states/DownloadsMenu.java:367
 msgid "Import All"
-msgstr ""
+msgstr "全部导入"
 
-#: ../../src/itdelatrisu/opsu/states/DownloadsMenu.java:368
+#: itdelatrisu/opsu/states/DownloadsMenu.java:368
 msgid "Reset"
-msgstr ""
+msgstr "重置"
 
-#. title
-#: ../../src/itdelatrisu/opsu/states/DownloadsMenu.java:443
+#: itdelatrisu/opsu/states/DownloadsMenu.java:443
 msgid "Download Beatmaps!"
-msgstr ""
+msgstr "下载谱面！"
 
-#: ../../src/itdelatrisu/opsu/states/DownloadsMenu.java:484
+#: itdelatrisu/opsu/states/DownloadsMenu.java:484
 msgid "Page 1"
-msgstr ""
+msgstr "第 1 页"
 
-#: ../../src/itdelatrisu/opsu/states/DownloadsMenu.java:486
+#: itdelatrisu/opsu/states/DownloadsMenu.java:486
 #, java-printf-format
 msgid "Page %d"
-msgstr ""
+msgstr "第 %d 页"
 
-#: ../../src/itdelatrisu/opsu/states/DownloadsMenu.java:500
+#: itdelatrisu/opsu/states/DownloadsMenu.java:500
 msgid "Downloads"
-msgstr ""
+msgstr "下载项"
 
-#: ../../src/itdelatrisu/opsu/states/DownloadsMenu.java:529
+#: itdelatrisu/opsu/states/DownloadsMenu.java:529
 msgid "Show Unranked"
-msgstr ""
+msgstr "显示未上架"
 
-#: ../../src/itdelatrisu/opsu/states/DownloadsMenu.java:529
+#: itdelatrisu/opsu/states/DownloadsMenu.java:529
 msgid "Hide Unranked"
-msgstr ""
+msgstr "隐藏未上架"
 
-#: ../../src/itdelatrisu/opsu/states/DownloadsMenu.java:615
+#: itdelatrisu/opsu/states/DownloadsMenu.java:615
 msgid "Reset the current search."
-msgstr ""
+msgstr "重置当前搜索。"
 
-#: ../../src/itdelatrisu/opsu/states/DownloadsMenu.java:617
+#: itdelatrisu/opsu/states/DownloadsMenu.java:617
 msgid "Toggle the display of unranked maps.\n"
 "Some download servers may not support this option."
-msgstr ""
+msgstr "显示/隐藏未上架谱面。\n"
+"部分下载服务器可能不支持。"
 
-#: ../../src/itdelatrisu/opsu/states/DownloadsMenu.java:619
+#: itdelatrisu/opsu/states/DownloadsMenu.java:619
 msgid "Select a download server."
-msgstr ""
+msgstr "选择下载服务器。"
 
-#: ../../src/itdelatrisu/opsu/states/DownloadsMenu.java:700
+#: itdelatrisu/opsu/states/DownloadsMenu.java:700
 msgid "Failed to load track preview. See log for details."
-msgstr ""
+msgstr "无法加载谱面预览。查看日志获取详情。"
 
-#: ../../src/itdelatrisu/opsu/states/DownloadsMenu.java:1008
+#: itdelatrisu/opsu/states/DownloadsMenu.java:1008
 #, java-printf-format
 msgid "Save the beatmap in the Import folder and then click \"Import All\":\n"
 "%s"
 msgstr ""
 
-#: ../../src/itdelatrisu/opsu/states/DownloadsMenu.java:1016
+#: itdelatrisu/opsu/states/DownloadsMenu.java:1016
 #, java-printf-format
 msgid "Opened a web browser to download \"%s\".\n\n"
 "%s"
 msgstr ""
 
-#. browse not supported: copy URL instead
-#: ../../src/itdelatrisu/opsu/states/DownloadsMenu.java:1024
+#: itdelatrisu/opsu/states/DownloadsMenu.java:1024
 #, java-printf-format
 msgid "Click here to copy the download URL for \"%s\"."
 msgstr ""
 
-#: ../../src/itdelatrisu/opsu/states/DownloadsMenu.java:1038
+#: itdelatrisu/opsu/states/DownloadsMenu.java:1038
 msgid "The download could not be started."
 msgstr ""
 
-#: ../../src/itdelatrisu/opsu/states/Game.java:589
+#: itdelatrisu/opsu/states/Game.java:589
 #, java-printf-format
 msgid "%d retries and counting..."
 msgstr "已经重试 %d 次了..."
 
-#. draw overlay text
-#: ../../src/itdelatrisu/opsu/states/Game.java:735
+#: itdelatrisu/opsu/states/Game.java:735
 msgid "Click on the pulsing cursor to continue play!"
 msgstr "点击跳动的光标继续玩！"
 
-#: ../../src/itdelatrisu/opsu/states/Game.java:806
+#: itdelatrisu/opsu/states/Game.java:806
 msgid "Click to resume gameplay."
 msgstr "点击继续游戏。"
 
-#: ../../src/itdelatrisu/opsu/states/Game.java:1226
+#: itdelatrisu/opsu/states/Game.java:1226
 msgid "Checkpoint saved."
-msgstr ""
+msgstr "已保存存档点。"
 
-#: ../../src/itdelatrisu/opsu/states/Game.java:1247
+#: itdelatrisu/opsu/states/Game.java:1247
 msgid "Checkpoint loaded."
-msgstr ""
+msgstr "已载入存档点。"
 
-#: ../../src/itdelatrisu/opsu/states/Game.java:1628
+#: itdelatrisu/opsu/states/Game.java:1628
 #, java-printf-format
 msgid "Using local beatmap offset (%dms)"
-msgstr ""
+msgstr "使用本地谱面偏移量(%dms)"
 
-#: ../../src/itdelatrisu/opsu/states/Game.java:1633
+#: itdelatrisu/opsu/states/Game.java:1633
 msgid "Playing with custom difficulty settings."
-msgstr ""
+msgstr "将使用自定义难度设置游玩。"
 
-#: ../../src/itdelatrisu/opsu/states/Game.java:1968
+#: itdelatrisu/opsu/states/Game.java:1968
 msgid "Failed to load beatmap video.\n"
 "See log for details."
-msgstr ""
+msgstr "无法载入谱面视频。\n"
+"查看日志获取详情。"
 
-#: ../../src/itdelatrisu/opsu/states/Game.java:2440
-#: ../../src/itdelatrisu/opsu/states/GamePauseMenu.java:149
+#: itdelatrisu/opsu/states/Game.java:2440
+#: itdelatrisu/opsu/states/GamePauseMenu.java:149
 msgid "Offset can only be changed while game is not paused."
-msgstr ""
+msgstr "仅可在游戏未暂停时更改偏移量。"
 
-#: ../../src/itdelatrisu/opsu/states/Game.java:2447
+#: itdelatrisu/opsu/states/Game.java:2447
 #, java-printf-format
 msgid "Local beatmap offset set to %dms"
-msgstr ""
+msgstr "本地谱面偏移值设置为 %dms"
 
-#: ../../src/itdelatrisu/opsu/states/GameRanking.java:196
+#: itdelatrisu/opsu/states/GameRanking.java:196
 msgid "Replay file not found."
-msgstr ""
+msgstr "找不到回放文件。"
 
-#: ../../src/itdelatrisu/opsu/states/GameRanking.java:281
+#: itdelatrisu/opsu/states/GameRanking.java:281
 msgid "Failed to load replay data.\n"
 "See log for details."
-msgstr ""
+msgstr "无法载入回放数据。\n"
+"查看日志获取详情。"
 
-#: ../../src/itdelatrisu/opsu/states/MainMenu.java:464
+#: itdelatrisu/opsu/states/MainMenu.java:464
 #, java-printf-format
 msgid "You have %d beatmaps available!"
-msgstr ""
+msgstr "你共有 %d 张可用谱面！"
 
-#: ../../src/itdelatrisu/opsu/states/MainMenu.java:469
+#: itdelatrisu/opsu/states/MainMenu.java:469
 #, java-printf-format
 msgid "%s has been running for %s."
-msgstr ""
+msgstr "%s 已运行 %s。"
 
-#: ../../src/itdelatrisu/opsu/states/MainMenu.java:476
+#: itdelatrisu/opsu/states/MainMenu.java:476
 #, java-printf-format
 msgid "It is currently %s."
-msgstr ""
+msgstr "现在是 %s。"
 
-#: ../../src/itdelatrisu/opsu/states/MainMenu.java:618
+#: itdelatrisu/opsu/states/MainMenu.java:618
 msgid "Click to seek to a specific point in the song."
-msgstr ""
+msgstr "点击定位到歌曲特定时间点。"
 
-#: ../../src/itdelatrisu/opsu/states/MainMenu.java:620
-#: ../../src/itdelatrisu/opsu/states/MainMenu.java:769
-#: ../../src/itdelatrisu/opsu/states/MainMenu.java:887
+#: itdelatrisu/opsu/states/MainMenu.java:620
+#: itdelatrisu/opsu/states/MainMenu.java:769
+#: itdelatrisu/opsu/states/MainMenu.java:887
 msgid "Play"
-msgstr ""
+msgstr "播放"
 
-#: ../../src/itdelatrisu/opsu/states/MainMenu.java:622
-#: ../../src/itdelatrisu/opsu/states/MainMenu.java:752
-#: ../../src/itdelatrisu/opsu/states/MainMenu.java:892
+#: itdelatrisu/opsu/states/MainMenu.java:622
+#: itdelatrisu/opsu/states/MainMenu.java:752
+#: itdelatrisu/opsu/states/MainMenu.java:892
 msgid "Pause"
-msgstr ""
+msgstr "暂停"
 
-#: ../../src/itdelatrisu/opsu/states/MainMenu.java:622
-#: ../../src/itdelatrisu/opsu/states/MainMenu.java:755
+#: itdelatrisu/opsu/states/MainMenu.java:622
+#: itdelatrisu/opsu/states/MainMenu.java:755
 msgid "Resume"
-msgstr ""
+msgstr "继续"
 
-#: ../../src/itdelatrisu/opsu/states/MainMenu.java:624
+#: itdelatrisu/opsu/states/MainMenu.java:624
 msgid "Next track"
-msgstr ""
+msgstr "下一曲"
 
-#: ../../src/itdelatrisu/opsu/states/MainMenu.java:626
+#: itdelatrisu/opsu/states/MainMenu.java:626
 msgid "Previous track"
-msgstr ""
+msgstr "上一曲"
 
-#: ../../src/itdelatrisu/opsu/states/MainMenu.java:630
+#: itdelatrisu/opsu/states/MainMenu.java:630
 #, java-printf-format
 msgid "running %s %s\n"
 "created by %s"
-msgstr ""
+msgstr "正在运行 %s %s\n"
+"开发者 %s"
 
-#: ../../src/itdelatrisu/opsu/states/MainMenu.java:653
+#: itdelatrisu/opsu/states/MainMenu.java:653
 msgid "A new update is available!"
-msgstr ""
+msgstr "有新更新可用！"
 
-#: ../../src/itdelatrisu/opsu/states/MainMenu.java:656
+#: itdelatrisu/opsu/states/MainMenu.java:656
 msgid " is now up to date!"
-msgstr ""
+msgstr " 是最新的！"
 
-#: ../../src/itdelatrisu/opsu/states/MainMenu.java:659
+#: itdelatrisu/opsu/states/MainMenu.java:659
 msgid "\n"
 "Click to see what changed!"
-msgstr ""
+msgstr "\n"
+"点击看看更改了什么！"
 
-#: ../../src/itdelatrisu/opsu/states/MainMenu.java:760
-#: ../../src/itdelatrisu/opsu/states/MainMenu.java:900
+#: itdelatrisu/opsu/states/MainMenu.java:760
+#: itdelatrisu/opsu/states/MainMenu.java:900
 msgid ">> Next"
 msgstr ">> 下一曲"
 
-#: ../../src/itdelatrisu/opsu/states/MainMenu.java:764
-#: ../../src/itdelatrisu/opsu/states/MainMenu.java:879
+#: itdelatrisu/opsu/states/MainMenu.java:764
+#: itdelatrisu/opsu/states/MainMenu.java:879
 msgid "<< Prev"
 msgstr "<< 上一曲"
 
-#: ../../src/itdelatrisu/opsu/states/MainMenu.java:895
+#: itdelatrisu/opsu/states/MainMenu.java:895
 msgid "Unpause"
 msgstr "继续"
 
-#: ../../src/itdelatrisu/opsu/states/MainMenu.java:1018
+#: itdelatrisu/opsu/states/MainMenu.java:1018
 msgid "Download some beatmaps to get started!"
 msgstr "从下载一些谱面开始吧！"
 
-#: ../../src/itdelatrisu/opsu/states/SongMenu.java:462
+#: itdelatrisu/opsu/states/SongMenu.java:462
 msgid "Changes in Songs folder detected.\n"
 "Hit F5 to refresh."
 msgstr "检测到 Songs 文件夹更改。\n"
 "按下 F5 刷新。"
 
-#: ../../src/itdelatrisu/opsu/states/SongMenu.java:742
+#: itdelatrisu/opsu/states/SongMenu.java:742
 msgid "Search:"
 msgstr "搜索："
 
-#: ../../src/itdelatrisu/opsu/states/SongMenu.java:752
+#: itdelatrisu/opsu/states/SongMenu.java:752
 msgid "Searching..."
 msgstr "搜索中..."
 
-#: ../../src/itdelatrisu/opsu/states/SongMenu.java:914
+#: itdelatrisu/opsu/states/SongMenu.java:914
 msgid "Sort by..."
 msgstr "排序..."
 
-#: ../../src/itdelatrisu/opsu/states/SongMenu.java:1576
+#: itdelatrisu/opsu/states/SongMenu.java:1576
 #, java-printf-format
 msgid "%d match%s found!"
 msgstr "已找到 %d 结果%s！"
 
-#: ../../src/itdelatrisu/opsu/states/SongMenu.java:1592
+#: itdelatrisu/opsu/states/SongMenu.java:1592
 msgid "No matches found. Hit ESC to reset."
 msgstr "找不到结果。按 ESC 重置。"
 
-#: ../../src/itdelatrisu/opsu/states/SongMenu.java:1974
+#: itdelatrisu/opsu/states/SongMenu.java:1974
 msgid "Unable to load the beatmap audio."
 msgstr "无法载入谱面音频。"
 
-#. * Button text.
-#: ../../src/itdelatrisu/opsu/ui/BackButton.java:50
+#: itdelatrisu/opsu/ui/BackButton.java:50
 msgid "back"
 msgstr "返回"
 
-#: ../../src/itdelatrisu/opsu/ui/UI.java:283
+#: itdelatrisu/opsu/ui/UI.java:283
 msgid "Unpacking new beatmaps..."
 msgstr "解压新谱面中..."
 
-#: ../../src/itdelatrisu/opsu/ui/UI.java:287
+#: itdelatrisu/opsu/ui/UI.java:287
 msgid "Updating database..."
 msgstr "更新数据库中..."
 
-#: ../../src/itdelatrisu/opsu/ui/UI.java:287
+#: itdelatrisu/opsu/ui/UI.java:287
 msgid "Loading beatmaps..."
 msgstr "加载谱面中..."
 
-#: ../../src/itdelatrisu/opsu/ui/UI.java:290
+#: itdelatrisu/opsu/ui/UI.java:290
 msgid "Unpacking new skins..."
 msgstr "解压新皮肤中..."
 
-#: ../../src/itdelatrisu/opsu/ui/UI.java:293
+#: itdelatrisu/opsu/ui/UI.java:293
 msgid "Importing replays..."
 msgstr "导入回放中..."
 
-#: ../../src/itdelatrisu/opsu/ui/UI.java:296
+#: itdelatrisu/opsu/ui/UI.java:296
 msgid "Loading sounds..."
 msgstr "加载声音中..."
 
-#: ../../src/itdelatrisu/opsu/ui/UI.java:299
+#: itdelatrisu/opsu/ui/UI.java:299
 #, java-printf-format
 msgid "Welcome to %s"
 msgstr "欢迎来到 %s"
 
-#: ../../src/itdelatrisu/opsu/ui/UI.java:477
+#: itdelatrisu/opsu/ui/UI.java:477
 msgid "Warning"
 msgstr "警告"
 
-#. title
-#: ../../src/itdelatrisu/opsu/user/UserSelectOverlay.java:294
+#: itdelatrisu/opsu/user/UserSelectOverlay.java:294
 msgid "User Select"
 msgstr "选择用户"
 
-#. title
-#: ../../src/itdelatrisu/opsu/user/UserSelectOverlay.java:325
-#: ../../src/itdelatrisu/opsu/user/UserSelectOverlay.java:714
+#: itdelatrisu/opsu/user/UserSelectOverlay.java:325
+#: itdelatrisu/opsu/user/UserSelectOverlay.java:714
 msgid "Add User"
 msgstr "添加用户"
 
-#: ../../src/itdelatrisu/opsu/user/UserSelectOverlay.java:334
+#: itdelatrisu/opsu/user/UserSelectOverlay.java:334
 msgid "Click the profile below to create it."
 msgstr "点击下方区域创建用户。"
 
-#. user name
-#: ../../src/itdelatrisu/opsu/user/UserSelectOverlay.java:341
+#: itdelatrisu/opsu/user/UserSelectOverlay.java:341
 msgid "Name"
 msgstr "名称"
 
-#: ../../src/itdelatrisu/opsu/user/UserSelectOverlay.java:347
+#: itdelatrisu/opsu/user/UserSelectOverlay.java:347
 msgid "Type a name..."
 msgstr "输一个名字..."
 
-#. user icons
-#: ../../src/itdelatrisu/opsu/user/UserSelectOverlay.java:361
+#: itdelatrisu/opsu/user/UserSelectOverlay.java:361
 msgid "Icon"
 msgstr "图标"
 
-#. title
-#: ../../src/itdelatrisu/opsu/user/UserSelectOverlay.java:369
+#: itdelatrisu/opsu/user/UserSelectOverlay.java:369
 msgid "Edit User"
 msgstr "编辑用户"
 
-#: ../../src/itdelatrisu/opsu/user/UserSelectOverlay.java:386
+#: itdelatrisu/opsu/user/UserSelectOverlay.java:386
 msgid "Change Icon"
 msgstr "更改图标"
 
-#: ../../src/itdelatrisu/opsu/user/UserSelectOverlay.java:544
+#: itdelatrisu/opsu/user/UserSelectOverlay.java:544
 msgid "You can't delete the current user!"
 msgstr "不能删除当前用户！"
 
-#: ../../src/itdelatrisu/opsu/user/UserSelectOverlay.java:546
+#: itdelatrisu/opsu/user/UserSelectOverlay.java:546
 msgid "Confirm User Deletion"
 msgstr "确定删除用户"
 
-#: ../../src/itdelatrisu/opsu/user/UserSelectOverlay.java:553
+#: itdelatrisu/opsu/user/UserSelectOverlay.java:553
 #, java-printf-format
 msgid "User '%s' was deleted."
 msgstr "已删除用户“%s”。"
 
-#: ../../src/itdelatrisu/opsu/user/UserSelectOverlay.java:555
+#: itdelatrisu/opsu/user/UserSelectOverlay.java:555
 msgid "The user could not be deleted."
 msgstr "无法删除此用户。"
 
-#: ../../src/itdelatrisu/opsu/user/UserSelectOverlay.java:677
+#: itdelatrisu/opsu/user/UserSelectOverlay.java:677
 msgid "Enter a name for the user."
 msgstr "输入用户的名字。"
 
-#: ../../src/itdelatrisu/opsu/user/UserSelectOverlay.java:677
+#: itdelatrisu/opsu/user/UserSelectOverlay.java:677
 msgid "You can't use that name."
 msgstr "无法使用此名字。"
 
-#: ../../src/itdelatrisu/opsu/user/UserSelectOverlay.java:682
+#: itdelatrisu/opsu/user/UserSelectOverlay.java:682
 msgid "Something wrong happened."
 msgstr "出现了问题。"
 
-#: ../../src/itdelatrisu/opsu/user/UserSelectOverlay.java:686
+#: itdelatrisu/opsu/user/UserSelectOverlay.java:686
 msgid "New user created.\n"
 "Enjoy the game! :)"
 msgstr "已创建新用户。\n"
 "享受游戏吧！:)"
 
-#: ../../src/itdelatrisu/opsu/user/UserSelectOverlay.java:740
+#: itdelatrisu/opsu/user/UserSelectOverlay.java:740
 msgid "Delete User"
 msgstr "删除用户"
 
-#: ../../src/itdelatrisu/opsu/Utils.java:176
-msgid "WARNING:\n"
-"Running in OpenGL software mode.\n"
-"You may experience severely degraded performance.\n\n"
-"This can usually be resolved by updating your graphics drivers."
-msgstr ""
-
-#: ../../src/itdelatrisu/opsu/Utils.java:353
-#, java-printf-format
-msgid "Saved screenshot to %s"
-msgstr ""
-
-#, java-printf-format
-#~ msgid ""
-#~ "%s could not be launched for one of these reasons:\n"
-#~ "- An instance of %s is already running.\n"
-#~ "- A database is locked for another reason (unlikely).\\s"
-#~ msgstr ""
-#~ "由于如下原因，无法启动 %s：\n"
-#~ "- %s 已有正在运行的实例。\n"
-#~ "- 由于其他原因，数据库被锁定（可能性不大）。\\s"
-
-#~ msgid "The databases could not be initialized."
-#~ msgstr "无法初始化数据库。"
-
-#~ msgid "Could not load sqlite-JDBC driver."
-#~ msgstr "无法加载 SQLite-JDBC 驱动。"
