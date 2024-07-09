@@ -36,7 +36,7 @@ public class PoReader {
 	 * @param src source .po file
 	 * @return a map of String to String
 	 */
-	public static Map<String, String> getTranslationMap(File src) {
+	public static Map<String, String> getTranslationMap(File src) throws Exception {
         final Map<String, String> translations = new HashMap<>();
         try (BufferedReader br = new BufferedReader(new FileReader(src))) {
             String line;
@@ -44,27 +44,27 @@ public class PoReader {
             String translation = null;
 
             while ((line = br.readLine()) != null) {
-                if (line.startsWith("msgid \"")) {
-                    original = line.substring(7, line.length() - 1);
-                } else if (line.startsWith("msgstr \"")) {
-                    translation = line.substring(8, line.length() - 1);
-                    if (original != null && !translation.isEmpty()) {
-                        translations.put(original, translation);
-                        original = null;
-                        translation = null;
-                    }
-                } else if (line.startsWith("\"")) {
-					if (translation == null) {
+				if (line.startsWith("\"")) {
+					if (original != null && translation == null) {
 						original += line.substring(1, line.length() - 1);
-					} else {
-						translation += line.substring(1);
+					} else if (translation != null) {
+						translation += line.substring(1, line.length() - 1);
 					}
+				} else if (line.startsWith("msgstr \"")) {
+					translation = line.substring(8, line.length() - 1);
+				} else if (line.startsWith("msgid \"")) {
+					if (translation != null) {
+						translations.put(original, translation);
+						original = null;
+						translation = null;
+					}
+					original = line.substring(7, line.length() - 1);
 				}
             }
         } catch (IOException e) {
 			Log.error(e);
         }
-		// System.err.println(translations);
+		System.err.println(translations);
         return translations;
     }
 }

@@ -55,24 +55,28 @@ public class I18N {
 			Log.warn(String.format("Translation for %s not found. Falling back to default.", defLocale));
 			return;
 		}
-		tlMap = PoReader.getTranslationMap(poFile);
-		if (defString != "LANGUAGE") isInited = true;
+		try {
+			tlMap = PoReader.getTranslationMap(poFile);
+			if (defString != "LANGUAGE") isInited = true;
+		} catch (Exception e) {
+			Log.error("Failed to generate translation map.", e);
+		}
 	}
 
 	/**
 	 * Returns the translated string from the .po file.
 	 *
 	 * @param src source string
-	 * @return A translated string
+	 * @return A translated string, or source if untranslated
 	 */
-	public static String t(String src) { return t(src, true);}
+	public static String t(String src) { return t(src, isInited);}
 
 	public static String t(String src, boolean status) {
 		// if (src == "LANGUAGE" && !isInited) init(false);
 		if (!status) return src;
 		try {
-			final String target = tlMap.get(src);
-			return target != null ? target : src;
+			String target = tlMap.get(src);
+			return (target != null && !target.isBlank()) ? target : src;
 		} catch (Exception e) {
 			return src;
 		}
