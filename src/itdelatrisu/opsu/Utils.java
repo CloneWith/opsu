@@ -20,7 +20,6 @@ package itdelatrisu.opsu;
 
 import com.sun.jna.platform.FileUtils;
 
-import clonewith.opsu.I18N;
 import itdelatrisu.opsu.audio.SoundController;
 import itdelatrisu.opsu.audio.SoundEffect;
 import itdelatrisu.opsu.beatmap.HitObject;
@@ -411,12 +410,13 @@ public class Utils {
 	 * @param dest the destination directory
 	 */
 	public static void unzip(File file, File dest) {
-		try {
-			ZipFile zipFile = new ZipFile(file);
+		try (ZipFile zipFile = new ZipFile(file);) {
 			zipFile.extractAll(dest.getAbsolutePath());
 		} catch (ZipException e) {
 			ErrorHandler.error(String.format("Failed to unzip file %s to dest %s.",
 					file.getAbsolutePath(), dest.getAbsolutePath()), e, false);
+		} catch (IOException e) {
+			ErrorHandler.error("Failed to close ZIP file.", e, false);
 		}
 	}
 
@@ -722,10 +722,12 @@ public class Utils {
 
 		// install the all-trusting trust manager
 		try {
-			SSLContext sc = SSLContext.getInstance("SSL");
+			SSLContext sc = SSLContext.getInstance("TLSv1.2");
 			sc.init(null, enabled ? null : trustAllCerts, null);
 			HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
-		} catch (Exception e) {}
+		} catch (Exception e) {
+			Log.warn("SSLContext error.", e);
+		}
 	}
 
 	/**
