@@ -457,33 +457,33 @@ public class ButtonMenu extends BasicGameState {
 
 	/** Button types. */
 	private enum Button {
-		YES("Yes", Color.green) {
+		YES(t("Yes"), Color.green) {
 			@Override
 			public void click(GameContainer container, StateBasedGame game) {
 				container.exit();
 			}
 		},
-		NO("No", Color.red) {
+		NO(t("No"), Color.red) {
 			@Override
 			public void click(GameContainer container, StateBasedGame game) {
 				SoundController.playSound(SoundEffect.MENUBACK);
 				game.enterState(Opsu.STATE_MAINMENU, new EmptyTransition(), new FadeInTransition());
 			}
 		},
-		RESTART("Restart the game", Color.orange) {
+		RESTART(t("Restart the game"), Color.orange) {
 			@Override
 			public void click(GameContainer container, StateBasedGame game) {
 				container.setForceExit(false);
 				container.exit();
 			}
 		},
-		THROW("Throw an error!", Color.blue) {
+		THROW(t("Throw an error!"), Color.blue) {
 			@Override
 			public void click(GameContainer container, StateBasedGame game) {
-				ErrorHandler.error("Congratulations! You've raised an error by yourself!", null, true);
+				ErrorHandler.error(t("Congratulations! You've raised an error by yourself!"), null, true);
 			}
 		},
-		CLEAR_SCORES("Clear local scores", Color.magenta) {
+		CLEAR_SCORES(t("Clear local scores"), Color.magenta) {
 			@Override
 			public void click(GameContainer container, StateBasedGame game) {
 				SoundController.playSound(SoundEffect.MENUHIT);
@@ -492,7 +492,7 @@ public class ButtonMenu extends BasicGameState {
 				game.enterState(Opsu.STATE_SONGMENU, new EmptyTransition(), new FadeInTransition());
 			}
 		},
-		FAVORITE_ADD("Add to Favorites", Color.blue) {
+		FAVORITE_ADD(t("Add to Favorites"), Color.blue) {
 			@Override
 			public void click(GameContainer container, StateBasedGame game) {
 				SoundController.playSound(SoundEffect.MENUHIT);
@@ -501,7 +501,7 @@ public class ButtonMenu extends BasicGameState {
 				game.enterState(Opsu.STATE_SONGMENU, new EmptyTransition(), new FadeInTransition());
 			}
 		},
-		FAVORITE_REMOVE("Remove from Favorites", Color.blue) {
+		FAVORITE_REMOVE(t("Remove from Favorites"), Color.blue) {
 			@Override
 			public void click(GameContainer container, StateBasedGame game) {
 				SoundController.playSound(SoundEffect.MENUHIT);
@@ -511,7 +511,7 @@ public class ButtonMenu extends BasicGameState {
 				game.enterState(Opsu.STATE_SONGMENU, new EmptyTransition(), new FadeInTransition());
 			}
 		},
-		DELETE("Delete...", Color.red) {
+		DELETE(t("Delete..."), Color.red) {
 			@Override
 			public void click(GameContainer container, StateBasedGame game) {
 				SoundController.playSound(SoundEffect.MENUHIT);
@@ -523,14 +523,14 @@ public class ButtonMenu extends BasicGameState {
 				game.enterState(Opsu.STATE_BUTTONMENU, null, new FadeInTransition(Color.black, 100));
 			}
 		},
-		CANCEL("Cancel", Color.gray) {
+		CANCEL(t("Cancel"), Color.gray) {
 			@Override
 			public void click(GameContainer container, StateBasedGame game) {
 				SoundController.playSound(SoundEffect.MENUBACK);
 				game.enterState(Opsu.STATE_SONGMENU, new EmptyTransition(), new FadeInTransition());
 			}
 		},
-		DELETE_CONFIRM("Yes, delete this beatmap!", Color.red) {
+		DELETE_CONFIRM(t("Yes, delete this beatmap!"), Color.red) {
 			@Override
 			public void click(GameContainer container, StateBasedGame game) {
 				SoundController.playSound(SoundEffect.MENUHIT);
@@ -540,13 +540,13 @@ public class ButtonMenu extends BasicGameState {
 				game.enterState(Opsu.STATE_SONGMENU, new EmptyTransition(), new FadeInTransition());
 			}
 		},
-		DELETE_GROUP("Yes, delete all difficulties!", Color.red) {
+		DELETE_GROUP(t("Yes, delete all difficulties!"), Color.red) {
 			@Override
 			public void click(GameContainer container, StateBasedGame game) {
 				DELETE_CONFIRM.click(container, game);
 			}
 		},
-		DELETE_SONG("Yes, but only this difficulty", Color.red) {
+		DELETE_SONG(t("Yes, but only this difficulty"), Color.red) {
 			@Override
 			public void click(GameContainer container, StateBasedGame game) {
 				SoundController.playSound(SoundEffect.MENUHIT);
@@ -556,13 +556,13 @@ public class ButtonMenu extends BasicGameState {
 				game.enterState(Opsu.STATE_SONGMENU, new EmptyTransition(), new FadeInTransition());
 			}
 		},
-		CANCEL_DELETE("Nooooo! I didn't mean to!", Color.gray) {
+		CANCEL_DELETE(t("Nooooo! I didn't mean to!"), Color.gray) {
 			@Override
 			public void click(GameContainer container, StateBasedGame game) {
 				CANCEL.click(container, game);
 			}
 		},
-		RELOAD_CONFIRM("Let's do it!", Color.green) {
+		RELOAD_CONFIRM(t("Let's do it!"), Color.green) {
 			@Override
 			public void click(GameContainer container, StateBasedGame game) {
 				SoundController.playSound(SoundEffect.MENUHIT);
@@ -570,13 +570,13 @@ public class ButtonMenu extends BasicGameState {
 				game.enterState(Opsu.STATE_SONGMENU, new EmptyTransition(), new FadeInTransition());
 			}
 		},
-		RELOAD_CANCEL("Cancel", Color.red) {
+		RELOAD_CANCEL(t("Cancel"), Color.red) {
 			@Override
 			public void click(GameContainer container, StateBasedGame game) {
 				CANCEL.click(container, game);
 			}
 		},
-		DELETE_SCORE("Delete score", Color.green) {
+		DELETE_SCORE(t("Delete score"), Color.green) {
 			@Override
 			public void click(GameContainer container, StateBasedGame game) {
 				SoundController.playSound(SoundEffect.MENUHIT);
@@ -585,13 +585,13 @@ public class ButtonMenu extends BasicGameState {
 				game.enterState(Opsu.STATE_SONGMENU, new EmptyTransition(), new FadeInTransition());
 			}
 		},
-		CLOSE("Close", Color.gray) {
+		CLOSE(t("Close"), Color.gray) {
 			@Override
 			public void click(GameContainer container, StateBasedGame game) {
 				CANCEL.click(container, game);
 			}
 		},
-		RESET_MODS("Reset All Mods", Color.red) {
+		RESET_MODS(t("Reset All Mods"), Color.red) {
 			@Override
 			public void click(GameContainer container, StateBasedGame game) {
 				SoundController.playSound(SoundEffect.MENUCLICK);
@@ -601,7 +601,7 @@ public class ButtonMenu extends BasicGameState {
 				}
 			}
 		},
-		ABOUT_WEBSITE("Visit Website", Color.cyan) {
+		ABOUT_WEBSITE(t("Visit Website"), Color.cyan) {
 			@Override
 			public void click(GameContainer container, StateBasedGame game) {
 				SoundController.playSound(SoundEffect.MENUHIT);
@@ -613,7 +613,7 @@ public class ButtonMenu extends BasicGameState {
 				game.enterState(Opsu.STATE_MAINMENU, new EmptyTransition(), new FadeInTransition());
 			}
 		},
-		ABOUT_REPOSITORY("Browse Source Code", Color.green) {
+		ABOUT_REPOSITORY(t("Browse Source Code"), Color.green) {
 			@Override
 			public void click(GameContainer container, StateBasedGame game) {
 				SoundController.playSound(SoundEffect.MENUHIT);
@@ -625,7 +625,7 @@ public class ButtonMenu extends BasicGameState {
 				game.enterState(Opsu.STATE_MAINMENU, new EmptyTransition(), new FadeInTransition());
 			}
 		},
-		ABOUT_REPORT("Report an Issue", Color.red) {
+		ABOUT_REPORT(t("Report an Issue"), Color.red) {
 			@Override
 			public void click(GameContainer container, StateBasedGame game) {
 				SoundController.playSound(SoundEffect.MENUHIT);
@@ -641,7 +641,7 @@ public class ButtonMenu extends BasicGameState {
 				game.enterState(Opsu.STATE_MAINMENU, new EmptyTransition(), new FadeInTransition());
 			}
 		},
-		ABOUT_ENV("Copy Debug Info", Color.orange) {
+		ABOUT_ENV(t("Copy Debug Info"), Color.orange) {
 			@Override
 			public void click(GameContainer container, StateBasedGame game) {
 				SoundController.playSound(SoundEffect.MENUHIT);
@@ -650,7 +650,7 @@ public class ButtonMenu extends BasicGameState {
 				game.enterState(Opsu.STATE_MAINMENU, new EmptyTransition(), new FadeInTransition());
 			}
 		},
-		ABOUT_CREDITS("View Credits", Color.magenta) {
+		ABOUT_CREDITS(t("View Credits"), Color.magenta) {
 			@Override
 			public void click(GameContainer container, StateBasedGame game) {
 				SoundController.playSound(SoundEffect.MENUHIT);
@@ -662,7 +662,7 @@ public class ButtonMenu extends BasicGameState {
 				game.enterState(Opsu.STATE_MAINMENU, new EmptyTransition(), new FadeInTransition());
 			}
 		},
-		ABOUT_CLOSE("Close", Color.gray) {
+		ABOUT_CLOSE(t("Close"), Color.gray) {
 			@Override
 			public void click(GameContainer container, StateBasedGame game) {
 				NO.click(container, game);
@@ -682,7 +682,7 @@ public class ButtonMenu extends BasicGameState {
 		 * @param color the button color
 		 */
 		Button(String text, Color color) {
-			this.text = t(text);
+			this.text = text;
 			this.color = color;
 		}
 

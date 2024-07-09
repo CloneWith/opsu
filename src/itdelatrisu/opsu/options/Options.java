@@ -18,11 +18,10 @@
 
 package itdelatrisu.opsu.options;
 
+import clonewith.opsu.I18N;
 import com.sun.jna.platform.win32.Advapi32Util;
 import com.sun.jna.platform.win32.Win32Exception;
 import com.sun.jna.platform.win32.WinReg;
-
-import clonewith.opsu.I18N;
 import itdelatrisu.opsu.*;
 import itdelatrisu.opsu.audio.MusicController;
 import itdelatrisu.opsu.beatmap.Beatmap;
@@ -208,7 +207,7 @@ public class Options {
 		final WinReg.HKEY rootKey = WinReg.HKEY_CLASSES_ROOT;
 		final String regKey = "osu\\DefaultIcon";
 		final String regValue = null; // default value
-		final String regPathPattern = "\"(.+)\\\\[^\\/]+\\.exe\"";
+		final String regPathPattern = "\"(.+)\\\\[^/]+\\.exe\"";
 
 		String value;
 		try {
@@ -372,9 +371,9 @@ public class Options {
 			@Override
 			public void read(String s) {
 				try {
-					Resolution res = Resolution.valueOf(String.format("RES_%s", s.replace('x', '_')));
-					resolution = res;
+					resolution = Resolution.valueOf(String.format("RES_%s", s.replace('x', '_')));
 				} catch (IllegalArgumentException e) {
+					Log.warn("Invalid resolution setting.", e);
 				}
 			}
 		},
@@ -398,7 +397,6 @@ public class Options {
 		},
 		SKIN("Skin", "Skin", "") {
 			private String[] itemList = null;
-			private String[] DirList = null;
 
 			// <TODO> Can we directly load skins without restart here?
 
@@ -406,14 +404,10 @@ public class Options {
 			private void createSkinList() {
 				File[] dirs = SkinLoader.getSkinDirectories(getSkinRootDir());
 				itemList = new String[dirs.length + 1];
-				DirList = new String[dirs.length + 1];
 				itemList[0] = Skin.DEFAULT_SKIN_NAME;
-				DirList[0] = null;
 				for (int i = 0; i < dirs.length; i++) {
 					Skin r = SkinLoader.loadSkin(dirs[i]);
-					// itemList[i + 1] = r.getName() + "(" + r.getAuthor() + ")";
 					itemList[i + 1] = r.getName();
-					DirList[i + 1] = dirs[i].getName();
 				}
 			}
 
@@ -450,7 +444,7 @@ public class Options {
 		},
 		TARGET_FPS(t("Frame limiter"), "FrameSync", t("Higher values may cause high CPU usage.")) {
 			private String[] itemList = null;
-			private String FPS_UN = t("Unlimited");
+			private final String FPS_UN = t("Unlimited");
 
 			@Override
 			public String getValueString() {
@@ -510,13 +504,14 @@ public class Options {
 			@Override
 			public Object[] getItemList() {
 				File[] langList = I18N.getBaseDir().listFiles();
-				itemList = new String[langList.length + 1];
+					itemList = new String[langList.length];
 				// The first item is always English
 				itemList[0] = "English";
 				// Add entries based on contents in res/i10n
 				for (int i = 1; i < itemList.length; i++) {
-					int postfixLoc = langList[i - 1].getName().indexOf('.');
-					itemList[i] = langList[i - 1].getName().substring(9, postfixLoc);
+					// We've recently added a messages.pot!
+					int postfixLoc = langList[i].getName().indexOf('.');
+					itemList[i] = langList[i].getName().substring(9, postfixLoc);
 				}
 				return itemList;
 			}
@@ -528,7 +523,7 @@ public class Options {
 
 			@Override
 			public void selectItem(int index, GameContainer container) {
-				lang = itemList[index].toString();
+				lang = itemList[index];
 			}
 
 			@Override

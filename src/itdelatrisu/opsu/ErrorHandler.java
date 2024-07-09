@@ -183,7 +183,7 @@ public class ErrorHandler {
 																							// and/or issues webpage
 				if (report && isBrowseSupported) { // ask to report the error
 					if (isOpenSupported) { // also ask to open the log
-						int n = JOptionPane.showOptionDialog(null, messageReport, title,
+						final int n = JOptionPane.showOptionDialog(null, messageReport, title,
 								JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE,
 								null, optionsLogReport, optionsLogReport[2]);
 						if (n == 0)
@@ -191,14 +191,14 @@ public class ErrorHandler {
 						else if (n == 1)
 							desktop.open(Options.LOG_FILE);
 					} else { // only ask to report the error
-						int n = JOptionPane.showOptionDialog(null, message, title,
+						final int n = JOptionPane.showOptionDialog(null, message, title,
 								JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE,
 								null, optionsReport, optionsReport[1]);
 						if (n == 0)
 							desktop.browse(getIssueURI(error, e, trace));
 					}
 				} else { // don't report the error
-					int n = JOptionPane.showOptionDialog(null, message, title,
+					final int n = JOptionPane.showOptionDialog(null, message, title,
 							JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE,
 							null, optionsLog, optionsLog[1]);
 					if (n == 0)
@@ -233,7 +233,7 @@ public class ErrorHandler {
 		StringBuilder sb = new StringBuilder();
 		try {
 			// read version and build date from version file, if possible
-			Properties props = new Properties();
+			final Properties props = new Properties();
 			props.load(ResourceLoader.getResourceAsStream(Options.VERSION_FILE));
 			String version = props.getProperty("version");
 			if (version != null && !version.equals("${pom.version}")) {

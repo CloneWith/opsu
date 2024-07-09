@@ -18,16 +18,15 @@
 
 package clonewith.opsu;
 
+import itdelatrisu.opsu.options.Options;
+import org.newdawn.slick.util.Log;
+
 import java.io.File;
 import java.util.Locale;
 import java.util.Map;
 
-import org.newdawn.slick.util.Log;
-
-import itdelatrisu.opsu.options.Options;
-
 public class I18N {
-	private static File baseDir = new File("res/i10n");
+	private static final File baseDir = new File("res/i10n");
 	private static boolean isInited = false;
 	private static Map<String, String> tlMap = null;
 
@@ -49,11 +48,11 @@ public class I18N {
 		if (defString == "LANGUAGE" || defString == null) return;
 
 		// TODO: Another way to build Locales
-		Locale defLocale = new Locale(defString);
+		final Locale defLocale = new Locale(defString);
 
-		File poFile = PoReader.getPo(defLocale);
+		final File poFile = PoReader.getPo(defLocale);
 		if (poFile == null) {
-			Log.warn(String.format("Translation for %s not found. Falling back to default.", defLocale.toString()));
+			Log.warn(String.format("Translation for %s not found. Falling back to default.", defLocale));
 			return;
 		}
 		tlMap = PoReader.getTranslationMap(poFile);
@@ -72,7 +71,7 @@ public class I18N {
 		// if (src == "LANGUAGE" && !isInited) init(false);
 		if (!status) return src;
 		try {
-			String target = tlMap.get(src);
+			final String target = tlMap.get(src);
 			return target != null ? target : src;
 		} catch (Exception e) {
 			return src;
@@ -84,7 +83,7 @@ public class I18N {
 	 *
 	 * @return true is initialized
 	 */
-	public static boolean getInitStatus() {
+	public static boolean isInit() {
 		return isInited;
 	}
 

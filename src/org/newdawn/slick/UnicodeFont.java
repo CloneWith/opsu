@@ -37,6 +37,8 @@ import org.newdawn.slick.opengl.renderer.Renderer;
 import org.newdawn.slick.opengl.renderer.SGL;
 import org.newdawn.slick.util.ResourceLoader;
 
+import clonewith.opsu.I18N;
+
 import java.awt.Font;
 import java.awt.*;
 import java.awt.font.GlyphVector;
@@ -365,6 +367,15 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 	 */
 	public void addNeheGlyphs () {
 		addGlyphs(32, 32 + 96);
+	}
+
+	/**
+	 * Queues the glyphs based on characters in the I18N Map.
+	 * Note that the glyphs are not actually loaded until {@link #loadGlyphs()} is called.
+	 * @author CloneWith
+	 */
+	public void addLocaleGlyphs () {
+		addGlyphs(I18N.getFontmap());
 	}
 
 	/**

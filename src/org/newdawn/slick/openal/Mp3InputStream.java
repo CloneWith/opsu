@@ -204,7 +204,7 @@ public class Mp3InputStream extends InputStream implements AudioInputStream {
 		try {
 			bitstream.close();
 		} catch (BitstreamException e) {
-			e.printStackTrace();
+			Log.error(e);
 		}
 	}
 }

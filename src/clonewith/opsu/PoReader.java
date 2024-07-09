@@ -1,5 +1,7 @@
 package clonewith.opsu;
 
+import org.newdawn.slick.util.Log;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -21,10 +23,9 @@ public class PoReader {
 	 * @return a .po File, or null if not found
 	 */
 	public static File getPo(Locale target) {
-		String locale = Locale.getDefault().toString();
-		File localedFile = new File(i10nDir + poPrefix + "_" + locale + ".po");
+		final File localedFile = new File(i10nDir + poPrefix + "_" + target + ".po");
 		if (!localedFile.exists()) {
-			System.err.println("Not found:" + localedFile);
+			Log.error("Not found:" + localedFile);
 		}
 
 		return localedFile.exists() ? localedFile : null;
@@ -36,7 +37,7 @@ public class PoReader {
 	 * @return a map of String to String
 	 */
 	public static Map<String, String> getTranslationMap(File src) {
-        Map<String, String> translations = new HashMap<>();
+        final Map<String, String> translations = new HashMap<>();
         try (BufferedReader br = new BufferedReader(new FileReader(src))) {
             String line;
             String original = null;
@@ -56,12 +57,12 @@ public class PoReader {
 					if (translation == null) {
 						original += line.substring(1, line.length() - 1);
 					} else {
-						translation += line.substring(1, line.length());
+						translation += line.substring(1);
 					}
 				}
             }
         } catch (IOException e) {
-            e.printStackTrace();
+			Log.error(e);
         }
 		// System.err.println(translations);
         return translations;

@@ -40,7 +40,7 @@ import java.util.List;
 public class Fonts {
 	public static UnicodeFont DEFAULT, BOLD, XLARGE, LARGE, MEDIUM, MEDIUMBOLD, SMALL, SMALLBOLD;
 
-	public static UnicodeFont fonts[] = {
+	public static UnicodeFont[] fonts = {
 		Fonts.DEFAULT,
 		Fonts.BOLD,
 		Fonts.XLARGE,
@@ -101,6 +101,7 @@ public class Fonts {
 	private static void loadFont(UnicodeFont font, Effect effect, UnicodeFont backup) throws SlickException {
 		font.addBackupFont(backup);
 		font.addAsciiGlyphs();
+		font.addLocaleGlyphs();
 		font.getEffects().add(effect);
 		font.loadGlyphs();
 	}
