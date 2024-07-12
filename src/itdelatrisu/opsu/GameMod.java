@@ -234,7 +234,7 @@ public enum GameMod {
 	 */
 	public static float getSpeedMultiplier() {
 		if (speedMultiplier < 0f) {
-			if (DOUBLE_TIME.isActive())
+			if (DOUBLE_TIME.isActive() || NIGHTCORE.isActive())
 				speedMultiplier = 1.5f;
 			else if (HALF_TIME.isActive())
 				speedMultiplier = 0.75f;
@@ -390,7 +390,6 @@ public enum GameMod {
 				RELAX.active = false;
 				AUTOPILOT.active = false;
 				CINEMA.active = false;
-				active = true;
 			}
 			if (AUTOPILOT.isActive() && SPUN_OUT.isActive()) {
 				if (this == AUTOPILOT)
