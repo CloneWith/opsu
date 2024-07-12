@@ -19,7 +19,6 @@
 package itdelatrisu.opsu;
 
 import com.sun.jna.platform.FileUtils;
-
 import itdelatrisu.opsu.audio.SoundController;
 import itdelatrisu.opsu.audio.SoundEffect;
 import itdelatrisu.opsu.beatmap.HitObject;
@@ -293,6 +292,21 @@ public class Utils {
 			return mid - (mid - min) * (5f - difficulty) / 5f;
 		else
 			return mid;
+	}
+
+	/**
+	 * Maps a difficulty value to the given range, with a minimum edge.
+	 * @param difficulty the difficulty value
+	 * @param min the min
+	 * @param mid the mid
+	 * @param max the max
+	 * @param minEdge the minimum edge
+	 */
+	public static float mapDifficultyRange(float difficulty, float min, float mid, float max, float minEdge) {
+		if (difficulty > 5f)
+			return Math.min(mid + (max - mid) * (difficulty - 5f) / 5f, minEdge);
+		else
+			return mapDifficultyRange(difficulty, min, mid, max);
 	}
 
 	/**

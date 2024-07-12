@@ -118,6 +118,7 @@ public class OptionGroup {
 			GameOption.FIXED_AR,
 			GameOption.FIXED_OD,
 			GameOption.FIXED_SPEED,
+			GameOption.ALLOW_INSANE,
 		}),
 		new OptionGroup(t("COLOR"), new GameOption[] {
 			GameOption.UICOLOR_CUSTOM,

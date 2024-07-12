@@ -27,6 +27,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
 
+import static clonewith.opsu.I18N.t;
+
 /**
  * Data type containing all beatmaps in a beatmap set.
  */
@@ -87,21 +89,21 @@ public class BeatmapSet implements Iterable<Beatmap> {
 		NumberFormat nf = new DecimalFormat("##.#");
 		String[] info = new String[5];
 		info[0] = beatmap.toString();
-		info[1] = String.format("Mapped by %s", beatmap.creator);
-		info[2] = String.format("Length: %d:%02d  BPM: %s  Objects: %d",
+		info[1] = String.format(t("Mapped by %s"), beatmap.creator);
+		info[2] = String.format(t("Length: %d:%02d  BPM: %s  Objects: %d"),
 				TimeUnit.MILLISECONDS.toMinutes(endTime),
 				TimeUnit.MILLISECONDS.toSeconds(endTime) -
 				TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(endTime)),
 				(bpmMax <= 0) ? "--" : ((bpmMin == bpmMax) ? bpmMin : String.format("%d-%d", bpmMin, bpmMax)),
 				(beatmap.hitObjectCircle + beatmap.hitObjectSlider + beatmap.hitObjectSpinner));
-		info[3] = String.format("Circles: %d  Sliders: %d  Spinners: %d",
+		info[3] = String.format(t("Circles: %d  Sliders: %d  Spinners: %d"),
 				beatmap.hitObjectCircle, beatmap.hitObjectSlider, beatmap.hitObjectSpinner);
 		info[4] = String.format("CS:%s HP:%s AR:%s OD:%s%s",
-				nf.format(Math.min(beatmap.circleSize * multiplier, 10f)),
-				nf.format(Math.min(beatmap.HPDrainRate * multiplier, 10f)),
-				nf.format(Math.min(beatmap.approachRate * multiplier, 10f)),
-				nf.format(Math.min(beatmap.overallDifficulty * multiplier, 10f)),
-				(beatmap.starRating >= 0) ? String.format(" Stars:%.2f", beatmap.starRating) : "");
+				nf.format(beatmap.circleSize * multiplier),
+				nf.format(beatmap.HPDrainRate * multiplier),
+				nf.format(beatmap.approachRate * multiplier),
+				nf.format(beatmap.overallDifficulty * multiplier),
+				String.format(t(" Stars:%.2f"), beatmap.starRating));
 		return info;
 	}
 

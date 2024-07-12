@@ -73,7 +73,7 @@ public enum BeatmapGroup {
 	},
 
 	/** "Favorite" beatmaps. */
-	FAVORITE (2, "Favorites", "Right-click a beatmap to add it to your Favorites!") {
+	FAVORITE (2, t("Favorites"), t("Right-click a beatmap to add it to your Favorites!")) {
 		@Override
 		public ArrayList<BeatmapSetNode> filter(ArrayList<BeatmapSetNode> list) {
 			// find "favorite" beatmaps

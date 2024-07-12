@@ -99,6 +99,9 @@ public class Game extends BasicGameState {
 	/** Minimum time before start of song, in milliseconds, to process skip-related actions. */
 	private static final int SKIP_OFFSET = 2000;
 
+	/** Minimum time for an object to fade in. */
+	private static final int OBJ_FADE_IN_TIME = 20;
+
 	/** Tolerance in case if hit object is not snapped to the grid. */
 	private static final float STACK_LENIENCE = 3f;
 
@@ -1098,10 +1101,6 @@ public class Game extends BasicGameState {
 
 				if (playState != PlayState.LOSE) {
 					if (GameMod.PERFECT.isActive()) {
-						// game.enterState(Opsu.STATE_GAME,
-						// 	new DelayedFadeOutTransition(Color.black, MUSIC_FADEOUT_TIME, MUSIC_FADEOUT_TIME - LOSE_FADEOUT_TIME),
-						// 	new FadeInTransition());
-						// new DelayedFadeOutTransition(Color.black, MUSIC_FADEOUT_TIME, MUSIC_FADEOUT_TIME - LOSE_FADEOUT_TIME);
 						retry();
 						return;
 					}
@@ -1973,26 +1972,17 @@ public class Game extends BasicGameState {
 	 * Set map modifiers.
 	 */
 	private void setMapModifiers() {
+		boolean isAllowBeyond = Options.isInsaneSettingAllowed();
 		// map-based properties, re-initialized each game
 		float multiplier = GameMod.getDifficultyMultiplier();
-		float circleSize = beatmap.circleSize * multiplier;
-		float approachRate = beatmap.approachRate * multiplier;
-		float overallDifficulty = beatmap.overallDifficulty * multiplier;
-		float HPDrainRate = beatmap.HPDrainRate * multiplier;
-		// float circleSize = Math.min(beatmap.circleSize * multiplier, 10f);
-		// float approachRate = Math.min(beatmap.approachRate * multiplier, 10f);
-		// float overallDifficulty = Math.min(beatmap.overallDifficulty * multiplier, 10f);
-		// float HPDrainRate = Math.min(beatmap.HPDrainRate * multiplier, 10f);
-
-		// fixed difficulty overrides
-		if (Options.getFixedCS() > 0f)
-			circleSize = Options.getFixedCS();
-		if (Options.getFixedAR() > 0f)
-			approachRate = Options.getFixedAR();
-		if (Options.getFixedOD() > 0f)
-			overallDifficulty = Options.getFixedOD();
-		if (Options.getFixedHP() > 0f)
-			HPDrainRate = Options.getFixedHP();
+		float circleSize = Options.getFixedCS() > 0f ? Options.getFixedCS() * multiplier : beatmap.circleSize * multiplier;
+		float approachRate = Options.getFixedAR() > 0f ? Options.getFixedAR() * multiplier : beatmap.approachRate * multiplier;
+		float overallDifficulty = Options.getFixedOD() > 0f ? Options.getFixedOD() * multiplier : beatmap.overallDifficulty * multiplier;
+		float HPDrainRate = Options.getFixedHP() > 0f ? Options.getFixedHP() * multiplier : beatmap.HPDrainRate * multiplier;
+		circleSize = isAllowBeyond ? circleSize : Math.min(circleSize, 10f);
+		approachRate = isAllowBeyond ? approachRate : Math.min(approachRate, 10f);
+		overallDifficulty = isAllowBeyond ? overallDifficulty : Math.min(overallDifficulty, 10f);
+		HPDrainRate = isAllowBeyond ? HPDrainRate : Math.min(HPDrainRate, 10f);
 
 		// Stack modifier scales with hit object size
 		// StackOffset = HitObjectRadius / 10
@@ -2008,7 +1998,7 @@ public class Game extends BasicGameState {
 				Options.getSkin().getSliderBorderColor() : beatmap.getSliderBorderColor());
 
 		// approachRate (hit object approach time)
-		approachTime = (int) Utils.mapDifficultyRange(approachRate, 1800, 1200, 450);
+		approachTime = (int) Utils.mapDifficultyRange(approachRate, 1800, 1200, 450, 50);
 
 		// overallDifficulty (hit result time offsets)
 		hitResultOffset = new int[GameData.HIT_MAX];
@@ -2027,8 +2017,10 @@ public class Game extends BasicGameState {
 		// difficulty multiplier (scoring)
 		data.calculateDifficultyMultiplier(beatmap.HPDrainRate, beatmap.circleSize, beatmap.overallDifficulty);
 
+		int minFadeTime = isAllowBeyond ? OBJ_FADE_IN_TIME : 375;
+
 		// hit object fade-in time (TODO: formula)
-		fadeInTime = Math.min(375, (int) (approachTime / 2.5f));
+		fadeInTime = Math.min(minFadeTime, (int) (approachTime / 2.5f));
 
 		// fade times ("Hidden" mod)
 		// TODO: find the actual formulas for this

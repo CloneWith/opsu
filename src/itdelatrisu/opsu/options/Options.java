@@ -820,6 +820,7 @@ public class Options {
 					val = i;
 			}
 		},
+		ALLOW_INSANE(t("Allow abnormal difficulty settings"), "AllowInsaneSetting", t("Allow difficulty settings to go beyond the normal limits.\nEnabling this might break the game."), false),
 		UICOLOR_CUSTOM(t("Customize interface color"), "CustomUIColor", t("Use your own color for the interface of opsu!"),
 				false),
 		UICOLOR_R(t("Interface color Red"), "CustomColorR", t("Red color value."), 235, 0, 255) {
@@ -1831,6 +1832,13 @@ public class Options {
 	public static boolean isColorCustom() {
 		return GameOption.UICOLOR_CUSTOM.getBooleanValue();
 	}
+
+	/**
+	 * Returns whether to allow difficulty settings beyond the normal limits.
+	 *
+	 * @return whether to allow
+	 */
+	public static boolean isInsaneSettingAllowed() { return GameOption.ALLOW_INSANE.getBooleanValue(); }
 
 	/**
 	 * Returns the accent color.
