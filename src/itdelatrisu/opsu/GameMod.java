@@ -374,22 +374,27 @@ public enum GameMod {
 			if (AUTO.isActive() || CINEMA.isActive()) {
 				if (this == AUTO || this == CINEMA) {
 					SPUN_OUT.active = false;
-					SUDDEN_DEATH.active = false;
-					PERFECT.active = false;
 					RELAX.active = false;
 					AUTOPILOT.active = false;
 					if (this == CINEMA) AUTO.active = false;
-					else CINEMA.active = false;
-				} else if (this == SPUN_OUT || this == SUDDEN_DEATH || this == PERFECT || this == RELAX || this == AUTOPILOT)
-					this.active = false;
+					else {
+						CINEMA.active = false;
+					}
+				} else if (this == SPUN_OUT || this == RELAX || this == AUTOPILOT) {
+					// this.active = false;
+					AUTO.active = false;
+					CINEMA.active = false;
+				}
 			}
-			if (active && (this == SUDDEN_DEATH || this == PERFECT || this == NO_FAIL || this == RELAX || this == AUTOPILOT)) {
-				SUDDEN_DEATH.active = false;
-				PERFECT.active = false;
-				NO_FAIL.active = false;
-				RELAX.active = false;
-				AUTOPILOT.active = false;
-				CINEMA.active = false;
+			if (NO_FAIL.isActive() && (SUDDEN_DEATH.isActive() || PERFECT.isActive())) {
+				if (this == NO_FAIL) {
+					SUDDEN_DEATH.active = false;
+					PERFECT.active = false;
+				} else {
+					NO_FAIL.active = false;
+					if (this == SUDDEN_DEATH) PERFECT.active = false;
+					else SUDDEN_DEATH.active = false;
+				}
 			}
 			if (AUTOPILOT.isActive() && SPUN_OUT.isActive()) {
 				if (this == AUTOPILOT)
@@ -416,6 +421,10 @@ public enum GameMod {
 					NIGHTCORE.active = false;
 				else
 					DOUBLE_TIME.active = false;
+			}
+			if (RELAX.isActive() && AUTOPILOT.isActive()) {
+				if (this == RELAX) AUTOPILOT.active = false;
+				else RELAX.active = false;
 			}
 		}
 	}
