@@ -1627,8 +1627,7 @@ public class Game extends BasicGameState {
 				UI.getNotificationManager().sendBarNotification(String.format(t("Using local beatmap offset (%dms)"), beatmap.localMusicOffset));
 
 			// using custom difficulty settings?
-			if (Options.getFixedCS() > 0f || Options.getFixedAR() > 0f || Options.getFixedOD() > 0f ||
-				Options.getFixedHP() > 0f || Options.getFixedSpeed() > 0f)
+			if (Options.isDifficultyCustom())
 				UI.getNotificationManager().sendNotification(t("Playing with custom difficulty settings."));
 
 			// load video
@@ -1972,13 +1971,14 @@ public class Game extends BasicGameState {
 	 * Set map modifiers.
 	 */
 	private void setMapModifiers() {
+		boolean isCustom = Options.isDifficultyCustom();
 		boolean isAllowBeyond = Options.isInsaneSettingAllowed();
 		// map-based properties, re-initialized each game
 		float multiplier = GameMod.getDifficultyMultiplier();
-		float circleSize = Options.getFixedCS() > 0f ? Options.getFixedCS() * multiplier : beatmap.circleSize * multiplier;
-		float approachRate = Options.getFixedAR() > 0f ? Options.getFixedAR() * multiplier : beatmap.approachRate * multiplier;
-		float overallDifficulty = Options.getFixedOD() > 0f ? Options.getFixedOD() * multiplier : beatmap.overallDifficulty * multiplier;
-		float HPDrainRate = Options.getFixedHP() > 0f ? Options.getFixedHP() * multiplier : beatmap.HPDrainRate * multiplier;
+		float circleSize = (isCustom && Options.getFixedCS() > 0f) ? Options.getFixedCS() * multiplier : beatmap.circleSize * multiplier;
+		float approachRate = (isCustom && Options.getFixedAR() > 0f) ? Options.getFixedAR() * multiplier : beatmap.approachRate * multiplier;
+		float overallDifficulty = (isCustom && Options.getFixedOD() > 0f) ? Options.getFixedOD() * multiplier : beatmap.overallDifficulty * multiplier;
+		float HPDrainRate = (isCustom && Options.getFixedHP() > 0f) ? Options.getFixedHP() * multiplier : beatmap.HPDrainRate * multiplier;
 		circleSize = isAllowBeyond ? circleSize : Math.min(circleSize, 10f);
 		approachRate = isAllowBeyond ? approachRate : Math.min(approachRate, 10f);
 		overallDifficulty = isAllowBeyond ? overallDifficulty : Math.min(overallDifficulty, 10f);
@@ -1998,7 +1998,7 @@ public class Game extends BasicGameState {
 				Options.getSkin().getSliderBorderColor() : beatmap.getSliderBorderColor());
 
 		// approachRate (hit object approach time)
-		approachTime = (int) Utils.mapDifficultyRange(approachRate, 1800, 1200, 450, 50);
+		approachTime = (int) Utils.mapDifficultyRange(approachRate, 1800, 1200, 450);
 
 		// overallDifficulty (hit result time offsets)
 		hitResultOffset = new int[GameData.HIT_MAX];
@@ -2017,7 +2017,9 @@ public class Game extends BasicGameState {
 		// difficulty multiplier (scoring)
 		data.calculateDifficultyMultiplier(beatmap.HPDrainRate, beatmap.circleSize, beatmap.overallDifficulty);
 
-		int minFadeTime = isAllowBeyond ? OBJ_FADE_IN_TIME : 375;
+		// FIXME
+		// int minFadeTime = isAllowBeyond ? OBJ_FADE_IN_TIME : 375;
+		int minFadeTime = 375;
 
 		// hit object fade-in time (TODO: formula)
 		fadeInTime = Math.min(minFadeTime, (int) (approachTime / 2.5f));

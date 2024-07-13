@@ -113,6 +113,7 @@ public class OptionGroup {
 		}),
 		new OptionGroup(t("Custom"), GameImage.MENU_NAV_CUSTOM),
 		new OptionGroup(t("DIFFICULTY"), new GameOption[] {
+			GameOption.CUSTOM_DIFFICULTY,
 			GameOption.FIXED_CS,
 			GameOption.FIXED_HP,
 			GameOption.FIXED_AR,

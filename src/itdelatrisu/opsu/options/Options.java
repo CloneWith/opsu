@@ -730,6 +730,7 @@ public class Options {
 				String.format(t("Loads HD (%s) images when available.\nIncreases memory usage and loading times."),
 						GameImage.HD_SUFFIX),
 				true),
+		CUSTOM_DIFFICULTY(t("Use custom difficulty"), "CustomDiff", t("Use your own difficulty settings for beatmaps!"), false),
 		FIXED_CS(t("Fixed CS"), "FixedCS", t("Determines the size of circles and sliders."), 0, 0, 100) {
 			@Override
 			public String getValueString() {
@@ -1599,6 +1600,13 @@ public class Options {
 	public static boolean isExperimentalSliderMerging() {
 		return GameOption.EXPERIMENTAL_SLIDERS_MERGE.getBooleanValue();
 	}
+
+	/**
+	 * Returns whether to use user-defined difficulty settings.
+	 *
+	 * @return true if use custom difficulty settings
+	 */
+	public static boolean isDifficultyCustom() { return GameOption.CUSTOM_DIFFICULTY.getBooleanValue(); }
 
 	/**
 	 * Returns the fixed circle size override, if any.
