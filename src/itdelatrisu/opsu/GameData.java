@@ -1009,6 +1009,7 @@ public class GameData {
 	 */
 	public void drawHitResults(int trackPosition, boolean over) {
 		Iterator<HitObjectResult> iter = hitResultList.iterator();
+		// TODO: Scale result images based on CS
 		while (iter.hasNext()) {
 			HitObjectResult hitResult = iter.next();
 			if (hitResult.time + HITRESULT_TIME > trackPosition) {

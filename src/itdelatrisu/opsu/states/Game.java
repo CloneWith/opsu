@@ -1685,7 +1685,8 @@ public class Game extends BasicGameState {
 
 		// draw merged slider
 		if (!loseState && !GameMod.CINEMA.isActive() && mergedSlider != null && Options.isExperimentalSliderMerging()) {
-			mergedSlider.draw(Color.white);
+			mergedSlider.draw(Options.isBeatmapSkinIgnored() ?
+				Options.getSkin().getSliderBorderColor() : beatmap.getSliderBorderColor());
 			mergedSlider.clearPoints();
 		}
 
