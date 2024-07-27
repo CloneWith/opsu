@@ -324,6 +324,13 @@ public enum GameImage {
 	MUSIC_PREVIOUS ("music-previous", "png", false, false),
 	MUSIC_NOW_PLAYING ("music-now-playing", "png", false, false),
 
+	SETTINGS ("settings", "png", false, false) {
+		@Override
+		protected Image process_sub(Image img, int w, int h) {
+			return img.getScaledCopy((h * 0.45f) / img.getHeight());
+		}
+	},
+
 	DOWNLOADS ("downloads", "png", false, false) {
 		@Override
 		protected Image process_sub(Image img, int w, int h) {

@@ -95,6 +95,9 @@ public class MainMenu extends BasicGameState {
 	/** Music control buttons. */
 	private MenuButton musicPlay, musicPause, musicNext, musicPrevious, musicReplay;
 
+	/** Button linking to Options sidebar. */
+	private MenuButton settingsButton;
+
 	/** Button linking to Downloads menu. */
 	private MenuButton downloadsButton;
 
@@ -241,6 +244,13 @@ public class MainMenu extends BasicGameState {
 		musicBarWidth = musicWidth * 3f;
 		musicBarHeight = musicHeight * 0.11f;
 
+		// initialize settings button
+		Image settingsImg = GameImage.SETTINGS.getImage();
+		settingsButton = new MenuButton(settingsImg, settingsImg.getWidth() / 2f, height / 2f);
+		settingsButton.setHoverAnimationDuration(350);
+		settingsButton.setHoverAnimationEquation(AnimationEquation.IN_OUT_BACK);
+		settingsButton.setHoverExpand(1.03f, Expand.RIGHT);
+
 		// initialize downloads button
 		Image dlImg = GameImage.DOWNLOADS.getImage();
 		downloadsButton = new MenuButton(dlImg, width - dlImg.getWidth() / 2f, height / 2f);
@@ -349,7 +359,8 @@ public class MainMenu extends BasicGameState {
 		// draw star fountain
 		starFountain.draw();
 
-		// draw downloads button
+		// draw settings & downloads button
+		settingsButton.draw();
 		downloadsButton.draw();
 
 		// draw buttons
@@ -511,6 +522,7 @@ public class MainMenu extends BasicGameState {
 			updateButton.autoHoverUpdate(delta, true);
 			restartButton.autoHoverUpdate(delta, false);
 		}
+		settingsButton.hoverUpdate(delta, mouseX, mouseY);
 		downloadsButton.hoverUpdate(delta, mouseX, mouseY);
 		// ensure only one button is in hover state at once
 		boolean noHoverUpdate = musicPositionBarContains(mouseX, mouseY);
@@ -695,6 +707,8 @@ public class MainMenu extends BasicGameState {
 			repoButton.resetHover();
 		updateButton.resetHover();
 		restartButton.resetHover();
+		if (!settingsButton.contains(mouseX, mouseY))
+			settingsButton.resetHover();
 		if (!downloadsButton.contains(mouseX, mouseY))
 			downloadsButton.resetHover();
 		if (!userButton.contains(mouseX, mouseY))
@@ -766,6 +780,15 @@ public class MainMenu extends BasicGameState {
 			MusicController.playAt(0, false);
 			musicInfoProgress.setTime(0);
 			UI.getNotificationManager().sendBarNotification(t("Play"));
+		}
+
+		// settings button actions
+		if (settingsButton.contains(x, y)) {
+			SoundController.playSound(SoundEffect.MENUHIT);
+			showOptionsOverlay = true;
+			optionsOverlayProgress.setTime(0);
+			optionsOverlay.activate();
+			return;
 		}
 
 		// downloads button actions
@@ -953,6 +976,7 @@ public class MainMenu extends BasicGameState {
 			repoButton.resetHover();
 		updateButton.resetHover();
 		restartButton.resetHover();
+		settingsButton.resetHover();
 		downloadsButton.resetHover();
 		userButton.resetHover();
 	}
