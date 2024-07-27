@@ -33,6 +33,7 @@ The images included in opsu! belong to their respective authors.
   * [Another link](https://www.freepik.com/free-vector/wild-and-marine-animal-collection_845661.htm)
 * Font Awesome by Dave Gandy - [Website](https://fontawesome.io)
 * Papirus icon theme - [GitHub](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme)
+* Material Icons - [Website](https://mui.com/material-ui/material-icons)
 
 ## Projects
 
