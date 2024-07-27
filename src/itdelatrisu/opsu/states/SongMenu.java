@@ -355,7 +355,7 @@ public class SongMenu extends BasicGameState {
 		headerY = height * 0.0075f + GameImage.MENU_MUSICNOTE.getImage().getHeight() +
 				Fonts.BOLD.getLineHeight() + Fonts.DEFAULT.getLineHeight() +
 				Fonts.SMALL.getLineHeight();
-		footerY = height - GameImage.SELECTION_MODS.getImage().getHeight();
+		footerY = height - GameImage.SELECTION_MODS_OVERLAY.getImage().getHeight();
 
 		// footer logo coordinates
 		float footerHeight = height - footerY;
@@ -429,8 +429,7 @@ public class SongMenu extends BasicGameState {
 		search.setMaxLength(60);
 
 		// selection buttons
-		// TODO: For special cases (e.g. 5 digit skin), need to process each image separately
-		// Image selectionMods = GameImage.SELECTION_MODS.getImage();
+		// For special cases (e.g. 5 digit skin), need to process each image separately
 		Image selectionModsOverlay = GameImage.SELECTION_MODS_OVERLAY.getImage();
 		float selectX = width * 0.183f + selectionModsOverlay.getWidth() / 2f;
 		float selectY = height - selectionModsOverlay.getHeight() / 2f;
