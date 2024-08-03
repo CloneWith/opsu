@@ -18,6 +18,7 @@
 
 package itdelatrisu.opsu.states;
 
+import clonewith.opsu.storyboard.Storyboard;
 import itdelatrisu.opsu.*;
 import itdelatrisu.opsu.audio.HitSound;
 import itdelatrisu.opsu.audio.MusicController;
@@ -53,6 +54,8 @@ import org.newdawn.slick.state.transition.EasedFadeOutTransition;
 import org.newdawn.slick.state.transition.EmptyTransition;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.util.Log;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -64,6 +67,8 @@ import static clonewith.opsu.I18N.t;
  * "Game" state.
  */
 public class Game extends BasicGameState {
+	private static final Logger log = LoggerFactory.getLogger(Game.class);
+
 	/** Game play states. */
 	public enum PlayState {
 		/** Normal play. */
@@ -296,6 +301,9 @@ public class Game extends BasicGameState {
 	/** The video seek time (if any). */
 	private int videoSeekTime;
 
+	/** The storyboard (if any). */
+	private Storyboard storyboard;
+
 	/** The single merged slider (if enabled). */
 	private FakeCombinedCurve mergedSlider;
 
@@ -313,6 +321,7 @@ public class Game extends BasicGameState {
 	private StateBasedGame game;
 	private Input input;
 	private final int state;
+	private boolean useBGImage = true;
 
 	public Game(int state) {
 		this.state = state;
@@ -390,11 +399,33 @@ public class Game extends BasicGameState {
 				else
 					dimLevel = 1f;
 			}
-			if (Options.isDefaultPlayfieldForced() || !beatmap.drawBackground(width, height, 0, 0, dimLevel, false)) {
-				Image bg = GameImage.MENU_BG.getImage();
-				bg.setAlpha(dimLevel);
-				bg.drawCentered((float) width / 2, (float) height / 2);
-				bg.setAlpha(1f);
+			if(useBGImage)
+				if (Options.isDefaultPlayfieldForced() || !beatmap.drawBackground(width, height, 0, 0, dimLevel, storyboard == null)) {
+					Image bg = GameImage.MENU_BG.getImage();
+					bg.setAlpha(dimLevel);
+					bg.drawCentered(width / 2, height / 2);
+					bg.setAlpha(1f);
+				}
+		}
+		//Storyboard
+		boolean normalDim = true;
+		if (storyboard != null) {
+			storyboard.render(g, normalDim?dimLevel:1);
+			if (!beatmap.widescreenStoryboard) {
+				float targetWidth = height * 4f / 3f;
+				if ( width > targetWidth) {
+					float barWidth = (width - targetWidth)/2;
+					g.setColor(Color.black);
+					g.fillRect(0, 0, barWidth, height);
+					g.fillRect(width-barWidth, 0, barWidth, height);
+				}
+			}
+			if (!normalDim) {
+				float oldAlpha2 = Color.black.a;
+				Color.black.a = 1-dimLevel;
+				g.setColor(Color.black);
+				g.fillRect(0, 0, width, height);
+				Color.black.a = oldAlpha2;
 			}
 		}
 
@@ -512,7 +543,7 @@ public class Game extends BasicGameState {
 			int breakLength = endTime - breakTime;
 
 			// letterbox effect (black bars on top/bottom)
-			if (beatmap.letterboxInBreaks && breakLength >= 4000) {
+			if (storyboard == null && beatmap.letterboxInBreaks && breakLength >= 4000) {
 				// let it fade in/out
 				float a = Colors.BLACK_ALPHA.a;
 				if (trackPosition - breakTime > breakLength / 2) {
@@ -847,6 +878,9 @@ public class Game extends BasicGameState {
 				video.update(trackPosition - videoStartTime - videoSeekTime);
 		}
 
+		if (storyboard != null)
+			storyboard.update(trackPosition);
+
 		// normal game update
 		if (!isReplay && !gameFinished) {
 			addReplayFrameAndRun(mouseX, mouseY, lastKeysPressed, trackPosition);
@@ -1056,6 +1090,8 @@ public class Game extends BasicGameState {
 				breakTime = breakValue;
 				breakSound = false;
 				breakIndex++;
+				if (storyboard != null)
+					data.checkPassingFailingBreaks(trackPosition);
 				return;
 			}
 		}
@@ -1635,6 +1671,40 @@ public class Game extends BasicGameState {
 				loadVideo((beatmap.videoOffset < 0) ? -beatmap.videoOffset : 0);
 				videoStartTime = Math.max(0, beatmap.videoOffset);
 			}
+
+			//load Storyboard
+			if (storyboard != null) {
+				if (storyboard.file.equals(beatmap.getFile())) {
+					storyboard.reset();
+
+				} else {
+					storyboard.dispose();
+					storyboard = null;
+				}
+			}
+			if (storyboard == null && Options.isBeatmapStoryboardEnabled()) {
+				try {
+					String sbname = beatmap.getFile().getName();
+					sbname = sbname.substring(0, sbname.lastIndexOf(" ["))+".osb";
+					File sbFile = new File(beatmap.getFile().getParentFile(), sbname);
+					String bgStr = beatmap.bg!=null?beatmap.bg.getName():null;
+					storyboard = new Storyboard(beatmap.getFile());
+					storyboard.load(beatmap.getFile(), bgStr);
+					if (sbFile.exists()) {
+						storyboard.load(sbFile, bgStr);
+					}
+					if (storyboard.exists()){
+						data.setSBTrigListener(storyboard);
+						storyboard.ready();
+					} else {
+						storyboard = null;
+					}
+				} catch (IOException e) {
+					log.error("An error occurred when loading the storyboard.", e);
+				}
+			}
+
+			useBGImage = storyboard == null || !storyboard.exists() || beatmap.bg==null || !storyboard.usesBG();
 
 			// needs to play before setting position to resume without lag later
 			MusicController.playAt(0, false);

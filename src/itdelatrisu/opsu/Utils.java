@@ -18,6 +18,7 @@
 
 package itdelatrisu.opsu;
 
+import clonewith.opsu.storyboard.Storyboard;
 import com.sun.jna.platform.FileUtils;
 import itdelatrisu.opsu.audio.SoundController;
 import itdelatrisu.opsu.audio.SoundEffect;
@@ -155,6 +156,9 @@ public class Utils {
 
 		// initialize hit objects
 		HitObject.init(width, height);
+
+		// initialize Storyboard
+		Storyboard.init(width, height);
 
 		// initialize download nodes
 		DownloadNode.init(width, height);
@@ -521,7 +525,7 @@ public class Utils {
 	}
 
 	/**
-	 * Returns a the contents of a URL as a string.
+	 * Returns the contents of a URL as a string.
 	 * @param url the remote URL
 	 * @return the contents as a string, or null if any error occurred
 	 * @author Roland Illig (<a href="http://stackoverflow.com/a/4308662">...</a>)

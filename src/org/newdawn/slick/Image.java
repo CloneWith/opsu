@@ -228,7 +228,7 @@ public class Image implements Renderable {
 
 	/**
 	 * Set the image filtering to be used. Note that this will also affect any
-	 * image that was derived from this one (i.e. sub-images etc)
+	 * image that was derived from this one (i.e. sub-images etc.)
 	 *
 	 * @param f The filtering mode to use
 	 */
@@ -320,7 +320,7 @@ public class Image implements Renderable {
 	}
 
 	/**
-	 * Create an image from a image data source
+	 * Create an image from an image data source
 	 *
 	 * @param data The pixelData to use to create the image
 	 */
@@ -329,7 +329,7 @@ public class Image implements Renderable {
 	}
 
 	/**
-	 * Create an image from a image data source. Note that this method uses
+	 * Create an image from an image data source. Note that this method uses
 	 *
 	 * @param data The pixelData to use to create the image
 	 * @param f The filter to use when scaling this image
@@ -844,6 +844,48 @@ public class Image implements Renderable {
     }
 
 	/**
+	 * Draw this image at a specified location, size, and on its center of rotation
+	 *
+	 * @param x The x location to draw the image at
+	 * @param y The y location to draw the image at
+	 * @param width The width to render the image at
+	 * @param height The height to render the image at
+	 * @param filter The color to filter with while drawing
+	 */
+	public void drawCenterRot(float x,float y,float width,float height,Color filter) {
+		if (alpha != 1) {
+			if (filter == null) {
+				filter = Color.white;
+			}
+
+			filter = new Color(filter);
+			filter.a *= alpha;
+		}
+		if (filter != null) {
+			filter.bind();
+		}
+
+		texture.bind();
+
+		GL.glTranslatef(x, y, 0);
+		if (angle != 0) {
+			GL.glRotatef(angle, 0.0f, 0.0f, 1.0f);
+		}
+		GL.glTranslatef(-centerX, -centerY, 0.0f);
+
+		GL.glBegin(SGL.GL_QUADS);
+		drawEmbedded(0,0,width,height);
+		GL.glEnd();
+
+		GL.glTranslatef(centerX, centerY, 0.0f);
+
+		if (angle != 0) {
+			GL.glRotatef(-angle, 0.0f, 0.0f, 1.0f);
+		}
+		GL.glTranslatef(-x, -y, 0);
+	}
+
+	/**
 	 * Draw this image at a specified location and size as a silohette
 	 *
 	 * @param x The x location to draw the image at
@@ -995,7 +1037,7 @@ public class Image implements Renderable {
     }
 
 	/**
-	 * Get a sub-part of this image. Note that the create image retains a reference to the
+	 * Get a sub-part of this image. Note that the created image retains a reference to the
 	 * image data so should anything change it will affect sub-images too.
 	 *
 	 * @param x The x coordinate of the sub-image
@@ -1353,7 +1395,7 @@ public class Image implements Renderable {
 	}
 
 	/**
-	 * Make sure the texture cordinates are inverse on the y axis
+	 * Make sure the texture cordinates are inverse on the y-axis.
 	 */
 	public void ensureInverted() {
 		if (textureHeight > 0) {
@@ -1383,6 +1425,32 @@ public class Image implements Renderable {
 		}
 
 		return image;
+	}
+
+	/**
+	 * if the current is horizontally / vertically flipped
+	 */
+	boolean hFlip, vFlip;
+
+	/**
+	 * Sets the current image to be horizontally / vertically flipped
+	 * @author fluddokt
+	 * @param flipHorizontal whether to flip the image horizonally
+	 * @param flipVertical whether to flip the image vertically
+	 * @return itself for chaining
+	 */
+	public Image setFlipped(boolean flipHorizontal, boolean flipVertical) {
+		if (flipHorizontal != hFlip) {
+			textureOffsetX = textureOffsetX + textureWidth;
+			textureWidth = -textureWidth;
+			hFlip = !hFlip;
+		}
+		if (flipVertical != vFlip) {
+			textureOffsetY = textureOffsetY + textureHeight;
+			textureHeight = -textureHeight;
+			vFlip = !vFlip;
+		}
+		return this;
 	}
 
 	/**

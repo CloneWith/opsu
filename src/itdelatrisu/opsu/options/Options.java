@@ -696,6 +696,7 @@ public class Options {
 		ENABLE_VIDEOS(t("Background video"), "Video",
 				t("Enables background video playback.\nIf you get a large amount of lag on beatmaps with video, try disabling this feature."),
 				true),
+		ENABLE_STORYBOARDS (t("Storyboards (Experimental)"), "Storyboard", t("Enables storyboard playback.\nThis is still an experimental feature."), true),
 		IGNORE_BEATMAP_SKINS(t("Ignore all beatmap skins"), "IgnoreBeatmapSkins",
 				t("Defaults game settings to never use skin element overrides provided by beatmaps."), false),
 		FORCE_SKIN_CURSOR(t("Always use skin cursor"), "UseSkinCursor",
@@ -1535,6 +1536,12 @@ public class Options {
 	}
 
 	/**
+	 * Returns whether beatmap storyboards are enabled.
+	 * @return true if enabled
+	 */
+	public static boolean isBeatmapStoryboardEnabled() { return GameOption.ENABLE_STORYBOARDS.getBooleanValue(); }
+
+	/**
 	 * Returns whether beatmap skins are ignored.
 	 *
 	 * @return true if ignored
@@ -1604,7 +1611,7 @@ public class Options {
 	/**
 	 * Returns whether to use user-defined difficulty settings.
 	 *
-	 * @return true if use custom difficulty settings
+	 * @return true if using custom difficulty settings
 	 */
 	public static boolean isDifficultyCustom() { return GameOption.CUSTOM_DIFFICULTY.getBooleanValue(); }
 
