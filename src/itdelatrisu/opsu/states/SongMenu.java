@@ -281,7 +281,6 @@ public class SongMenu extends BasicGameState {
 	 * be cleared (to be garbage collected). If the flag is true, also clear the
 	 * beatmap's array fields (timing points, etc.).
 	 */
-	@SuppressWarnings("serial")
 	private final LRUCache<Beatmap, Boolean> beatmapsCalculated = new LRUCache<>(12) {
 		@Override
 		public void eldestRemoved(Map.Entry<Beatmap, Boolean> eldest) {
@@ -1290,7 +1289,7 @@ public class SongMenu extends BasicGameState {
 	}
 
 	@Override
-	public void mouseDragged(int oldx, int oldy, int newx, int newy) {
+	public void mouseDragged(int oldX, int oldY, int newX, int newY) {
 		// block input
 		if (isInputBlocked())
 			return;
@@ -1299,20 +1298,21 @@ public class SongMenu extends BasicGameState {
 		if (input.isMouseButtonDown(Input.MOUSE_MIDDLE_BUTTON))
 			return;
 
-		int diff = newy - oldy;
+		int diff = newY - oldY;
 		if (diff == 0)
 			return;
 
 		// score buttons
-		if (focusScores != null && focusScores.length >= MAX_SCORE_BUTTONS && ScoreData.areaContains(oldx, oldy))
+		if (focusScores != null && focusScores.length >= MAX_SCORE_BUTTONS && ScoreData.areaContains(oldX, oldY))
 			startScorePos.dragged(-diff);
 
 		// song buttons
 		else {
 			if (songScrolling.isPressed())
 				songScrolling.dragged(-diff);
-			else if (songScrolling.getSpeedMultiplier() == FAST_SCROLL_SPEED)  // make sure mousePressed() preceded this event
-				scrollSongsToPosition(newy);
+			else if (songScrolling.getSpeedMultiplier() == FAST_SCROLL_SPEED)
+				// make sure mousePressed() preceded this event
+				scrollSongsToPosition(newY);
 		}
 	}
 
@@ -1942,7 +1942,7 @@ public class SongMenu extends BasicGameState {
 		}
 	}
 
-	/** Enters the game mods menu. */
+	/** Enters the game modifier menu. */
 	private void openModsMenu() {
 		SoundController.playSound(SoundEffect.MENUHIT);
 		((ButtonMenu) game.getState(Opsu.STATE_BUTTONMENU)).setMenuState(MenuState.MODS);

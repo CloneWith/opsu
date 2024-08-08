@@ -110,13 +110,15 @@ public abstract class GameContainer implements GUIContext {
 	/** The number of samples we'll attempt through hardware */
 	protected int samples;
 
-	/** True if this context supports multisample */
+	/** True if this context supports multi-sampling */
 	protected boolean supportsMultiSample;
 
 	/** True if we should render when not focused */
 	protected boolean alwaysRender;
 	/** True if we require stencil bits */
 	protected static boolean stencil;
+	/** The version of Slick. */
+	protected static int slickVersion;
 
 	/**
 	 * Create a new game container wrapping a given game
@@ -127,7 +129,7 @@ public abstract class GameContainer implements GUIContext {
 		this.game = game;
 		lastFrame = getTime();
 
-		getBuildVersion();
+		slickVersion = getBuildVersion();
 		Log.checkVerboseLogSetting();
 	}
 
@@ -136,7 +138,7 @@ public abstract class GameContainer implements GUIContext {
 	}
 
 	/**
-	 * Set the default font that will be intialised in the graphics held in this container
+	 * Set the default font that will be initialized in the graphics held in this container
 	 *
 	 * @param font The font to use as default
 	 */
@@ -178,7 +180,7 @@ public abstract class GameContainer implements GUIContext {
 	}
 
 	/**
-	 * Indicate if we should force exitting the VM at the end
+	 * Indicate if we should force exiting the VM at the end
 	 * of the game (default = true)
 	 *
 	 * @param forceExit True if we should force the VM exit
@@ -228,7 +230,7 @@ public abstract class GameContainer implements GUIContext {
 
 	/**
 	 * Enable shared OpenGL context. After calling this all containers created
-	 * will shared a single parent context
+	 * will share a single parent context
 	 *
 	 * @throws SlickException Indicates a failure to create the shared drawable
 	 */
@@ -236,7 +238,7 @@ public abstract class GameContainer implements GUIContext {
 		try {
 			SHARED_DRAWABLE = new Pbuffer(64, 64, new PixelFormat(8, 0, 0), null);
 		} catch (LWJGLException e) {
-			throw new SlickException("Unable to create the pbuffer used for shard context, buffers not supported", e);
+			throw new SlickException("Unable to create the P-buffer used for shard context, buffers not supported.", e);
 		}
 	}
 
@@ -254,14 +256,14 @@ public abstract class GameContainer implements GUIContext {
 	 * rendering to the whole screen each frame then setting this to false can give
 	 * some performance improvements
 	 *
-	 * @param clear True if the the screen should be cleared each frame
+	 * @param clear True if the screen should be cleared each frame
 	 */
 	public void setClearEachFrame(boolean clear) {
 		this.clearEachFrame = clear;
 	}
 
 	/**
-	 * Renitialise the game and the context in which it's being rendered
+	 * Reinitialize the game and the context in which it's being rendered
 	 *
 	 * @throws SlickException Indicates a failure rerun initialisation routines
 	 */
@@ -277,7 +279,7 @@ public abstract class GameContainer implements GUIContext {
 	}
 
 	/**
-	 * Resumt the game - i.e. continue updates
+	 * Resume the game - i.e. continue updates
 	 */
 	public void resume()
 	{
@@ -295,7 +297,7 @@ public abstract class GameContainer implements GUIContext {
 
 	/**
 	 * Indicates if the game should be paused, i.e. if updates
-	 * should be propogated through to the game.
+	 * should be propagated through to the game.
 	 *
 	 * @param paused True if the game should be paused
 	 */
@@ -337,7 +339,7 @@ public abstract class GameContainer implements GUIContext {
 
 			return build;
 		} catch (Exception e) {
-			Log.info("Unable to determine Slick build number");
+			Log.info("Unable to determine Slick build number.");
 			return -1;
 		}
 	}
@@ -495,7 +497,7 @@ public abstract class GameContainer implements GUIContext {
 	public void sleep(int milliseconds) {
 		long target = getTime()+milliseconds;
 		while (getTime() < target) {
-			try { Thread.sleep(1); } catch (Exception e) {}
+			try { Thread.sleep(1); } catch (Exception ignored) {}
 		}
 	}
 
@@ -515,7 +517,7 @@ public abstract class GameContainer implements GUIContext {
 	 * Set the mouse cursor to be displayed - this is a hardware cursor and hence
 	 * shouldn't have any impact on FPS.
 	 *
-	 * @param data The image data from which the cursor can be construted
+	 * @param data The image data from which the cursor can be constructed
 	 * @param hotSpotX The x coordinate of the hotspot within the cursor image
 	 * @param hotSpotY The y coordinate of the hotspot within the cursor image
 	 * @throws SlickException Indicates a failure to load the cursor image or create the hardware cursor
@@ -528,7 +530,7 @@ public abstract class GameContainer implements GUIContext {
 	 * account of render state type changes to images (rotation and such). If these effects
 	 * are required it is recommended that an offscreen buffer be used to produce an appropriate
 	 * image. An offscreen buffer will always be used to produce the new cursor and as such
-	 * this operation an be very expensive
+	 * this operation to be very expensive
 	 *
 	 * @param image The image to use as the cursor
 	 * @param hotSpotX The x coordinate of the hotspot within the cursor image
@@ -550,7 +552,7 @@ public abstract class GameContainer implements GUIContext {
 	public abstract void setMouseCursor(Cursor cursor, int hotSpotX, int hotSpotY) throws SlickException;
 
 	/**
-	 * Get a cursor based on a image reference on the classpath. The image
+	 * Get a cursor based on an image reference on the classpath. The image
 	 * is assumed to be a set/strip of cursor animation frames running from top to
 	 * bottom.
 	 *
@@ -608,7 +610,7 @@ public abstract class GameContainer implements GUIContext {
 	public abstract void setMouseGrabbed(boolean grabbed);
 
 	/**
-	 * Check if the mouse cursor is current grabbed. This will cause it not
+	 * Check if the mouse cursor is currently grabbed. This will cause it not
 	 * to be seen.
 	 *
 	 * @return True if the mouse is currently grabbed
@@ -641,7 +643,7 @@ public abstract class GameContainer implements GUIContext {
 	}
 
 	/**
-	 * Set the minimum amount of time in milliseonds that has to
+	 * Set the minimum amount of time in milliseconds that has to
 	 * pass before update() is called on the container game. This gives
 	 * a way to limit logic updates compared to renders.
 	 *
@@ -745,7 +747,7 @@ public abstract class GameContainer implements GUIContext {
 	 * Indicate if the display should update only when the game is visible
 	 * (the default is true)
 	 *
-	 * @param updateOnlyWhenVisible True if we should updated only when the display is visible
+	 * @param updateOnlyWhenVisible True if we should update only when the display is visible
 	 */
 	public void setUpdateOnlyWhenVisible(boolean updateOnlyWhenVisible) {
 	}
@@ -863,7 +865,7 @@ public abstract class GameContainer implements GUIContext {
 	}
 
 	/**
-	 * Inidcate we want verbose logging
+	 * Indicate we want verbose logging
 	 *
 	 * @param verbose True if we want verbose logging (INFO and DEBUG)
 	 */
@@ -887,7 +889,7 @@ public abstract class GameContainer implements GUIContext {
 
 	/**
 	 * Get the graphics context used by this container. Note that this
-	 * value may vary over the life time of the game.
+	 * value may vary over the lifetime of the game.
 	 *
 	 * @return The graphics context used by this container
 	 */
@@ -898,10 +900,10 @@ public abstract class GameContainer implements GUIContext {
 	/**
 	 * Enter the orthographic mode
 	 *
-	 * @param xsize The size of the panel being used
-	 * @param ysize The size of the panel being used
+	 * @param xSize The size of the panel being used
+	 * @param ySize The size of the panel being used
 	 */
-	protected void enterOrtho(int xsize, int ysize) {
-		GL.enterOrtho(xsize, ysize);
+	protected void enterOrtho(int xSize, int ySize) {
+		GL.enterOrtho(xSize, ySize);
 	}
 }

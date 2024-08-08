@@ -442,10 +442,11 @@ public class Utils {
 	 * Deletes a file or directory.  If a system trash directory is available,
 	 * the file or directory will be moved there instead.
 	 * @param file the file or directory to delete
-	 * @return true if moved to trash, and false if deleted
 	 * @throws IOException if given file does not exist
 	 */
-	public static boolean deleteToTrash(File file) throws IOException {
+	public static void deleteToTrash(File file) throws IOException {
+		boolean result = false;
+
 		if (file == null)
 			throw new IOException("File cannot be null.");
 		if (!file.exists())
@@ -456,18 +457,21 @@ public class Utils {
 		if (fileUtils.hasTrash()) {
 			try {
 				fileUtils.moveToTrash(file);
-				return true;
+				return;
 			} catch (IOException e) {
 				Log.warn(String.format("Failed to move file '%s' to trash.", file.getAbsolutePath()), e);
 			}
 		}
 
+		Log.warn(String.format("Unable to move '%s' to trash, deleting instead.", file.getAbsolutePath()));
 		// delete otherwise
 		if (file.isDirectory())
 			deleteDirectory(file);
 		else
-			file.delete();
-		return false;
+			result = file.delete();
+
+		if (!result)
+			Log.error(String.format("Failed to delete '%s'", file.getAbsolutePath()));
 	}
 
 	/**
@@ -476,8 +480,12 @@ public class Utils {
 	 * @param dir the directory to delete
 	 */
 	public static void deleteDirectory(File dir) {
-		if (dir == null || !dir.isDirectory())
+		boolean isDeleted = false;
+
+		if (dir == null || !dir.isDirectory()) {
+			Log.debug("Directory null or empty.");
 			return;
+		}
 
 		// recursively delete contents of directory
 		File[] files = dir.listFiles();
@@ -485,13 +493,17 @@ public class Utils {
 			for (File file : files) {
 				if (file.isDirectory())
 					deleteDirectory(file);
-				else
-					file.delete();
+				else {
+					isDeleted = file.delete();
+					if (!isDeleted)
+						Log.warn(String.format("Cannot delete file '%s' at '%s'.", file.getName(), file.getPath()));
+				}
 			}
 		}
-
 		// delete the directory
-		dir.delete();
+		isDeleted = dir.delete();
+		if (!isDeleted)
+			Log.warn(String.format("Cannot delete directory '%s' at '%s'.", dir.getName(), dir.getPath()));
 	}
 
 	/**

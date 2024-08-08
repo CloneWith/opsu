@@ -200,7 +200,6 @@ public class SBObject implements Comparable<SBObject>{
 				return;
 			case "BottomRight":
 				alignV = SBAlignV.Bottom; alignH = SBAlignH.Right;
-				return;
 		}
 	}
 
@@ -227,8 +226,10 @@ public class SBObject implements Comparable<SBObject>{
 		events.addCommands(commands, activeCommands);
 		events.ready();
 		for(SBCommand c2 : commands) {
-			if (c2 instanceof SBCommandTrigger)
+			if (c2 instanceof SBCommandTrigger) {
 				iOpacity = 0;
+				break;
+			}
 		}
 		for(SBCommand c2 : commands) {
 			start = Math.min(start, c2.startTime);

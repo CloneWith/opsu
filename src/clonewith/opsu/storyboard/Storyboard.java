@@ -48,8 +48,8 @@ public class Storyboard {
 			sheight = swidth * 3 / 4;
 		xMultiplier = swidth / 640f;
 		yMultiplier = sheight / 480f;
-		xOffset = (int) (width - swidth) / 2;
-		yOffset = (int) (height - sheight) / 2;
+		xOffset = (int) ((width - swidth) / 2f);
+		yOffset = (int) ((height - sheight) / 2f);
 	}
 
 	ArrayList<SBObject> objs = new ArrayList<>();

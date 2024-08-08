@@ -23,6 +23,7 @@ import itdelatrisu.opsu.Utils;
 import itdelatrisu.opsu.audio.MusicController;
 import itdelatrisu.opsu.db.BeatmapDB;
 import itdelatrisu.opsu.options.Options;
+import org.newdawn.slick.util.Log;
 
 import java.io.File;
 import java.io.IOException;
@@ -134,11 +135,12 @@ public class BeatmapSetList {
 	 * Deletes a song group from the list, and also deletes the beatmap
 	 * directory associated with the node.
 	 * @param node the node containing the song group to delete
-	 * @return true if the song group was deleted, false otherwise
 	 */
-	public boolean deleteSongGroup(BeatmapSetNode node) {
-		if (node == null)
-			return false;
+	public void deleteSongGroup(BeatmapSetNode node) {
+		if (node == null) {
+			Log.error("BeatmapSetNode is null, cannot delete.");
+			return;
+		}
 
 		// re-link base nodes
 		int index = node.index;
@@ -213,8 +215,6 @@ public class BeatmapSetList {
 		}
 		if (ws != null)
 			ws.resume();
-
-		return true;
 	}
 
 	/**
@@ -222,17 +222,21 @@ public class BeatmapSetList {
 	 * If this causes the song group to be empty, then the song group and
 	 * beatmap directory will be deleted altogether.
 	 * @param node the node containing the song group to delete (expanded only)
-	 * @return true if the song or song group was deleted, false otherwise
 	 * @see #deleteSongGroup(BeatmapSetNode)
 	 */
-	public boolean deleteSong(BeatmapSetNode node) {
-		if (node == null || node.beatmapIndex == -1 || node.index != expandedIndex)
-			return false;
+	public void deleteSong(BeatmapSetNode node) {
+		// Invalid request
+		if (node == null || node.beatmapIndex == -1 || node.index != expandedIndex) {
+			Log.warn("Invalid beatmap deletion request.");
+			return;
+		}
 
 		// last song in group?
 		int size = node.getBeatmapSet().size();
-		if (size == 1)
-			return deleteSongGroup(node);
+		if (size == 1) {
+			deleteSongGroup(node);
+			return;
+		}
 
 		// reset indices
 		BeatmapSetNode expandedNode = node.next;
@@ -268,8 +272,6 @@ public class BeatmapSetList {
 		}
 		if (ws != null)
 			ws.resume();
-
-		return true;
 	}
 
 	/**
