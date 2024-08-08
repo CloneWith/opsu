@@ -32,6 +32,7 @@ import itdelatrisu.opsu.options.Options;
 import itdelatrisu.opsu.replay.LifeFrame;
 import itdelatrisu.opsu.replay.Replay;
 import itdelatrisu.opsu.replay.ReplayFrame;
+import itdelatrisu.opsu.skins.Skin;
 import itdelatrisu.opsu.ui.Colors;
 import itdelatrisu.opsu.ui.Fonts;
 import itdelatrisu.opsu.ui.UI;
@@ -52,6 +53,9 @@ import static clonewith.opsu.I18N.t;
  * Holds game data and renders all related elements.
  */
 public class GameData {
+	/** The currently used skin. */
+	private Skin skin = Options.getSkin();
+
 	/** Time, in milliseconds, for a hit result to remain existent. */
 	public static final int HITRESULT_TIME = 833;
 
@@ -505,8 +509,12 @@ public class GameData {
 	 * @param alpha the alpha level
 	 */
 	public void drawSymbolNumber(int n, float x, float y, float scale, float alpha) {
+		drawSymbolNumber(n, x, y, scale, alpha, 0);
+	}
+
+	public void drawSymbolNumber(int n, float x, float y, float scale, float alpha, float spacingDelta) {
 		int length = (int) (Math.log10(n) + 1);
-		float digitWidth = getDefaultSymbolImage(0).getWidth() * scale;
+		float digitWidth = (getDefaultSymbolImage(0).getWidth() - spacingDelta) * scale;
 		float cx = x + ((length - 1) * (digitWidth / 2));
 
 		for (int i = 0; i < length; i++) {
@@ -528,6 +536,10 @@ public class GameData {
 	 * @param rightAlign align right (true) or left (false)
 	 */
 	public void drawSymbolString(String str, float x, float y, float scale, float alpha, boolean rightAlign) {
+		drawSymbolString(str, x, y, scale, alpha, rightAlign, 0);
+	}
+
+	public void drawSymbolString(String str, float x, float y, float scale, float alpha, boolean rightAlign, float spacingDelta) {
 		char[] c = str.toCharArray();
 		float cx = x;
 		if (rightAlign) {
@@ -535,7 +547,7 @@ public class GameData {
 				Image digit = getScoreSymbolImage(c[i]);
 				if (scale != 1.0f)
 					digit = digit.getScaledCopy(scale);
-				cx -= digit.getWidth();
+				cx -= digit.getWidth() - spacingDelta;
 				digit.setAlpha(alpha);
 				digit.draw(cx, y);
 				digit.setAlpha(1f);
@@ -548,7 +560,7 @@ public class GameData {
 				digit.setAlpha(alpha);
 				digit.draw(cx, y);
 				digit.setAlpha(1f);
-				cx += digit.getWidth();
+				cx += digit.getWidth() - spacingDelta;
 			}
 		}
 	}
@@ -564,6 +576,10 @@ public class GameData {
 	 * @param rightAlign align right (true) or left (false)
 	 */
 	public void drawFixedSizeSymbolString(String str, float x, float y, float scale, float alpha, float fixedsize, boolean rightAlign) {
+		drawFixedSizeSymbolString(str, x, y, scale, alpha, fixedsize, rightAlign, 0);
+	}
+
+	public void drawFixedSizeSymbolString(String str, float x, float y, float scale, float alpha, float fixedsize, boolean rightAlign, float spacingDelta) {
 		char[] c = str.toCharArray();
 		float cx = x;
 		if (rightAlign) {
@@ -571,7 +587,7 @@ public class GameData {
 				Image digit = getScoreSymbolImage(c[i]);
 				if (scale != 1.0f)
 					digit = digit.getScaledCopy(scale);
-				cx -= fixedsize;
+				cx -= fixedsize - spacingDelta;
 				digit.setAlpha(alpha);
 				digit.draw(cx + (fixedsize - digit.getWidth()) / 2, y);
 				digit.setAlpha(1f);
@@ -584,7 +600,7 @@ public class GameData {
 				digit.setAlpha(alpha);
 				digit.draw(cx + (fixedsize - digit.getWidth()) / 2, y);
 				digit.setAlpha(1f);
-				cx += fixedsize;
+				cx += fixedsize - spacingDelta;
 			}
 		}
 	}
@@ -607,14 +623,15 @@ public class GameData {
 		// score
 		if (!relaxAutoPilot)
 			drawFixedSizeSymbolString((scoreDisplay < 100000000) ? String.format("%08d", scoreDisplay) : Long.toString(scoreDisplay),
-					width - margin, 0, 1f, alpha, getScoreSymbolImage('0').getWidth() - 2, true);
+					width - margin, 0, 1f, alpha, getScoreSymbolImage('0').getWidth() - 2, true,
+				skin.getScoreFontOverlap());
 
 		// score percentage
 		int symbolHeight = getScoreSymbolImage('0').getHeight();
 		if (!relaxAutoPilot && !GameMod.CINEMA.isActive())
 			drawSymbolString(
 					String.format((scorePercentDisplay < 10f) ? "0%.2f%%" : "%.2f%%", scorePercentDisplay),
-					width - margin, symbolHeight, 0.60f, alpha, true);
+					width - margin, symbolHeight, 0.60f, alpha, true, skin.getScoreFontOverlap());
 
 		// map progress circle
 		Beatmap beatmap = MusicController.getBeatmap();
@@ -769,8 +786,8 @@ public class GameData {
 				float comboPopFront = 1 + comboPop * 0.08f;
 				String comboString = String.format("%dx", combo);
 				if (comboPopTime != COMBO_POP_TIME)
-					drawSymbolString(comboString, margin, height - margin - (symbolHeight * comboPopBack), comboPopBack, 0.5f * alpha, false);
-				drawSymbolString(comboString, margin, height - margin - (symbolHeight * comboPopFront), comboPopFront, alpha, false);
+					drawSymbolString(comboString, margin, height - margin - (symbolHeight * comboPopBack), comboPopBack, 0.5f * alpha, false, skin.getComboFontOverlap());
+				drawSymbolString(comboString, margin, height - margin - (symbolHeight * comboPopFront), comboPopFront, alpha, false, skin.getComboFontOverlap());
 			}
 		} else if (!relaxAutoPilot && !GameMod.CINEMA.isActive()) {
 			// grade

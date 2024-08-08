@@ -28,6 +28,7 @@ import itdelatrisu.opsu.beatmap.HitObject;
 import itdelatrisu.opsu.objects.curves.Curve;
 import itdelatrisu.opsu.objects.curves.Vec2f;
 import itdelatrisu.opsu.options.Options;
+import itdelatrisu.opsu.skins.Skin;
 import itdelatrisu.opsu.states.Game;
 import itdelatrisu.opsu.ui.Colors;
 import itdelatrisu.opsu.ui.animations.AnimatedValue;
@@ -41,6 +42,11 @@ import org.newdawn.slick.Image;
  * Data type representing a slider object.
  */
 public class Slider implements GameObject {
+	/** The current skin. */
+	private static final Skin skin = Options.getSkin();
+
+	private static final int circleFontOverlap = skin.getHitCircleFontOverlap();
+
 	/** Slider ball frames. */
 	private static Image[] sliderBallImages;
 
@@ -280,7 +286,7 @@ public class Slider implements GameObject {
 		// draw combo number and overlay if not initially clicked
 		if (!sliderClickedInitial) {
 			data.drawSymbolNumber(hitObject.getComboNumber(), x, y,
-				hitCircle.getWidth() * 0.40f / data.getDefaultSymbolImage(0).getHeight(), alpha);
+				hitCircle.getWidth() * 0.40f / data.getDefaultSymbolImage(0).getHeight(), alpha, circleFontOverlap);
 
 			if (overlayAboveNumber) {
 				startCircleOverlayColor.a = sliderAlpha;

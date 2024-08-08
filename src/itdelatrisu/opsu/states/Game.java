@@ -1704,7 +1704,7 @@ public class Game extends BasicGameState {
 				}
 			}
 
-			useBGImage = storyboard == null || !storyboard.exists() || beatmap.bg==null || !storyboard.usesBG();
+			useBGImage = storyboard == null || !storyboard.exists() || beatmap.bg == null || !storyboard.usesBG();
 
 			// needs to play before setting position to resume without lag later
 			MusicController.playAt(0, false);
@@ -1942,7 +1942,7 @@ public class Game extends BasicGameState {
 		if (video != null) {
 			try {
 				video.close();
-			} catch (IOException e) {}
+			} catch (IOException ignored) {}
 			video = null;
 		}
 		videoSeekTime = 0;
@@ -2016,7 +2016,7 @@ public class Game extends BasicGameState {
 		if (video != null) {
 			try {
 				video.close();
-			} catch (IOException e) {}
+			} catch (IOException ignored) { }
 			video = null;
 		}
 

@@ -26,6 +26,7 @@ import itdelatrisu.opsu.Utils;
 import itdelatrisu.opsu.beatmap.HitObject;
 import itdelatrisu.opsu.objects.curves.Vec2f;
 import itdelatrisu.opsu.options.Options;
+import itdelatrisu.opsu.skins.Skin;
 import itdelatrisu.opsu.states.Game;
 import itdelatrisu.opsu.ui.Colors;
 import org.newdawn.slick.Color;
@@ -36,6 +37,11 @@ import org.newdawn.slick.Graphics;
  * Data type representing a circle object.
  */
 public class Circle implements GameObject {
+	/** The current skin. */
+	private static final Skin skin = Options.getSkin();
+
+	private static final int circleFontOverlap = skin.getHitCircleFontOverlap();
+
 	/** The diameter of hit circles. */
 	private static float diameter;
 
@@ -117,7 +123,8 @@ public class Circle implements GameObject {
 		if (!overlayAboveNumber)
 			GameImage.HITCIRCLE_OVERLAY.getImage().drawCentered(x, y, Colors.WHITE_FADE);
 		data.drawSymbolNumber(hitObject.getComboNumber(), x, y,
-				GameImage.HITCIRCLE.getImage().getWidth() * 0.40f / data.getDefaultSymbolImage(0).getHeight(), alpha);
+				GameImage.HITCIRCLE.getImage().getWidth() * 0.40f / data.getDefaultSymbolImage(0).getHeight(),
+			alpha, circleFontOverlap);
 		if (overlayAboveNumber)
 			GameImage.HITCIRCLE_OVERLAY.getImage().drawCentered(x, y, Colors.WHITE_FADE);
 

@@ -96,78 +96,77 @@ public class Storyboard {
 						line = in.readLine();
 						continue;
 					}
-					switch (line) {
-						case "[Events]":
-							SBObject lastObject = null;//new SBObject();
-							line = in.readLine();
-							while (line != null) {
-								line = line.trim();
-								if (!isValidLine(line)) { //actually stops accepting new commands to the current object
-									line = in.readLine();
-									continue;
-								}
-								if (line.charAt(0) == '[')
-									break;
-								tokens = line.split(",");
-								switch (tokens[0]) {
-									case "0":  // background image
-										bgPath = tokens[2].replaceAll("^\"|\"$", "");
-
-									case "1":
-									case "Video":  // background video
-									case "2":  // break periods
-										line = in.readLine();
-										break;
-									default:
-										System.err.println("SB: unknown token:"+tokens[0]+" at line:"+in.getLineNumber()+" "+file);
-										line = in.readLine();
-										break;
-									case "Sprite":{
-										Image im = null;
-										String align = tokens[2];
-										String path = tokens[3].replaceAll("^\"|\"$", "");
-										im = getImage(file.getParentFile(), path);
-										float x = Float.parseFloat(tokens[4]);
-										float y = Float.parseFloat(tokens[5]);
-										String layer = tokens[1];
-										//System.out.println(bgPath +" "+path);
-										if ("Background".equals(layer) && bgPath!=null && bgPath.equalsIgnoreCase(path)) {
-											usesBG  = true;
-										}
-										TreeSet<SBObject> layerTS = getLayer(layer);
-										lastObject = new SBObject(in.getLineNumber(),objCnt++, layerTS, align, im, scaleX(x), scaleY(y));
-										objs.add(lastObject);
-										line = parseCommands(in, 0, lastObject, lastObject.commands);
-									}break;
-									case "Animation":{
-
-										String align = tokens[2];
-										float x = Float.parseFloat(tokens[4]);
-										float y = Float.parseFloat(tokens[5]);
-										int frameCount = Integer.parseInt(tokens[6]);
-										int frameDelay= Integer.parseInt(tokens[7]);
-										String loopType = tokens.length>8 ? tokens[8].trim() : "";
-
-										Image[] im = new Image[frameCount];
-										String path = tokens[3].replaceAll("^\"|\"$", "");
-
-										String endPath = getExt(path);
-										String startPath = path.substring(0, path.length()-endPath.length());
-										for(int i=0; i<frameCount; i++) {
-											im[i] = getImage(file.getParentFile(), startPath+i+endPath);
-										}
-										String layer = tokens[1];
-										TreeSet<SBObject> layerTS = getLayer(layer);
-										lastObject = new SBAnimObject(in.getLineNumber(),objCnt++, layerTS, align, im, scaleX(x), scaleY(y), frameCount, frameDelay, loopType);
-										objs.add(lastObject);
-										line = parseCommands(in, 0, lastObject, lastObject.commands);
-									}break;
-								}
+					if (line.equals("[Events]")) {
+						SBObject lastObject = null;//new SBObject();
+						line = in.readLine();
+						while (line != null) {
+							line = line.trim();
+							if (!isValidLine(line)) { //actually stops accepting new commands to the current object
+								line = in.readLine();
+								continue;
 							}
-							break;
-						default:
-							line = in.readLine();
-							break;
+							if (line.charAt(0) == '[')
+								break;
+							tokens = line.split(",");
+							switch (tokens[0]) {
+								case "0":  // background image
+									bgPath = tokens[2].replaceAll("^\"|\"$", "");
+
+								case "1":
+								case "Video":  // background video
+								case "2":  // break periods
+									line = in.readLine();
+									break;
+								default:
+									System.err.println("SB: unknown token:" + tokens[0] + " at line:" + in.getLineNumber() + " " + file);
+									line = in.readLine();
+									break;
+								case "Sprite": {
+									Image im = null;
+									String align = tokens[2];
+									String path = tokens[3].replaceAll("^\"|\"$", "");
+									im = getImage(file.getParentFile(), path);
+									float x = Float.parseFloat(tokens[4]);
+									float y = Float.parseFloat(tokens[5]);
+									String layer = tokens[1];
+									//System.out.println(bgPath +" "+path);
+									if ("Background".equals(layer) && bgPath != null && bgPath.equalsIgnoreCase(path)) {
+										usesBG = true;
+									}
+									TreeSet<SBObject> layerTS = getLayer(layer);
+									lastObject = new SBObject(in.getLineNumber(), objCnt++, layerTS, align, im, scaleX(x), scaleY(y));
+									objs.add(lastObject);
+									line = parseCommands(in, 0, lastObject, lastObject.commands);
+								}
+								break;
+								case "Animation": {
+
+									String align = tokens[2];
+									float x = Float.parseFloat(tokens[4]);
+									float y = Float.parseFloat(tokens[5]);
+									int frameCount = Integer.parseInt(tokens[6]);
+									int frameDelay = Integer.parseInt(tokens[7]);
+									String loopType = tokens.length > 8 ? tokens[8].trim() : "";
+
+									Image[] im = new Image[frameCount];
+									String path = tokens[3].replaceAll("^\"|\"$", "");
+
+									String endPath = getExt(path);
+									String startPath = path.substring(0, path.length() - endPath.length());
+									for (int i = 0; i < frameCount; i++) {
+										im[i] = getImage(file.getParentFile(), startPath + i + endPath);
+									}
+									String layer = tokens[1];
+									TreeSet<SBObject> layerTS = getLayer(layer);
+									lastObject = new SBAnimObject(in.getLineNumber(), objCnt++, layerTS, align, im, scaleX(x), scaleY(y), frameCount, frameDelay, loopType);
+									objs.add(lastObject);
+									line = parseCommands(in, 0, lastObject, lastObject.commands);
+								}
+								break;
+							}
+						}
+					} else {
+						line = in.readLine();
 					}
 
 				}
@@ -193,9 +192,9 @@ public class Storyboard {
 		//if starts or ends with != 0 then visible
 		//currently only does fade and is pretty buggy.
 		class TEvent {
-			int time;
-			int state;
-			int mod;
+			final int time;
+			final int state;
+			final int mod;
 			final static int Fade = 1
 			/*,ScaleX = 2
 			,ScaleY = 3
@@ -259,7 +258,7 @@ public class Storyboard {
 					}
 				}
 			}
-			Collections.sort(list, new Comparator<TEvent>() {
+			list.sort(new Comparator<TEvent>() {
 
 				@Override
 				public int compare(TEvent o1, TEvent o2) {
