@@ -271,7 +271,7 @@ public class SkinLoader {
 				}
 			}
 		} catch (IOException e) {
-			ErrorHandler.notify(String.format("Failed to read file '%s'. The file might be corrept.", skinFile.getAbsolutePath()), e);
+			ErrorHandler.notify(String.format("Failed to read file '%s'. The file might be corrupt.", skinFile.getAbsolutePath()), e);
 		}
 
 		return skin;

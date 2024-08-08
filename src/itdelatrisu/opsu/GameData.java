@@ -328,6 +328,9 @@ public class GameData {
 	/** Score text symbol images. */
 	private HashMap<Character, Image> scoreSymbols;
 
+	/** Combo text symbol images. */
+	private HashMap<Character, Image> comboSymbols;
+
 	/** Scorebar animation. */
 	private Animation scorebarColour;
 
@@ -469,6 +472,20 @@ public class GameData {
 		scoreSymbols.put('%', GameImage.SCORE_PERCENT.getImage());
 		scoreSymbols.put('x', GameImage.SCORE_X.getImage());
 
+		// combo symbol images
+		comboSymbols = new HashMap<>(11);
+		comboSymbols.put('0', GameImage.COMBO_0.getImage());
+		comboSymbols.put('1', GameImage.COMBO_1.getImage());
+		comboSymbols.put('2', GameImage.COMBO_2.getImage());
+		comboSymbols.put('3', GameImage.COMBO_3.getImage());
+		comboSymbols.put('4', GameImage.COMBO_4.getImage());
+		comboSymbols.put('5', GameImage.COMBO_5.getImage());
+		comboSymbols.put('6', GameImage.COMBO_6.getImage());
+		comboSymbols.put('7', GameImage.COMBO_7.getImage());
+		comboSymbols.put('8', GameImage.COMBO_8.getImage());
+		comboSymbols.put('9', GameImage.COMBO_9.getImage());
+		comboSymbols.put('x', GameImage.COMBO_X.getImage());
+
 		// hit result images
 		hitResults = new Image[HIT_MAX];
 		hitResults[HIT_MISS]     = GameImage.HIT_MISS.getImage();
@@ -493,6 +510,12 @@ public class GameData {
 	 * @param c the character [0-9,.%x]
 	 */
 	public Image getScoreSymbolImage(char c) { return scoreSymbols.get(c); }
+
+	/**
+	 * Returns a combo text symbol image for a character.
+	 * @param c the character [0-9x]
+	 */
+	public Image getComboSymbolImage(char c) { return comboSymbols.get(c); }
 
 	/**
 	 * Sets the array of hit result offsets.
@@ -536,31 +559,31 @@ public class GameData {
 	 * @param rightAlign align right (true) or left (false)
 	 */
 	public void drawSymbolString(String str, float x, float y, float scale, float alpha, boolean rightAlign) {
-		drawSymbolString(str, x, y, scale, alpha, rightAlign, 0);
+		drawSymbolString(str, x, y, scale, alpha, rightAlign, false, 0);
 	}
 
-	public void drawSymbolString(String str, float x, float y, float scale, float alpha, boolean rightAlign, float spacingDelta) {
+	public void drawSymbolString(String str, float x, float y, float scale, float alpha, boolean rightAlign, boolean isCombo, float spacingDelta) {
 		char[] c = str.toCharArray();
 		float cx = x;
 		if (rightAlign) {
 			for (int i = c.length - 1; i >= 0; i--) {
-				Image digit = getScoreSymbolImage(c[i]);
+				Image digit = isCombo ? getComboSymbolImage(c[i]) : getScoreSymbolImage(c[i]);
 				if (scale != 1.0f)
 					digit = digit.getScaledCopy(scale);
-				cx -= digit.getWidth() - spacingDelta;
+				cx -= (digit.getWidth() - spacingDelta);
 				digit.setAlpha(alpha);
 				digit.draw(cx, y);
 				digit.setAlpha(1f);
 			}
 		} else {
 			for (char value : c) {
-				Image digit = getScoreSymbolImage(value);
+				Image digit = isCombo ? getComboSymbolImage(value) : getScoreSymbolImage(value);
 				if (scale != 1.0f)
 					digit = digit.getScaledCopy(scale);
 				digit.setAlpha(alpha);
 				digit.draw(cx, y);
 				digit.setAlpha(1f);
-				cx += digit.getWidth() - spacingDelta;
+				cx += (digit.getWidth() - spacingDelta);
 			}
 		}
 	}
@@ -631,7 +654,7 @@ public class GameData {
 		if (!relaxAutoPilot && !GameMod.CINEMA.isActive())
 			drawSymbolString(
 					String.format((scorePercentDisplay < 10f) ? "0%.2f%%" : "%.2f%%", scorePercentDisplay),
-					width - margin, symbolHeight, 0.60f, alpha, true, skin.getScoreFontOverlap());
+					width - margin, symbolHeight, 0.60f, alpha, true, false, skin.getScoreFontOverlap());
 
 		// map progress circle
 		Beatmap beatmap = MusicController.getBeatmap();
@@ -786,8 +809,8 @@ public class GameData {
 				float comboPopFront = 1 + comboPop * 0.08f;
 				String comboString = String.format("%dx", combo);
 				if (comboPopTime != COMBO_POP_TIME)
-					drawSymbolString(comboString, margin, height - margin - (symbolHeight * comboPopBack), comboPopBack, 0.5f * alpha, false, skin.getComboFontOverlap());
-				drawSymbolString(comboString, margin, height - margin - (symbolHeight * comboPopFront), comboPopFront, alpha, false, skin.getComboFontOverlap());
+					drawSymbolString(comboString, margin, height - margin - (symbolHeight * comboPopBack), comboPopBack, 0.5f * alpha, false, true, skin.getComboFontOverlap());
+				drawSymbolString(comboString, margin, height - margin - (symbolHeight * comboPopFront), comboPopFront, alpha, false, true, skin.getComboFontOverlap());
 			}
 		} else if (!relaxAutoPilot && !GameMod.CINEMA.isActive()) {
 			// grade
