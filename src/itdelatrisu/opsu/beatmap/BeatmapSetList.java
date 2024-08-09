@@ -436,7 +436,7 @@ public class BeatmapSetList {
 
 		// don't redo the same search
 		query = query.trim().toLowerCase();
-		if (lastQuery != null && query.equals(lastQuery))
+		if (query.equals(lastQuery))
 			return false;
 		lastQuery = query;
 		LinkedList<String> terms = new LinkedList<>(Arrays.asList(query.split("\\s+")));

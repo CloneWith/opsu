@@ -672,8 +672,7 @@ public class SoundStore {
 				buffer = buf.get(0);
 			} catch (Exception e) {
 				Log.error(e);
-				IOException x = new IOException("Failed to load: "+ref);
-				x.initCause(e);
+				IOException x = new IOException("Failed to load: "+ref, e);
 
 				throw x;
 			}
@@ -745,8 +744,7 @@ public class SoundStore {
 				buffer = buf.get(0);
 			} catch (Exception e) {
 				Log.error(e);
-				IOException x = new IOException("Failed to load: "+ref);
-				x.initCause(e);
+				IOException x = new IOException("Failed to load: "+ref, e);
 
 				throw x;
 			}

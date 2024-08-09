@@ -17,20 +17,19 @@ import java.util.*;
 
 /**
  * Main Storyboard class based on
- * https://osu.ppy.sh/forum/viewtopic.php?p=12468#p12468
- * https://osu.ppy.sh/help/wiki/Storyboard_Scripting/Commands
- *
+ * <a href="https://osu.ppy.sh/community/forums/topics/1869">"Storyboarding by Scripting" Forum Thread</a>
+ * and <a href="https://osu.ppy.sh/wiki/Storyboard/Scripting/Commands">osu! Storyboard Scripting wiki</a>
+ * <p>
  * Currently works by making a timeline of when to add/remove objects
  * each object also make its own timeline for commands
- *
- * probably buggy
+ * <p>
  * known bugs:
- *  textures bleeding especially single pixel
- * Triggers / visibility
- *   only visible if gets triggered unless already visible....
- *   Things auto visible unless contains trigger??
- * @author fluddokt
+ * <li>textures bleeding especially single pixel
+ * <li>Triggers / visibility:
+ * <li>only visible if gets triggered unless already visible....</li>
+ * <li>Things auto visible unless contains trigger??</li>
  *
+ * @author fluddokt
  */
 public class Storyboard {
 	private static final Logger log = LoggerFactory.getLogger(Storyboard.class);
@@ -38,6 +37,7 @@ public class Storyboard {
 	private static float yMultiplier;
 	private static int xOffset;
 	private static int yOffset;
+
 	public static void init(int width, int height) {
 		int swidth = width;
 		int sheight = height;
@@ -75,18 +75,19 @@ public class Storyboard {
 	boolean isFailing = false;
 	boolean additiveBlending = false;
 
-	public Storyboard(File file){
+	public Storyboard(File file) {
 		this.file = file;
 
-		for (TriggerEvent trigEv : TriggerEvent.values()){
+		for (TriggerEvent trigEv : TriggerEvent.values()) {
 			trigLis.put(trigEv, new HashSet<TriggerListener>());
 		}
 
 	}
-	public void load(File file, String bgPath2) throws IOException  {
+
+	public void load(File file, String bgPath2) throws IOException {
 		try (
 			InputStream bis = new BufferedInputStream(new FileInputStream(file));
-			LineNumberReader in = new LineNumberReader(new InputStreamReader(bis, StandardCharsets.UTF_8));
+			LineNumberReader in = new LineNumberReader(new InputStreamReader(bis, StandardCharsets.UTF_8))
 		) {
 			try {
 				String line = in.readLine();
@@ -187,8 +188,9 @@ public class Storyboard {
 	}
 
 	enum Mod {Fade, ScaleX, scaleY, scaleA}
+
 	public void ready() {
-		for(SBObject o : objs) {
+		for (SBObject o : objs) {
 			o.init();
 		}
 
@@ -206,31 +208,28 @@ public class Storyboard {
 			final static int Fade = 1
 			/*,ScaleX = 2
 			,ScaleY = 3
-			,ScaleA = 4*/
-				;
+			,ScaleA = 4*/;
 			final static int
-				Update = 1
-				,NoUpdate = 2
-				,BeginMulti = 3
-				,EndMulti = 4;
+				Update = 1, NoUpdate = 2, BeginMulti = 3, EndMulti = 4;
+
 			public TEvent(int time, int state, int mod) {
 				super();
 				this.time = time;
 				this.state = state;
 				this.mod = mod;
 			}
+
 			@Override
 			public String toString() {
-				return "TEvent "+time+" "+state+" "+mod;
+				return "TEvent " + time + " " + state + " " + mod;
 			}
 
 		}
-		for(SBObject o : objs) {
+		for (SBObject o : objs) {
 			//*
 			List<TEvent> list = new ArrayList<>();
-			for(SBCommand c : o.commands) {
-				if (c instanceof SBCommandMod) {
-					SBCommandMod c2 = (SBCommandMod)c;
+			for (SBCommand c : o.commands) {
+				if (c instanceof SBCommandMod c2) {
 					if (c2.mod == SBModify.SBFadeModify) {
 						//s0 e0 - no update s
 						//s0 e1 - update s
@@ -249,12 +248,10 @@ public class Storyboard {
 					}
 
 				}
-				if (c instanceof SBCommandMult) {
-					SBCommandMult c2 = (SBCommandMult)c;
+				if (c instanceof SBCommandMult c2) {
 					boolean usesFade = false;
-					for (SBCommand c3: c2.commands) {
-						if(c3 instanceof SBCommandMod) {
-							SBCommandMod c4 = (SBCommandMod)c3;
+					for (SBCommand c3 : c2.commands) {
+						if (c3 instanceof SBCommandMod c4) {
 							if (c4.mod == SBModify.SBFadeModify) {
 								usesFade = true;
 							}
@@ -299,12 +296,11 @@ public class Storyboard {
 				boolean needsToUpdate = (fadeMultiCnt > 0 || fadeVis);
 				if (isUpdating != needsToUpdate) {
 					isUpdating = !isUpdating;
-					if(isUpdating) {
+					if (isUpdating) {
 						events.add(new AttachObjectSBEvent(e.time, this, o));
 						removeAtEnd = true;
-					}
-					else {
-						if(e.time == o.start)
+					} else {
+						if (e.time == o.start)
 							addAtStart = false;
 							//else if (e.time == o.end)
 							//	;
@@ -332,6 +328,7 @@ public class Storyboard {
 			}
 		});
 	}
+
 	private String getExt(String fileName) {
 		String extension = "";
 
@@ -345,8 +342,6 @@ public class Storyboard {
 	}
 
 	public String parseCommands(LineNumberReader in, int indent, SBObject o, ArrayList<SBCommand> commands) throws NumberFormatException, IOException {
-
-		//System.out.println("ParseCommand:"+indent);
 		String line;
 		String[] tokens;
 
@@ -354,20 +349,20 @@ public class Storyboard {
 		while (line != null) {
 			if (!isValidLine(line))
 				return line;
-			if (line.length() <= indent + 1 || line.charAt(indent) != ' ' || line.charAt(indent+1) == ' ')
+			if (line.length() <= indent + 1 || line.charAt(indent) != ' ' || line.charAt(indent + 1) == ' ')
 				return line;
 			SBModify command = null;
 			line = line.trim();
 			tokens = line.split(",");
 			switch (tokens[0]) {
 				default:
-					System.err.println("parseCommands] unknown token:"+tokens[0]+" at line:"+in.getLineNumber());
+					System.err.println("parseCommands] unknown token:" + tokens[0] + " at line:" + in.getLineNumber());
 					return line;
 
-				case "0":  // background image
+				case "0": // background image
 				case "1":
-				case "Video":  // background video
-				case "2":  // break periods
+				case "Video": // background video
+				case "2": // break periods
 				case "Sprite":
 					return line;
 
@@ -398,56 +393,66 @@ public class Storyboard {
 					break;
 				case "P": {
 					int tstartTime = Integer.parseInt(tokens[2]);
-					int tendTime = tokens[3].length()>0?Integer.parseInt(tokens[3]):tstartTime;
-					switch(tokens[4])  {
-						case "H": commands.add(new SBCommandEventFlipH(o, tstartTime, tendTime)); break;
-						case "V": commands.add(new SBCommandEventFlipV(o, tstartTime, tendTime)); break;
-						case "A": commands.add(new SBCommandEventAddBlend(o, tstartTime, tendTime)); break;
-						default: System.err.println(" P command not implemented: "+tokens[4]);
+					int tendTime = !tokens[3].isEmpty() ? Integer.parseInt(tokens[3]) : tstartTime;
+					switch (tokens[4]) {
+						case "H":
+							commands.add(new SBCommandEventFlipH(o, tstartTime, tendTime));
+							break;
+						case "V":
+							commands.add(new SBCommandEventFlipV(o, tstartTime, tendTime));
+							break;
+						case "A":
+							commands.add(new SBCommandEventAddBlend(o, tstartTime, tendTime));
+							break;
+						default:
+							System.err.println(" P command not implemented: " + tokens[4]);
 					}
-				} break;
+				}
+				break;
 				case "L": {
 					int tstartTime = Integer.parseInt(tokens[1]);
 					int loopCnt = Integer.parseInt(tokens[2]);
 					ArrayList<SBCommand> commands2 = new ArrayList<SBCommand>();
-					line = parseCommands(in, indent+1, o, commands2);
+					line = parseCommands(in, indent + 1, o, commands2);
 					commands.add(new SBCommandLoop(o, tstartTime, loopCnt, commands2));
-				} continue; //don't read next line
+				}
+				continue; //don't read next line
 				case "T": {
 					String triggerName = tokens[1];
 					int tstartTime = Integer.parseInt(tokens[2]);
 					int tendTime = Integer.parseInt(tokens[3]);
 
 					ArrayList<SBCommand> commands2 = new ArrayList<SBCommand>();
-					line = parseCommands(in, indent+1, o, commands2);
+					line = parseCommands(in, indent + 1, o, commands2);
 					commands.add(new SBCommandTrigger(o, triggerName, tstartTime, tendTime, commands2, this));
-				} continue; //don't read next line
+				}
+				continue; //don't read next line
 			}
 			if (command != null) {
 				int easing = Integer.parseInt(tokens[1]);
 				int startTime = Integer.parseInt(tokens[2]);
-				int endTime = tokens[3].length()>0?Integer.parseInt(tokens[3]):startTime;
+				int endTime = !tokens[3].isEmpty() ? Integer.parseInt(tokens[3]) : startTime;
 				int duration = endTime - startTime;
 				if (command == SBModify.SBScaleModify && startTime == endTime)
 					command = SBModify.SBSpecialScaleModify;
 				int nvars = command.vars();
-				int repeats = (tokens.length - 4 - nvars)/(nvars);
+				int repeats = (tokens.length - 4 - nvars) / (nvars);
 				int tokensAt = 4;
 				if (repeats > 1)
-					System.out.println("Command with repeats:"+command+" "+repeats);
+					System.out.println("Command with repeats: " + command + " " + repeats);
 				if (repeats == 0)
 					repeats = 1; //shorthand startVal == endVal
 				float[] startVals = new float[nvars];
-				for(int j=0; j<nvars; j++){
+				for (int j = 0; j < nvars; j++) {
 					startVals[j] = Float.parseFloat(tokens[tokensAt++]);
 				}
 				command.init(startVals);
-				for (int i=0; i< repeats; i++) {
+				for (int i = 0; i < repeats; i++) {
 					float[] endVals;
 
 					if (tokensAt + nvars <= tokens.length) {
 						endVals = new float[nvars];
-						for(int j=0; j<nvars; j++){
+						for (int j = 0; j < nvars; j++) {
 							endVals[j] = Float.parseFloat(tokens[tokensAt++]);
 							//		System.out.println("E:"+endVals[j]);
 						}
@@ -481,6 +486,7 @@ public class Storyboard {
 	}
 
 	HashMap<String, Image> imageCache = new HashMap<>();
+
 	public Image getImage(File parent, String path) {
 		Image im = imageCache.get(path);
 		if (im == null) {
@@ -488,13 +494,13 @@ public class Storyboard {
 				GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_S, GL12.GL_CLAMP_TO_EDGE);
 				GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_T, GL12.GL_CLAMP_TO_EDGE);
 				if (!new File(parent, path).isFile()) {
-					System.err.println("File Doesn't exist:"+path);
+					System.err.println("File Doesn't exist:" + path);
 					im = new Image(32, 32);
-				}else
-					im = new Image(parent+"/"+path);//, false, 0);
+				} else
+					im = new Image(parent + "/" + path);//, false, 0);
 				imageCache.put(path, im);
 			} catch (Exception e) {
-				System.out.println("Error loading "+path);
+				System.out.println("Error loading " + path);
 				e.printStackTrace();
 			}
 		}
@@ -504,18 +510,18 @@ public class Storyboard {
 	public void render(Graphics g, float dimLevel) {
 		additiveBlending = false;
 		inactiveCnt = 0;
-		for(SBObject o : background) {
+		for (SBObject o : background) {
 			if (!o.render(g, dimLevel))
-				inactiveCnt ++;
+				inactiveCnt++;
 		}
-		for(SBObject o : !isFailing ? pass : fail) {
+		for (SBObject o : !isFailing ? pass : fail) {
 			if (!o.render(g, dimLevel))
-				inactiveCnt ++;
+				inactiveCnt++;
 		}
 
-		for(SBObject o : foreground) {
+		for (SBObject o : foreground) {
 			if (!o.render(g, dimLevel))
-				inactiveCnt ++;
+				inactiveCnt++;
 		}
 		g.setDrawMode(Graphics.MODE_NORMAL);
 		/*
@@ -568,23 +574,26 @@ public class Storyboard {
 				break;
 		}*/
 	}
+
 	int trkPos;
+
 	public void update(int trackPosition) {
 		trkPos = trackPosition;
 		events.update(trackPosition);
-		for(SBObject o: background) {
+		for (SBObject o : background) {
 			o.update(trackPosition);
 		}
-		for(SBObject o: pass) {
+		for (SBObject o : pass) {
 			o.update(trackPosition);
 		}
-		for(SBObject o: fail) {
+		for (SBObject o : fail) {
 			o.update(trackPosition);
 		}
-		for(SBObject o: foreground) {
+		for (SBObject o : foreground) {
 			o.update(trackPosition);
 		}
 	}
+
 	public void reset() {
 		background.clear();
 		pass.clear();
@@ -596,23 +605,31 @@ public class Storyboard {
 		}
 
 	}
+
 	public static float scaleX(float x) {
 		return x * xMultiplier + xOffset;
 	}
+
 	public static float scaleY(float y) {
 		return y * yMultiplier + yOffset;
 	}
+
 	/**
 	 * Returns the X multiplier for coordinates.
 	 */
-	public static float getXMultiplier() { return xMultiplier; }
+	public static float getXMultiplier() {
+		return xMultiplier;
+	}
 
 	/**
 	 * Returns the Y multiplier for coordinates.
 	 */
-	public static float getYMultiplier() { return yMultiplier; }
+	public static float getYMultiplier() {
+		return yMultiplier;
+	}
+
 	public TreeSet<SBObject> getLayer(String layer) {
-		switch(layer) {
+		switch (layer) {
 			case "Background":
 				return background;
 			case "Foreground":
@@ -627,6 +644,7 @@ public class Storyboard {
 				return foreground;
 		}
 	}
+
 	public boolean exists() {
 		return !objs.isEmpty();
 	}
@@ -640,11 +658,11 @@ public class Storyboard {
 		boolean hasT = false;
 		try (
 			InputStream bis = new BufferedInputStream(new FileInputStream(sbFile));
-			LineNumberReader in = new LineNumberReader(new InputStreamReader(bis, "UTF-8"));
+			LineNumberReader in = new LineNumberReader(new InputStreamReader(bis, StandardCharsets.UTF_8))
 		) {
 			int cnt = 0;
 			String line = in.readLine();
-			String tokens[] = null;
+			String[] tokens = null;
 			while (line != null) {
 				line = line.trim();
 				if (!isValidLine(line)) {
@@ -683,7 +701,7 @@ public class Storyboard {
 									break;
 								case "T":
 									hasT = true;
-									System.out.println(in.getLineNumber()+" "+line);
+									System.out.println(in.getLineNumber() + " " + line);
 									break;
 							}
 
@@ -693,57 +711,68 @@ public class Storyboard {
 						break;
 				}
 			}
-			if(cnt>0){
-				System.out.println("nobjs:"+cnt+" "+(hasL?"L":"")+(hasT?"T":""));//TODO delete me
+			if (cnt > 0) {
+				System.out.println("nobjs:" + cnt + " " + (hasL ? "L" : "") + (hasT ? "T" : ""));//TODO delete me
 				return true;
 			}
 		}
 		return false;
 	}
+
 	public void dispose() throws SlickException {
-		for(Image im : imageCache.values()) {
+		for (Image im : imageCache.values()) {
 			im.destroy();
 		}
 		imageCache.clear();
 	}
+
 	public void addTriggerListener(TriggerListener trigger, TriggerEvent triggerName) {
 		trigListenerSet.add(trigger);
 		trigLis.get(triggerName).add(trigger);
 	}
+
 	public void removeTriggerListener(TriggerListener trigger, TriggerEvent triggerName) {
 		trigListenerSet.remove(trigger);
 		trigLis.get(triggerName).remove(trigger);
 	}
 
 	public void nowPassing(int trackPosition) {
-		for(TriggerListener l : trigLis.get(TriggerEvent.Passing)) {
+		for (TriggerListener l : trigLis.get(TriggerEvent.Passing)) {
 			l.trigger(trackPosition);
 		}
 		isFailing = false;
 	}
+
 	public void nowFailing(int trackPosition) {
-		for(TriggerListener l : trigLis.get(TriggerEvent.Failing)) {
+		for (TriggerListener l : trigLis.get(TriggerEvent.Failing)) {
 			l.trigger(trackPosition);
 		}
 		isFailing = true;
 	}
+
 	public void nowHitSoundClap(int trackPosition) {
-		for(TriggerListener l : trigLis.get(TriggerEvent.HitSoundClap)) {
+		for (TriggerListener l : trigLis.get(TriggerEvent.HitSoundClap)) {
 			l.trigger(trackPosition);
 		}
 	}
+
 	public void nowHitSoundFinish(int trackPosition) {
-		for(TriggerListener l : trigLis.get(TriggerEvent.HitSoundFinish)) {
+		for (TriggerListener l : trigLis.get(TriggerEvent.HitSoundFinish)) {
 			l.trigger(trackPosition);
 		}
 	}
+
 	public void nowHitSoundWhistle(int trackPosition) {
-		for(TriggerListener l : trigLis.get(TriggerEvent.HitSoundWhistle)) {
+		for (TriggerListener l : trigLis.get(TriggerEvent.HitSoundWhistle)) {
 			l.trigger(trackPosition);
 		}
 	}
+
 	public void addActiveTrigger(SBCommandTrigger sbCommandTrigger) {
 		activeTriggers.add(sbCommandTrigger);
 	}
-	public Color getBackgroundColor() { return backgroundColor; }
+
+	public Color getBackgroundColor() {
+		return backgroundColor;
+	}
 }

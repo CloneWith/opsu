@@ -592,7 +592,7 @@ public class DownloadsMenu extends BasicGameState {
 
 			String query = search.getText().trim().toLowerCase();
 			DownloadServer server = serverMenu.getSelectedItem();
-			if ((lastQuery == null || !query.equals(lastQuery)) &&
+			if ((!query.equals(lastQuery)) &&
 			    (query.isEmpty() || query.length() >= server.minQueryLength())) {
 				lastQuery = query;
 				lastQueryDir = pageDir;

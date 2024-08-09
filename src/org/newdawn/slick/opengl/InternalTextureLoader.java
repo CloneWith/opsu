@@ -37,9 +37,9 @@ public class InternalTextureLoader {
 	}
 
 	/** The table of textures that have been loaded in this loader */
-	private HashMap texturesLinear = new HashMap();
+	private final HashMap texturesLinear = new HashMap();
 	/** The table of textures that have been loaded in this loader */
-	private HashMap texturesNearest = new HashMap();
+	private final HashMap texturesNearest = new HashMap();
 	/** The destination pixel format */
 	private int dstPixelFormat = SGL.GL_RGBA8;
 	/** True if we're using deferred loading */

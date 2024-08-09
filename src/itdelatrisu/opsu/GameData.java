@@ -54,7 +54,7 @@ import static clonewith.opsu.I18N.t;
  */
 public class GameData {
 	/** The currently used skin. */
-	private Skin skin = Options.getSkin();
+	private final Skin skin = Options.getSkin();
 
 	/** Time, in milliseconds, for a hit result to remain existent. */
 	public static final int HITRESULT_TIME = 833;

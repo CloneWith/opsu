@@ -259,8 +259,8 @@ public class SBObject implements Comparable<SBObject>{
 }
 class SBAnimObject extends SBObject {
 
-	private int frameDelay;
-	private Image[] imgs;
+	private final int frameDelay;
+	private final Image[] imgs;
 
 	static int FOREVER = 0;
 	static int ONCE = 1;
