@@ -403,6 +403,9 @@ public class Game extends BasicGameState {
 				if (Options.isDefaultPlayfieldForced() || !beatmap.drawBackground(width, height, 0, 0, dimLevel, storyboard == null)) {
 					Image bg = GameImage.MENU_BG.getImage();
 					bg.setAlpha(dimLevel);
+					Color bgColors = storyboard.getBackgroundColor();
+					if (bgColors != null)
+						bg.setImageColor(bgColors.r, bgColors.g, bgColors.b, bgColors.a);
 					bg.drawCentered(width / 2, height / 2);
 					bg.setAlpha(1f);
 				}
@@ -498,7 +501,7 @@ public class Game extends BasicGameState {
 
 		// "flashlight" mod: restricted view of hit objects around cursor
 		if (GameMod.FLASHLIGHT.isActive()) {
-			// render hit objects offscreen
+			// render hit objects off-screen
 			Graphics.setCurrent(gOffscreen);
 			int trackPos = (isLeadIn()) ? (leadInTime - Options.getMusicOffset() - beatmap.localMusicOffset) * -1 : trackPosition;
 			drawHitObjects(gOffscreen, trackPos);
@@ -529,7 +532,7 @@ public class Game extends BasicGameState {
 			int alphaY = mouseY - alphaRadius / 2;
 			GameImage.ALPHA_MAP.getImage().draw(alphaX, alphaY, alphaRadius, alphaRadius);
 
-			// blend offscreen image
+			// blend off-screen image
 			g.setDrawMode(Graphics.MODE_ALPHA_BLEND);
 			g.setClip(alphaX, alphaY, alphaRadius, alphaRadius);
 			g.drawImage(offscreen, 0, 0);

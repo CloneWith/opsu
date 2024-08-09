@@ -2,6 +2,7 @@ package clonewith.opsu.storyboard;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -32,8 +33,6 @@ import java.util.*;
  *
  */
 public class Storyboard {
-
-
 	private static final Logger log = LoggerFactory.getLogger(Storyboard.class);
 	private static float xMultiplier;
 	private static float yMultiplier;
@@ -53,6 +52,8 @@ public class Storyboard {
 	}
 
 	ArrayList<SBObject> objs = new ArrayList<>();
+
+	private Color backgroundColor;
 
 	TreeSet<SBObject> background = new TreeSet<>();
 	TreeSet<SBObject> foreground = new TreeSet<>();
@@ -111,10 +112,16 @@ public class Storyboard {
 							switch (tokens[0]) {
 								case "0":  // background image
 									bgPath = tokens[2].replaceAll("^\"|\"$", "");
-
+									line = in.readLine();
+									break;
+								case "3": // Background colour transformations
+									backgroundColor = new Color(Float.parseFloat(tokens[2]), Float.parseFloat(tokens[3]),
+										Float.parseFloat(tokens[4]), Float.parseFloat(tokens[1]));
+									line = in.readLine();
+									break;
 								case "1":
-								case "Video":  // background video
-								case "2":  // break periods
+								case "Video":  // Background video
+								case "2":  // Break periods
 									line = in.readLine();
 									break;
 								default:
@@ -173,7 +180,8 @@ public class Storyboard {
 			} catch (Exception e) {
 				log.error(String.format("Error loading storyboard \"%s\" on line %d.", file, in.getLineNumber()));
 				// TODO: Should we just throw this?
-				throw e;
+				e.printStackTrace();
+				// throw e;
 			}
 		}
 	}
@@ -737,4 +745,5 @@ public class Storyboard {
 	public void addActiveTrigger(SBCommandTrigger sbCommandTrigger) {
 		activeTriggers.add(sbCommandTrigger);
 	}
+	public Color getBackgroundColor() { return backgroundColor; }
 }
