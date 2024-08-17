@@ -2142,6 +2142,10 @@ public class Options {
 		return GameOption.LANGUAGE.toString();
 	}
 
+	public static File getOptionsFile() {
+		return OPTIONS_FILE;
+	}
+
 	/**
 	 * Reads user options from the options file, if it exists.
 	 */

@@ -21,7 +21,10 @@ package clonewith.opsu;
 import itdelatrisu.opsu.options.Options;
 import org.newdawn.slick.util.Log;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Locale;
 import java.util.Map;
 
@@ -39,7 +42,8 @@ public class I18N {
 		}
 
 		// !status -> Initial -> Use system default temporarily
-		defString = (!status) ? Locale.getDefault().toString() : Options.getLanguage();
+		defString = getLangFromOptions();
+		// defString = (!status) ? Locale.getDefault().toString() : Options.getLanguage();
 
 		if (defString.equals("English") || defString.contains("en")) {
 			isInited = true;
@@ -61,6 +65,37 @@ public class I18N {
 		} catch (Exception e) {
 			Log.error("Failed to generate translation map.", e);
 		}
+	}
+
+	private static String getLangFromOptions() {
+		File OptionsFile = Options.getOptionsFile();
+
+		if (!OptionsFile.isFile()) {
+			return "";
+		}
+
+		// Read the configuration file, but just for UILang.
+		try (BufferedReader in = new BufferedReader(new FileReader(OptionsFile))) {
+			String line;
+			while ((line = in.readLine()) != null) {
+				line = line.trim();
+				if (line.length() < 2 || line.charAt(0) == '#')
+					continue;
+				int index = line.indexOf('=');
+				if (index == -1)
+					continue;
+
+				// read option
+				String name = line.substring(0, index).trim();
+				String value = line.substring(index + 1).trim();
+				if (name.equals("UILang")) {
+					return value;
+				}
+			}
+		} catch (IOException e) {
+			Log.warn("Failed to read options file, locale falling to default.", e);
+		}
+		return "";
 	}
 
 	/**
@@ -92,6 +127,7 @@ public class I18N {
 	}
 
 	public static String getFontmap() {
+		if (tlMap == null) return "";
 		return tlMap.toString();
 	}
 

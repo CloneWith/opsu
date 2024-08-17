@@ -100,15 +100,15 @@ public class Opsu extends StateBasedGame {
 			System.exit(1);
 		});
 
+		// initialize translations
+		I18N.init(false);
+
 		// parse configuration file
 		try {
 			Options.parseOptions();
 		} catch (UnsatisfiedLinkError e) {
 			Log.error(e);
 		}
-
-		// initialize translations
-		I18N.init(false);
 
 		// initialize databases
 		try {
