@@ -39,7 +39,7 @@ public class BackButton {
 	private static final int darkColorDelta = -32;
 
 	/** Colors. */
-	private static final Color
+	private static Color
 		COLOR_MAIN = Options.getAccentColor(),
 		COLOR_DARK = new Color(COLOR_MAIN.getRed() + darkColorDelta, COLOR_MAIN.getGreen() + darkColorDelta, COLOR_MAIN.getBlue() + darkColorDelta);
 
@@ -91,6 +91,15 @@ public class BackButton {
 	/** The real button with, determined by the size and animations. */
 	private int realButtonWidth;
 
+	private void updateColor() {
+		COLOR_MAIN = Options.getAccentColor();
+		COLOR_DARK = new Color(
+			COLOR_MAIN.getRed() + darkColorDelta,
+			COLOR_MAIN.getGreen() + darkColorDelta,
+			COLOR_MAIN.getBlue() + darkColorDelta
+		);
+	}
+
 	/**
 	 * Creates the back button.
 	 * @param container the game container
@@ -132,6 +141,8 @@ public class BackButton {
 	 * Draws the backbutton.
 	 */
 	public void draw(Graphics g) {
+		updateColor();
+
 		if (backButton != null) {
 			backButton.draw();
 			return;

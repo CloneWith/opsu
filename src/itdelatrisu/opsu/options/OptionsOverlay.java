@@ -253,18 +253,24 @@ public class OptionsOverlay extends AbstractComponent {
 	/** Turn a color into its dark varient. */
 	private static final int darkColorDelta = -32;
 
+	private static Color
+		COLOR_ACCENT = Options.getAccentColor(),
+		COLOR_NAV_INDICATOR = new Color(COLOR_ACCENT),
+		COLOR_COMBOBOX_HOVER = new Color(
+			COLOR_ACCENT.getRed() + darkColorDelta,
+			COLOR_ACCENT.getGreen() + darkColorDelta,
+			COLOR_ACCENT.getBlue() + darkColorDelta
+		);
+
 	/** Colors. */
 	private static final Color
 		COLOR_BG = new Color(Color.black),
 		COLOR_WHITE = new Color(Color.white),
-		COLOR_ACCENT = Options.getAccentColor(),
 		COLOR_CYAN = new Color(88, 218, 254),
 		COLOR_GREY = new Color(55, 55, 57),
 		COLOR_BLUE = new Color(Colors.BLUE_BACKGROUND),
-		COLOR_COMBOBOX_HOVER = new Color(COLOR_ACCENT.getRed() + darkColorDelta, COLOR_ACCENT.getGreen() + darkColorDelta, COLOR_ACCENT.getBlue() + darkColorDelta),
 		COLOR_INDICATOR = new Color(Color.black),
 		COLOR_NAV_BG = new Color(COLOR_BG),
-		COLOR_NAV_INDICATOR = new Color(COLOR_ACCENT),
 		COLOR_NAV_WHITE = new Color(COLOR_WHITE),
 		COLOR_NAV_FILTERED = new Color(37, 37, 37),
 		COLOR_NAV_INACTIVE = new Color(153, 153, 153),
@@ -275,6 +281,19 @@ public class OptionsOverlay extends AbstractComponent {
 	private final Input input;
 	private final int containerWidth;
 	private final int containerHeight;
+
+	/**
+	 * Update the accent color in case color settings updates.
+	 */
+	private void updateAccentColor() {
+		COLOR_ACCENT = Options.getAccentColor();
+		COLOR_NAV_INDICATOR = new Color(COLOR_ACCENT);
+		COLOR_COMBOBOX_HOVER = new Color(
+			COLOR_ACCENT.getRed() + darkColorDelta,
+			COLOR_ACCENT.getGreen() + darkColorDelta,
+			COLOR_ACCENT.getBlue() + darkColorDelta
+		);
+	}
 
 	/**
 	 * Creates the options overlay.
@@ -468,6 +487,8 @@ public class OptionsOverlay extends AbstractComponent {
 
 	@Override
 	public void render(GUIContext container, Graphics g) throws SlickException {
+		updateAccentColor();
+
 		g.setClip((int) x + navButtonSize, (int) y, width - navButtonSize, height);
 
 		// background
