@@ -33,26 +33,20 @@ public class I18N {
 	private static boolean isInited = false;
 	private static Map<String, String> tlMap = null;
 
-	public static void init() { init(true); }
-
-	public static void init(boolean status) {
-		String defString = null;
+	public static void init() {
 		if (isInited) {
 			return;
 		}
 
-		// !status -> Initial -> Use system default temporarily
-		defString = getLangFromOptions();
-		// defString = (!status) ? Locale.getDefault().toString() : Options.getLanguage();
+		String defString = getLangFromOptions();
 
-		if (defString.equals("English") || defString.contains("en")) {
+		// Null or default: Use English
+		if (defString == null || defString.equals("English") || defString.contains("en") || defString.equals("LANGUAGE")) {
 			isInited = true;
 			return;
 		}
-		if (defString.equals("LANGUAGE") || defString == null) return;
 
-		// TODO: Another way to build Locales
-		final Locale defLocale = new Locale(defString);
+		final Locale defLocale = Locale.of(defString);
 
 		final File poFile = PoReader.getPo(defLocale);
 		if (poFile == null) {
@@ -61,17 +55,21 @@ public class I18N {
 		}
 		try {
 			tlMap = PoReader.getTranslationMap(poFile);
-			if (!defString.equals("LANGUAGE")) isInited = true;
+			if (!tlMap.isEmpty()) isInited = true;
 		} catch (Exception e) {
 			Log.error("Failed to generate translation map.", e);
 		}
 	}
 
+	/**
+	 * Read raw language setting data from the default configuration file.
+	 * @return a language code string
+	 */
 	private static String getLangFromOptions() {
 		File OptionsFile = Options.getOptionsFile();
 
 		if (!OptionsFile.isFile()) {
-			return "";
+			return null;
 		}
 
 		// Read the configuration file, but just for UILang.
@@ -95,19 +93,17 @@ public class I18N {
 		} catch (IOException e) {
 			Log.warn("Failed to read options file, locale falling to default.", e);
 		}
-		return "";
+		return null;
 	}
 
 	/**
 	 * Returns the translated string from the .po file.
-	 *
 	 * @param src source string
-	 * @return A translated string, or source if untranslated
+	 * @return A translated string, or {@code src} if untranslated
 	 */
 	public static String t(String src) { return t(src, isInited);}
 
 	public static String t(String src, boolean status) {
-		// if (src == "LANGUAGE" && !isInited) init(false);
 		if (!status) return src;
 		try {
 			String target = tlMap.get(src);
@@ -119,7 +115,6 @@ public class I18N {
 
 	/**
 	 * Returns if I18N framework has been initialized.
-	 *
 	 * @return true is initialized
 	 */
 	public static boolean isInit() {

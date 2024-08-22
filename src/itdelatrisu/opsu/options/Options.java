@@ -504,6 +504,7 @@ public class Options {
 			@Override
 			public Object[] getItemList() {
 				File[] langList = I18N.getBaseDir().listFiles();
+				if (langList != null)
 					itemList = new String[langList.length];
 				// The first item is always English
 				itemList[0] = "English";

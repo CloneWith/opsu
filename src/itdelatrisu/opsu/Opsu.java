@@ -18,6 +18,7 @@
 
 package itdelatrisu.opsu;
 
+import clonewith.opsu.I18N;
 import itdelatrisu.opsu.audio.MusicController;
 import itdelatrisu.opsu.db.DBController;
 import itdelatrisu.opsu.downloads.DownloadList;
@@ -38,8 +39,6 @@ import org.newdawn.slick.util.Log;
 import org.newdawn.slick.util.ResourceLoader;
 import org.sqlite.SQLiteErrorCode;
 import org.sqlite.SQLiteException;
-
-import clonewith.opsu.I18N;
 
 import java.io.*;
 
@@ -101,7 +100,7 @@ public class Opsu extends StateBasedGame {
 		});
 
 		// initialize translations
-		I18N.init(false);
+		I18N.init();
 
 		// parse configuration file
 		try {
