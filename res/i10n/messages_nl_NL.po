@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opsu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-09 10:15+0800\n"
-"PO-Revision-Date: 2024-07-09 03:26\n"
+"POT-Creation-Date: 2024-07-09 15:08+0800\n"
+"PO-Revision-Date: 2024-07-09 07:11\n"
 "Last-Translator: \n"
 "Language-Team: Dutch\n"
 "MIME-Version: 1.0\n"
@@ -117,6 +117,11 @@ msgid "You don't need to click.\n"
 "**UNRANKED**"
 msgstr ""
 
+#: itdelatrisu/opsu/GameMod.java:59
+msgid "Automatic cursor movement - just follow the rhythm.\n"
+"**UNRANKED**"
+msgstr ""
+
 #: itdelatrisu/opsu/GameMod.java:61
 msgid "Timing practice!"
 msgstr ""
@@ -169,23 +174,23 @@ msgid "Achieved on %s\n"
 "Mods: %s"
 msgstr ""
 
-#: itdelatrisu/opsu/Utils.java:176
+#: itdelatrisu/opsu/Utils.java:175
 msgid "WARNING:\n"
 "Running in OpenGL software mode.\n"
 "You may experience severely degraded performance.\n\n"
 "This can usually be resolved by updating your graphics drivers."
 msgstr ""
 
-#: itdelatrisu/opsu/Utils.java:353
+#: itdelatrisu/opsu/Utils.java:352
 #, java-printf-format
 msgid "Saved screenshot to %s"
 msgstr ""
 
-#: itdelatrisu/opsu/Utils.java:360
+#: itdelatrisu/opsu/Utils.java:359
 msgid "Failed to open screenshot location."
 msgstr ""
 
-#: itdelatrisu/opsu/Utils.java:774
+#: itdelatrisu/opsu/Utils.java:776
 msgid "Skin changed.\n"
 "Some elements might not be replaced properly, for this please restart the game."
 msgstr ""
@@ -1422,12 +1427,12 @@ msgstr ""
 msgid "Loading sounds..."
 msgstr ""
 
-#: itdelatrisu/opsu/ui/UI.java:299
+#: itdelatrisu/opsu/ui/UI.java:300
 #, java-printf-format
 msgid "Welcome to %s"
 msgstr ""
 
-#: itdelatrisu/opsu/ui/UI.java:477
+#: itdelatrisu/opsu/ui/UI.java:478
 msgid "Warning"
 msgstr ""
 
