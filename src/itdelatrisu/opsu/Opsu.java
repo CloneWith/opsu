@@ -58,7 +58,8 @@ public class Opsu extends StateBasedGame {
 			STATE_GAME = 4,
 			STATE_GAMEPAUSEMENU = 5,
 			STATE_GAMERANKING = 6,
-			STATE_DOWNLOADSMENU = 7;
+			STATE_DOWNLOADSMENU = 7,
+			STATE_BLANK = 8;
 
 	/**
 	 * Constructor.
@@ -79,6 +80,7 @@ public class Opsu extends StateBasedGame {
 		addState(new GamePauseMenu(STATE_GAMEPAUSEMENU));
 		addState(new GameRanking(STATE_GAMERANKING));
 		addState(new DownloadsMenu(STATE_DOWNLOADSMENU));
+		addState(new Blank(STATE_BLANK));
 	}
 
 	/**
