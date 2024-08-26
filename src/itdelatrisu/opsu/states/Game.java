@@ -343,7 +343,7 @@ public class Game extends BasicGameState {
 		int width = container.getWidth();
 		int height = container.getHeight();
 
-		// create offscreen graphics
+		// create off-screen graphics
 		offscreen = new Image(width, height);
 		gOffscreen = offscreen.getGraphics();
 		gOffscreen.setBackground(Color.black);
@@ -403,10 +403,13 @@ public class Game extends BasicGameState {
 				if (Options.isDefaultPlayfieldForced() || !beatmap.drawBackground(width, height, 0, 0, dimLevel, storyboard == null)) {
 					Image bg = GameImage.MENU_BG.getImage();
 					bg.setAlpha(dimLevel);
-					Color bgColors = storyboard.getBackgroundColor();
-					if (bgColors != null)
-						bg.setImageColor(bgColors.r, bgColors.g, bgColors.b, bgColors.a);
-					bg.drawCentered(width / 2, height / 2);
+					if (storyboard != null)
+					{
+						Color bgColors = storyboard.getBackgroundColor();
+						if (bgColors != null)
+							bg.setImageColor(bgColors.r, bgColors.g, bgColors.b, bgColors.a);
+					}
+					bg.drawCentered(width / 2f, height / 2f);
 					bg.setAlpha(1f);
 				}
 		}
@@ -437,24 +440,22 @@ public class Game extends BasicGameState {
 
 		// Auto relevant mods: move cursor automatically
 		// TODO: this should really be in update(), not render()
-		autoMousePosition.set((float) width / 2, (float) height / 2);
+		// autoMousePosition.set((float) width / 2, (float) height / 2);
 		autoMousePressed = false;
 		if (GameMod.AUTO.isActive() || GameMod.AUTOPILOT.isActive() || GameMod.CINEMA.isActive()) {
 			Vec2f autoPoint = null;
-			if (gameFinished) {
-				// game finished, do nothing
-			} else if (isLeadIn()) {
+			if (!gameFinished && isLeadIn()) {
 				// lead-in
 				float progress = Math.max((float) (leadInTime - beatmap.audioLeadIn) / approachTime, 0f);
 				autoMousePosition.y = height / (2f - progress);
-			} else if (objectIndex == 0 && trackPosition < firstObjectTime) {
+			} else if (!gameFinished && objectIndex == 0 && trackPosition < firstObjectTime) {
 				// before first object
 				timeDiff = firstObjectTime - trackPosition;
 				if (timeDiff < approachTime) {
 					Vec2f point = gameObjects[0].getPointAt(trackPosition);
 					autoPoint = getPointAt(autoMousePosition.x, autoMousePosition.y, point.x, point.y, 1f - ((float) timeDiff / approachTime));
 				}
-			} else if (objectIndex < beatmap.objects.length) {
+			} else if (!gameFinished && objectIndex < beatmap.objects.length) {
 				// normal object
 				int objectTime = beatmap.objects[objectIndex].getTime();
 				if (trackPosition < objectTime) {
@@ -2220,9 +2221,7 @@ public class Game extends BasicGameState {
 		int deltaKeys = (keys & ~lastReplayKeys);  // keys that turned on
 		if (deltaKeys != ReplayFrame.KEY_NONE)  // send a key press
 			sendGameKeyPress(deltaKeys, replayX, replayY, frame.getTime());
-		else if (keys != lastReplayKeys)
-			;  // do nothing
-		else
+		else if (keys == lastReplayKeys)
 			updateGame(replayX, replayY, frame.getTimeDiff(), frame.getTime(), keys);
 		lastReplayKeys = keys;
 	}
