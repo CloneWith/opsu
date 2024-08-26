@@ -242,7 +242,7 @@ public class OptionsOverlay extends AbstractComponent {
 	private int invalidSearchTextRotation;
 
 	/** The 'invalid search' animation progress. */
-	private final AnimatedValue invalidSearchAnimation = new AnimatedValue(500, 1f, 0f, AnimationEquation.LINEAR);
+	private final AnimatedValue invalidSearchAnimation = new AnimatedValue(500, 1f, 0f, AnimationEquation.IN_OUT_CUBIC);
 
 	/** Desired alpha values for specific colors. */
 	private static final float
@@ -250,7 +250,7 @@ public class OptionsOverlay extends AbstractComponent {
 		LINEALPHA = 0.8f,
 		INDICATOR_ALPHA = 0.8f;
 
-	/** Turn a color into its dark varient. */
+	/** Turn a color into its dark variant. */
 	private static final int darkColorDelta = -32;
 
 	private static Color
