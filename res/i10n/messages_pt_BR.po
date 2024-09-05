@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: opsu\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-09 15:08+0800\n"
-"PO-Revision-Date: 2024-07-09 07:11\n"
+"PO-Revision-Date: 2024-09-05 15:07\n"
 "Last-Translator: \n"
 "Language-Team: Portuguese, Brazilian\n"
 "MIME-Version: 1.0\n"
@@ -25,29 +25,29 @@ msgstr ""
 #: itdelatrisu/opsu/ErrorHandler.java:45
 #: itdelatrisu/opsu/downloads/Download.java:64
 msgid "Error"
-msgstr ""
+msgstr "Erro"
 
 #: itdelatrisu/opsu/ErrorHandler.java:48
 msgid "An error occurred. :("
-msgstr ""
+msgstr "Um erro ocorreu. :("
 
 #: itdelatrisu/opsu/ErrorHandler.java:49
 msgid "Something bad happened. Please report this!"
-msgstr ""
+msgstr "Algo ruim aconteceu. Por favor, reporte isso!"
 
 #: itdelatrisu/opsu/ErrorHandler.java:52
 #: itdelatrisu/opsu/states/ButtonMenu.java:588
 #: itdelatrisu/opsu/states/ButtonMenu.java:665
 msgid "Close"
-msgstr ""
+msgstr "Fechar"
 
 #: itdelatrisu/opsu/ErrorHandler.java:53
 msgid "View Error Log"
-msgstr ""
+msgstr "Ver registro de erro"
 
 #: itdelatrisu/opsu/ErrorHandler.java:54
 msgid "Send Report"
-msgstr ""
+msgstr "Mandar relatório"
 
 #: itdelatrisu/opsu/GameData.java:974
 #, java-printf-format
