@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: opsu\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-09 15:08+0800\n"
-"PO-Revision-Date: 2024-07-09 07:11\n"
+"PO-Revision-Date: 2024-09-05 16:30\n"
 "Last-Translator: \n"
 "Language-Team: Portuguese, Brazilian\n"
 "MIME-Version: 1.0\n"
@@ -25,146 +25,151 @@ msgstr ""
 #: itdelatrisu/opsu/ErrorHandler.java:45
 #: itdelatrisu/opsu/downloads/Download.java:64
 msgid "Error"
-msgstr ""
+msgstr "Erro"
 
 #: itdelatrisu/opsu/ErrorHandler.java:48
 msgid "An error occurred. :("
-msgstr ""
+msgstr "Um erro ocorreu. :("
 
 #: itdelatrisu/opsu/ErrorHandler.java:49
 msgid "Something bad happened. Please report this!"
-msgstr ""
+msgstr "Algo ruim aconteceu. Por favor, reporte isso!"
 
 #: itdelatrisu/opsu/ErrorHandler.java:52
 #: itdelatrisu/opsu/states/ButtonMenu.java:588
 #: itdelatrisu/opsu/states/ButtonMenu.java:665
 msgid "Close"
-msgstr ""
+msgstr "Fechar"
 
 #: itdelatrisu/opsu/ErrorHandler.java:53
 msgid "View Error Log"
-msgstr ""
+msgstr "Ver registro de erro"
 
 #: itdelatrisu/opsu/ErrorHandler.java:54
 msgid "Send Report"
-msgstr ""
+msgstr "Mandar relatório"
 
 #: itdelatrisu/opsu/GameData.java:974
 #, java-printf-format
 msgid "Beatmap by %s"
-msgstr ""
+msgstr "Mapa feito por %s"
 
 #: itdelatrisu/opsu/GameData.java:975
 #, java-printf-format
 msgid " by %s"
-msgstr ""
+msgstr " por %s"
 
 #: itdelatrisu/opsu/GameData.java:977
 #, java-printf-format
 msgid "Played%s on %s."
-msgstr ""
+msgstr "Jogado%s em %s."
 
 #: itdelatrisu/opsu/GameData.java:1815
 #, java-printf-format
 msgid "Accuracy:\n"
 "Error: %.2fms - %.2fms avg\n"
 "Unstable Rate: %.2f"
-msgstr ""
+msgstr "Precisão:\n"
+"Erro: %.2fms - %.2fms avg\n"
+"Taxa instável: %.2f"
 
 #: itdelatrisu/opsu/GameMod.java:39
 msgid "Reduces overall difficulty - larger circles, more forgiving HP drain, less accuracy required."
-msgstr ""
+msgstr "Reduz a dificuldade geral - círculos maiores, menos perda de vida, menos precisão requirida."
 
 #: itdelatrisu/opsu/GameMod.java:41
 msgid "You can't fail. No matter what."
-msgstr ""
+msgstr "Você não pode falhar. Não importa oque for."
 
 #: itdelatrisu/opsu/GameMod.java:43
 msgid "Less zoom."
-msgstr ""
+msgstr "Menos zoom."
 
 #: itdelatrisu/opsu/GameMod.java:45
 msgid "Everything just got a bit harder..."
-msgstr ""
+msgstr "Tudo fica um pouco mais difícil..."
 
 #: itdelatrisu/opsu/GameMod.java:47
 msgid "Miss a note and fail."
-msgstr ""
+msgstr "Erre uma nota e falhe."
 
 #: itdelatrisu/opsu/GameMod.java:48
 msgid "SS or quit."
-msgstr ""
+msgstr "SS ou saia."
 
 #: itdelatrisu/opsu/GameMod.java:50
 msgid "Zoooooooooom."
-msgstr ""
+msgstr "Zoooooooooom."
 
 #: itdelatrisu/opsu/GameMod.java:51
 msgid "uguuuuuuuu"
-msgstr ""
+msgstr "uguuuuuuuu"
 
 #: itdelatrisu/opsu/GameMod.java:53
 msgid "Play with no approach circles and fading notes for a slight score advantage."
-msgstr ""
+msgstr "Jogue sem círculos bordados e notas desvanecentes para uma pequena vantagem pontual."
 
 #: itdelatrisu/opsu/GameMod.java:55
 msgid "Restricted view area."
-msgstr ""
+msgstr "Área de visão restrita."
 
 #: itdelatrisu/opsu/GameMod.java:57
 msgid "You don't need to click.\n"
 "Give your clicking/tapping finger a break from the heat of things.\n"
 "**UNRANKED**"
-msgstr ""
+msgstr "Você não precisa clicar.\n"
+"Dê um descanso aos seus dedos clicantes do calor das coisas.\n"
+"**NÃO CLASSIFICADO**"
 
 #: itdelatrisu/opsu/GameMod.java:59
 msgid "Automatic cursor movement - just follow the rhythm.\n"
 "**UNRANKED**"
-msgstr ""
+msgstr "Movimento do cursor automático - apenas siga o ritmo.\n"
+"**NÃO CLASSIFICADO**"
 
 #: itdelatrisu/opsu/GameMod.java:61
 msgid "Timing practice!"
-msgstr ""
+msgstr "Prática de timing!"
 
 #: itdelatrisu/opsu/GameMod.java:63
 msgid "Spinners will be automatically completed."
-msgstr ""
+msgstr "Spinners vão ser automaticamente feitos."
 
 #: itdelatrisu/opsu/GameMod.java:65
 msgid "Watch a perfect automated play through the song."
-msgstr ""
+msgstr "Veja uma jogada automática perfeita durante a música."
 
 #: itdelatrisu/opsu/GameMod.java:66
 msgid "Watch the video without being distubed by objects."
-msgstr ""
+msgstr "Assista o vídeo sem ser incomodado por objetos."
 
 #: itdelatrisu/opsu/GameMod.java:71
 msgid "Difficulty Reduction"
-msgstr ""
+msgstr "Redução da dificuldade"
 
 #: itdelatrisu/opsu/GameMod.java:72
 msgid "Difficulty Increase"
-msgstr ""
+msgstr "Aumento da dificuldade"
 
 #: itdelatrisu/opsu/GameMod.java:73
 msgid "Special"
-msgstr ""
+msgstr "Especial"
 
 #: itdelatrisu/opsu/Opsu.java:201
 msgid "An error occurred while creating the game container."
-msgstr ""
+msgstr "Um erro ocorreu durante a criação do contêiner do jogo."
 
 #: itdelatrisu/opsu/Opsu.java:267
 msgid "JARs cannot be run from some paths containing the '!' character. "
-msgstr ""
+msgstr "JARs não podem ser executados a partir de alguns caminhos contendo o caractere '!'. "
 
 #: itdelatrisu/opsu/Opsu.java:268
 msgid "Please rename the file/directories and try again.\n\n"
-msgstr ""
+msgstr "Por favor, renomeie o arquivo/diretórios e tente novamente.\n\n"
 
 #: itdelatrisu/opsu/Opsu.java:269
 msgid "Path: "
-msgstr ""
+msgstr "Caminho: "
 
 #: itdelatrisu/opsu/ScoreData.java:419
 #, java-printf-format
@@ -172,82 +177,90 @@ msgid "Achieved on %s\n"
 "300:%d 100:%d 50:%d Miss:%d\n"
 "Accuracy: %.2f%%\n"
 "Mods: %s"
-msgstr ""
+msgstr "Atingido em %s\n"
+"300: %d 100: %d 50:%d Miss:%d\n"
+"Precisão: %.2f%%\n"
+"Modos: %s"
 
 #: itdelatrisu/opsu/Utils.java:175
 msgid "WARNING:\n"
 "Running in OpenGL software mode.\n"
 "You may experience severely degraded performance.\n\n"
 "This can usually be resolved by updating your graphics drivers."
-msgstr ""
+msgstr "AVISO:\n"
+"Rodando em modo ‘software’ OpenGL.\n\n"
+"Isso só pode ser resolvido ao atualizar seus ‘drivers’ gráficos."
 
 #: itdelatrisu/opsu/Utils.java:352
 #, java-printf-format
 msgid "Saved screenshot to %s"
-msgstr ""
+msgstr "Captura de tela salva para %s"
 
 #: itdelatrisu/opsu/Utils.java:359
 msgid "Failed to open screenshot location."
-msgstr ""
+msgstr "Falha ao abrir local da captura de tela."
 
 #: itdelatrisu/opsu/Utils.java:776
 msgid "Skin changed.\n"
 "Some elements might not be replaced properly, for this please restart the game."
-msgstr ""
+msgstr "Textura alterada.\n"
+"Alguns elementos podem não ter sido substituídos adequadamente, para isso, reinicie o jogo."
 
 #: itdelatrisu/opsu/audio/MultiClip.java:238
 #, java-printf-format
 msgid "Could not close AudioInputStream for MultiClip %s."
-msgstr ""
+msgstr "Não é possível fechar AudioInputStream para Multiclip %s."
 
 #: itdelatrisu/opsu/audio/MusicController.java:103
 #, java-printf-format
 msgid "Could not find track '%s'."
-msgstr ""
+msgstr "Não é possível achar a música '%s'."
 
 #: itdelatrisu/opsu/audio/MusicController.java:144
 msgid "Looks like sound isn't working right now. Sorry!\n\n"
 "Restarting the game will probably fix this."
-msgstr ""
+msgstr "Parece que o som não está funcionando agora. Desculpe!\n\n"
+"Reiniciar o jogo provavelmente resolveria isso."
 
 #: itdelatrisu/opsu/audio/SoundController.java:267
 #, java-printf-format
 msgid "Failed to load %d audio file%s."
-msgstr ""
+msgstr "Falha ao carregar %d arquivo de áudio %s."
 
 #: itdelatrisu/opsu/audio/SoundController.java:270
 msgid "\n"
 "Click for details."
-msgstr ""
+msgstr "\n"
+"Clique para detalhes."
 
 #: itdelatrisu/opsu/audio/SoundController.java:419
 msgid "Failed to download track preview."
-msgstr ""
+msgstr "Falha ao fazer download do ‘preview’ da música."
 
 #: itdelatrisu/opsu/beatmap/BeatmapGroup.java:38
 msgid "All Songs"
-msgstr ""
+msgstr "Todas as músicas"
 
 #: itdelatrisu/opsu/beatmap/BeatmapGroup.java:41
 msgid "Last Played"
-msgstr ""
+msgstr "Últimos jogados"
 
 #: itdelatrisu/opsu/beatmap/BeatmapGroup.java:41
 msgid "Your recently played beatmaps will appear in this list!"
-msgstr ""
+msgstr "Você recentemente jogou mapas que vão aparecer nessa lista!"
 
 #: itdelatrisu/opsu/beatmap/OszUnpacker.java:82
 #, java-printf-format
 msgid "Imported %d new beatmap pack%s."
-msgstr ""
+msgstr "Importado %d novo conjunto de beatmap %s."
 
 #: itdelatrisu/opsu/downloads/Download.java:60
 msgid "Waiting"
-msgstr ""
+msgstr "Aguardando"
 
 #: itdelatrisu/opsu/downloads/Download.java:61
 msgid "Downloading"
-msgstr ""
+msgstr "Baixando"
 
 #: itdelatrisu/opsu/downloads/Download.java:62
 msgid "Complete"
