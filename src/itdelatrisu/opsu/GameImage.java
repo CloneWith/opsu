@@ -105,14 +105,29 @@ public enum GameImage {
 	},
 
 	// Circle
-	HITCIRCLE ("hitcircle", "png"),
-	HITCIRCLE_OVERLAY ("hitcircleoverlay", "png"),
+	HITCIRCLE ("hitcircle", "png")  {
+		/*@Override
+		protected Image process_sub(Image img, int w, int h) {
+			return img.getScaledCopyByAlpha();
+		}*/
+	},
+	HITCIRCLE_OVERLAY ("hitcircleoverlay", "png")  {
+		/*@Override
+		protected Image process_sub(Image img, int w, int h) {
+			return img.getScaledCopyByAlpha();
+		}*/
+	},
 	APPROACHCIRCLE ("approachcircle", "png"),
 
 	// Slider
 	SLIDER_GRADIENT ("slidergradient", "png"),
 	SLIDER_GRADIENT_EXPERIMENTAL ("slidergradient_ex", "png"),
-	SLIDER_BALL ("sliderb", "sliderb%d", "png"),
+	SLIDER_BALL ("sliderb", "sliderb%d", "png") {
+		/*@Override
+		protected Image process_sub(Image img, int w, int h) {
+			return img.getScaledCopyByAlpha();
+		}*/
+	},
 	SLIDER_FOLLOWCIRCLE ("sliderfollowcircle", "png"),
 	REVERSEARROW ("reversearrow", "png"),
 	SLIDER_TICK ("sliderscorepoint", "png"),

@@ -1395,6 +1395,29 @@ public class Image implements Renderable {
 	}
 
 	/**
+	 * Get a scaled copy of this image, based on transparent pixels around the main part of it.
+	 * @return the new scaled image
+	 */
+	public Image getScaledCopyByAlpha() {
+		init();
+		Image image = copy();
+
+		// Start from centre left
+		int startX = 0;
+		int startY = image.height / 2;
+
+		int colorX = 0;
+
+		for (int x = startX; x <= image.width; x++) {
+			if (getAlphaAt(x, startY) != 0) break;
+			colorX++;
+		}
+
+		// System.out.println("Got alpha width: " + colorX);
+		return image.getScaledCopy((float) image.width / (image.width - colorX * 2));
+	}
+
+	/**
 	 * Make sure the texture cordinates are inverse on the y-axis.
 	 */
 	public void ensureInverted() {
