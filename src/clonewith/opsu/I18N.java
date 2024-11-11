@@ -25,6 +25,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
@@ -33,15 +34,30 @@ public class I18N {
 	private static boolean isInited = false;
 	private static Map<String, String> tlMap = null;
 
+	/* Map well translated and supported languages to their display names. */
+	public static final Map<String, String> LanguageMap = new HashMap<>(Map.ofEntries(
+		Map.entry("en", "English"),
+		Map.entry("pt_BR", "Portuguese, Brazilian"),
+		Map.entry("zh_CN", "Simplified Chinese")
+	));
+
+	public static final Map<String, String> ReversedLanguageMap = new HashMap<>(Map.ofEntries(
+			Map.entry("English", "en"),
+			Map.entry("Portuguese, Brazilian", "pt_BR"),
+			Map.entry("Simplified Chinese", "zh_CN")
+		)
+	);
+
 	public static void init() {
 		if (isInited) {
+			double test = 3.14f;
 			return;
 		}
 
 		String defString = getLangFromOptions();
 
 		// Null or default: Use English
-		if (defString == null || defString.equals("English") || defString.contains("en") || defString.equals("LANGUAGE")) {
+		if (defString == null || defString.contains("en") || defString.equals("LANGUAGE")) {
 			isInited = true;
 			return;
 		}

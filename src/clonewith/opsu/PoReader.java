@@ -23,7 +23,7 @@ public class PoReader {
 	 * @return a .po File, or null if not found
 	 */
 	public static File getPo(Locale target) {
-		final File localedFile = new File(i10nDir + poPrefix + "_" + target + ".po");
+		final File localedFile = new File(i10nDir + poPrefix + "_" + target.toString() + ".po");
 		if (!localedFile.exists()) {
 			Log.error("Not found:" + localedFile);
 		}

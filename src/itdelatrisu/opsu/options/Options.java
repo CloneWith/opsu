@@ -494,8 +494,8 @@ public class Options {
 			}
 		},
 		LANGUAGE(t("Language"), "UILang", t("The interface language.")) {
-			private String[] itemList = null;
-			// TODO: Display human-friendly items
+			private final Object[] itemList = I18N.LanguageMap.keySet().toArray();
+
 			@Override
 			public boolean isRestartRequired() {
 				return true;
@@ -503,28 +503,17 @@ public class Options {
 
 			@Override
 			public Object[] getItemList() {
-				File[] langList = I18N.getBaseDir().listFiles();
-				if (langList != null)
-					itemList = new String[langList.length];
-				// The first item is always English
-				itemList[0] = "English";
-				// Add entries based on contents in res/i10n
-				for (int i = 1; i < itemList.length; i++) {
-					// We've recently added a messages.pot!
-					int postfixLoc = langList[i].getName().indexOf('.');
-					itemList[i] = langList[i].getName().substring(9, postfixLoc);
-				}
-				return itemList;
+				return I18N.LanguageMap.values().toArray();
 			}
 
 			@Override
 			public String getValueString() {
-				return lang;
+				return I18N.ReversedLanguageMap.get(lang);
 			}
 
 			@Override
 			public void selectItem(int index, GameContainer container) {
-				lang = itemList[index];
+				lang = itemList[index].toString();
 			}
 
 			@Override
@@ -1242,9 +1231,7 @@ public class Options {
 	/** The current skin. */
 	private static Skin skin;
 
-	// private static File skinDir = skin.getDirectory();
-
-	private static String lang = "English";
+	private static String lang = "en";
 
 	/** Frame limiters. */
 	private static final int[] targetFPS = { 60, 120, 240, -1 /* Unlimited */ };
