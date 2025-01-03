@@ -101,10 +101,10 @@ public class Options {
 	public static final File TEMP_DIR = new File(CACHE_DIR, "Temp/");
 
 	/** Main font file name. */
-	public static final String FONT_MAIN = "Exo2-Regular.ttf";
+	public static final String FONT_MAIN = "Torus-Regular.otf";
 
 	/** Bold font file name. */
-	public static final String FONT_BOLD = "Exo2-Bold.ttf";
+	public static final String FONT_BOLD = "Torus-SemiBold.otf";
 
 	/** CJK font file name. */
 	public static final String FONT_CJK = "DroidSansFallback.ttf";
@@ -301,11 +301,10 @@ public class Options {
 
 			@Override
 			public void read(String s) {
-				String oldThemeString = themeString;
 				themeString = s;
 				Beatmap beatmap = getThemeBeatmap();
 				if (beatmap == null) {
-					Log.warn(String.format("The theme song \"%s\" data is invaild.", s));
+					Log.warn(String.format("The theme song \"%s\" data is invalid.", s));
 				} else if (!beatmap.audioFilename.isFile()
 						&& !ResourceLoader.resourceExists(beatmap.audioFilename.getName())) {
 					Log.warn(String.format("Cannot find theme song [%s].", beatmap.audioFilename.getAbsolutePath()));
