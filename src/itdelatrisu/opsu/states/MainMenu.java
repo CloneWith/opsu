@@ -484,7 +484,7 @@ public class MainMenu extends BasicGameState {
 		lineHeight += Fonts.MEDIUM.getLineHeight() * 0.925f;
 		Fonts.MEDIUM.drawString(marginX, topMarginY + lineHeight,
 			String.format(t("It is currently %s."),
-				new SimpleDateFormat("h:mm a").format(new Date())),
+				new SimpleDateFormat("HH:mm").format(new Date())),
 			Colors.WHITE_FADE
 		);
 		Colors.WHITE_FADE.a = oldWhiteAlpha;
