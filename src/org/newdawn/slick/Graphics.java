@@ -138,17 +138,15 @@ public class Graphics {
 	 */
 	public Graphics(int width, int height) {
 		if (DEFAULT_FONT == null) {
-			AccessController.doPrivileged(new PrivilegedAction() {
-				public Object run() {
-					try {
-						DEFAULT_FONT = new AngelCodeFont(
-							"org/newdawn/slick/data/defaultfont.fnt",
-							"org/newdawn/slick/data/defaultfont.png");
-					} catch (SlickException e) {
-						Log.error(e);
-					}
-					return null; // nothing to return
+			AccessController.doPrivileged((PrivilegedAction) () -> {
+				try {
+					DEFAULT_FONT = new AngelCodeFont(
+						"org/newdawn/slick/data/defaultfont.fnt",
+						"org/newdawn/slick/data/defaultfont.png");
+				} catch (SlickException e) {
+					Log.error(e);
 				}
+				return null; // nothing to return
 			});
 		}
 
@@ -171,7 +169,7 @@ public class Graphics {
 	/**
 	 * Set the drawing mode to use. This mode defines how pixels are drawn to
 	 * the graphics context. It can be used to draw into the alpha map.
-	 *
+	 * <p>
 	 * The mode supplied should be one of {@link Graphics#MODE_NORMAL} or
 	 * {@link Graphics#MODE_ALPHA_MAP} or {@link Graphics#MODE_ALPHA_BLEND}
 	 *

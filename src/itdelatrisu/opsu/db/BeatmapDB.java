@@ -84,30 +84,34 @@ public class BeatmapDB {
 	/** Beatmap loading flags. */
 	public static final int LOAD_NONARRAY = 1, LOAD_ARRAY = 2, LOAD_ALL = 3;
 
-	/** Represents an entry in the last modified map. */
-	public static class LastModifiedMapEntry {
-		/** The last modified time. */
-		private final long lastModified;
-
-		/** The game mode. */
-		private final byte mode;
-
+	/**
+	 * Represents an entry in the last modified map.
+	 *
+	 * @param lastModified The last modified time.
+	 * @param mode         The game mode.
+	 */
+		public record LastModifiedMapEntry(long lastModified, byte mode) {
 		/**
 		 * Creates a new entry.
+		 *
 		 * @param lastModified the last modified time
-		 * @param mode the game mode (Beatmap.MODE_*)
+		 * @param mode         the game mode (Beatmap.MODE_*)
 		 */
-		public LastModifiedMapEntry(long lastModified, byte mode) {
-			this.lastModified = lastModified;
-			this.mode = mode;
+		public LastModifiedMapEntry {
 		}
 
-		/** Returns the last modified time. */
-		public long getLastModified() { return lastModified; }
+			/** Returns the last modified time. */
+			@Override
+			public long lastModified() {
+				return lastModified;
+			}
 
-		/** Returns the game mode (Beatmap.MODE_*). */
-		public byte getMode() { return mode; }
-	}
+			/** Returns the game mode (Beatmap.MODE_*). */
+			@Override
+			public byte mode() {
+				return mode;
+			}
+		}
 
 	/** Database connection. */
 	private static Connection connection;
@@ -219,13 +223,7 @@ public class BeatmapDB {
 					return;
 			} else {
 				// try to retrieve stored version
-				sql = "SELECT value FROM info WHERE key = 'version'";
-				ResultSet versionRS = stmt.executeQuery(sql);
-				String versionString = (versionRS.next()) ? versionRS.getString(1) : "0";
-				versionRS.close();
-				try {
-					version = Integer.parseInt(versionString);
-				} catch (NumberFormatException e) {}
+				version = getDBVersion(stmt, version);
 			}
 
 			// database versions match
@@ -244,6 +242,18 @@ public class BeatmapDB {
 				ps.close();
 			}
 		}
+	}
+
+	static int getDBVersion(Statement stmt, int version) throws SQLException {
+		String sql;
+		sql = "SELECT value FROM info WHERE key = 'version'";
+		ResultSet versionRS = stmt.executeQuery(sql);
+		String versionString = (versionRS.next()) ? versionRS.getString(1) : "0";
+		versionRS.close();
+		try {
+			version = Integer.parseInt(versionString);
+		} catch (NumberFormatException e) {}
+		return version;
 	}
 
 	/**

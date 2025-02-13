@@ -182,13 +182,7 @@ public class ScoreDB {
 					return;
 			} else {
 				// try to retrieve stored version
-				sql = "SELECT value FROM info WHERE key = 'version'";
-				ResultSet versionRS = stmt.executeQuery(sql);
-				String versionString = (versionRS.next()) ? versionRS.getString(1) : "0";
-				versionRS.close();
-				try {
-					version = Integer.parseInt(versionString);
-				} catch (NumberFormatException e) {}
+				version = BeatmapDB.getDBVersion(stmt, version);
 			}
 
 			// database versions match

@@ -20,6 +20,7 @@ package itdelatrisu.opsu.downloads;
 
 import itdelatrisu.opsu.OpsuConstants;
 import itdelatrisu.opsu.downloads.Download.Status;
+import org.newdawn.slick.util.Log;
 
 import java.util.*;
 
@@ -111,7 +112,9 @@ public class DownloadList {
 		try {
 			DownloadNode node = nodes.remove(index);
 			map.remove(node.getID());
-		} catch (IndexOutOfBoundsException e) {}
+		} catch (IndexOutOfBoundsException e) {
+			Log.warn("Attempting to remove a DownloadNode whose index is out of bounds.", e);
+		}
 	}
 
 	/**

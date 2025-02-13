@@ -57,7 +57,7 @@ public class SBObject implements Comparable<SBObject>{
 	//SBAlign align;
 	SBAlignH alignH;
 	SBAlignV alignV;
-	ArrayList<SBCommand> commands = new ArrayList<SBCommand>();
+	ArrayList<SBCommand> commands = new ArrayList<>();
 
 	SBComEventRunner events = new SBComEventRunner();
 

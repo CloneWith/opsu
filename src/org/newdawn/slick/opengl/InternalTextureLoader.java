@@ -256,7 +256,7 @@ public class InternalTextureLoader {
 		if (holdTextureData) {
 			hash.put(resName, tex);
 		} else {
-			hash.put(resName, new SoftReference(tex));
+			hash.put(resName, new SoftReference<>(tex));
 		}
 
 		return tex;

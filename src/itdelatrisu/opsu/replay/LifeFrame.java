@@ -21,37 +21,39 @@ package itdelatrisu.opsu.replay;
 /**
  * Captures a single life frame.
  *
+ * @param time   Time, in milliseconds.
+ * @param health Health.
+ *
  * @author smoogipooo (<a href="https://github.com/smoogipooo/osu-Replay-API/">...</a>)
  */
-public class LifeFrame {
+public record LifeFrame(int time, float health) {
 	/** The sample interval, in milliseconds, when saving replays. */
 	public static final int SAMPLE_INTERVAL = 2000;
 
-	/** Time, in milliseconds. */
-	private final int time;
-
-	/** Health. */
-	private final float health;
-
 	/**
 	 * Constructor.
-	 * @param time the time (in ms)
+	 *
+	 * @param time   the time (in ms)
 	 * @param health the health [0,1]
 	 */
-	public LifeFrame(int time, float health) {
-		this.time = time;
-		this.health = health;
+	public LifeFrame {
 	}
 
 	/**
 	 * Returns the frame time, in milliseconds.
 	 */
-	public int getTime() { return time; }
+	@Override
+	public int time() {
+		return time;
+	}
 
 	/**
 	 * Returns the health.
 	 */
-	public float getHealth() { return health; }
+	@Override
+	public float health() {
+		return health;
+	}
 
 	@Override
 	public String toString() {

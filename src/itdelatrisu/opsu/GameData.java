@@ -944,20 +944,20 @@ public class GameData {
 			float graphHeight = graphImg.getHeight() - margin * 2f;
 			g.setClip((int) cx, (int) cy, (int) (graphWidth * ((float) time / graphEnd)), (int) graphHeight);
 			float lastXt = cx;
-			float lastYt = cy + graphHeight * (1f - replay.lifeFrames[0].getHealth());
+			float lastYt = cy + graphHeight * (1f - replay.lifeFrames[0].health());
 			g.setLineWidth(2 * uiScale);
 			if (replay.lifeFrames.length == 1) {
-				g.setColor(replay.lifeFrames[0].getHealth() >= 0.5f ? Colors.GREEN : Color.red);
+				g.setColor(replay.lifeFrames[0].health() >= 0.5f ? Colors.GREEN : Color.red);
 				g.drawLine(lastXt, lastYt, lastXt + graphWidth, lastYt);
 			} else {
-				int minTime = replay.lifeFrames[0].getTime();
-				int maxTime = replay.lifeFrames[replay.lifeFrames.length - 1].getTime();
+				int minTime = replay.lifeFrames[0].time();
+				int maxTime = replay.lifeFrames[replay.lifeFrames.length - 1].time();
 				int totalTime = maxTime - minTime;
 				Color lastColor = null;
 				for (int i = 1; i < replay.lifeFrames.length; i++) {
-					float xt = cx + graphWidth * ((float) (replay.lifeFrames[i].getTime() - minTime) / totalTime);
-					float yt = cy + graphHeight * (1f - replay.lifeFrames[i].getHealth());
-					Color color = replay.lifeFrames[i].getHealth() >= 0.5f ? Colors.GREEN : Color.red;
+					float xt = cx + graphWidth * ((float) (replay.lifeFrames[i].time() - minTime) / totalTime);
+					float yt = cy + graphHeight * (1f - replay.lifeFrames[i].health());
+					Color color = replay.lifeFrames[i].health() >= 0.5f ? Colors.GREEN : Color.red;
 					if (color != lastColor)
 						g.setColor(color);
 					g.drawLine(lastXt, lastYt, xt, yt);
@@ -1518,9 +1518,7 @@ public class GameData {
 			incrementComboStreak();
 			health.changeHealthForHit(result);
 
-			if (!Options.isPerfectHitBurstEnabled())
-				;  // hide perfect hit results
-			else
+			if (Options.isPerfectHitBurstEnabled())
 				hitResultList.add(new HitObjectResult(time, result, x, y, null, HitObjectType.SLIDERTICK, null, false, false));
 		}
 		fullObjectCount++;

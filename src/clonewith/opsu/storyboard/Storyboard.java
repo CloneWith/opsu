@@ -79,7 +79,7 @@ public class Storyboard {
 		this.file = file;
 
 		for (TriggerEvent trigEv : TriggerEvent.values()) {
-			trigLis.put(trigEv, new HashSet<TriggerListener>());
+			trigLis.put(trigEv, new HashSet<>());
 		}
 
 	}
@@ -263,13 +263,7 @@ public class Storyboard {
 					}
 				}
 			}
-			list.sort(new Comparator<TEvent>() {
-
-				@Override
-				public int compare(TEvent o1, TEvent o2) {
-					return o1.time - o2.time;
-				}
-			});
+			list.sort(Comparator.comparingInt(o2 -> o2.time));
 			boolean fadeVis = false;
 			int fadeMultiCnt = 0;
 
@@ -321,12 +315,7 @@ public class Storyboard {
 			//*/
 		}
 		events.ready();
-		events.setListener(new SBEventRunnerListener() {
-			@Override
-			public void reseted() {
-				reset();
-			}
-		});
+		events.setListener(this::reset);
 	}
 
 	private String getExt(String fileName) {
@@ -412,7 +401,7 @@ public class Storyboard {
 				case "L": {
 					int tstartTime = Integer.parseInt(tokens[1]);
 					int loopCnt = Integer.parseInt(tokens[2]);
-					ArrayList<SBCommand> commands2 = new ArrayList<SBCommand>();
+					ArrayList<SBCommand> commands2 = new ArrayList<>();
 					line = parseCommands(in, indent + 1, o, commands2);
 					commands.add(new SBCommandLoop(o, tstartTime, loopCnt, commands2));
 				}
@@ -422,7 +411,7 @@ public class Storyboard {
 					int tstartTime = Integer.parseInt(tokens[2]);
 					int tendTime = Integer.parseInt(tokens[3]);
 
-					ArrayList<SBCommand> commands2 = new ArrayList<SBCommand>();
+					ArrayList<SBCommand> commands2 = new ArrayList<>();
 					line = parseCommands(in, indent + 1, o, commands2);
 					commands.add(new SBCommandTrigger(o, triggerName, tstartTime, tendTime, commands2, this));
 				}
@@ -629,20 +618,17 @@ public class Storyboard {
 	}
 
 	public TreeSet<SBObject> getLayer(String layer) {
-		switch (layer) {
-			case "Background":
-				return background;
-			case "Foreground":
-				return foreground;
-			case "Pass":
-				return pass;
-			case "Fail":
-				return fail;
-			default:
+		return switch (layer) {
+			case "Background" -> background;
+			case "Foreground" -> foreground;
+			case "Pass" -> pass;
+			case "Fail" -> fail;
+			default -> {
 				// TODO: Overlay hasn't implemented yet
 				log.error(String.format("Could not find layer %s. Falling back to Foreground.", layer));
-				return foreground;
-		}
+				yield foreground;
+			}
+		};
 	}
 
 	public boolean exists() {

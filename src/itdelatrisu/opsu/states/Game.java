@@ -1290,9 +1290,10 @@ public class Game extends BasicGameState {
 					MusicController.setPitch(getCurrentPitch());
 					if (video != null)
 						loadVideo(checkpoint);
-					while (objectIndex < gameObjects.length &&
-							beatmap.objects[objectIndex++].getTime() <= checkpoint)
-						;
+					while (objectIndex < gameObjects.length) {
+						if (beatmap.objects[objectIndex].getTime() <= checkpoint)
+							objectIndex++;
+					}
 					objectIndex--;
 					lastReplayTime = beatmap.objects[objectIndex].getTime();
 					lastTrackPosition = checkpoint;

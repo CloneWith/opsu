@@ -300,11 +300,11 @@ public class Replay {
 					int lastFrameTime = 0;
 					for (int i = 0; i < lifeFrames.length; i++) {
 						LifeFrame frame = lifeFrames[i];
-						if (i > 0 && frame.getTime() - lastFrameTime < LifeFrame.SAMPLE_INTERVAL)
+						if (i > 0 && frame.time() - lastFrameTime < LifeFrame.SAMPLE_INTERVAL)
 							continue;
 
-						sb.append(String.format("%d|%s,", frame.getTime(), nf.format(frame.getHealth())));
-						lastFrameTime = frame.getTime();
+						sb.append(String.format("%d|%s,", frame.time(), nf.format(frame.health())));
+						lastFrameTime = frame.time();
 					}
 				}
 				writer.write(sb.toString());

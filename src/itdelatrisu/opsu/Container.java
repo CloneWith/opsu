@@ -32,6 +32,7 @@ import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.Game;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.opengl.InternalTextureLoader;
+import org.newdawn.slick.util.Log;
 
 /**
  * AppGameContainer extension that sends critical errors to ErrorHandler.
@@ -125,7 +126,9 @@ public class Container extends AppGameContainer {
 	protected void gameLoop() throws SlickException {
 		final int delta = getDelta();
 		if (!Display.isVisible() && updateOnlyOnVisible) {
-			try { Thread.sleep(100); } catch (Exception e) {}
+			try { Thread.sleep(100); } catch (Exception e) {
+				Log.warn("An exception occurred when trying to sleep the thread.", e);
+			}
 		} else {
 			try {
 				updateAndRender(delta);
