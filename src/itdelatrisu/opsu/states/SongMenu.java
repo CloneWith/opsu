@@ -84,34 +84,38 @@ public class SongMenu extends BasicGameState {
 	/** Fast scrolling speed multiplier. */
 	private static final float FAST_SCROLL_SPEED = 2f;
 
-	/** Song node class representing an BeatmapSetNode and file index. */
-	private static class SongNode {
-		/** Song node. */
-		private final BeatmapSetNode node;
-
-		/** File index. */
-		private final int index;
-
+	/**
+	 * Song node class representing an BeatmapSetNode and file index.
+	 *
+	 * @param node  Song node.
+	 * @param index File index.
+	 */
+		private record SongNode(BeatmapSetNode node, int index) {
 		/**
 		 * Constructor.
-		 * @param node the BeatmapSetNode
+		 *
+		 * @param node  the BeatmapSetNode
 		 * @param index the file index
 		 */
-		public SongNode(BeatmapSetNode node, int index) {
-			this.node = node;
-			this.index = index;
+		private SongNode {
 		}
 
-		/**
-		 * Returns the associated BeatmapSetNode.
-		 */
-		public BeatmapSetNode getNode() { return node; }
+			/**
+			 * Returns the associated BeatmapSetNode.
+			 */
+			@Override
+			public BeatmapSetNode node() {
+				return node;
+			}
 
-		/**
-		 * Returns the associated file index.
-		 */
-		public int getIndex() { return index; }
-	}
+			/**
+			 * Returns the associated file index.
+			 */
+			@Override
+			public int index() {
+				return index;
+			}
+		}
 
 	/** Current start node (topmost menu entry). */
 	private BeatmapSetNode startNode;
@@ -508,7 +512,7 @@ public class SongMenu extends BasicGameState {
 		}
 		if (!lastBgAlpha.isFinished() && lastFadeBeatmap != null && lastFadeBeatmap.hasLoadedBackground())
 			lastFadeBeatmap.drawBackground(width, height, parallaxX, parallaxY, lastBgAlpha.getValue(), true);
-		if (playfieldAlpha.getTime() > 0) {
+		if (Options.showDefaultBackgroundInSongMenu() || playfieldAlpha.getTime() > 0) {
 			Image bg = GameImage.MENU_BG.getImage();
 			if (Options.isParallaxEnabled()) {
 				bg = bg.getScaledCopy(GameImage.PARALLAX_SCALE);
@@ -520,7 +524,7 @@ public class SongMenu extends BasicGameState {
 				bg.setAlpha(1f);
 			}
 		}
-		if (lastBeatmap != null && lastBeatmap.hasLoadedBackground())
+		if (!Options.showDefaultBackgroundInSongMenu() && lastBeatmap != null && lastBeatmap.hasLoadedBackground())
 			lastBeatmap.drawBackground(width, height, parallaxX, parallaxY, bgAlpha.getValue(), true);
 
 		// star stream
@@ -846,7 +850,7 @@ public class SongMenu extends BasicGameState {
 
 		// background (crossfade)
 		lastBgAlpha.update(delta);
-		if (lastBeatmap != null && lastBeatmap.hasLoadedBackground()) {
+		if (!Options.showDefaultBackgroundInSongMenu() && lastBeatmap != null && lastBeatmap.hasLoadedBackground()) {
 			bgAlpha.update(delta);
 			playfieldAlpha.update(-delta);
 		} else
@@ -1576,7 +1580,7 @@ public class SongMenu extends BasicGameState {
 				if (search.getText().isEmpty()) {  // cleared search
 					// use previous start/focus if possible
 					if (oldFocusNode != null) {
-						setFocus(oldFocusNode.getNode(), oldFocusNode.getIndex(), true, true);
+						setFocus(oldFocusNode.node(), oldFocusNode.index(), true, true);
 						songChangeTimer.setTime(songChangeTimer.getDuration());
 						musicIconBounceTimer.setTime(musicIconBounceTimer.getDuration());
 					} else
@@ -1623,11 +1627,11 @@ public class SongMenu extends BasicGameState {
 			SongNode prev;
 			if (randomStack.isEmpty() || (prev = randomStack.pop()) == null)
 				return;
-			BeatmapSetNode node = prev.getNode();
+			BeatmapSetNode node = prev.node();
 			int expandedIndex = BeatmapSetList.get().getExpandedIndex();
 			if (node.index == expandedIndex)
 				node = node.next;  // move past base node
-			setFocus(node, prev.getIndex(), true, true);
+			setFocus(node, prev.index(), true, true);
 		} else {
 			// random track, add previous to stack
 			randomStack.push(new SongNode(BeatmapSetList.get().getBaseNode(focusNode.index), focusNode.beatmapIndex));
@@ -1759,7 +1763,7 @@ public class SongMenu extends BasicGameState {
 		lastBeatmap = beatmap;
 		boolean lastBgExists = lastFadeBeatmap != null && lastFadeBeatmap.hasLoadedBackground();
 		boolean thisBgExists = beatmap.bg != null;
-		if (lastBgExists != thisBgExists || (lastBgExists && thisBgExists && !beatmap.bg.equals(lastFadeBeatmap.bg))) {
+		if (!Options.showDefaultBackgroundInSongMenu() && (lastBgExists != thisBgExists || (lastBgExists && thisBgExists && !beatmap.bg.equals(lastFadeBeatmap.bg)))) {
 			bgAlpha.setTime(0);
 			playfieldAlpha.setTime(lastBgExists ? 0 : playfieldAlpha.getDuration());
 			lastBgAlpha.setTime(0);

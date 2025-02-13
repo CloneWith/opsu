@@ -605,6 +605,8 @@ public class Options {
 				t("Use the builtin back button style regardless of the skin."), false),
 		DYNAMIC_BACKGROUND(t("Dynamic backgrounds"), "DynamicBackground",
 				t("The current beatmap background will be used as the main menu background."), true),
+		DEFAULT_BACKGROUND_FOR_SONG_SELECT(t("Show default background in song select"), "DefaultBackgroundForSongSelect",
+			t("Always show the default background in song select screen."), false),
 		LOAD_VERBOSE(t("Detailed loading progress"), "LoadVerbose",
 				t("Display more verbose loading progress in the splash screen."), false),
 		MASTER_VOLUME(t("Master"), "VolumeUniversal", t("Global volume level."), 35, 0, 100) {
@@ -1709,6 +1711,13 @@ public class Options {
 	public static boolean useUnicodeMetadata() {
 		return GameOption.SHOW_UNICODE.getBooleanValue();
 	}
+
+	/**
+	 * Returns whether to show the default background image in the song select screen.
+	 *
+	 * @return true if showing default image
+	 */
+	public static boolean showDefaultBackgroundInSongMenu() { return GameOption.DEFAULT_BACKGROUND_FOR_SONG_SELECT.getBooleanValue(); }
 
 	/**
 	 * Returns whether parallax is enabled.

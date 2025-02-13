@@ -68,8 +68,11 @@ public class OptionGroup {
 			GameOption.PARALLAX,
 			GameOption.ENABLE_THEME_SONG,
 		}),
+		new OptionGroup(t("SONG SELECT"), new GameOption[] {
+			GameOption.DEFAULT_BACKGROUND_FOR_SONG_SELECT,
+		}),
 		new OptionGroup(t("Gameplay"), GameImage.MENU_NAV_GAMEPLAY),
-		new OptionGroup("GENERAL", new GameOption[] {
+		new OptionGroup(t("GENERAL"), new GameOption[] {
 			GameOption.BACKGROUND_DIM,
 			GameOption.FORCE_DEFAULT_PLAYFIELD,
 			GameOption.SHOW_HIT_ERROR_BAR,
