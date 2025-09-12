@@ -69,7 +69,9 @@ opsu! is distributed a [Maven](https://maven.apache.org/) project.
 
 Maven builds are built to the `target` directory.
 
-- To run the project, execute the Maven goal `compile`. After compiling it will automatically show up.
+- To run the project from code:
+  - Execute the Maven goal `compile`, which would generate files necessary for the game to launch.
+  - Execute the plugin `exec:exec@run`. After that the game window would show up.
 - To create a single executable jar, execute the Maven goal `package -Djar`. This will compile a jar to `target/opsu-${version}.jar` with the libraries, resources and natives packed inside the jar.
   - Setting the "XDG" property (`-DXDG=true`) will make the application use XDG folders under Unix-like operating systems.
   - Setting the "exclude" property to "ffmpeg" (`-Dexclude=ffmpeg`) will exclude FFmpeg shared libraries from the jar.

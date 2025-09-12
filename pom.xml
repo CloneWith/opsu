@@ -75,7 +75,6 @@
 				<executions>
 					<execution>
 						<id>run</id>
-						<phase>compile</phase>
 						<goals>
 							<goal>exec</goal>
 						</goals>
