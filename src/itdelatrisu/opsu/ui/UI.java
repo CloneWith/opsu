@@ -32,7 +32,6 @@ import itdelatrisu.opsu.ui.animations.AnimatedValue;
 import itdelatrisu.opsu.ui.animations.AnimationEquation;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.StateBasedGame;
-import org.newdawn.slick.util.Log;
 
 import javax.swing.*;
 
@@ -470,11 +469,6 @@ public class UI {
 	 * @return true if user selects "yes", false otherwise
 	 */
 	public static boolean showExitConfirmation(String message) {
-		try {
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		} catch (Exception e) {
-			Log.warn("Could not set system look and feel for exit confirmation.", e);
-		}
 		int n = JOptionPane.showConfirmDialog(null, message, t("Warning"),
 				JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 		return (n != JOptionPane.YES_OPTION);

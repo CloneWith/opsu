@@ -19,6 +19,7 @@
 package itdelatrisu.opsu;
 
 import clonewith.opsu.I18N;
+import com.formdev.flatlaf.FlatIntelliJLaf;
 import itdelatrisu.opsu.audio.MusicController;
 import itdelatrisu.opsu.db.DBController;
 import itdelatrisu.opsu.downloads.DownloadList;
@@ -40,6 +41,7 @@ import org.newdawn.slick.util.ResourceLoader;
 import org.sqlite.SQLiteErrorCode;
 import org.sqlite.SQLiteException;
 
+import javax.swing.*;
 import java.io.*;
 
 import static clonewith.opsu.I18N.t;
@@ -93,6 +95,16 @@ public class Opsu extends StateBasedGame {
 			DefaultLogSystem.out = new PrintStream(new FileOutputStream(Options.LOG_FILE, true));
 		} catch (FileNotFoundException e) {
 			Log.error(e);
+		}
+
+		// Set Swing appearance
+		FlatIntelliJLaf.installLafInfo();
+
+		try {
+			UIManager.setLookAndFeel(FlatIntelliJLaf.class.getName());
+		} catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException |
+				 IllegalAccessException e) {
+			Log.error("Failed to set appearance for low-level GUI.", e);
 		}
 
 		// set default exception handler

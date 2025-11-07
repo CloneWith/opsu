@@ -171,7 +171,6 @@ public class ErrorHandler {
 
 		// display popup
 		try {
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 			Desktop desktop = null;
 			boolean isBrowseSupported = false, isOpenSupported = false;
 			if (Desktop.isDesktopSupported()) {
