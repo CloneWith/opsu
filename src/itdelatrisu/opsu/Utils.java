@@ -57,10 +57,7 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.SocketTimeoutException;
-import java.net.URISyntaxException;
-import java.net.URL;
+import java.net.*;
 import java.nio.ByteBuffer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -101,8 +98,6 @@ public class Utils {
 
 	// game-related variables
 	private static Input input;
-
-	private static Thread NewSkinLoader;
 
 	// This class should not be instantiated.
 	private Utils() {}
@@ -400,6 +395,47 @@ public class Utils {
 	}
 
 	/**
+	 * Transform a raw URL string into a safe URI.
+	 * @throws IllegalArgumentException the source string cannot be transformed into a safe URI
+	 * @throws URISyntaxException should not be thrown, unless there's something wrong with the normalization process
+	 */
+	public static URI getSafeURI(String source) throws IllegalArgumentException, URISyntaxException {
+		return new URI(normalizeURL(source));
+	}
+
+	/**
+	 * Generate a normalized URL up to standards of RFC 3986.
+	 */
+	public static String normalizeURL(String source) {
+		try {
+			URI in = new URI(source);
+			URI out = new URI(
+				in.getScheme(),
+				in.getUserInfo(),
+				in.getHost(),
+				in.getPort(),
+				in.getPath(),
+				in.getQuery(),
+				in.getFragment());
+
+			return out.toASCIIString();
+		} catch (URISyntaxException e) {
+			// The source string contains spaces and other non-ASCII characters.
+			// We make a simple fallback here.
+			try {
+				URI fallback = URI.create(
+					source.replaceAll("\\s+", "%20")
+						.replaceAll("\\[", "%5B")
+						.replaceAll("]", "%5D"));
+				return fallback.toASCIIString();
+			} catch (Exception ex) {
+				// What the hell?
+				throw new IllegalArgumentException("Illegal URI: " + source, ex);
+			}
+		}
+	}
+
+	/**
 	 * Cleans a file name.
 	 * @param badFileName the original name string
 	 * @param replace the character to replace illegal characters with (or 0 if none)
@@ -480,7 +516,7 @@ public class Utils {
 	 * @param dir the directory to delete
 	 */
 	public static void deleteDirectory(File dir) {
-		boolean isDeleted = false;
+		boolean isDeleted;
 
 		if (dir == null || !dir.isDirectory()) {
 			Log.debug("Directory null or empty.");
@@ -658,7 +694,10 @@ public class Utils {
 	 * @return true if JAR, false if file
 	 */
 	public static boolean isJarRunning() {
-		return Opsu.class.getResource(String.format("%s.class", Opsu.class.getSimpleName())).toString().startsWith("jar:");
+		String className = String.format("%s.class", Opsu.class.getSimpleName());
+		URL resourceURL = Opsu.class.getResource(className);
+
+		return resourceURL != null && resourceURL.toString().startsWith("jar:");
 	}
 
 	/**
@@ -788,16 +827,15 @@ public class Utils {
 
 	/** Sets the execute permission for the given file. */
 	public static void setExecutable(File file) {
-		if (!Files.isExecutable(file.toPath())) {
-			file.setExecutable(true);
-		}
+		if (!Files.isExecutable(file.toPath()) && !file.setExecutable(true))
+			Log.warn(String.format("Cannot set executable privilege for %s.", file.getAbsolutePath()));
 	}
 
 	public static void ChangeNewSkin() {
-		NewSkinLoader = new Thread(() -> {
+		Thread newSkinLoader = new Thread(() -> {
 		});
 		// Steps: Load, release & reload
-		NewSkinLoader.start();
+		newSkinLoader.start();
 		GameImage.clearReferences();
 		Utils.gc(true);
 		Options.loadSkin();

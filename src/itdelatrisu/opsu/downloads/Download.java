@@ -27,9 +27,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.net.*;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.file.Files;
@@ -38,6 +36,8 @@ import java.nio.file.StandardCopyOption;
 import java.util.Map;
 
 import static clonewith.opsu.I18N.t;
+import static itdelatrisu.opsu.Utils.getSafeURI;
+import static itdelatrisu.opsu.Utils.normalizeURL;
 
 /**
  * File download.
@@ -154,12 +154,12 @@ public class Download {
 	 */
 	public Download(String remoteURL, String localPath, String rename) {
 		try {
-			this.url = new URL(remoteURL);
-		} catch (MalformedURLException e) {
+			this.url = getSafeURI(remoteURL).toURL();
+		} catch (URISyntaxException | MalformedURLException e) {
 			this.status = Status.ERROR;
 			ErrorHandler.error(String.format("Bad download URL: '%s'", remoteURL), e, true);
-			return;
 		}
+
 		this.localPath = localPath;
 		this.rename = Utils.cleanFileName(rename, '-');
 	}
@@ -202,14 +202,16 @@ public class Download {
 
 		Thread t = new Thread(() -> {
 			// open connection
-			HttpURLConnection conn = null;
+			HttpURLConnection conn;
+
 			try {
 				if (disableSSLCertValidation)
 					Utils.setSSLCertValidation(false);
 
 				URL downloadURL = url;
 				int redirectCount = 0;
-				boolean isRedirect = false;
+				boolean isRedirect;
+
 				do {
 					isRedirect = false;
 
@@ -234,8 +236,19 @@ public class Download {
 						URL base = conn.getURL();
 						String location = conn.getHeaderField("Location");
 						URL target = null;
-						if (location != null)
-							target = new URL(base, location);
+
+						if (location != null) {
+							try {
+								URI baseUri = getSafeURI(base.toString());
+								URI resolvedUri = baseUri.resolve(normalizeURL(location));
+								target = resolvedUri.toURL();
+							} catch (URISyntaxException e) {
+								this.status = Status.ERROR;
+								ErrorHandler.error(String.format("Bad download URL: base: '%s', location: '%s'",
+									base, location), e, true);
+							}
+						}
+
 						conn.disconnect();
 
 						// check for problems
@@ -243,9 +256,9 @@ public class Download {
 						if (location == null)
 							error = String.format("Download for URL '%s' is attempting to redirect without a 'location' header.", base.toString());
 						else if (!target.getProtocol().equals("http") && !target.getProtocol().equals("https"))
-							error = String.format("Download for URL '%s' is attempting to redirect to a non-HTTP/HTTPS protocol '%s'.", base.toString(), target.getProtocol());
+							error = String.format("Download for URL '%s' is attempting to redirect to a non-HTTP/HTTPS protocol '%s'.", base, target.getProtocol());
 						else if (redirectCount > MAX_REDIRECTS)
-							error = String.format("Download for URL '%s' is attempting too many redirects (over %d).", base.toString(), MAX_REDIRECTS);
+							error = String.format("Download for URL '%s' is attempting too many redirects (over %d).", base, MAX_REDIRECTS);
 						if (error != null) {
 							ErrorHandler.notify(error, null);
 							throw new IOException();
@@ -450,8 +463,8 @@ public class Download {
 				fos.close();
 			if (transferring) {
 				File f = new File(localPath);
-				if (f.isFile())
-					f.delete();
+				if (f.isFile() && !f.delete())
+					Log.warn("Failed to delete temporary file: " + f);
 			}
 		} catch (IOException e) {
 			this.status = Status.ERROR;

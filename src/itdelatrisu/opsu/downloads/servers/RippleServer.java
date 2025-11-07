@@ -29,13 +29,15 @@ import org.newdawn.slick.util.Log;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
-import java.net.URL;
+import java.net.URISyntaxException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import static itdelatrisu.opsu.Utils.getSafeURI;
 
 /**
  * Download server: <a href="https://ripple.moe/">...</a>
@@ -81,7 +83,7 @@ public class RippleServer extends DownloadServer {
 			String search = String.format(SEARCH_URL, URLEncoder.encode(query, StandardCharsets.UTF_8), PAGE_LIMIT, offset);
 			if (rankedOnly)
 				search += "&status=1";
-			JSONArray arr = Utils.readJsonArrayFromUrl(new URL(search));
+			JSONArray arr = Utils.readJsonArrayFromUrl(getSafeURI(search).toURL());
 			if (arr == null) {
 				this.totalResults = -1;
 				return null;
@@ -103,7 +105,7 @@ public class RippleServer extends DownloadServer {
 			if (nodes.length == PAGE_LIMIT)
 				resultCount++;
 			this.totalResults = resultCount;
-		} catch (MalformedURLException | UnsupportedEncodingException e) {
+		} catch (MalformedURLException | URISyntaxException | UnsupportedEncodingException e) {
 			ErrorHandler.error(String.format("Problem loading result list for query '%s'.", query), e, true);
 		} catch (JSONException e) {
 			Log.error(e);

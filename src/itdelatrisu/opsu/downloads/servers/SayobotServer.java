@@ -30,12 +30,14 @@ import org.newdawn.slick.util.Log;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
-import java.net.URL;
+import java.net.URISyntaxException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import static itdelatrisu.opsu.Utils.getSafeURI;
 
 /**
  * Download server: <a href="https://osu.sayobot.cn/home">...</a>
@@ -96,7 +98,7 @@ public class SayobotServer extends DownloadServer {
 				1
 			);
 			if (rankedOnly) search += "1";
-			String s = Utils.readDataFromUrl(new URL(search));
+			String s = Utils.readDataFromUrl(getSafeURI(search).toURL());
 			JSONObject body = new JSONObject(s);
 			int stat = body.getInt("status");
 			if (stat != 0) {
@@ -117,7 +119,7 @@ public class SayobotServer extends DownloadServer {
 						item.getString("artist"), item.isNull("artistU") ? null : item.getString("artistU"), // "artistUnicode"
 						item.getString("creator"));
 			}
-		} catch (MalformedURLException | UnsupportedEncodingException e) {
+		} catch (MalformedURLException | URISyntaxException | UnsupportedEncodingException e) {
 			ErrorHandler.error(String.format("Problem loading result list for query '%s'.", query), e, true);
 		} catch (JSONException e) {
 			Log.error(e);

@@ -33,7 +33,7 @@ import org.newdawn.slick.util.ResourceLoader;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
-import java.net.URL;
+import java.net.URISyntaxException;
 import java.net.UnknownHostException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -42,6 +42,7 @@ import java.util.Locale;
 import java.util.Properties;
 
 import static clonewith.opsu.I18N.t;
+import static itdelatrisu.opsu.Utils.getSafeURI;
 
 /**
  * Handles automatic program updates.
@@ -239,12 +240,14 @@ public class Updater {
 		// get latest version
 		String s = null;
 		try {
-			s = Utils.readDataFromUrl(new URL(OpsuConstants.VERSION_REMOTE));
+			s = Utils.readDataFromUrl(getSafeURI(OpsuConstants.VERSION_REMOTE).toURL());
 		} catch (UnknownHostException e) {
 			Log.warn(String.format(
 				"Check for updates failed. Please check your internet connection, or your connection to %s.",
 				OpsuConstants.VERSION_REMOTE)
 			);
+		} catch (URISyntaxException e) {
+			Log.warn("Failed to parse the version remote string, which isn't necessary to happen.", e);
 		}
 		if (s == null) {
 			status = Status.CONNECTION_ERROR;
