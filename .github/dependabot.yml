@@ -9,6 +9,22 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    groups:
+      maven:
+        applies-to: version-updates
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
+      minor-and-patch:
+        applies-to: security-updates
+        patterns:
+          - "*"
+        update-types:
+          - "patch"
+          - "minor"
+
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
