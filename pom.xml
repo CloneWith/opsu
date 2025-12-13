@@ -189,7 +189,7 @@
         <dependency>
             <groupId>com.formdev</groupId>
             <artifactId>flatlaf</artifactId>
-            <version>3.6.2</version>
+            <version>3.7</version>
         </dependency>
 		<dependency>
 			<groupId>net.lingala.zip4j</groupId>
@@ -220,7 +220,7 @@
 		<dependency>
 			<groupId>org.xerial</groupId>
 			<artifactId>sqlite-jdbc</artifactId>
-			<version>3.51.0.0</version>
+			<version>3.51.1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.json</groupId>
