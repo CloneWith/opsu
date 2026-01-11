@@ -8,11 +8,10 @@
 	<artifactId>lwjgl</artifactId>
 	<packaging>jar</packaging>
 	<name>Lighweight Java Game Library</name>
-	<version>2.9.4-SNAPSHOT</version>
-	<description>Lighweight Java Game Library</description>
-	<url>http://lwjgl.org/</url>
+    <description>Lightweight Java Game Library</description>
+	<url>https://lwjgl.org/</url>
 	<scm>
-		<url>http://java-game-lib.svn.sourceforge.net/viewvc/java-game-lib/trunk/</url>
+		<url>https://java-game-lib.svn.sourceforge.net/viewvc/java-game-lib/trunk/</url>
 		<connection>https://java-game-lib.svn.sourceforge.net/svnroot/java-game-lib </connection>
 	</scm>
 
@@ -20,20 +19,7 @@
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>lwjgl-platform</artifactId>
-			<version>${project.version}</version>
-			<classifier>natives-windows</classifier>
-		</dependency>
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>lwjgl-platform</artifactId>
-			<version>${project.version}</version>
-			<classifier>natives-linux</classifier>
-		</dependency>
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>lwjgl-platform</artifactId>
-			<version>${project.version}</version>
-			<classifier>natives-osx</classifier>
+			<version>1.0.0-gdx</version>
 		</dependency>
 		<dependency>
 			<groupId>net.java.jinput</groupId>
